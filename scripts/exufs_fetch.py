@@ -55,7 +55,7 @@ History
 import os
 import time
 
-from fetch_interface import Fetch
+from staging.fetch import Fetch
 from utils.arguments_interface import Arguments
 from utils.logger_interface import Logger
 
