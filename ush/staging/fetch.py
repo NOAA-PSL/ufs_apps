@@ -69,7 +69,13 @@ class Fetch(Staging):
         super().__init__(options_obj=options_obj)
 
         # Define the supported fetch application interfaces.
-        self.fetch_methods_dict = {'aws_s3': self.aws_s3}
+        self.fetch_methods_dict = {'aws_s3': self.aws_s3,
+                                   'noaa_hpss': self.aws_s3}  # None}
+
+        # Check whether the base-class arguments contain the
+        # respective supported fetch types; proceed accordingly
+        self.fetch_type_opt = parser_interface.object_getattr(
+            object_in=self.options_obj, key='fetch_type', force=True)
 
     def aws_s3(self, filesdict):
         """
@@ -191,48 +197,64 @@ class Fetch(Staging):
                    'Aborting!!!')
             raise StagingError(msg=msg)
 
-        # Check whether the base-class arguments contain the
-        # respective supported fetch types; proceed accordingly
-        fetch_type_opt = parser_interface.object_getattr(
-            object_in=self.options_obj, key='fetch_type', force=True)
-
-        # Build the Python dictionary containing the fetch attributes
-        # in accordance with the configuration options.
+        # Build the Python dictionary containing the fetch attributes.
         fetch_dict = {}
         for (fetch_method, _) in self.fetch_methods_dict.items():
 
-            # If no fetch type has been specified, assume that all
-            # values within the file are to be fetched.
-            if fetch_type_opt is None:
-
-                fetch_dict[fetch_method] = dict()
-                for (key, value) in config_dict[fetch_method].items():
-                    fetch_dict[fetch_method][key] = value
-
-            # If the fetch type has been specified, collect the
-            # relevant values; if the specified key is not found in
-            # the configuration file, exit gracefully.
-            if fetch_type_opt is not None:
-
-                # Define the Python dictionary containing the fetch
-                # attributes for the specified type.
-                fetch_dict[fetch_method] = parser_interface.dict_key_value(
-                    dict_in=config_dict[fetch_method], key=fetch_type_opt,
-                    force=True, no_split=True)
-
-                if fetch_dict[fetch_method] is None:
-                    msg = (f'No attributes for fetch type option {fetch_type_opt} '
-                           'were found in YAML-formatted configuration file '
-                           f'{self.yaml_file}; exiting gracefully.')
-                    self.logger.warn(msg=msg)
-                    system_interface.task_exit()
+            # Define the file attributes for the respective fetch
+            # application (i.e., supported interface or platform).
+            fetch_dict[fetch_method] = dict()
+            for (key, value) in config_dict[fetch_method].items():
+                fetch_dict[fetch_method][key] = value
 
         return fetch_dict
+
+    def collect(self, fetch_dict: dict) -> None:
+        """ 
+
+        """
+
+        # For each supported interface/platform type, collect (i.e.,
+        # fetch) the attributes specified in the YAML-formatted
+        # configuration file.
+        for (fetch_method, _) in fetch_dict.items():
+
+            # Define the base-class method to be used for collecting
+            # from the supported interfaces/platforms; proceed
+            # accordingly.
+            method = parser_interface.dict_key_value(
+                dict_in=self.fetch_methods_dict, key=fetch_method, force=True,
+                no_split=True)
+
+            if method is None:
+                msg = (f'A method for collecting files from the {fetch_method} '
+                       'platform is not supported. Aborting!!!')
+                raise StagingError(msg=msg)
+
+            # Define the respective file attributes for the respective
+            # supported interface/platform.
+            filesdict = parser_interface.dict_key_value(
+                dict_in=fetch_dict, key=fetch_method, force=True, no_split=True)
+
+            # Parse the configuration file attributes in accordance
+            # with the base-class argument; proceed accordingly.
+            if self.fetch_type_opt is None:
+                fetch_types = list(filesdict.keys())
+
+            if self.fetch_type_opt is not None:
+                fetch_types = [self.fetch_type_opt]
+
+            # Collect files in accordance with the configuration and
+            # options.
+            for fetch_type in fetch_types:
+
+                # add method here
 
     def run(self):
         """ """
 
         # Define the fetching configuration.
-        self.fetch_dict = self.build_fetch_dict()
+        fetch_dict = self.build_fetch_dict()
 
-        print(self.fetch_dict)
+        # Collect the specified files for each interface.
+        self.collect(fetch_dict=fetch_dict)
