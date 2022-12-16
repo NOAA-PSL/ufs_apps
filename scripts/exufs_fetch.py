@@ -52,6 +52,10 @@ History
 
 # ----
 
+# pylint: disable=no-name-in-module
+
+# ----
+
 import os
 import time
 
@@ -67,12 +71,8 @@ __email__ = "henry.winterbottom@noaa.gov"
 
 # ----
 
-logger = Logger()
 
-# ----
-
-
-def main():
+def main() -> None:
     """
     Description
     -----------
@@ -80,13 +80,71 @@ def main():
     This is the driver-level function to invoke the tasks within this
     script.
 
+    Parameters
+    ----------
+
+    yaml_file: str
+
+        A Python string specifying the path to the YAML-formatted
+        configuration file; this script and it's child modules assume
+        that the fetch key is specified within the top-level YAML keys
+        of the respective file as follows:
+
+        fetch:
+
+            some_stuff:
+
+                some_more_stuff:
+
+        Enter the parameter value as:
+
+        --yaml_file=/path/to/yaml/file or -yaml_file=/path/to/yaml/file
+
+    cycle: str
+
+        A Python string specifying the respective forecast cycle; this
+        string must be formatted as %Y%m%d%H%M%S assuming the POSIX
+        convention; enter the parameter value as follows for a
+        forecast cycle beginning 0000 UTC 01 January 2000:
+
+        --cycle=20000101000000 or -cycle=20000101000000
+
+    Keywords
+    --------
+
+    fetch_type: str
+
+        A Python string specifying the file types to be collected; an
+        example is as follows:
+
+        fetch:
+
+            interface:
+
+                foo:
+
+                bar:
+
+                ocean_stuff:
+
+        if fetch_type is specified as 'foo', all files for the
+        respective interface (i.e., AWS s3, NOAA HPSS, etc.,) beneath
+        the ocean_stuff block will be collected; if the keyword is not
+        specified or NoneType upon entry, the attributes beneath both
+        'foo' and 'bar' will be returned.
+
+        For the 'foo' example above, the keyword value may be entered
+        as:
+
+        --fetch_type=foo or -fetch_type=foo
+
     """
 
     # Collect the command line arguments.
     script_name = os.path.basename(__file__)
     start_time = time.time()
     msg = f"Beginning application {script_name}."
-    logger.info(msg=msg)
+    Logger().info(msg=msg)
     options_obj = Arguments().run()
 
     # Launch the task.
@@ -94,10 +152,10 @@ def main():
     task.run()
     stop_time = time.time()
     msg = f"Completed application {script_name}."
-    logger.info(msg=msg)
+    Logger().info(msg=msg)
     total_time = stop_time - start_time
     msg = f"Total Elapsed Time: {total_time} seconds."
-    logger.info(msg=msg)
+    Logger().info(msg=msg)
 
 
 # ----
