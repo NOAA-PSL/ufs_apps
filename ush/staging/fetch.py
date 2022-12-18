@@ -76,19 +76,17 @@ __email__ = "henry.winterbottom@noaa.gov"
 # ----
 
 # Define the default AWS fetch attribute values.
-aws_opt_attr_dict = {'bufr_concat': None,
-                     'ignore_missing': True,
-                     'multifile': None,
-                     'nc_concat': None,
-                     'offset_seconds': 0,
-                     'profile_name': None
-                     }
+aws_opt_attr_dict = {
+    "bufr_concat": None,
+    "ignore_missing": True,
+    "multifile": None,
+    "nc_concat": None,
+    "offset_seconds": 0,
+    "profile_name": None,
+}
 
 # Define the mandatory AWS fetch attribute values.
-aws_mand_attr_list = ['bucket',
-                      'local_path',
-                      'object_path'
-                      ]
+aws_mand_attr_list = ["bucket", "local_path", "object_path"]
 
 # -----
 
@@ -125,12 +123,13 @@ class Fetch(Staging):
         super().__init__(options_obj=options_obj)
 
         # Define the supported fetch application interfaces.
-        self.fetch_methods_dict = {'aws_s3': self.aws_s3}
+        self.fetch_methods_dict = {"aws_s3": self.aws_s3}
 
         # Check whether the base-class arguments contain the
         # respective supported fetch types; proceed accordingly
         self.fetch_type_opt = parser_interface.object_getattr(
-            object_in=self.options_obj, key='fetch_type', force=True)
+            object_in=self.options_obj, key="fetch_type", force=True
+        )
 
     def aws_s3(self, filesdict):
         """
@@ -156,23 +155,25 @@ class Fetch(Staging):
 
         # Collect the AWS s3 checksum index attributes.
         checksum_obj = parser_interface.object_define()
-        checksum_attrs_dict = {'aws_s3_filepath': None,
-                               'aws_s3_hash': 'md5'
-                               }
+        checksum_attrs_dict = {"aws_s3_filepath": None, "aws_s3_hash": "md5"}
 
         for (checksum_attr, _) in checksum_attrs_dict.items():
             value = parser_interface.dict_key_value(
-                dict_in=self.checksum_dict, key=checksum_attr,
-                force=True, no_split=True)
+                dict_in=self.checksum_dict, key=checksum_attr, force=True, no_split=True
+            )
 
             if value is None:
 
                 value = parser_interface.dict_key_value(
-                    dict_in=checksum_attrs_dict, key=checksum_attr,
-                    force=True, no_split=True)
+                    dict_in=checksum_attrs_dict,
+                    key=checksum_attr,
+                    force=True,
+                    no_split=True,
+                )
 
             checksum_obj = parser_interface.object_setattr(
-                object_in=checksum_obj, key=checksum_attr, value=value)
+                object_in=checksum_obj, key=checksum_attr, value=value
+            )
 
         # Loop through all AWS s3 files to be collected; proceed
         # accordingly.
@@ -182,9 +183,11 @@ class Fetch(Staging):
             # configuration attributes for the respective file(s) to
             # be collected.
             fileid_obj = self.build_fileid_obj(
-                filesdict=filesdict, fileid=fileid,
+                filesdict=filesdict,
+                fileid=fileid,
                 mand_attr_list=aws_mand_attr_list,
-                opt_attr_dict=aws_opt_attr_dict)
+                opt_attr_dict=aws_opt_attr_dict,
+            )
 
             # Define list of valid timestamps relative to the
             # respective file attributes.
@@ -201,7 +204,9 @@ class Fetch(Staging):
             self.awss3_fetch(
                 fileid_obj=fileid_obj,
                 checksum_filepath=checksum_obj.aws_s3_filepath,
-                checksum_index=checksum_index, checksum_level=checksum_obj.aws_s3_hash)
+                checksum_index=checksum_index,
+                checksum_level=checksum_obj.aws_s3_hash,
+            )
 
             # If applicable, concatenate the respective files in
             # accordance with the experiment configuration.
@@ -243,12 +248,15 @@ class Fetch(Staging):
         # Collect the fetch configuration attributes; proceed
         # accordingly.
         fetch_dict = parser_interface.dict_key_value(
-            dict_in=self.yaml_dict, key='fetch', force=True)
+            dict_in=self.yaml_dict, key="fetch", force=True
+        )
 
         if fetch_dict is None:
-            msg = (f'The fetch attribute could not be determined from '
-                   f'YAML-formatted configuration file {self.yaml_file}. '
-                   'Aborting!!!')
+            msg = (
+                f"The fetch attribute could not be determined from "
+                f"YAML-formatted configuration file {self.yaml_file}. "
+                "Aborting!!!"
+            )
             raise StagingError(msg=msg)
 
         return fetch_dict
@@ -299,18 +307,24 @@ class Fetch(Staging):
             # from the supported interfaces/platforms; proceed
             # accordingly.
             method = parser_interface.dict_key_value(
-                dict_in=self.fetch_methods_dict, key=fetch_method, force=True,
-                no_split=True)
+                dict_in=self.fetch_methods_dict,
+                key=fetch_method,
+                force=True,
+                no_split=True,
+            )
 
             if method is None:
-                msg = (f'A method for collecting files from the {fetch_method} '
-                       'platform is not supported. Aborting!!!')
+                msg = (
+                    f"A method for collecting files from the {fetch_method} "
+                    "platform is not supported. Aborting!!!"
+                )
                 raise StagingError(msg=msg)
 
             # Define the respective file attributes for the respective
             # supported interface/platform.
             filesdict = parser_interface.dict_key_value(
-                dict_in=fetch_dict, key=fetch_method, force=True, no_split=True)
+                dict_in=fetch_dict, key=fetch_method, force=True, no_split=True
+            )
 
             # Parse the configuration file attributes in accordance
             # with the base-class argument; proceed accordingly.
@@ -323,7 +337,7 @@ class Fetch(Staging):
             # Collect files in accordance with the configuration and
             # options.
             for fetch_type in fetch_types:
-                msg = (f'Collecting files for fetch type {fetch_type}.')
+                msg = f"Collecting files for fetch type {fetch_type}."
                 self.logger.info(msg=msg)
                 method(filesdict=filesdict[fetch_type])
 
@@ -358,12 +372,15 @@ class Fetch(Staging):
         # Define the checksum hash attributes for the respective
         # fetching interfaces; proceed accordingly.
         self.checksum_dict = parser_interface.dict_key_value(
-            dict_in=fetch_dict, key='checksum', force=True, no_split=True)
+            dict_in=fetch_dict, key="checksum", force=True, no_split=True
+        )
 
         if self.checksum_dict is None:
-            msg = ('The checksum attributes for fetched files has not '
-                   f'specified in {self.yaml_file}; checksum hash values '
-                   'will only be written to standard output.')
+            msg = (
+                "The checksum attributes for fetched files has not "
+                f"specified in {self.yaml_file}; checksum hash values "
+                "will only be written to standard output."
+            )
             self.logger.warn(msg=msg)
             self.checksum = False
 

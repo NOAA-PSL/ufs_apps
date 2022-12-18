@@ -225,8 +225,7 @@ class Staging:
 
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
-        ncconcat_attrs_dict = {"ncdim": numpy.nan,
-                               "ncfile": numpy.nan, "ncfrmt": None}
+        ncconcat_attrs_dict = {"ncdim": numpy.nan, "ncfile": numpy.nan, "ncfrmt": None}
 
         ncconcat_obj = parser_interface.object_define()
         for (ncconcat_attr, _) in ncconcat_attrs_dict.items():
@@ -274,8 +273,7 @@ class Staging:
 
         # Check that the directory tree corresponding to the
         # concatenated output file exists; proceed accordingly.
-        fileio_interface.dirpath_tree(
-            path=os.path.dirname(ncconcat_obj.ncfile))
+        fileio_interface.dirpath_tree(path=os.path.dirname(ncconcat_obj.ncfile))
 
         # Concatenate the respective files to the specified output
         # file path.
@@ -618,8 +616,7 @@ class Staging:
         if str(concat_type).lower() == "nc_concat":
 
             # Concatenate the respective netCDF-formatted file.
-            self._nc_concat(fileid_obj=fileid_obj,
-                            fileconcat_obj=fileconcat_obj)
+            self._nc_concat(fileid_obj=fileid_obj, fileconcat_obj=fileconcat_obj)
 
     def get_hash_index(self, filepath: str, hash_level: str = None) -> str:
         """
@@ -667,7 +664,8 @@ class Staging:
         except FileNotFoundError:
             msg = (
                 f"File path {filepath} does not exist and therefore no checksum "
-                "hash index value will be computed.")
+                "hash index value will be computed."
+            )
             self.logger.warn(msg=msg)
             hash_index = None
 
@@ -868,8 +866,7 @@ class Staging:
         # path; proceed accordingly.
         if hash_index is not None:
 
-            fileio_interface.dirpath_tree(
-                path=os.path.dirname(checksum_filepath))
+            fileio_interface.dirpath_tree(path=os.path.dirname(checksum_filepath))
 
             with open(checksum_filepath, "a", encoding="utf-8") as file:
                 file.write(f"{hash_index} {local_path}\n")
