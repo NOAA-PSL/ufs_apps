@@ -55,7 +55,7 @@
 ##
 ################################################################################
 
-set -e
+set -e -u
 
 #----
 
@@ -65,7 +65,7 @@ export UFS_STAGE=1
 
 # Define the run-time environment for the respective UFS-RNR
 # application.
-export PYTHONPATH="${HOMEufs}/ush"
+export PYTHONPATH=${HOMEufs}/ush:${PYTHONPATH}
 
 # Get processor id (pid).
 export pid=$$
