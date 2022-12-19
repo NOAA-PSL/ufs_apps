@@ -1,8 +1,7 @@
 #!/bin/bash --posix
 
 ################################################################################
-#### UNIX Script Documentation Block
-##
+## 
 ## Script name:         JUFS_FETCH_OCEANOBS
 ##
 ## Script description:  Launch the UFS workflow ocean observation
@@ -20,9 +19,10 @@
 ##
 ##   Imported Shell Variables:
 ##
-##     CYCLEufs:         The respective UFS forecast cycle.
+##     CYCLEufs:        The respective UFS forecast cycle; the format is
+##                       %Y%m%d%H%M%S assuming the POSIX convention.
 ##
-##     HOMEufs:          The top-level working directory for all UFS-RNR
+##     HOMEufs:          The top-level working directory for all UFS
 ##                       applications.
 ##
 ##     PREufs:           The full-path to the (supported) platform-dependent
@@ -33,8 +33,11 @@
 ##
 ##   Exported Shell Variables:
 ##
-##     UFS_STAGE:        UFS workflow environment variable for respective
-##                       task.
+##     PYTHONPATH:       Python library path for the respective UFS
+##                       application(s).
+##
+##     UFS_STAGE:        UFS workflow environment variable for the respective
+##                       task(s).
 ##
 ##     pid:              UNIX system processes identifier.  
 ##
@@ -48,11 +51,13 @@
 ## Attributes:
 ##
 ##   Language: POSIX shell
-##   Machine: IBM SP
+##   Machine:  Linux
 ##
 ################################################################################
 
 set -e
+
+#----
 
 # Load all modules required by utilities referenced by this script.
 export UFS_STAGE=1
@@ -66,9 +71,10 @@ export PYTHONPATH="${HOMEufs}/ush"
 export pid=$$
 
 # Launch the UFS-RNR experiment application.
-python ${HOMEufs}/scripts/exufs_fetch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --fetch_opt=ocean_obs
+${PYTHONufs} ${HOMEufs}/scripts/exufs_fetch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --fetch_opt=ocean_obs
+
+#----
 
 # Collect (any) error information and exit.
 export ERR=$?
-export err=${ERR}
-exit ${err}
+exit ${ERR}
