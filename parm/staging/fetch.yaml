@@ -79,7 +79,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/sst/nesdis/noaa07/%Y/%m/1h/superob_0p25/iodav2/nesdis.avhrr_noaa07.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    object_path: observations/reanalysis/sst/nesdis/noaa07/%Y/%m/1h/superob_0p25/nesdis.avhrr_noaa07.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     profile_name: null
                     ignore_missing: True
 
@@ -132,7 +132,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/sst/nesdis/noaa09/%Y/%m/1h/superob_0p25/iodav2/nesdis.avhrr_noaa09.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    object_path: observations/reanalysis/sst/nesdis/noaa09/%Y/%m/1h/superob_0p25/nesdis.avhrr_noaa09.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     profile_name: null
                     ignore_missing: True
 
@@ -185,7 +185,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/sst/nesdis/noaa11/%Y/%m/1h/superob_0p25/iodav2/nesdis.avhrr_noaa11.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    object_path: observations/reanalysis/sst/nesdis/noaa11/%Y/%m/1h/superob_0p25/nesdis.avhrr_noaa11.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     profile_name: null
                     ignore_missing: True
 
@@ -238,7 +238,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/sst/nesdis/noaa12/%Y/%m/1h/superob_0p25/iodav2/nesdis.avhrr_noaa12.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    object_path: observations/reanalysis/sst/nesdis/noaa12/%Y/%m/1h/superob_0p25/nesdis.avhrr_noaa12.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     profile_name: null
                     ignore_missing: True
 
@@ -291,7 +291,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/sst/nesdis/noaa14/%Y/%m/1h/superob_0p25/iodav2/nesdis.avhrr_noaa14.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    object_path: observations/reanalysis/sst/nesdis/noaa14/%Y/%m/1h/superob_0p25/nesdis.avhrr_noaa14.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     profile_name: null
                     ignore_missing: True
 
@@ -397,7 +397,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/sst/nesdis/noaa16/%Y/%m/1h/superob_0p25/iodav2/nesdis.avhrr_noaa16.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    object_path: observations/reanalysis/sst/nesdis/noaa16/%Y/%m/1h/superob_0p25/nesdis.avhrr_noaa16.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     profile_name: null
                     ignore_missing: True
 
