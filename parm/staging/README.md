@@ -3,12 +3,12 @@
 The Unified Forecast System (UFS) workflow staging applies to the
 fetching (i.e., collecting) and storing (i.e., saving) of specified
 files. This README provides a description of the available
-YAML-formatted configuration options.
+YAML-formatted configuration file options.
 
 ## Building a Fetching Application Configuration
 
 The following YAML snippet provides an example architecture for the
-YAML-formatted configuration files to be used for the UFS fetching
+YAML-formatted configuration files to be used for a UFS fetching
 application. Descriptions for the respective attributes are provided
 in the tables throughout this section.
 
@@ -42,10 +42,10 @@ fetch:
 | Attribute | Description |
 | :-------------: | :-------------: |
 | `fetch` | <div align="left">This attribute is mandatory for all fetching applications; this informs the application as to the relevant configuration attributes.</div> | 
-| `checksum` | <div align="left">This optional attribute provides information relevant to the determination of checksum hash values for each file collected for the respective interface/platform; a list of currently supported values can be found [here](#checksum-configuration-attributes).</div> |
-| `[interface_platform]` | <div align="left">This value defines the platform and/or interface from which to fetch files; the currently (only) supported option is `aws_s3` which should replace the `[interface_platform]` reference key.</div> |
-| `[fetching_option]` | <div align="left">This value defines the types/contents of the file identifiers to follow; as an example, for ocean or atmosphere type observation files, this attribute may read `ocean_obs` or `atmos_obs`, respectively; the respective attributes may be used as optional command line arguments for the [fetching application script](https://github.com/HenryWinterbottom-NOAA/ufs_apps/blob/develop/scripts/exufs_fetch.py). </div> |
-| `[file_identifier]` | <div align="left">This value assigns a unique name to the YAML key for the attributes corresponding to a given file to be retrieved; for example, [National Environmental Satellite, Data, and Information Service (NESDIS)](https://www.nesdis.noaa.gov/) hosted observations for sea-surface temperature (SST) derived from the [AVHRR](https://www.eumetsat.int/avhrr) instrument onboard the National Oceanic and Atmospheric (NOAA) 15 satellite may have a file identifier such as `sst.nesdis_avhrr_noaa15`. </div> | 
+| `checksum` | <div align="left">This optional attribute provides information relevant to the determination of checksum hash values for each file collected from the respective interface platform; a list of currently supported values can be found [here](#checksum-configuration-attributes).</div> |
+| `[interface_platform]` | <div align="left">This value defines the interface platform from which to fetch files; the currently supported option is `aws_s3`.</div> |
+| `[fetching_option]` | <div align="left">This value defines the file identifiers types to follow; as an example, for ocean or atmosphere type observation files, this attribute may read `ocean_obs` or `atmos_obs`, respectively; these attributes may also be used as optional command line arguments for the [fetching application script](https://github.com/HenryWinterbottom-NOAA/ufs_apps/blob/develop/scripts/exufs_fetch.py). </div> |
+| `[file_identifier]` | <div align="left">This value assigns a unique name to the YAML key for which the attributes corresponding to the contents to be retrieved; for example, [National Environmental Satellite, Data, and Information Service (NESDIS)](https://www.nesdis.noaa.gov/) hosted observations for sea-surface temperature (SST) derived from the [AVHRR](https://www.eumetsat.int/avhrr) instrument onboard the National Oceanic and Atmospheric (NOAA) 15 satellite may have a file identifier such as `sst.nesdis_avhrr_noaa15`. </div> | 
 
 </div>
 
@@ -53,15 +53,15 @@ fetch:
 
 <div align="center">
 
-| Attribute | Description |
-| :-------------: | :-------------: |
-| `aws_s3_filepath` | <div align="left">The local host path for the file to contain the checksum hash values for the AWS s3 interface/platform downloaded files.</div> |
-| `aws_s3_hash` | <div align="left">The checksum hash types for the respective AWS s3 interface/platform downloaded files; currently supported values are `md5`, `sha1`, `sha224`, `sha256`, `sha384`, and `sha512`; if not specified, `md5` is assumed. |
+| Attribute | Description | Default Values | 
+| :-------------: | :-------------: | :-------------: |
+| `aws_s3_filepath` | <div align="left">The local file path to contain the checksum hash values for the AWS s3 interface platform downloaded files; environment variables and POSIX compliant time and date string attributes are supported when building this attribute</div> | None; if not provided the checksum hash values are written only to standard out. | 
+| `aws_s3_hash` | <div align="left">The checksum hash types for the respective AWS s3 interface platform downloaded files; currently supported options are `md5`, `sha1`, `sha224`, `sha256`, `sha384`, and `sha512` </div> |  `md5` |
 
 </div>
 
 An example YAML-formatted configuration file using each of the
-attributes defined above might be as follows.
+attributes defined above is as follows.
 
 ~~~
 # All attributes that follow are for the UFS fetching application.
@@ -102,9 +102,9 @@ identifier attributes.
 | Mandatory Attribute | Description | Platform/Interface | 
 | :-------------: | :-------------: | :-------------: |
 | `bucket` | <div align="left">The AWS s3 bucket from which collect the specified `object_path` (see below). | `aws_s3` | </div>
-| `local_path` | <div align="left">The file path on the local host to where the fetched file will be staged; environment variables and POSIX compliant time and date string attributes are supported when building this attribute. | This value is required for all platforms/interfaces | </div>
+| `local_path` | <div align="left">The file path on the local host to where the fetched file will be staged; environment variables and POSIX compliant time and date string attributes are supported when building this attribute. | This value is required for all interface platforms. | </div>
 | `object_path` | <div align="left">The AWS s3 object path beneath the AWS s3 `bucket` attribute defined above; environment variables and POSIX compliant time and date string attributes are supported when building this attribute.| `aws_s3` | </div> 
-| `profile_name` | <div align="left">The AWS s3 profile to be used for AWS s3 platform/interface file fetching; this value should be a profile name within the respective user `~/.aws/credentials` file path; if fetching from a public bucket this value should be set to `null`. | `aws_s3` | </div>
+| `profile_name` | <div align="left">The AWS s3 profile to be used for AWS s3 interface platform file fetching; this value should be a profile name within the respective user `~/.aws/credentials` file path; if fetching from a public bucket this value should be set to `null`. | `aws_s3` | </div>
 
 </div>
 
@@ -147,7 +147,7 @@ formatted files for a given file identifier.
 | Attribute | Description | 
 | :-------------: | :-------------: |
 | `ncdim` | <div align="left">The netCDF dimension name along which to concatenate the respective member files.</div> |
-| `ncfile` | <div align="left">The netCDF-formatted file path to contain the concatenated member files.</div> |
+| `ncfile` | <div align="left">The netCDF-formatted file path to contain the concatenated member files; environment variables and POSIX compliant time and date string attributes are supported when building this attribute.</div> |
 | `ncfrmt` | <div align="left">The netCDF file format for the concatenated file path (see `ncfile`); supported values are `NETCDF3_CLASSIC`, `NETCDF3_64BIT_OFFSET`, `NETCDF3_64BIT_DATA`, `NETCDF4`, `NETCDF4_CLASSIC`. </div> | 
 </div>
 
@@ -162,8 +162,6 @@ below. This example assumes the following.
 - Hourly (i.e., multiple) netCDF-formatted files collected from an [AWS s3](https://aws.amazon.com/pm/serv-s3/?trk=fecf68c9-3874-4ae2-a7ed-72b6d19c8034&sc_channel=ps&s_kwcid=AL!4422!3!536452728638!e!!g!!aws%20s3&ef_id=Cj0KCQiA14WdBhD8ARIsANao07jcrgPFmsPPGxTJDSWizyp8U3k9WhPE95zHj5UNF2Jt8FdoJlMEoHMaAr7REALw_wcB:G:s&s_kwcid=AL!4422!3!536452728638!e!!g!!aws%20s3) relative to the specified forecast cycle. 
 
 - Concatenation of the hourly netCDF-formatted member files along the `nlocs` netCDF dimension and formatted as `NETCDF4`.
-
-
 
 ~~~
 # All attributes that follow are for the UFS fetching application.
