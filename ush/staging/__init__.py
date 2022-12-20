@@ -388,41 +388,48 @@ class Staging:
                 bucket=fileid_obj.bucket, object_path=object_path,
                 profile_name=fileid_obj.profile_name)
 
-            print(aws_filelist)
-            quit()
+            if len(aws_filelist) > 0:
 
-            fileio_interface.dirpath_tree(path=os.path.dirname(local_path))
+                fileio_interface.dirpath_tree(path=os.path.dirname(local_path))
 
-            # Collect the file from the specified AWS s3 bucket and
-            # object path and stage it locally.
-            filedict = {local_path: object_path}
+                # Collect the file from the specified AWS s3 bucket
+                # and object path and stage it locally.
+                filedict = {local_path: object_path}
 
-            boto3_interface.s3get(
-                bucket = fileid_obj.bucket,
-                filedict = filedict,
-                profile_name = fileid_obj.profile_name,
-            )
-
-            # Define the checksum index value for the collected file.
-            if checksum_index:
-
-                hash_index = self.get_hash_index(
-                    filepath=local_path, hash_level=checksum_level
+                boto3_interface.s3get(
+                    bucket=fileid_obj.bucket,
+                    filedict=filedict,
+                    profile_name=fileid_obj.profile_name,
                 )
-                msg = f"The hash index for file path {local_path} is {hash_index}."
+
+                # Define the checksum index value for the collected
+                # file.
+                if checksum_index:
+
+                    hash_index = self.get_hash_index(
+                        filepath=local_path, hash_level=checksum_level
+                    )
+                    msg = f"The hash index for file path {local_path} is {hash_index}."
+                    self.logger.warn(msg=msg)
+
+                # Check the checksum index writing parameter value and
+                # proceed accordingly.
+                if checksum_index and checksum_filepath is not None:
+
+                    # Write the checksum index value to the specified
+                    # external file path.
+                    self.write_fetch_checksum(
+                        checksum_filepath=checksum_filepath,
+                        local_path=local_path,
+                        hash_index=hash_index,
+                    )
+
+            else:
+
+                msg = (f'The AWS s3 object path {object_path} does not exist '
+                       f'and will not be downloaded to {local_path}.')
                 self.logger.warn(msg=msg)
-
-            # Check the checksum index writing parameter value and
-            # proceed accordingly.
-            if checksum_index and checksum_filepath is not None:
-
-                # Write the checksum index value to the specified
-                # external file path.
-                self.write_fetch_checksum(
-                    checksum_filepath=checksum_filepath,
-                    local_path=local_path,
-                    hash_index=hash_index,
-                )
+                    
 
     def build_fileid_obj(
         self,
