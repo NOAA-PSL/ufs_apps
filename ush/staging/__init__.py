@@ -385,7 +385,8 @@ class Staging:
             # Check the contents of the AWS s3 bucket; proceed
             # accordingly.
             aws_filelist = boto3_interface.s3filelist(
-                bucket=fileid_obj.bucket, object_path=object_path,
+                bucket=fileid_obj.bucket, object_path=os.path.dirname(
+                    object_path),
                 profile_name=fileid_obj.profile_name)
 
             if len(aws_filelist) > 0:
