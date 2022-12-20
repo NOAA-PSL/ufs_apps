@@ -104,7 +104,7 @@ identifier attributes.
 | `bucket` | <div align="left">The AWS s3 bucket from which collect the specified `object_path` (see below). | `aws_s3` | </div>
 | `local_path` | <div align="left">The file path on the local host to where the fetched file will be staged; environment variables and POSIX compliant time and date string attributes are supported when building this attribute. | This value is required for all platforms/interfaces | </div>
 | `object_path` | <div align="left">The AWS s3 object path beneath the AWS s3 `bucket` attribute defined above; environment variables and POSIX compliant time and date string attributes are supported when building this attribute.| `aws_s3` | </div> 
-| `profile_name` | <div align="left">The AWS s3 profile to be used for AWS s3 platform/interface file fetching; this value should be a profile name within the respective user `~/.aws/credentials` file path; if fetching from a public bucket this value should be set to `null`. | `aws_s3` |</div>
+| `profile_name` | <div align="left">The AWS s3 profile to be used for AWS s3 platform/interface file fetching; this value should be a profile name within the respective user `~/.aws/credentials` file path; if fetching from a public bucket this value should be set to `null`. | `aws_s3` | </div>
 
 </div>
 
