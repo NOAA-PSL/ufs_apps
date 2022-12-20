@@ -13,16 +13,24 @@ files. Explanations of the respective attributes are provided in the
 table which follows.
 
 ~~~
+# All attributes that follow are for the UFS fetching application.
 fetch:
+
+     # Define the checksum hash index attributes.
      checksum:
           .
 	  .
           .
-	  
+
+     # Define a supported the platform/interface from which to collect
+     # the respective files.
      [interface_platform]:
-     
+
+          # Define the fetching type; this corresponds to ocean
+          # observations.
           [fetching_option]:
-	  
+
+	       # Define the file identifier.
 	       [file_identifier]:
                     .
 		    .
@@ -51,3 +59,35 @@ fetch:
 | `aws_s3_hash` | <div align="left">The checksum hash types for the respective AWS s3 interface/platform downloaded files; currently supported values are `md5`, `sha1`, `sha224`, `sha256`, `sha384`, and `sha512`; if not specified, `md5` is assumed. |
 
 </div>
+
+An example YAML-formatted configuration file using each of the
+attributes defined above might be as follows.
+
+~~~
+# All attributes that follow are for the UFS fetching application.
+fetch:
+
+     # Define the checksum hash index attributes.
+     checksum:
+
+       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.obs.md5     
+       aws_s3_hash: md5
+  
+     # Define a supported the platform/interface from which to collect
+     # the respective files.
+     aws_s3:	 
+
+          # Define the fetching type; this corresponds to ocean
+          # observations.
+	  ocean_obs:
+
+	       # Define the file identifier.
+               sst.nesdis_avhrr_noaa15:
+
+                    .
+		    .
+		    .
+
+
+
+~~~
