@@ -42,7 +42,7 @@ fetch:
 
 <div align="center">
 
-| `checksum` Attribute | Description |
+| Attribute | Description |
 | :-------------: | :-------------: |
 | `aws_s3_filepath` | <div align="left">The local host path for the file to contain the checksum hash values for the AWS s3 interface/platform downloaded files.</div> |
 | `aws_s3_hash` | <div align="left">The checksum hash types for the respective AWS s3 interface/platform downloaded files; currently supported values are `md5`, `sha1`, `sha224`, `sha256`, `sha384`, and `sha512`; if not specified, `md5` is assumed. |
