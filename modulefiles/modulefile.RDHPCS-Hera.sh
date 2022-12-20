@@ -103,26 +103,6 @@ load_modules(){
 
 #----
 
-# Function
-# --------
-
-# This function defines the global environment variables required to
-# load/define the specified UFS application libraries/environment
-# variables for the respective UFS supported platform.
-
-setup(){
-
-
-
-    # Print message to the user.
-    script_name=`${BASENAMEufs} "$0"`
-    start_date=`${DATEufs} -u`
-    message="START ${script_name}: ${start_date}"
-    ${PYTHONufs} ${HOMEufs}/modulefiles/py/logger.py --message "${message}" --info
-}
-
-#----
-
 # (1) Define the path to all UFS application environment variables for
 #     the respective supported platform.
 export MODULESufs=${HOMEufs}/modulefiles/platforms/rdhpcs-hera
