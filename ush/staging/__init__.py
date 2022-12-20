@@ -273,7 +273,7 @@ class Staging:
             )
 
         # Check that netCDF-formatted member files exist; proceed accordingly.
-        if sum(fileio_interface.fileexist(path=filename) for filename in ncfilelist) > 0:
+        if sum([fileio_interface.fileexist(path=filename) for filename in ncfilelist]) > 0:
 
             # Check that the directory tree corresponding to the
             # concatenated output file exists; proceed accordingly.
