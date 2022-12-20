@@ -73,12 +73,12 @@ fetch:
        aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.obs.md5     
        aws_s3_hash: md5
   
-     # Define a supported the platform/interface from which to collect
+     # Define a supported the interface platform from which to collect
      # the respective files.
      aws_s3:	 
 
-          # Define the fetching type; this corresponds to ocean
-          # observations.
+          # Define the fetching type; this example corresponds to
+          # ocean observations.
 	  ocean_obs:
 
 	       # Define the file identifier.
@@ -173,12 +173,12 @@ fetch:
        aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.obs.md5     
        aws_s3_hash: md5
   
-     # Define a supported the platform/interface from which to collect
+     # Define a supported the interface platform from which to collect
      # the respective files.
      aws_s3:	 
 
-          # Define the fetching type; this corresponds to ocean
-          # observations.
+          # Define the fetching type; this example corresponds to
+          # ocean observations.
 	  ocean_obs:
 
 	       # Define the file identifier.
@@ -189,6 +189,8 @@ fetch:
 		    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.avhrr_noaa15.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
 		    offset_seconds: 21600
 
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
                     bucket: noaa-reanalyses-pds
                     object_path: observations/reanalysis-test/sst/nesdis/avhrr/noaa15/%Y/%m/superob_0p25/iodav2/nesdis.avhrr_noaa15.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     profile_name: null

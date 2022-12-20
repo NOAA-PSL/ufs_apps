@@ -1,45 +1,366 @@
+# All attributes that follow are for the UFS fetching application.
 fetch:
 
-     # Define the checksum hash indices attributes.
+     # Define the checksum hash index attributes.
      checksum:
 
        aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.obs.md5     
        aws_s3_hash: md5
-
-       noaa_hpss_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/noaa_hpss.fetch.obs.md5     
-       noaa_hpss_hash: sha256
   
-     # Define the remote location; see TABLE 1 above.
+     # Define a supported the interface platform from which to collect
+     # the respective files.
      aws_s3:
-     
+
+          # Define the fetching type; this example corresponds to
+          # ocean observations.
           ocean_obs:
 
-               sst.nesdis_avhrr_noaa15:
-
-                    # Define the path attributes.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.avhrr_noaa15.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+               # Define the file identifier.
+               adt.nesdis.cryosat2:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.cryosat2.adt.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     offset_seconds: 21600
-
-                    # Define the AWS s3 attributes.
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis-test/sst/nesdis/avhrr/noaa15/%Y/%m/superob_0p25/iodav2/nesdis.avhrr_noaa15.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
-                    profile_name: Null
+                    object_path: observations/reanalysis-test/sst/nesdis/cryosat2/%Y/%m/24hr/cryosat2.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    profile_name: null
                     ignore_missing: True
 
-                    # Define the attributes for multiple file
-                    # applications; these are used to create (i.e.,
-                    # concatenate member files) a single file
-                    # containing all files within the specified
-                    # window.
+                    # Define the attributes for multiple (i.e.,
+                    # member file) collection applications; these are
+                    # a single file containing all member files within
+                    # the specified window.
                     multifile:
 
                          # Define the total number of seconds, prior
-                         # to the relevant the analysis cycle, from
+                         # to the relevant analysis timestamp, from
+                         # which to begin collecting member files.
+                         start_offset_seconds: -43200
+
+                         # Define the total number of seconds,
+                         # following the relevant the analysis timestamp,
+                         # from which to end collecting member files.
+                         stop_offset_seconds: 43200
+
+                         # Define the total number of seconds
+                         # specifying the interval at which to collect
+                         # member files.
+                         offset_seconds: 43200
+
+                    # Define the netCDF-formatted member file
+                    # concatenation attributes.
+                    nc_concat:
+
+                         # Define the dimension name along which to
+                         # concatenate the respective member files.
+                         ncdim: nlocs
+
+                         # Define the netCDF-formatted file path to
+                         # contain the results of the concatenated
+                         # member files.
+                         ncfile: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.cryosat2.adt.nc
+
+                         # Define the netCDF-formatted concatenated
+                         # file path format.
+                         ncfrmt: NETCDF4
+
+               # Define the file identifier.
+               sst.nesdis_avhrr_noaa07:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.avhrr_noaa07.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis-test/sst/nesdis/avhrr/noaa07/%Y/%m/superob_0p25/iodav2/nesdis.avhrr_noaa07.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    profile_name: null
+                    ignore_missing: True
+
+                    # Define the attributes for multiple (i.e.,
+                    # member file) collection applications; these are
+                    # a single file containing all member files within
+                    # the specified window.
+                    multifile:
+
+                         # Define the total number of seconds, prior
+                         # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
                          start_offset_seconds: -10800
 
                          # Define the total number of seconds,
-                         # following the relevant the analysis cycle,
+                         # following the relevant the analysis timestamp,
+                         # from which to end collecting member files.
+                         stop_offset_seconds: 10800
+
+                         # Define the total number of seconds
+                         # specifying the interval at which to collect
+                         # member files.
+                         offset_seconds: 3600
+
+                    # Define the netCDF-formatted member file
+                    # concatenation attributes.
+                    nc_concat:
+
+                         # Define the dimension name along which to
+                         # concatenate the respective member files.
+                         ncdim: nlocs
+
+                         # Define the netCDF-formatted file path to
+                         # contain the results of the concatenated
+                         # member files.
+                         ncfile: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.avhrr_noaa07.sst.nc
+
+                         # Define the netCDF-formatted concatenated
+                         # file path format.
+                         ncfrmt: NETCDF4
+
+               # Define the file identifier.
+               sst.nesdis_avhrr_noaa09:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.avhrr_noaa09.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis-test/sst/nesdis/avhrr/noaa09/%Y/%m/superob_0p25/iodav2/nesdis.avhrr_noaa09.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    profile_name: null
+                    ignore_missing: True
+
+                    # Define the attributes for multiple (i.e.,
+                    # member file) collection applications; these are
+                    # a single file containing all member files within
+                    # the specified window.
+                    multifile:
+
+                         # Define the total number of seconds, prior
+                         # to the relevant analysis timestamp, from
+                         # which to begin collecting member files.
+                         start_offset_seconds: -10800
+
+                         # Define the total number of seconds,
+                         # following the relevant the analysis timestamp,
+                         # from which to end collecting member files.
+                         stop_offset_seconds: 10800
+
+                         # Define the total number of seconds
+                         # specifying the interval at which to collect
+                         # member files.
+                         offset_seconds: 3600
+
+                    # Define the netCDF-formatted member file
+                    # concatenation attributes.
+                    nc_concat:
+
+                         # Define the dimension name along which to
+                         # concatenate the respective member files.
+                         ncdim: nlocs
+
+                         # Define the netCDF-formatted file path to
+                         # contain the results of the concatenated
+                         # member files.
+                         ncfile: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.avhrr_noaa09.sst.nc
+
+                         # Define the netCDF-formatted concatenated
+                         # file path format.
+                         ncfrmt: NETCDF4
+
+               # Define the file identifier.
+               sst.nesdis_avhrr_noaa11:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.avhrr_noaa11.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis-test/sst/nesdis/avhrr/noaa11/%Y/%m/superob_0p25/iodav2/nesdis.avhrr_noaa11.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    profile_name: null
+                    ignore_missing: True
+
+                    # Define the attributes for multiple (i.e.,
+                    # member file) collection applications; these are
+                    # a single file containing all member files within
+                    # the specified window.
+                    multifile:
+
+                         # Define the total number of seconds, prior
+                         # to the relevant analysis timestamp, from
+                         # which to begin collecting member files.
+                         start_offset_seconds: -10800
+
+                         # Define the total number of seconds,
+                         # following the relevant the analysis timestamp,
+                         # from which to end collecting member files.
+                         stop_offset_seconds: 10800
+
+                         # Define the total number of seconds
+                         # specifying the interval at which to collect
+                         # member files.
+                         offset_seconds: 3600
+
+                    # Define the netCDF-formatted member file
+                    # concatenation attributes.
+                    nc_concat:
+
+                         # Define the dimension name along which to
+                         # concatenate the respective member files.
+                         ncdim: nlocs
+
+                         # Define the netCDF-formatted file path to
+                         # contain the results of the concatenated
+                         # member files.
+                         ncfile: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.avhrr_noaa11.sst.nc
+
+                         # Define the netCDF-formatted concatenated
+                         # file path format.
+                         ncfrmt: NETCDF4
+
+               # Define the file identifier.
+               sst.nesdis_avhrr_noaa12:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.avhrr_noaa12.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis-test/sst/nesdis/avhrr/noaa12/%Y/%m/superob_0p25/iodav2/nesdis.avhrr_noaa12.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    profile_name: null
+                    ignore_missing: True
+
+                    # Define the attributes for multiple (i.e.,
+                    # member file) collection applications; these are
+                    # a single file containing all member files within
+                    # the specified window.
+                    multifile:
+
+                         # Define the total number of seconds, prior
+                         # to the relevant analysis timestamp, from
+                         # which to begin collecting member files.
+                         start_offset_seconds: -10800
+
+                         # Define the total number of seconds,
+                         # following the relevant the analysis timestamp,
+                         # from which to end collecting member files.
+                         stop_offset_seconds: 10800
+
+                         # Define the total number of seconds
+                         # specifying the interval at which to collect
+                         # member files.
+                         offset_seconds: 3600
+
+                    # Define the netCDF-formatted member file
+                    # concatenation attributes.
+                    nc_concat:
+
+                         # Define the dimension name along which to
+                         # concatenate the respective member files.
+                         ncdim: nlocs
+
+                         # Define the netCDF-formatted file path to
+                         # contain the results of the concatenated
+                         # member files.
+                         ncfile: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.avhrr_noaa12.sst.nc
+
+                         # Define the netCDF-formatted concatenated
+                         # file path format.
+                         ncfrmt: NETCDF4
+
+               # Define the file identifier.
+               sst.nesdis_avhrr_noaa14:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.avhrr_noaa14.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis-test/sst/nesdis/avhrr/noaa14/%Y/%m/superob_0p25/iodav2/nesdis.avhrr_noaa14.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    profile_name: null
+                    ignore_missing: True
+
+                    # Define the attributes for multiple (i.e.,
+                    # member file) collection applications; these are
+                    # a single file containing all member files within
+                    # the specified window.
+                    multifile:
+
+                         # Define the total number of seconds, prior
+                         # to the relevant analysis timestamp, from
+                         # which to begin collecting member files.
+                         start_offset_seconds: -10800
+
+                         # Define the total number of seconds,
+                         # following the relevant the analysis timestamp,
+                         # from which to end collecting member files.
+                         stop_offset_seconds: 10800
+
+                         # Define the total number of seconds
+                         # specifying the interval at which to collect
+                         # member files.
+                         offset_seconds: 3600
+
+                    # Define the netCDF-formatted member file
+                    # concatenation attributes.
+                    nc_concat:
+
+                         # Define the dimension name along which to
+                         # concatenate the respective member files.
+                         ncdim: nlocs
+
+                         # Define the netCDF-formatted file path to
+                         # contain the results of the concatenated
+                         # member files.
+                         ncfile: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.avhrr_noaa14.sst.nc
+
+                         # Define the netCDF-formatted concatenated
+                         # file path format.
+                         ncfrmt: NETCDF4
+               
+               # Define the file identifier.
+               sst.nesdis_avhrr_noaa15:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.avhrr_noaa15.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis-test/sst/nesdis/avhrr/noaa15/%Y/%m/superob_0p25/iodav2/nesdis.avhrr_noaa15.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    profile_name: null
+                    ignore_missing: True
+
+                    # Define the attributes for multiple (i.e.,
+                    # member file) collection applications; these are
+                    # a single file containing all member files within
+                    # the specified window.
+                    multifile:
+
+                         # Define the total number of seconds, prior
+                         # to the relevant analysis timestamp, from
+                         # which to begin collecting member files.
+                         start_offset_seconds: -10800
+
+                         # Define the total number of seconds,
+                         # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
                          stop_offset_seconds: 10800
 
@@ -65,32 +386,34 @@ fetch:
                          # file path format.
                          ncfrmt: NETCDF4
 
+               # Define the file identifier.
                sst.nesdis_avhrr_noaa16:
 
-                    # Define the path attributes.
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.avhrr_noaa16.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     offset_seconds: 21600
 
-                    # Define the AWS s3 attributes.
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
                     bucket: noaa-reanalyses-pds
                     object_path: observations/reanalysis-test/sst/nesdis/avhrr/noaa16/%Y/%m/superob_0p25/iodav2/nesdis.avhrr_noaa16.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
-                    profile_name: Null
+                    profile_name: null
                     ignore_missing: True
 
-                    # Define the attributes for multiple file
-                    # applications; these are used to create (i.e.,
-                    # concatenate member files) a single file
-                    # containing all files within the specified
-                    # window.
+                    # Define the attributes for multiple (i.e.,
+                    # member file) collection applications; these are
+                    # a single file containing all member files within
+                    # the specified window.
                     multifile:
 
                          # Define the total number of seconds, prior
-                         # to the relevant the analysis cycle, from
+                         # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
                          start_offset_seconds: -10800
 
                          # Define the total number of seconds,
-                         # following the relevant the analysis cycle,
+                         # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
                          stop_offset_seconds: 10800
 
