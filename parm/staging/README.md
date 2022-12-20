@@ -110,7 +110,7 @@ identifier attributes.
 
 <div align="center">
 
-| Optional Attribute | Description | | Default Value | 
+| Optional Attribute | Description | Default Value | 
 | :-------------: | :-------------: | :-------------: |
 | `ignore_missing` | <div align="left">This is boolean value specifying whether to fail for missing platform/interface file paths (`False`) or to ignore a missing file and continue to process the attributes within the YAML-formatted configuration file (`True`). | `False` | </div>
 | `multifile` |  <div align="left">See section [multifile configuration attributes](#multifile_configuration_attributes) below. | option is ignored | </div> 
