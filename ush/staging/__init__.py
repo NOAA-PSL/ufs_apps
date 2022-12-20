@@ -275,9 +275,13 @@ class Staging:
         # Check that netCDF-formatted member files exist; proceed accordingly.
         if len(ncfilelist) > 0:
 
+            print(ncfilelist)
+            quit()
+
             # Check that the directory tree corresponding to the
             # concatenated output file exists; proceed accordingly.
-            fileio_interface.dirpath_tree(path=os.path.dirname(ncconcat_obj.ncfile))
+            fileio_interface.dirpath_tree(
+                path=os.path.dirname(ncconcat_obj.ncfile))
 
             # Concatenate the respective files to the specified output
             # file path.
@@ -286,7 +290,7 @@ class Staging:
                 ncfile=ncconcat_obj.ncfile,
                 ncdim=ncconcat_obj.ncdim,
                 ncfrmt=ncconcat_obj.ncfrmt,
-        )
+            )
 
     def awss3_fetch(
         self,
@@ -620,7 +624,8 @@ class Staging:
         if str(concat_type).lower() == "nc_concat":
 
             # Concatenate the respective netCDF-formatted file.
-            self._nc_concat(fileid_obj=fileid_obj, fileconcat_obj=fileconcat_obj)
+            self._nc_concat(fileid_obj=fileid_obj,
+                            fileconcat_obj=fileconcat_obj)
 
     def get_hash_index(self, filepath: str, hash_level: str = None) -> str:
         """
