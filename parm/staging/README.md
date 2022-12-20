@@ -102,10 +102,16 @@ example above.
 
 | Attribute | Description |
 | :-------------: | :-------------: |
-| `bucket` | <div align="left">The AWS s3 bucket from which collect the specified `object_path` (see below).</div> | 
+| `bucket` | <div align="left">The AWS s3 bucket from which collect the specified `object_path` (see below).</div> |
+
+| `ignore_missing` | <div align="left">This is boolean value specifying whether to fail for missing platform/interface file paths (`False`) or to ignore a missing file and continue to process the attributes within the YAML-formatted configuration file (`True`).</div> | 
+
 | `local_path` | <div align="left">The file path on the local host to where the fetched file will be staged; environment variables and POSIX compliant time and date string attributes are supported when building this attribute.</div> |
+| `multifile` |  <div align="left">See section [multifile configuration attributes](#multifile_configuration_attributes) below. </div> | 
 | `object_path` | <div align="left">The AWS s3 object path beneath the AWS s3 `bucket` attribute defined above; environment variables and POSIX compliant time and date string attributes are supported when building this attribute.</div> | 
 | `offset_seconds` | <div align="left">The total number of offset seconds relative to the forecast date for valid files; this value is used to define any POSIX compliant time and date string information specified in `local_path`; this value is also used to build the `object_path` (see above).</div> | 
-| `profile_name` | <div align="left">  </div> | 
+| `profile_name` | <div align="left">The AWS s3 profile to be used for AWS s3 platform/interface file fetching; this value should be a profile name within the respective user `~/.aws/credentials` file path; if fetching from a public bucket this value should be set to `null`.</div> | 
 
 </div>
+
+### Multifile Configuration Attributes
