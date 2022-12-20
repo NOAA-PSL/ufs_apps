@@ -19,11 +19,21 @@ fetch:
 	  .
           .
 	  
-     interface_platform:
-          fetching_option:
-	       file_identifier:
+     <interface_platform>:
+     
+          <fetching_option>:
+	  
+	       <file_identifier>:
                     .
 		    .
 		    .
 ~~~
 
+<div align="center">
+
+| Attribute | Description |
+| :-------------: | :-------------: |
+| `fetch` | <div align="left">This attribute is mandatory for all fetching applications; this informs the application as to the relevant configuration attributes.</div> | 
+| `checksum` | <div align="left"> </div> | 
+
+</div>
