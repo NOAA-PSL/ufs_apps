@@ -106,9 +106,11 @@ load_modules(){
 # (1) Define the path to all UFS application environment variables for
 #     the respective supported platform.
 export MODULESufs=${HOMEufs}/modulefiles/platforms/rdhpcs-hera
+echo "here 1"
 
 # (2) Define the platform specific environment attributes.
 . ${HOMEufs}/modulefiles/platforms/platform.rdhpcs-hera.env
+echo "here 2"
 
 # (3) Load the respective application module(s) for the supported
 #     platform.
