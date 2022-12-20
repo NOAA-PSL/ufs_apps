@@ -16,7 +16,9 @@ fetch:
 
      checksum:
 
-          [`CHECKSUM ATTRIBUTES`](https://www.google.com)
+          <pre>
+          <a href="https://www.google.com">CHECKSUM ATTRIBUTES</a>
+	  </pre>
 
      interface_platform:
 
