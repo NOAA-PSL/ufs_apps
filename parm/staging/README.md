@@ -9,16 +9,15 @@ YAML-formatted configuration options.
 
 The following YAML snippets provide an example for the architecture of
 the YAML-formatted configuration file for fetching user-specified
-files.
+files. Explanations of the respective attributes are provided in the
+table which follows.
 
 ~~~
 fetch:
 
      checksum:
 
-          <pre>
-          <a href="https://www.google.com">CHECKSUM ATTRIBUTES</a>
-	  </pre>
+          ...
 
      interface_platform:
 
@@ -26,5 +25,6 @@ fetch:
 
                file_identifier:
 
-                    <FILE IDENTIFIER ATTRIBUTES>
+                    ...
 ~~~
+
