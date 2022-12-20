@@ -1,16 +1,16 @@
-# Unified Forecast System Workflow Staging Configurations
+# Unified Forecast System Workflow Staging
 
 The Unified Forecast System (UFS) workflow staging applies to the
 fetching (i.e., collecting) and storing (i.e., saving) of specified
 files. This README provides a description of the available
 YAML-formatted configuration options.
 
-### Fetching Application Configuration
+## Building a Fetching Application Configuration
 
-The following YAML snippets provide an example for the architecture of
-the YAML-formatted configuration file for fetching user-specified
-files. Explanations of the respective attributes are provided in the
-table which follows.
+The following YAML snippet provides an example architecture for the
+YAML-formatted configuration files to be used for the UFS fetching
+application. Descriptions for the respective attributes are provided
+in the tables throughout this section.
 
 ~~~
 # All attributes that follow are for the UFS fetching application.
@@ -42,14 +42,14 @@ fetch:
 | Attribute | Description |
 | :-------------: | :-------------: |
 | `fetch` | <div align="left">This attribute is mandatory for all fetching applications; this informs the application as to the relevant configuration attributes.</div> | 
-| `checksum` | <div align="left">This optional attribute provides information relevant to the determination of checksum hash values for each file collected for the respective interface/platform; a list of currently supported values can be found [here](#checksum-attributes).</div> |
+| `checksum` | <div align="left">This optional attribute provides information relevant to the determination of checksum hash values for each file collected for the respective interface/platform; a list of currently supported values can be found [here](#checksum-configuration-attributes).</div> |
 | `[interface_platform]` | <div align="left">This value defines the platform and/or interface from which to fetch files; the currently (only) supported option is `aws_s3` which should replace the `[interface_platform]` reference key.</div> |
 | `[fetching_option]` | <div align="left">This value defines the types/contents of the file identifiers to follow; as an example, for ocean or atmosphere type observation files, this attribute may read `ocean_obs` or `atmos_obs`, respectively; the respective attributes may be used as optional command line arguments for the [fetching application script](https://github.com/HenryWinterbottom-NOAA/ufs_apps/blob/develop/scripts/exufs_fetch.py). </div> |
 | `[file_identifier]` | <div align="left">This value assigns a unique name to the YAML key for the attributes corresponding to a given file to be retrieved; for example, [National Environmental Satellite, Data, and Information Service (NESDIS)](https://www.nesdis.noaa.gov/) hosted observations for sea-surface temperature (SST) derived from the [AVHRR](https://www.eumetsat.int/avhrr) instrument onboard the National Oceanic and Atmospheric (NOAA) 15 satellite may have a file identifier such as `sst.nesdis_avhrr_noaa15`. </div> | 
 
 </div>
 
-#### `checksum` Attributes
+### Checksum Configuration Attributes
 
 <div align="center">
 
@@ -83,7 +83,15 @@ fetch:
 
 	       # Define the file identifier.
                sst.nesdis_avhrr_noaa15:
-                    .
-		    .
-		    .
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    [file_identifier_attributes]
+		         .
+		         .
+			 .
 ~~~
+
+The following table provides the supported file identifier attributes
+attributes for the file identifier `sst.nesdis_avhrr_noaa15` in the
+example above.
