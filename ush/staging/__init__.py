@@ -289,6 +289,12 @@ class Staging:
                 ncfrmt=ncconcat_obj.ncfrmt,
             )
 
+        else:
+
+            msg = (f'No netCDF files within list {ncfilelist} exist; netCDF-formatted '
+                   f'file path {ncconcat_obj.ncfile} will not be created.')
+            self.logger.warn(msg=msg)
+
     def awss3_fetch(
         self,
         fileid_obj: object,
@@ -376,6 +382,15 @@ class Staging:
                 out_frmttyp=fileid_obj.object_path,
             )
 
+            # Check the contents of the AWS s3 bucket; proceed
+            # accordingly.
+            aws_filelist = boto3_interface.s3filelist(
+                bucket=fileid_obj.bucket, object_path=object_path,
+                profile_name=fileid_obj.profile_name)
+
+            print(aws_filelist)
+            quit()
+
             fileio_interface.dirpath_tree(path=os.path.dirname(local_path))
 
             # Collect the file from the specified AWS s3 bucket and
@@ -383,9 +398,9 @@ class Staging:
             filedict = {local_path: object_path}
 
             boto3_interface.s3get(
-                bucket=fileid_obj.bucket,
-                filedict=filedict,
-                profile_name=fileid_obj.profile_name,
+                bucket = fileid_obj.bucket,
+                filedict = filedict,
+                profile_name = fileid_obj.profile_name,
             )
 
             # Define the checksum index value for the collected file.
