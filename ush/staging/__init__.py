@@ -275,9 +275,6 @@ class Staging:
         # Check that netCDF-formatted member files exist; proceed accordingly.
         if len(ncfilelist) > 0:
 
-            print(ncfilelist)
-            quit()
-
             # Check that the directory tree corresponding to the
             # concatenated output file exists; proceed accordingly.
             fileio_interface.dirpath_tree(
@@ -348,6 +345,9 @@ class Staging:
               above) provided upon entry.
 
         """
+
+        print(vars(fileid_obj))
+        quit()
 
         # Define the timestamp strings for the respective file
         # identifier.
@@ -875,7 +875,8 @@ class Staging:
         # path; proceed accordingly.
         if hash_index is not None:
 
-            fileio_interface.dirpath_tree(path=os.path.dirname(checksum_filepath))
+            fileio_interface.dirpath_tree(
+                path=os.path.dirname(checksum_filepath))
 
             with open(checksum_filepath, "a", encoding="utf-8") as file:
                 file.write(f"{hash_index} {local_path}\n")
