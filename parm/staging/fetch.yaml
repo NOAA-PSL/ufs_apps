@@ -26,7 +26,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/sst/nesdis/cryosat2/%Y/%m/24hr/cryosat2.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    object_path: observations/reanalysis/adt/nesdis/cryosat2/%Y/%m/24hr/cryosat2.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
                     profile_name: null
                     ignore_missing: True
 
