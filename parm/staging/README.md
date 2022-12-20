@@ -14,16 +14,13 @@ table which follows.
 
 ~~~
 fetch:
-
      checksum:
           .
 	  .
           .
 	  
      interface_platform:
-     
           fetching_option:
-
 	       file_identifier:
                     .
 		    .
