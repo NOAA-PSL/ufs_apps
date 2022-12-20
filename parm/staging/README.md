@@ -39,3 +39,10 @@ fetch:
 </div>
 
 ### `checksum` Attributes
+
+<div align="center">
+
+| `checksum` Attribute | Description |
+| :-------------: | :-------------: |
+
+</div>
