@@ -31,7 +31,7 @@ fetch:
 
 <div align="center">
 
-| YAML Attribute | Description |
+| Attribute | Description |
 | :-------------: | :-------------: |
 | `fetch` | <div align="left">This attribute is mandatory for all fetching applications; this informs the application as to the relevant configuration attributes.</div> | 
 | `checksum` | <div align="left">This optional attribute provides information relevant to the determination of checksum hash values for each file collected for the respective interface/platform; a list of currently supported values can be found [here](#checksum-attributes).</div> | 
