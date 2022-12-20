@@ -389,6 +389,8 @@ class Staging:
                     object_path),
                 profile_name=fileid_obj.profile_name)
 
+            print(aws_filelist)
+
             if len(aws_filelist) > 0:
 
                 fileio_interface.dirpath_tree(path=os.path.dirname(local_path))
