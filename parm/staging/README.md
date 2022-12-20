@@ -5,7 +5,7 @@ fetching (i.e., collecting) and storing (i.e., saving) of specified
 files. This README provides a description of the available
 YAML-formatted configuration options.
 
-## Fetching Application Configuration
+### Fetching Application Configuration
 
 The following YAML snippets provide an example for the architecture of
 the YAML-formatted configuration file for fetching user-specified
@@ -19,11 +19,11 @@ fetch:
 	  .
           .
 	  
-     <interface_platform>:
+     [interface_platform]:
      
-          <fetching_option>:
+          [fetching_option]:
 	  
-	       <file_identifier>:
+	       [file_identifier]:
                     .
 		    .
 		    .
@@ -38,7 +38,7 @@ fetch:
 
 </div>
 
-### `checksum` Attributes
+#### `checksum` Attributes
 
 <div align="center">
 
@@ -46,5 +46,7 @@ fetch:
 | :-------------: | :-------------: |
 | `aws_s3_filepath` | <div align="left">The local host path for the file to contain the checksum hash values for the AWS s3 interface/platform downloaded files.</div> |
 | `aws_s3_hash` | <div align="left">The checksum hash types for the respective AWS s3 interface/platform downloaded files; currently supported values are `md5`, `sha1`, `sha224`, `sha256`, `sha384`, and `sha512`; if not specified, `md5` is assumed. |
+| `[interface_platform]` | <div align="left">This value defines the platform and/or interface from which to fetch files; the currently (only) supported option is `aws_s3` which should replace the `[interface_platform]` reference key.</div> |
+| `[fetching_option]` | <div align="left">This value defines a type of file; </div> | 
 
 </div>
