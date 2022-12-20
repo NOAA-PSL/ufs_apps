@@ -66,7 +66,7 @@ exit_script(){
     script_name=`${BASENAMEufs} "$0"`
     stop_date=`${DATEufs} -u`
     message="STOP ${script_name}: ${stop_date}"
-    ${PYTHONufs} ${HOMEufs}/modulefiles/py/logger.py --message "${message}" --info
+    ${PYTHONufs}  ${PYUTILSufs}/scripts/ufs_logger.py --msg="${message}" --msgtype=info
 }
 
 #----
@@ -86,7 +86,7 @@ load_modules(){
     script_name=`${BASENAMEufs} "$0"`
     start_date=`${DATEufs} -u`
     message="START ${script_name}: ${start_date}"
-    ${PYTHONufs} ${HOMEufs} --message "${message}" --info
+    ${PYTHONufs}  ${PYUTILSufs}/scripts/ufs_logger.py --msg="${message}" --msgtype=info
 
     # Query the run-time environment and proceed accordingly.
     if [[ ${UFS_STAGE} -eq 1 ]]; then
