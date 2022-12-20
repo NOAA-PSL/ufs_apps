@@ -20,7 +20,7 @@ fetch:
                     
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.cryosat2.adt.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.cryosat2.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
                     offset_seconds: 0
                     
                     # Define the AWS s3 attributes for the respective
