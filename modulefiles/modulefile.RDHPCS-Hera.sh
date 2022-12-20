@@ -125,7 +125,7 @@ setup(){
 
 # (1) Define the path to all UFS application environment variables for
 #     the respective supported platform.
-export MODULESufs=${HOMEufs}/modulefiles/platforms/rdhpcs-hera
+export MODULESufs=${HOMEufs}/modulefiles/platforms/platform.rdhpcs-hera.env
 
 # (2) Define the platform specific environment attributes.
 . ${HOMEufs}/modulefiles/platforms/rdhpcs_hera.env
