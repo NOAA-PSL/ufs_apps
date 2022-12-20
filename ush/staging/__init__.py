@@ -365,6 +365,12 @@ class Staging:
             )
             raise StagingError(msg=msg)
 
+        # Collect a list of the available files within the specified
+        # AWS s3 bucket and object path parent directory.
+        aws_filelist = boto3_interface.s3filelist(
+            bucket=fileid_obj.bucket, object_path=os.path.dirname(
+                object_path), profile_name=fileid_obj.profile_name)
+
         # Loop through each specified time and proceed accordingly.
         for timestamp in timestamps_list:
 
@@ -382,16 +388,8 @@ class Staging:
                 out_frmttyp=fileid_obj.object_path,
             )
 
-            # Check the contents of the AWS s3 bucket; proceed
-            # accordingly.
-            aws_filelist = boto3_interface.s3filelist(
-                bucket=fileid_obj.bucket, object_path=os.path.dirname(
-                    object_path),
-                profile_name=fileid_obj.profile_name)
-
-            print(aws_filelist)
-
-            if len(aws_filelist) > 0:
+            # If the AWS s3 object path exists, proceed accordingly.
+            if object_path in aws_filelist:
 
                 fileio_interface.dirpath_tree(path=os.path.dirname(local_path))
 
@@ -432,7 +430,6 @@ class Staging:
                 msg = (f'The AWS s3 object path {object_path} does not exist '
                        f'and will not be downloaded to {local_path}.')
                 self.logger.warn(msg=msg)
-                    
 
     def build_fileid_obj(
         self,
