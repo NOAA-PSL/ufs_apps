@@ -346,9 +346,6 @@ class Staging:
 
         """
 
-        print(vars(fileid_obj))
-        quit()
-
         # Define the timestamp strings for the respective file
         # identifier.
         timestamps_list = parser_interface.object_getattr(
