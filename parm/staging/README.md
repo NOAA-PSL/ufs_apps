@@ -102,5 +102,13 @@ example above.
 
 | Attribute | Description |
 | :-------------: | :-------------: |
+| `bucket` | <div align="left">The AWS s3 bucket from which collect the specified `object_path` (see below).</div> | 
+| `local_path` | <div align="left">The file path on the local host to where the fetched file will be staged; environment variables and POSIX compliant time and date string attributes are supported when building this attribute.</div> |
+
+| `object_path` | <div align="left">The AWS s3 object path beneath the AWS s3 `bucket` attribute defined above; environment variables and POSIX compliant time and date string attributes are supported when building this attribute.</div> | 
+
+| `offset_seconds` | <div align="left">The total number of offset seconds relative to the forecast date for valid files; this value is used to define any POSIX compliant time and date string information specified in `local_path`; this value is also used to build the `object_path` (see above).</div> | 
+
+| `profile_name` | <div align="left">  </div> | 
 
 </div>
