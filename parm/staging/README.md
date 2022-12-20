@@ -136,5 +136,18 @@ platform/interface values.
 
 </div>
 
-
 ### netCDF Multifile Concatenation Attributes
+
+The following table provides the mandatory variables required to
+concatenate [netCDF](https://www.unidata.ucar.edu/software/netcdf/)
+formatted files for a given file identifier.
+
+<div align="center">
+
+| Attribute | Description | 
+| :-------------: | :-------------: |
+| `ncdim` | <div align="left">The netCDF dimension name along which to concatenate the respective member files.</div> |
+| `ncfile` | <div align="left">The netCDF-formatted file path to contain the concatenated member files.</div> |
+| `ncfrmt` | <div align="left">The netCDF file format for the concatenated file path (see `ncfile`); supported values are `NETCDF3_CLASSIC`, `NETCDF3_64BIT_OFFSET`, NETCDF3_64BIT_DATA`, `NETCDF4`, `NETCDF4_CLASSIC`. </div> | 
+
+</div> 
