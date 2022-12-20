@@ -120,10 +120,21 @@ identifier attributes.
 </div>
 
 
-
 ### Multifile Configuration Attributes
 
+The following table provides the mandatory variables required to
+collect multiple files for a given file identifier for the supported
+platform/interface values.
 
+<div align="center">
+
+| Attribute | Description | 
+| :-------------: | :-------------: |
+| `offset_seconds` | <div align="left"> The total number of seconds specifying the interval at which to collect member files. </div> | 
+| `start_offset_seconds` | <div align="left">The total number of seconds, prior to the respective forecast cycle timestamp, for which to begin collecting member files. </div> |
+| `stop_offset_seconds` | <div align="left"> The total number of seconds, following the respective forecast cycle timestamp, for which to end collecting member files.</div> | 
+
+</div>
 
 
 ### netCDF Multifile Concatenation Attributes
