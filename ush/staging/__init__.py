@@ -225,7 +225,8 @@ class Staging:
 
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
-        ncconcat_attrs_dict = {"ncdim": numpy.nan, "ncfile": numpy.nan, "ncfrmt": None}
+        ncconcat_attrs_dict = {"ncdim": numpy.nan,
+                               "ncfile": numpy.nan, "ncfrmt": None}
 
         ncconcat_obj = parser_interface.object_define()
         for (ncconcat_attr, _) in ncconcat_attrs_dict.items():
@@ -271,17 +272,20 @@ class Staging:
                 object_in=ncconcat_obj, key=ncconcat_attr, value=value
             )
 
-        # Check that the directory tree corresponding to the
-        # concatenated output file exists; proceed accordingly.
-        fileio_interface.dirpath_tree(path=os.path.dirname(ncconcat_obj.ncfile))
+        # Check that netCDF-formatted member files exist; proceed accordingly.
+        if len(ncfilelist) > 0:
 
-        # Concatenate the respective files to the specified output
-        # file path.
-        netcdf4_interface.ncconcat(
-            ncfilelist=ncfilelist,
-            ncfile=ncconcat_obj.ncfile,
-            ncdim=ncconcat_obj.ncdim,
-            ncfrmt=ncconcat_obj.ncfrmt,
+            # Check that the directory tree corresponding to the
+            # concatenated output file exists; proceed accordingly.
+            fileio_interface.dirpath_tree(path=os.path.dirname(ncconcat_obj.ncfile))
+
+            # Concatenate the respective files to the specified output
+            # file path.
+            netcdf4_interface.ncconcat(
+                ncfilelist=ncfilelist,
+                ncfile=ncconcat_obj.ncfile,
+                ncdim=ncconcat_obj.ncdim,
+                ncfrmt=ncconcat_obj.ncfrmt,
         )
 
     def awss3_fetch(
