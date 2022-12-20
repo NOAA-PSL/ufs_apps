@@ -196,6 +196,41 @@ fetch:
                     profile_name: null
                     ignore_missing: True		    
 
+                    # Define the attributes for multiple (i.e.,
+                    # member file) collection applications; these are
+                    # a single file containing all member files within
+                    # the specified window.
+		    multifile:
 
+                         # Define the total number of seconds, prior
+                         # to the relevant analysis timestamp, from
+                         # which to begin collecting member files.
+                         start_offset_seconds: -10800
 
+                         # Define the total number of seconds,
+                         # following the relevant the analysis timestamp,
+                         # from which to end collecting member files.
+                         stop_offset_seconds: 10800
+
+                         # Define the total number of seconds
+                         # specifying the interval at which to collect
+                         # member files.
+                         offset_seconds: 3600
+
+                    # Define the netCDF-formatted member file
+                    # concatenation attributes.
+                    nc_concat:
+
+                         # Define the dimension name along which to
+                         # concatenate the respective member files.
+                         ncdim: nlocs
+
+                         # Define the netCDF-formatted file path to
+                         # contain the results of the concatenated
+                         # member files.
+                         ncfile: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.avhrr_noaa15.sst.nc
+
+                         # Define the netCDF-formatted concatenated
+                         # file path format.
+                         ncfrmt: NETCDF4
 ~~~
