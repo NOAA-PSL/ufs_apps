@@ -128,7 +128,7 @@ setup(){
 export MODULESufs=${HOMEufs}/modulefiles/platforms/rdhpcs-hera
 
 # (2) Define the platform specific environment attributes.
-. ${HOMEufs}/modulefiles/platforms/platform.rdhpcs_hera.env
+. ${HOMEufs}/modulefiles/platforms/platform.rdhpcs-hera.env
 
 # (3) Load the respective application module(s) for the supported
 #     platform.
