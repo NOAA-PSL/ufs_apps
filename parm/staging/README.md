@@ -7,15 +7,16 @@ YAML-formatted configuration options.
 
 ## Fetching Application Configuration
 
-Yhe following YAML snippet provides an example YAML-formatted
-configuration file for fetching user-specified files.
+The following YAML snippets provide an example for the architecture of
+the YAML-formatted configuration file for fetching user-specified
+files.
 
 ~~~
 fetch:
 
      checksum:
 
-          <CHECKSUM ATTRIBUTES>
+          [CHECKSUM ATTRIBUTES](http://www.google.com)
 
      interface_platform:
 
