@@ -152,9 +152,50 @@ formatted files for a given file identifier.
 </div>
 
 Using the attributes provided above, an example YAML-formatted
-configuration file for the UFS fetching application with the following
-attributes is provided.
+configuration file for a UFS fetching application is provided
+below. This example assumes the following.
 
-- this is a test
+- The file identifier, as above, is `sst.nesdis_avhrr_noaa15`.
 
-- this is another test
+- A 6-hour timestamp relative to the respective forecast cycle.
+
+- Hourly (i.e., multiple) netCDF-formatted files collected from an [AWS s3](https://aws.amazon.com/pm/serv-s3/?trk=fecf68c9-3874-4ae2-a7ed-72b6d19c8034&sc_channel=ps&s_kwcid=AL!4422!3!536452728638!e!!g!!aws%20s3&ef_id=Cj0KCQiA14WdBhD8ARIsANao07jcrgPFmsPPGxTJDSWizyp8U3k9WhPE95zHj5UNF2Jt8FdoJlMEoHMaAr7REALw_wcB:G:s&s_kwcid=AL!4422!3!536452728638!e!!g!!aws%20s3) relative to the specified forecast cycle. 
+
+- Concatenation of the hourly netCDF-formatted member files along the `nlocs` netCDF dimension and formatted as `NETCDF4`.
+
+
+
+~~~
+# All attributes that follow are for the UFS fetching application.
+fetch:
+
+     # Define the checksum hash index attributes.
+     checksum:
+
+       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.obs.md5     
+       aws_s3_hash: md5
+  
+     # Define a supported the platform/interface from which to collect
+     # the respective files.
+     aws_s3:	 
+
+          # Define the fetching type; this corresponds to ocean
+          # observations.
+	  ocean_obs:
+
+	       # Define the file identifier.
+               sst.nesdis_avhrr_noaa15:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+		    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.avhrr_noaa15.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+		    offset_seconds: 21600
+
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis-test/sst/nesdis/avhrr/noaa15/%Y/%m/superob_0p25/iodav2/nesdis.avhrr_noaa15.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    profile_name: null
+                    ignore_missing: True		    
+
+
+
+~~~
