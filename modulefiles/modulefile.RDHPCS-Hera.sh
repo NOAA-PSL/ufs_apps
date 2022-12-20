@@ -61,12 +61,6 @@ exit_script(){
 
     # List the loaded modules.
     module list
-
-    # Print message to the user.
-    script_name=`${BASENAMEufs} "$0"`
-    stop_date=`${DATEufs} -u`
-    message="STOP ${script_name}: ${stop_date}"
-    ${PYTHONufs}  ${PYUTILSufs}/scripts/ufs_logger.py --msg="${message}" --msgtype=info
 }
 
 #----
@@ -82,12 +76,6 @@ exit_script(){
 
 load_modules(){
 
-    # Print message to the user.
-    script_name=`${BASENAMEufs} "$0"`
-    start_date=`${DATEufs} -u`
-    message="START ${script_name}: ${start_date}"
-    ${PYTHONufs}  ${PYUTILSufs}/scripts/ufs_logger.py --msg="${message}" --msgtype=info
-
     # Query the run-time environment and proceed accordingly.
     if [[ ${UFS_STAGE} -eq 1 ]]; then
 
@@ -97,8 +85,7 @@ load_modules(){
 	# List modules and exit gracefully.
 	exit_script
 
-    fi # [[ ${UFS_STAGE} -eq 1 ]]
-    
+    fi # [[ ${UFS_STAGE} -eq 1 ]]   
 }
 
 #----
@@ -106,11 +93,9 @@ load_modules(){
 # (1) Define the path to all UFS application environment variables for
 #     the respective supported platform.
 export MODULESufs=${HOMEufs}/modulefiles/platforms/rdhpcs-hera
-echo "here 1"
 
 # (2) Define the platform specific environment attributes.
 . ${HOMEufs}/modulefiles/platforms/platform.rdhpcs-hera.env
-echo "here 2"
 
 # (3) Load the respective application module(s) for the supported
 #     platform.
