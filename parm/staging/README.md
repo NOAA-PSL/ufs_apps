@@ -83,11 +83,7 @@ fetch:
 
 	       # Define the file identifier.
                sst.nesdis_avhrr_noaa15:
-
                     .
 		    .
 		    .
-
-
-
 ~~~
