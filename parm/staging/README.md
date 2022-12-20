@@ -92,6 +92,15 @@ fetch:
 			 .
 ~~~
 
+### File Identifier Attributes
+
 The following table provides the supported file identifier attributes
 attributes for the file identifier `sst.nesdis_avhrr_noaa15` in the
 example above.
+
+<div align="center">
+
+| Attribute | Description |
+| :-------------: | :-------------: |
+
+</div>
