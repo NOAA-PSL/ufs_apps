@@ -16,57 +16,57 @@ fetch:
           ocean_obs:
 
                # Define the file identifier.
-#               adt.nesdis.cryosat2:
+               adt.nesdis.cryosat2:
                     
                     # Define the attributes corresponding to the
                     # respective file identifier.
-#                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.cryosat2.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-#                    offset_seconds: 0
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.cryosat2.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    offset_seconds: 0
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
-#                    bucket: noaa-reanalyses-pds
-#                    object_path: observations/reanalysis/adt/nesdis/cryosat2/%Y/%m/24h/cryosat2.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-#                    profile_name: noaa_bdp
-#                    ignore_missing: True
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/adt/nesdis/cryosat2/%Y/%m/24h/cryosat2.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    profile_name: noaa_bdp
+                    ignore_missing: True
 
                     # Define the attributes for multiple (i.e.,
                     # member file) collection applications; these are
                     # a single file containing all member files within
                     # the specified window.
-#                    multifile:
+                    multifile:
 
                          # Define the total number of seconds, prior
                          # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
-#                         start_offset_seconds: -43200
+                         start_offset_seconds: -43200
 
                          # Define the total number of seconds,
                          # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
-#                         stop_offset_seconds: 43200
+                         stop_offset_seconds: 43200
 
                          # Define the total number of seconds
                          # specifying the interval at which to collect
                          # member files.
-#                         offset_seconds: 43200
+                         offset_seconds: 43200
 
                     # Define the netCDF-formatted member file
                     # concatenation attributes.
-#                    nc_concat:
+                    nc_concat:
 
                          # Define the dimension name along which to
                          # concatenate the respective member files.
-#                         ncdim: nlocs
+                         ncdim: nlocs
 
                          # Define the netCDF-formatted file path to
                          # contain the results of the concatenated
                          # member files.
-#                         ncfile: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.cryosat2.adt.nc
+                         ncfile: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.cryosat2.adt.nc
 
                          # Define the netCDF-formatted concatenated
                          # file path format.
-#                         ncfrmt: NETCDF4
+                         ncfrmt: NETCDF4
 
                # Define the file identifier.
                sst.nesdis_avhrr_noaa07:
