@@ -260,12 +260,12 @@ class Staging:
 
                 # Check the valid values for the respective netCDF
                 # attribute; proceed accordingly.
-                check=parser_interface.dict_key_value(
+                check = parser_interface.dict_key_value(
                     dict_in=ncconcat_attrs_dict, key=ncconcat_attr, no_split=True
                 )
 
                 if check == numpy.nan:
-                    msg=(
+                    msg = (
                         "For netCDF-formatted file concatenation, the "
                         f"attribute {ncconcat_attr} cannot be NoneType. "
                         "Aborting!!!"
@@ -274,7 +274,7 @@ class Staging:
 
             # Update the attribute value; proceed accordingly.
             try:
-                value=datetime_interface.datestrupdate(
+                value = datetime_interface.datestrupdate(
                     datestr=str(self.cycle),
                     in_frmttyp=timestamp_interface.GLOBAL,
                     out_frmttyp=value,
@@ -284,12 +284,12 @@ class Staging:
             except TypeError:
                 pass
 
-            ncconcat_obj=parser_interface.object_setattr(
+            ncconcat_obj = parser_interface.object_setattr(
                 object_in=ncconcat_obj, key=ncconcat_attr, value=value
             )
 
         # Check that netCDF-formatted member files exist; proceed accordingly.
-        if sum([fileio_interface.fileexist(path = filename) for filename in ncfilelist]) > 0:
+        if sum([fileio_interface.fileexist(path=filename) for filename in ncfilelist]) > 0:
 
             # Check that the directory tree corresponding to the
             # concatenated output file exists; proceed accordingly.
@@ -384,9 +384,24 @@ class Staging:
         # Loop through each specified time and determine whether the
         # request AWS s3 bucket and object path exists; if so, update
         # the local attribute containing the files to be collected.
-        aws_filedict={}
+        aws_filelist = ()
         for timestamp in timestamps_list:
 
+            aws_filelist.append(boto3_interface.filelist(
+                bucket=fileid_obj.bucket,
+                object_path=os.path.dirname(
+                    datetime_interface.datestrupdate(datestr=timestamp,
+                                                     in_frmttyp=timestamp_interface.GLOBAL,
+                                                     out_frmttyp=fileid_obj.object_path)
+                    )))
+
+
+        print(aws_filelist)
+
+        quit()
+
+        for timestamp in timestamps_list:
+            
             # Define the respective file path names in accordance with
             # the respective timestamp; check that the directory tree
             # for the local filename exists.
