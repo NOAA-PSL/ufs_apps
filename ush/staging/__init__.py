@@ -389,53 +389,64 @@ class Staging:
             aws_path = os.path.dirname(os.path.join(
                 's3://', fileid_obj.bucket, object_path, str()))
 
+            # Query the AWS s3 bucket and object path to determine
+            # whether the path exists; proceed accordingly.
             exist = awscli_interface.exist_awspath(
                 aws_path, resource='s3', profile=fileid_obj.profile_name)
 
-            aws_filelist = awscli_interface.list_awspath(
-                aws_path=aws_path, resource='s3', profile=fileid_obj.profile_name)
+            if exist:
 
-            # If the AWS s3 object path exists, proceed accordingly.
-            if os.path.basename(object_path) in aws_filelist:
+                aws_filelist = awscli_interface.list_awspath(
+                    aws_path=aws_path, resource='s3', profile=fileid_obj.profile_name)
 
-                fileio_interface.dirpath_tree(path=os.path.dirname(local_path))
+                # If the AWS s3 object path exists, proceed accordingly.
+                if os.path.basename(object_path) in aws_filelist:
 
-                # Collect the file from the specified AWS s3 bucket
-                # and object path and stage it locally.
-                filedict = {local_path: object_path}
+                    fileio_interface.dirpath_tree(
+                        path=os.path.dirname(local_path))
 
-                boto3_interface.s3get(
-                    bucket=fileid_obj.bucket,
-                    filedict=filedict,
-                    profile_name=fileid_obj.profile_name,
-                )
+                    # Collect the file from the specified AWS s3
+                    # bucket and object path and stage it locally.
+                    filedict = {local_path: object_path}
 
-                # Define the checksum index value for the collected
-                # file.
-                if checksum_index:
-
-                    hash_index = self.get_hash_index(
-                        filepath=local_path, hash_level=checksum_level
+                    boto3_interface.s3get(
+                        bucket=fileid_obj.bucket,
+                        filedict=filedict,
+                        profile_name=fileid_obj.profile_name,
                     )
-                    msg = f"The hash index for file path {local_path} is {hash_index}."
+
+                    # Define the checksum index value for the
+                    # collected file.
+                    if checksum_index:
+
+                        hash_index = self.get_hash_index(
+                            filepath=local_path, hash_level=checksum_level
+                        )
+                        msg = f"The hash index for file path {local_path} is {hash_index}."
+                        self.logger.warn(msg=msg)
+
+                    # Check the checksum index writing parameter value
+                    # and proceed accordingly.
+                    if checksum_index and checksum_filepath is not None:
+
+                        # Write the checksum index value to the
+                        # specified external file path.
+                        self.write_fetch_checksum(
+                            checksum_filepath=checksum_filepath,
+                            local_path=local_path,
+                            hash_index=hash_index,
+                        )
+
+                else:
+
+                    msg = (f'The AWS s3 object path {object_path} does not exist '
+                           f'and will not be downloaded to {local_path}.')
                     self.logger.warn(msg=msg)
 
-                # Check the checksum index writing parameter value and
-                # proceed accordingly.
-                if checksum_index and checksum_filepath is not None:
+            if not exist:
 
-                    # Write the checksum index value to the specified
-                    # external file path.
-                    self.write_fetch_checksum(
-                        checksum_filepath=checksum_filepath,
-                        local_path=local_path,
-                        hash_index=hash_index,
-                    )
-
-            else:
-
-                msg = (f'The AWS s3 object path {object_path} does not exist '
-                       f'and will not be downloaded to {local_path}.')
+                msg = (f'The AWS s3 path {aws_path} does not exist; no attempt(s) will be '
+                       'made to retrieve files.')
                 self.logger.warn(msg=msg)
 
     def build_fileid_obj(
