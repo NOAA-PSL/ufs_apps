@@ -76,6 +76,7 @@ from ioapps import netcdf4_interface
 from tools import datetime_interface
 from tools import fileio_interface
 from tools import parser_interface
+from tools import system_interface
 from utils import timestamp_interface
 from utils.error_interface import Error
 from utils.logger_interface import Logger
@@ -392,6 +393,7 @@ class Staging:
             msg = (f"Collecting filelist for timestamp {timestamp}.")
             self.logger.info(msg=msg)
 
+            system_interface.sleep(seconds=10)
             boto3_filelist = boto3_interface.filelist(
                 bucket=fileid_obj.bucket,
                 object_path=datetime_interface.datestrupdate(
