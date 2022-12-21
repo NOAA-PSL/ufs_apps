@@ -397,7 +397,7 @@ class Staging:
 
                 aws_filelist.append(boto3_file)
 
-        aws_filelist=set(aws_filelist)
+        aws_filelist = list(set(aws_filelist))
         print(aws_filelist)
 
         quit()
