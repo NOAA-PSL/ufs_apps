@@ -224,6 +224,7 @@ class Staging:
                 )
             )
 
+        print(ncfilelist)
         quit()
 
         # Define the netCDF concatenation attributes to be
