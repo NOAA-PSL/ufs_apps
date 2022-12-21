@@ -289,7 +289,7 @@ class Staging:
             )
 
         # Check that netCDF-formatted member files exist; proceed accordingly.
-        if sum([fileio_interface.fileexist(path=filename) for filename in ncfilelist]) > 0:
+        if sum(fileio_interface.fileexist(path=filename) for filename in ncfilelist) > 0:
 
             # Check that the directory tree corresponding to the
             # concatenated output file exists; proceed accordingly.
@@ -427,7 +427,7 @@ class Staging:
                 in_frmttyp=timestamp_interface.GLOBAL,
                 out_frmttyp=fileid_obj.local_path,
             )
-            object_path=datetime_interface.datestrupdate(
+            object_path = datetime_interface.datestrupdate(
                 datestr=timestamp,
                 in_frmttyp=timestamp_interface.GLOBAL,
                 out_frmttyp=fileid_obj.object_path,
