@@ -387,7 +387,7 @@ class Staging:
             # specified AWS s3 bucket and object path parent
             # directory.
             aws_path = os.path.dirname(os.path.join(
-                's3://', fileid_obj.bucket, object_path))
+                's3://', fileid_obj.bucket, object_path, str()))
             aws_filelist = awscli_interface.list_awspath(
                 aws_path=aws_path, resource='s3', profile=fileid_obj.profile_name)
 
