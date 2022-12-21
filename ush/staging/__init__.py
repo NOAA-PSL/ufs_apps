@@ -391,6 +391,7 @@ class Staging:
             aws_filelist = awscli_interface.list_awspath(
                 aws_path=aws_path, resource='s3', profile=fileid_obj.profile_name)
 
+            print(aws_path)
             print(object_path)
             print(os.path.basename(object_path))
             print(aws_filelist)
