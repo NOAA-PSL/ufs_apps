@@ -393,7 +393,6 @@ class Staging:
             msg = (f"Collecting filelist for timestamp {timestamp}.")
             self.logger.info(msg=msg)
 
-            system_interface.sleep(seconds=2)
             boto3_filelist = boto3_interface.filelist(
                 bucket=fileid_obj.bucket,
                 object_path=datetime_interface.datestrupdate(
