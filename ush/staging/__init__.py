@@ -241,9 +241,6 @@ class Staging:
                        )
                 self.logger.warn(msg=msg)
 
-                )
-            )
-
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
         ncconcat_attrs_dict={"ncdim": numpy.nan,
