@@ -69,6 +69,7 @@ History
 import numpy
 import os
 
+from ioapps import awscli_interface
 from ioapps import boto3_interface
 from ioapps import hashlib_interface
 from ioapps import netcdf4_interface
@@ -365,12 +366,6 @@ class Staging:
             )
             raise StagingError(msg=msg)
 
-        # Collect a list of the available files within the specified
-        # AWS s3 bucket and object path parent directory.
-        aws_filelist = boto3_interface.s3filelist(
-            bucket=fileid_obj.bucket, object_path=os.path.dirname(
-                object_path), profile_name=fileid_obj.profile_name)
-
         # Loop through each specified time and proceed accordingly.
         for timestamp in timestamps_list:
 
@@ -388,8 +383,16 @@ class Staging:
                 out_frmttyp=fileid_obj.object_path,
             )
 
+            # Collect a list of the available files within the
+            # specified AWS s3 bucket and object path parent
+            # directory.
+            aws_path = os.path.dirname(os.path.join(
+                's3://', fileid_obj.bucket, object_path))
+            aws_filelist = awscli_interface.list_awspath(
+                aws_path=aws_path, resource='s3', profile=fileid_obj.profile_name)
+
             # If the AWS s3 object path exists, proceed accordingly.
-            if object_path in aws_filelist:
+            if os.path.basename(object_path) in aws_filelist:
 
                 fileio_interface.dirpath_tree(path=os.path.dirname(local_path))
 
