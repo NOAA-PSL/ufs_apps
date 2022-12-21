@@ -216,28 +216,45 @@ class Staging:
         ncfilelist = []
         for timestamp in fileid_obj.timestamps_list:
 
-            ncfilelist.append(
-                datetime_interface.datestrupdate(
-                    datestr=str(timestamp),
-                    in_frmttyp=timestamp_interface.GLOBAL,
-                    out_frmttyp=fileid_obj.local_path,
+            # Define the netCDF-formatted file path.
+            ncfile = datetime_interface.datestrupdate(
+                datestr=str(timestamp),
+                in_frmttyp=timestamp_interface.GLOBAL,
+                out_frmttyp=fileid_obj.local_path)
+
+            # Check that the netCDF-formatted file path exists;
+            # proceed accordingly.
+            exist = fileio_interface.fileexist(path=ncfile)
+
+            if exist:
+
+                msg = (f'The netCDF-formatted file path {ncfile} exists and '
+                       'will be included in the netCDF file concatenation.')
+                self.logger.info(msg=msg)
+                ncfilelist.append(ncfile)
+
+            if not exist:
+
+                msg = (f'The netCDF-formatted file path {ncfile} does not '
+                       'exist and will not be included in the netCDF '
+                       'file concatenation.'
+                       )
+                self.logger.warn(msg=msg)
+
                 )
             )
 
-        print(ncfilelist)
-        quit()
-
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
-        ncconcat_attrs_dict = {"ncdim": numpy.nan,
+        ncconcat_attrs_dict={"ncdim": numpy.nan,
                                "ncfile": numpy.nan, "ncfrmt": None}
 
-        ncconcat_obj = parser_interface.object_define()
+        ncconcat_obj=parser_interface.object_define()
         for (ncconcat_attr, _) in ncconcat_attrs_dict.items():
 
             # Collect the respective netCDF attribute; proceed
             # accordingly.
-            value = parser_interface.dict_key_value(
+            value=parser_interface.dict_key_value(
                 dict_in=fileconcat_obj.nc_concat,
                 key=ncconcat_attr,
                 force=True,
@@ -248,12 +265,12 @@ class Staging:
 
                 # Check the valid values for the respective netCDF
                 # attribute; proceed accordingly.
-                check = parser_interface.dict_key_value(
+                check=parser_interface.dict_key_value(
                     dict_in=ncconcat_attrs_dict, key=ncconcat_attr, no_split=True
                 )
 
                 if check == numpy.nan:
-                    msg = (
+                    msg=(
                         "For netCDF-formatted file concatenation, the "
                         f"attribute {ncconcat_attr} cannot be NoneType. "
                         "Aborting!!!"
@@ -262,7 +279,7 @@ class Staging:
 
             # Update the attribute value; proceed accordingly.
             try:
-                value = datetime_interface.datestrupdate(
+                value=datetime_interface.datestrupdate(
                     datestr=str(self.cycle),
                     in_frmttyp=timestamp_interface.GLOBAL,
                     out_frmttyp=value,
@@ -272,12 +289,12 @@ class Staging:
             except TypeError:
                 pass
 
-            ncconcat_obj = parser_interface.object_setattr(
+            ncconcat_obj=parser_interface.object_setattr(
                 object_in=ncconcat_obj, key=ncconcat_attr, value=value
             )
 
         # Check that netCDF-formatted member files exist; proceed accordingly.
-        if sum([fileio_interface.fileexist(path=filename) for filename in ncfilelist]) > 0:
+        if sum([fileio_interface.fileexist(path = filename) for filename in ncfilelist]) > 0:
 
             # Check that the directory tree corresponding to the
             # concatenated output file exists; proceed accordingly.
@@ -295,16 +312,16 @@ class Staging:
 
         else:
 
-            msg = (f'No netCDF files within list {ncfilelist} exist; netCDF-formatted '
+            msg=(f'No netCDF files within list {ncfilelist} exist; netCDF-formatted '
                    f'file path {ncconcat_obj.ncfile} will not be created.')
             self.logger.warn(msg=msg)
 
     def awss3_fetch(
         self,
         fileid_obj: object,
-        checksum_filepath: str = None,
-        checksum_index: bool = False,
-        checksum_level: str = "md5",
+        checksum_filepath: str=None,
+        checksum_index: bool=False,
+        checksum_level: str="md5",
     ) -> None:
         """
         Description
@@ -358,12 +375,12 @@ class Staging:
 
         # Define the timestamp strings for the respective file
         # identifier.
-        timestamps_list = parser_interface.object_getattr(
+        timestamps_list=parser_interface.object_getattr(
             object_in=fileid_obj, key="timestamps_list", force=True
         )
 
         if timestamps_list is None:
-            msg = (
+            msg=(
                 "The attribute timestamps_list could not be determined "
                 "from the specified file identifier object. Aborting!!!"
             )
@@ -372,13 +389,13 @@ class Staging:
         # Loop through each specified time and determine whether the
         # request AWS s3 bucket and object path exists; if so, update
         # the local attribute containing the files to be collected.
-        aws_filedict = {}
+        aws_filedict={}
         for timestamp in timestamps_list:
 
             # Define the respective file path names in accordance with
             # the respective timestamp; check that the directory tree
             # for the local filename exists.
-            local_path = datetime_interface.datestrupdate(
+            local_path=datetime_interface.datestrupdate(
                 datestr=timestamp,
                 in_frmttyp=timestamp_interface.GLOBAL,
                 out_frmttyp=fileid_obj.local_path,
