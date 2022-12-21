@@ -393,6 +393,7 @@ class Staging:
                     datestr=timestamp, in_frmttyp=timestamp_interface.GLOBAL,
                     out_frmttyp=fileid_obj.object_path)))
 
+        aws_filelist = set(aws_filelist)
         print(aws_filelist)
 
         quit()
