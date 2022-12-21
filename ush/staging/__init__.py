@@ -224,6 +224,8 @@ class Staging:
                 )
             )
 
+        quit()
+
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
         ncconcat_attrs_dict = {"ncdim": numpy.nan,
@@ -370,7 +372,6 @@ class Staging:
         # request AWS s3 bucket and object path exists; if so, update
         # the local attribute containing the files to be collected.
         aws_filedict = {}
-
         for timestamp in timestamps_list:
 
             # Define the respective file path names in accordance with
