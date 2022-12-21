@@ -3,10 +3,10 @@ fetch:
      # Define the checksum hash indices attributes.
      checksum:
 
-#       aws_s3_filepath: !ENV ${WORKrnr}/${EXPTrnr}/com/${CYCLE}/aws_s3.fetch.obs.md5     
-#       aws_s3_hash: md5
+       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.obs.md5     
+       aws_s3_hash: md5
 
-       noaa_hpss_filepath: !ENV ${WORKrnr}/${EXPTrnr}/com/${CYCLE}/noaa_hpss.fetch.obs.md5     
+       noaa_hpss_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/noaa_hpss.fetch.obs.md5     
        noaa_hpss_hash: sha256
   
      # Define the remote location; see TABLE 1 above.
@@ -17,7 +17,7 @@ fetch:
                sst.nesdis_avhrr_noaa15:
 
                     # Define the path attributes.
-                    local_path: !ENV ${WORKrnr}/${EXPTrnr}/${CYCLE}/intercom/obsprep/ocean/nesdis.avhrr_noaa15.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.avhrr_noaa15.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     offset_seconds: 21600
 
                     # Define the AWS s3 attributes.
@@ -59,7 +59,7 @@ fetch:
                          # Define the netCDF-formatted file path to
                          # contain the results of the concatenated
                          # member files.
-                         ncfile: !ENV ${WORKrnr}/${EXPTrnr}/${CYCLE}/intercom/inputs/obs/ocean/nesdis.avhrr_noaa15.sst.nc
+                         ncfile: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.avhrr_noaa15.sst.nc
 
                          # Define the netCDF-formatted concatenated
                          # file path format.

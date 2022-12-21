@@ -223,7 +223,7 @@ class Fetch(Staging):
         optional argument fetch_type.
 
         Returns
-        -------g
+        -------
 
         fetch_dict: dict
 
