@@ -391,8 +391,7 @@ class Staging:
                 bucket=fileid_obj.bucket,
                 object_path=datetime_interface.datestrupdate(
                     datestr=timestamp, in_frmttyp=timestamp_interface.GLOBAL,
-                    out_frmttyp=fileid_obj.object_path))))
-
+                    out_frmttyp=fileid_obj.object_path)))
 
         print(aws_filelist)
 
