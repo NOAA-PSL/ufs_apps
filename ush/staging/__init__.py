@@ -69,7 +69,6 @@ History
 import numpy
 import os
 
-from ioapps import awscli_interface
 from ioapps import boto3_interface
 from ioapps import hashlib_interface
 from ioapps import netcdf4_interface
@@ -220,29 +219,32 @@ class Staging:
             ncfile = datetime_interface.datestrupdate(
                 datestr=str(timestamp),
                 in_frmttyp=timestamp_interface.GLOBAL,
-                out_frmttyp=fileid_obj.local_path)
+                out_frmttyp=fileid_obj.local_path,
+            )
 
             # Check that the netCDF-formatted file path exists;
             # proceed accordingly.
             exist = fileio_interface.fileexist(path=ncfile)
 
             if exist:
-                msg = (f'The netCDF-formatted file path {ncfile} exists and '
-                       'will be included in the netCDF file concatenation.')
+                msg = (
+                    f"The netCDF-formatted file path {ncfile} exists and "
+                    "will be included in the netCDF file concatenation."
+                )
                 self.logger.info(msg=msg)
                 ncfilelist.append(ncfile)
 
             if not exist:
-                msg = (f'The netCDF-formatted file path {ncfile} does not '
-                       'exist and will not be included in the netCDF '
-                       'file concatenation.'
-                       )
+                msg = (
+                    f"The netCDF-formatted file path {ncfile} does not "
+                    "exist and will not be included in the netCDF "
+                    "file concatenation."
+                )
                 self.logger.warn(msg=msg)
 
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
-        ncconcat_attrs_dict = {"ncdim": numpy.nan,
-                               "ncfile": numpy.nan, "ncfrmt": None}
+        ncconcat_attrs_dict = {"ncdim": numpy.nan, "ncfile": numpy.nan, "ncfrmt": None}
 
         ncconcat_obj = parser_interface.object_define()
         for (ncconcat_attr, _) in ncconcat_attrs_dict.items():
@@ -289,12 +291,14 @@ class Staging:
             )
 
         # Check that netCDF-formatted member files exist; proceed accordingly.
-        if sum([fileio_interface.fileexist(path=filename) for filename in ncfilelist]) > 0:
+        if (
+            sum(fileio_interface.fileexist(path=filename) for filename in ncfilelist)
+            > 0
+        ):
 
             # Check that the directory tree corresponding to the
             # concatenated output file exists; proceed accordingly.
-            fileio_interface.dirpath_tree(
-                path=os.path.dirname(ncconcat_obj.ncfile))
+            fileio_interface.dirpath_tree(path=os.path.dirname(ncconcat_obj.ncfile))
 
             # Concatenate the respective files to the specified output
             # file path.
@@ -307,8 +311,10 @@ class Staging:
 
         else:
 
-            msg = (f'No netCDF files within list {ncfilelist} exist; netCDF-formatted '
-                   f'file path {ncconcat_obj.ncfile} will not be created.')
+            msg = (
+                f"No netCDF files within list {ncfilelist} exist; netCDF-formatted "
+                f"file path {ncconcat_obj.ncfile} will not be created."
+            )
             self.logger.warn(msg=msg)
 
     def awss3_fetch(
@@ -389,14 +395,17 @@ class Staging:
 
             # Collect the file list using boto3 for the respective
             # object path.
-            msg = (f"Collecting filelist for timestamp {timestamp}.")
+            msg = f"Collecting filelist for timestamp {timestamp}."
             self.logger.info(msg=msg)
 
             boto3_filelist = boto3_interface.filelist(
                 bucket=fileid_obj.bucket,
                 object_path=datetime_interface.datestrupdate(
-                    datestr=timestamp, in_frmttyp=timestamp_interface.GLOBAL,
-                    out_frmttyp=fileid_obj.object_path))
+                    datestr=timestamp,
+                    in_frmttyp=timestamp_interface.GLOBAL,
+                    out_frmttyp=fileid_obj.object_path,
+                ),
+            )
 
             # Update the local Python list containing the files to be
             # collected.
@@ -406,13 +415,14 @@ class Staging:
         # Maintain only unique file names.
         aws_filelist = list(set(aws_filelist))
         if aws_filelist:
-            msg = ("The following files were found within the AWS resource bucket "
-                   f"{fileid_obj.bucket}: {aws_filelist}.")
+            msg = (
+                "The following files were found within the AWS resource bucket "
+                f"{fileid_obj.bucket}: {aws_filelist}."
+            )
             self.logger.info(msg=msg)
 
         if not aws_filelist:
-            msg = (
-                f"No files were found in AWS resource bucket {fileid_obj.bucket}.")
+            msg = f"No files were found in AWS resource bucket {fileid_obj.bucket}."
 
         # Loop through each specified time; if the specified object
         # path exists, collect the respective file; proceed
@@ -427,7 +437,7 @@ class Staging:
                 in_frmttyp=timestamp_interface.GLOBAL,
                 out_frmttyp=fileid_obj.local_path,
             )
-            object_path=datetime_interface.datestrupdate(
+            object_path = datetime_interface.datestrupdate(
                 datestr=timestamp,
                 in_frmttyp=timestamp_interface.GLOBAL,
                 out_frmttyp=fileid_obj.object_path,
@@ -439,8 +449,7 @@ class Staging:
 
                 # Check that the directory tree exists; proceed
                 # accordingly.
-                fileio_interface.dirpath_tree(
-                    path=os.path.dirname(local_path))
+                fileio_interface.dirpath_tree(path=os.path.dirname(local_path))
 
                 # Collect the file from the specified AWS resource
                 # bucket and object path and stage it locally.
@@ -449,7 +458,8 @@ class Staging:
                 boto3_interface.get(
                     bucket=fileid_obj.bucket,
                     filedict=filedict,
-                    profile_name=fileid_obj.profile_name)
+                    profile_name=fileid_obj.profile_name,
+                )
 
                 # Define the checksum index value for the collected
                 # file.
@@ -685,8 +695,7 @@ class Staging:
         if str(concat_type).lower() == "nc_concat":
 
             # Concatenate the respective netCDF-formatted file.
-            self._nc_concat(fileid_obj=fileid_obj,
-                            fileconcat_obj=fileconcat_obj)
+            self._nc_concat(fileid_obj=fileid_obj, fileconcat_obj=fileconcat_obj)
 
     def get_hash_index(self, filepath: str, hash_level: str = None) -> str:
         """
@@ -936,8 +945,7 @@ class Staging:
         # path; proceed accordingly.
         if hash_index is not None:
 
-            fileio_interface.dirpath_tree(
-                path=os.path.dirname(checksum_filepath))
+            fileio_interface.dirpath_tree(path=os.path.dirname(checksum_filepath))
 
             with open(checksum_filepath, "a", encoding="utf-8") as file:
                 file.write(f"{hash_index} {local_path}\n")
