@@ -389,6 +389,9 @@ class Staging:
 
             # Collect the file list using boto3 for the respective
             # object path.
+            msg = (f"Collecting filelist for timestamp {timestamp}.")
+            self.logger.info(msg=msg)
+
             boto3_filelist = boto3_interface.filelist(
                 bucket=fileid_obj.bucket,
                 object_path=datetime_interface.datestrupdate(
@@ -403,7 +406,7 @@ class Staging:
         # Maintain only unique file names.
         aws_filelist = list(set(aws_filelist))
         msg = ("The following files were found within the AWS resource bucket "
-               f"{fileid_obj.bucket}.")
+               f"{fileid_obj.bucket}: {aws_filelist}.")
         self.logger.info(msg=msg)
 
         # Loop through each specified time; if the specified object
