@@ -307,8 +307,8 @@ class Staging:
 
         else:
 
-            msg=(f'No netCDF files within list {ncfilelist} exist; netCDF-formatted '
-                 f'file path {ncconcat_obj.ncfile} will not be created.')
+            msg = (f'No netCDF files within list {ncfilelist} exist; netCDF-formatted '
+                   f'file path {ncconcat_obj.ncfile} will not be created.')
             self.logger.warn(msg=msg)
 
     def awss3_fetch(
@@ -384,7 +384,7 @@ class Staging:
         # Loop through each specified time and determine whether the
         # request AWS s3 bucket and object path exists; if so, update
         # the local attribute containing the files to be collected.
-        aws_filelist = ()
+        aws_filelist = []
         for timestamp in timestamps_list:
 
             aws_filelist.append(boto3_interface.filelist(
