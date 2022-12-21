@@ -390,7 +390,7 @@ class Staging:
                 's3://', fileid_obj.bucket, object_path, str()))
 
             exist = awscli_interface.exist_awspath(
-                aws_path, resource='s3', profile=fileid_obj.profile_name)_
+                aws_path, resource='s3', profile=fileid_obj.profile_name)
 
             aws_filelist = awscli_interface.list_awspath(
                 aws_path=aws_path, resource='s3', profile=fileid_obj.profile_name)
