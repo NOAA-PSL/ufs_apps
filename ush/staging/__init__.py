@@ -405,9 +405,14 @@ class Staging:
 
         # Maintain only unique file names.
         aws_filelist = list(set(aws_filelist))
-        msg = ("The following files were found within the AWS resource bucket "
-               f"{fileid_obj.bucket}: {aws_filelist}.")
-        self.logger.info(msg=msg)
+        if aws_filelist:
+            msg = ("The following files were found within the AWS resource bucket "
+                   f"{fileid_obj.bucket}: {aws_filelist}.")
+            self.logger.info(msg=msg)
+
+        if not aws_filelist:
+            msg = (
+                f"No files were found in AWS resource bucket {fileid_obj.bucket}.")
 
         # Loop through each specified time; if the specified object
         # path exists, collect the respective file; proceed
@@ -422,7 +427,7 @@ class Staging:
                 in_frmttyp=timestamp_interface.GLOBAL,
                 out_frmttyp=fileid_obj.local_path,
             )
-            object_path = datetime_interface.datestrupdate(
+            object_path=datetime_interface.datestrupdate(
                 datestr=timestamp,
                 in_frmttyp=timestamp_interface.GLOBAL,
                 out_frmttyp=fileid_obj.object_path,
