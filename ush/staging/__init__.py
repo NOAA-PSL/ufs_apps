@@ -387,13 +387,17 @@ class Staging:
         aws_filelist = []
         for timestamp in timestamps_list:
 
-            aws_filelist.append(boto3_interface.filelist(
+            boto3_filelist = boto3_interface.filelist(
                 bucket=fileid_obj.bucket,
                 object_path=datetime_interface.datestrupdate(
                     datestr=timestamp, in_frmttyp=timestamp_interface.GLOBAL,
-                    out_frmttyp=fileid_obj.object_path))[:])
+                    out_frmttyp=fileid_obj.object_path))
 
-        aws_filelist = set(aws_filelist)
+            for boto3_file in boto3_filelist:
+
+                aws_filelist.append(boto3_file)
+
+        aws_filelist=set(aws_filelist)
         print(aws_filelist)
 
         quit()
@@ -403,7 +407,7 @@ class Staging:
             # Define the respective file path names in accordance with
             # the respective timestamp; check that the directory tree
             # for the local filename exists.
-            local_path = datetime_interface.datestrupdate(
+            local_path=datetime_interface.datestrupdate(
                 datestr=timestamp,
                 in_frmttyp=timestamp_interface.GLOBAL,
                 out_frmttyp=fileid_obj.local_path,
