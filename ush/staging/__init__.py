@@ -227,14 +227,12 @@ class Staging:
             exist = fileio_interface.fileexist(path=ncfile)
 
             if exist:
-
                 msg = (f'The netCDF-formatted file path {ncfile} exists and '
                        'will be included in the netCDF file concatenation.')
                 self.logger.info(msg=msg)
                 ncfilelist.append(ncfile)
 
             if not exist:
-
                 msg = (f'The netCDF-formatted file path {ncfile} does not '
                        'exist and will not be included in the netCDF '
                        'file concatenation.'
@@ -243,15 +241,15 @@ class Staging:
 
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
-        ncconcat_attrs_dict={"ncdim": numpy.nan,
+        ncconcat_attrs_dict = {"ncdim": numpy.nan,
                                "ncfile": numpy.nan, "ncfrmt": None}
 
-        ncconcat_obj=parser_interface.object_define()
+        ncconcat_obj = parser_interface.object_define()
         for (ncconcat_attr, _) in ncconcat_attrs_dict.items():
 
             # Collect the respective netCDF attribute; proceed
             # accordingly.
-            value=parser_interface.dict_key_value(
+            value = parser_interface.dict_key_value(
                 dict_in=fileconcat_obj.nc_concat,
                 key=ncconcat_attr,
                 force=True,
@@ -310,7 +308,7 @@ class Staging:
         else:
 
             msg=(f'No netCDF files within list {ncfilelist} exist; netCDF-formatted '
-                   f'file path {ncconcat_obj.ncfile} will not be created.')
+                 f'file path {ncconcat_obj.ncfile} will not be created.')
             self.logger.warn(msg=msg)
 
     def awss3_fetch(
@@ -439,7 +437,7 @@ class Staging:
             # object path and stage it locally.
             filedict = {local_path: object_path}
 
-            boto3_interface.s3get(
+            boto3_interface.get(
                 bucket=fileid_obj.bucket,
                 filedict=filedict,
                 profile_name=fileid_obj.profile_name,
