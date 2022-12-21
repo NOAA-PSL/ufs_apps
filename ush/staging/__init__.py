@@ -412,9 +412,6 @@ class Staging:
                        'made to retrieve files.')
                 self.logger.warn(msg=msg)
 
-        print(aws_filedict)
-        quit()
-
         for (local_path, object_path) in aws_filedict.items():
 
             # Check that the directory tree exists; proceed
