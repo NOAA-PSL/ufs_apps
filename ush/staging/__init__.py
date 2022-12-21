@@ -383,31 +383,35 @@ class Staging:
 
         # Loop through each specified time and determine whether the
         # request AWS s3 bucket and object path exists; if so, update
-        # the local attribute containing the files to be collected.
+        # the local Python list containing the files to be collected.
         aws_filelist = []
         for timestamp in timestamps_list:
 
+            # Collect the file list using boto3 for the respective
+            # object path.
             boto3_filelist = boto3_interface.filelist(
                 bucket=fileid_obj.bucket,
                 object_path=datetime_interface.datestrupdate(
                     datestr=timestamp, in_frmttyp=timestamp_interface.GLOBAL,
                     out_frmttyp=fileid_obj.object_path))
 
+            # Update the local Python list containing the files to be
+            # collected.
             for boto3_file in boto3_filelist:
-
                 aws_filelist.append(boto3_file)
 
+        # Maintain only unique file names.
         aws_filelist = list(set(aws_filelist))
-        print(aws_filelist)
 
-        quit()
-
+        # Loop through each specified time; if the specified object
+        # path exists, collect the respective file; proceed
+        # accordingly.
         for timestamp in timestamps_list:
 
             # Define the respective file path names in accordance with
             # the respective timestamp; check that the directory tree
             # for the local filename exists.
-            local_path=datetime_interface.datestrupdate(
+            local_path = datetime_interface.datestrupdate(
                 datestr=timestamp,
                 in_frmttyp=timestamp_interface.GLOBAL,
                 out_frmttyp=fileid_obj.local_path,
@@ -418,68 +422,45 @@ class Staging:
                 out_frmttyp=fileid_obj.object_path,
             )
 
-            # Collect a list of the available files within the
-            # specified AWS s3 bucket and object path parent
-            # directory.
-            aws_path = os.path.dirname(os.path.join(
-                's3://', fileid_obj.bucket, os.path.dirname(object_path),
-                str()))
+            # Check that the respective object path exists in the AWS
+            # resource bucket; proceed accordingly.
+            if object_path in aws_filelist:
 
-            # Query the AWS s3 bucket and object path to determine
-            # whether the path exists; proceed accordingly.
-            exist = awscli_interface.exist_awspath(
-                aws_path, resource='s3', profile=fileid_obj.profile_name)
+                # Check that the directory tree exists; proceed
+                # accordingly.
+                fileio_interface.dirpath_tree(
+                    path=os.path.dirname(local_path))
 
-            if exist:
+                # Collect the file from the specified AWS resource
+                # bucket and object path and stage it locally.
+                filedict = {local_path: object_path}
 
-                # Update the Python dictionary containing the AWS s3
-                # bucket and object path and local file path
-                # attributes.
-                aws_filedict[local_path] = object_path
+                boto3_interface.get(
+                    bucket=fileid_obj.bucket,
+                    filedict=filedict,
+                    profile_name=fileid_obj.profile_name)
 
-            if not exist:
+                # Define the checksum index value for the collected
+                # file.
+                if checksum_index:
 
-                msg = (f'The AWS s3 path {aws_path} does not exist; no attempt(s) will be '
-                       'made to retrieve files.')
-                self.logger.warn(msg=msg)
+                    hash_index = self.get_hash_index(
+                        filepath=local_path, hash_level=checksum_level
+                    )
+                    msg = f"The hash index for file path {local_path} is {hash_index}."
+                    self.logger.warn(msg=msg)
 
-        for (local_path, object_path) in aws_filedict.items():
+                # Check the checksum index writing parameter value and
+                # proceed accordingly.
+                if checksum_index and checksum_filepath is not None:
 
-            # Check that the directory tree exists; proceed
-            # accordingly.
-            fileio_interface.dirpath_tree(
-                path=os.path.dirname(local_path))
-
-            # Collect the file from the specified AWS s3 bucket and
-            # object path and stage it locally.
-            filedict = {local_path: object_path}
-
-            boto3_interface.get(
-                bucket=fileid_obj.bucket,
-                filedict=filedict,
-                profile_name=fileid_obj.profile_name,
-            )
-
-            # Define the checksum index value for the collected file.
-            if checksum_index:
-
-                hash_index = self.get_hash_index(
-                    filepath=local_path, hash_level=checksum_level
-                )
-                msg = f"The hash index for file path {local_path} is {hash_index}."
-                self.logger.warn(msg=msg)
-
-            # Check the checksum index writing parameter value and
-            # proceed accordingly.
-            if checksum_index and checksum_filepath is not None:
-
-                # Write the checksum index value to the specified
-                # external file path.
-                self.write_fetch_checksum(
-                    checksum_filepath=checksum_filepath,
-                    local_path=local_path,
-                    hash_index=hash_index,
-                )
+                    # Write the checksum index value to the specified
+                    # external file path.
+                    self.write_fetch_checksum(
+                        checksum_filepath=checksum_filepath,
+                        local_path=local_path,
+                        hash_index=hash_index,
+                    )
 
     def build_fileid_obj(
         self,
