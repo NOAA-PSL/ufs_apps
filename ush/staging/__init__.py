@@ -402,6 +402,9 @@ class Staging:
 
         # Maintain only unique file names.
         aws_filelist = list(set(aws_filelist))
+        msg = ("The following files were found within the AWS resource bucket "
+               f"{fileid_obj.bucket}.")
+        self.logger.info(msg=msg)
 
         # Loop through each specified time; if the specified object
         # path exists, collect the respective file; proceed
