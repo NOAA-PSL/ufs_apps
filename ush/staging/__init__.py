@@ -314,9 +314,9 @@ class Staging:
     def awss3_fetch(
         self,
         fileid_obj: object,
-        checksum_filepath: str=None,
-        checksum_index: bool=False,
-        checksum_level: str="md5",
+        checksum_filepath: str = None,
+        checksum_index: bool = False,
+        checksum_level: str = "md5",
     ) -> None:
         """
         Description
@@ -370,12 +370,12 @@ class Staging:
 
         # Define the timestamp strings for the respective file
         # identifier.
-        timestamps_list=parser_interface.object_getattr(
+        timestamps_list = parser_interface.object_getattr(
             object_in=fileid_obj, key="timestamps_list", force=True
         )
 
         if timestamps_list is None:
-            msg=(
+            msg = (
                 "The attribute timestamps_list could not be determined "
                 "from the specified file identifier object. Aborting!!!"
             )
@@ -389,11 +389,9 @@ class Staging:
 
             aws_filelist.append(boto3_interface.filelist(
                 bucket=fileid_obj.bucket,
-                object_path=os.path.dirname(
-                    datetime_interface.datestrupdate(datestr=timestamp,
-                                                     in_frmttyp=timestamp_interface.GLOBAL,
-                                                     out_frmttyp=fileid_obj.object_path)
-                    )))
+                object_path=datetime_interface.datestrupdate(
+                    datestr=timestamp, in_frmttyp=timestamp_interface.GLOBAL,
+                    out_frmttyp=fileid_obj.object_path))))
 
 
         print(aws_filelist)
@@ -401,19 +399,19 @@ class Staging:
         quit()
 
         for timestamp in timestamps_list:
-            
+
             # Define the respective file path names in accordance with
             # the respective timestamp; check that the directory tree
             # for the local filename exists.
             local_path=datetime_interface.datestrupdate(
-                datestr=timestamp,
-                in_frmttyp=timestamp_interface.GLOBAL,
-                out_frmttyp=fileid_obj.local_path,
+                datestr = timestamp,
+                in_frmttyp = timestamp_interface.GLOBAL,
+                out_frmttyp = fileid_obj.local_path,
             )
-            object_path = datetime_interface.datestrupdate(
-                datestr=timestamp,
-                in_frmttyp=timestamp_interface.GLOBAL,
-                out_frmttyp=fileid_obj.object_path,
+            object_path=datetime_interface.datestrupdate(
+                datestr = timestamp,
+                in_frmttyp = timestamp_interface.GLOBAL,
+                out_frmttyp = fileid_obj.object_path,
             )
 
             # Collect a list of the available files within the
