@@ -1,9 +1,22 @@
-# Unified Forecast System Workflow Staging
+# Staging Applications
 
 The Unified Forecast System (UFS) workflow staging applies to the
 fetching (i.e., collecting) and storing (i.e., saving) of specified
 files. This README provides a description of the available
 YAML-formatted configuration file options.
+
+Note that the respective fetching and storing applications may rely on
+external platform interfaces (e.g., [Amazon Web
+Services](https://aws.amazon.com/), [Globus](https://www.globus.org/))
+in order to collect and/or store specified file objects. As a result,
+latency may be introduced via load on the aforementioned provider
+platform interfaces and may slow performance. In order for users to
+optimize performance for their respective applications, the following
+sites should be consulted prior to launching a given staging
+application.
+
+- [Latency to the closest AWS region](https://docs.aws.amazon.com/whitepapers/latest/best-practices-deploying-amazon-workspaces/how-to-check-latency-to-the-closest-aws-region.html)
+- [Global latency monitoring for all AWS regions](https://www.cloudping.co/grid/latency/timeframe/1D)
 
 ## Building a Fetching Application Configuration
 
