@@ -253,13 +253,13 @@ fetch:
                          ncfrmt: NETCDF4
 ~~~
 
-### Pre-configured Fetch Applications
+### Available Fetch Applications Configurations
 
 <div align="center">
 
 | Configuration | Description |
 | :-------------: | :-------------: |
-| [`fetch.adt.reanalysis.yaml`](./fetch.adt.reanalysis.yaml) | <div align="left">Ocean absolute dynamic topography observations for the UFS reanalysis project. </div>|
+| [`fetch.adt.reanalysis.yaml`](fetch.adt.reanalysis.yaml) | <div align="left">UFS reanalysis project ocean absolute dynamic topography observations. </div>|
 
 </div>
 
