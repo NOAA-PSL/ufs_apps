@@ -1,3 +1,8 @@
+[![Unit Tests](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml)
+[![Python Coding Standards](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml)
+[![GitHub license](https://img.shields.io/HenryWinterbottom-NOAA/StrapDown.js.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/blob/develop/LICENSE)
+
+
 # Disclaimer
 
 The United States Department of Commerce (DOC) GitHub project code is
