@@ -20,7 +20,7 @@ States Government.
 The applications listed in the following table are (currently)
 supported by the authoritative repository.
 
-<div align="center>
+<div align="center">
 
 | Application | Description |
 | :-------------: | :-------------: |
