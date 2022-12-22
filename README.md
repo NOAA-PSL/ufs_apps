@@ -20,6 +20,9 @@ States Government.
 The applications listed in the following table are (currently)
 supported by the authoritative repository.
 
+| Application | Description |
+| :-------------: | :-------------: |
+| [Staging](parm/staging/README.md) | File fetching (i.e., collecting) and storing (i.e., saving) applications. | 
 
 
 # Cloning
