@@ -383,9 +383,6 @@ class Staging:
             object_in=fileid_obj, key="timestamps_list", force=True
         )
 
-        print(timestamps_list)
-        quit()
-
         if timestamps_list is None:
             msg = (
                 "The attribute timestamps_list could not be determined "
@@ -928,6 +925,9 @@ class Staging:
                 msg = (f"The timestamp {timestamp} is within the specified "
                        "stream range and will be collected.")
                 self.logger.info(msg=msg)
+
+        print(timestamps_list)
+        quit()
 
         # Update the file identifier object.
         fileid_out_obj = parser_interface.object_deepcopy(object_in=fileid_obj)
