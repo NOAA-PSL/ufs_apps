@@ -909,8 +909,8 @@ class Staging:
 
             # If the timestamp is outside of the specified stream
             # start and stop timestamps, proceed accordingly.
-            if (timestamp < fileio_obj.stream_start) or \
-                    (timestamp > fileio_obj.stream_stop):
+            if (timestamp < fileid_obj.stream_start) or \
+                    (timestamp > fileid_obj.stream_stop):
 
                 # Remove the respective timestamp from the list.
                 msg = (f"The timestamp {timestamp} is not within the range "
