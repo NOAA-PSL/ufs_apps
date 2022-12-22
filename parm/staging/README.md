@@ -138,8 +138,8 @@ identifier attributes.
 | `multifile` |  <div align="left">See section [multifile configuration attributes](#multifile_configuration_attributes) below. | option is ignored | </div> 
 | `nc_concat` | <div align="left">See section [netCDF concatenation configuration attribues](#netcdf_multifile_concatenation_attributes) (below). | option is ignored | </div> |
 | `offset_seconds` | <div align="left">The total number of offset seconds relative to the forecast date for valid files; this value is used to define any POSIX compliant time and date string information specified in `local_path`; this value is also used to build the `object_path` (see above). | 0 | </div>
-| `stream_start` | <div align="left">The timestamp at which the respective datestream begins; format is `%Y%m%d%H%M%S` assuming the POSIX convention. | </div>
-| `stream_stop` | <div align="left">The timestamp at which the respective datestream ends; format is `%Y%m%d%H%M%S` assuming the POSIX convention. | </div>
+| `stream_start` | <div align="left">The timestamp at which the respective datestream begins; format is `%Y%m%d%H%M%S` assuming the POSIX convention. | `19000101000000` | </div>
+| `stream_stop` | <div align="left">The timestamp at which the respective datestream ends; format is `%Y%m%d%H%M%S` assuming the POSIX convention. | `20991231230000` | </div>
 
 </div>
 
