@@ -83,6 +83,8 @@ aws_opt_attr_dict = {
     "nc_concat": None,
     "offset_seconds": 0,
     "profile_name": None,
+    "stream_start": 19000101000000,
+    "stream_stop": 20991231230000,
 }
 
 # Define the mandatory AWS fetch attribute values.

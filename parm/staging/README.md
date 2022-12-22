@@ -18,6 +18,15 @@ application.
 - [Latency to the closest AWS region](https://docs.aws.amazon.com/whitepapers/latest/best-practices-deploying-amazon-workspaces/how-to-check-latency-to-the-closest-aws-region.html)
 - [Global latency monitoring for all AWS regions](https://www.cloudping.co/grid/latency/timeframe/1D)
 
+The relevant attributes for optimization are the respective AWS
+regions. Performance can be optimized by choosing the AWS region
+nearest to the request location with the lowest latency. Once a region
+is chosen, the `region` attribute within the user `~/.aws/config`
+corresponding to the respective profile should be updated. See
+[updating AWS
+configure](https://docs.aws.amazon.com/cli/latest/reference/configure/)
+for additional information.
+
 ## Building a Fetching Application Configuration
 
 The following YAML snippet provides an example architecture for the
@@ -126,12 +135,13 @@ identifier attributes.
 | Optional Attribute | Description | Default Value | 
 | :-------------: | :-------------: | :-------------: |
 | `ignore_missing` | <div align="left">This is boolean value specifying whether to fail for missing platform/interface file paths (`False`) or to ignore a missing file and continue to process the attributes within the YAML-formatted configuration file (`True`). | `False` | </div>
-| `multifile` |  <div align="left">See section [multifile configuration attributes](#multifile_configuration_attributes) below. | option is ignored | </div> 
-| `nc_concat` | <div align="left">See section [netCDF concatenation configuration attribues](#netcdf_multifile_concatenation_attributes) (below). | option is ignored | </div> |
-| `offset_seconds` | <div align="left">The total number of offset seconds relative to the forecast date for valid files; this value is used to define any POSIX compliant time and date string information specified in `local_path`; this value is also used to build the `object_path` (see above). | 0 | </div>
+| `multifile` |  <div align="left">See section [multifile configuration attributes](#multifile-configuration-attributes) below. | option is ignored | </div> 
+| `nc_concat` | <div align="left">See section [netCDF concatenation configuration attributes](#netcdf-multifile-concatenation-attributes) below. | option is ignored | </div> |
+| `offset_seconds` | <div align="left">The total number of offset seconds relative to the forecast date for valid files; this value is used to define any POSIX compliant time and date string information specified in `local_path`; this value is also used to build the `object_path` (see above). | `0` | </div>
+| `stream_start` | <div align="left">The timestamp at which the respective datestream begins; format is `%Y%m%d%H%M%S` assuming the POSIX convention. | `19000101000000` | </div>
+| `stream_stop` | <div align="left">The timestamp at which the respective datestream ends; format is `%Y%m%d%H%M%S` assuming the POSIX convention. | `20991231230000` | </div>
 
 </div>
-
 
 ### Multifile Configuration Attributes
 
@@ -247,6 +257,16 @@ fetch:
                          # file path format.
                          ncfrmt: NETCDF4
 ~~~
+
+### Available Fetch Applications Configurations
+
+<div align="center">
+
+| Configuration | Description |
+| :-------------: | :-------------: |
+| [`fetch.adt.reanalysis.yaml`](fetch.adt.reanalysis.yaml) | <div align="left">UFS reanalysis project ocean absolute dynamic topography observations. </div>|
+
+</div>
 
 #
 

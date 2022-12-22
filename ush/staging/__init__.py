@@ -244,7 +244,8 @@ class Staging:
 
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
-        ncconcat_attrs_dict = {"ncdim": numpy.nan, "ncfile": numpy.nan, "ncfrmt": None}
+        ncconcat_attrs_dict = {"ncdim": numpy.nan,
+                               "ncfile": numpy.nan, "ncfrmt": None}
 
         ncconcat_obj = parser_interface.object_define()
         for (ncconcat_attr, _) in ncconcat_attrs_dict.items():
@@ -292,13 +293,15 @@ class Staging:
 
         # Check that netCDF-formatted member files exist; proceed accordingly.
         if (
-            sum(fileio_interface.fileexist(path=filename) for filename in ncfilelist)
+            sum(fileio_interface.fileexist(path=filename)
+                for filename in ncfilelist)
             > 0
         ):
 
             # Check that the directory tree corresponding to the
             # concatenated output file exists; proceed accordingly.
-            fileio_interface.dirpath_tree(path=os.path.dirname(ncconcat_obj.ncfile))
+            fileio_interface.dirpath_tree(
+                path=os.path.dirname(ncconcat_obj.ncfile))
 
             # Concatenate the respective files to the specified output
             # file path.
@@ -695,7 +698,8 @@ class Staging:
         if str(concat_type).lower() == "nc_concat":
 
             # Concatenate the respective netCDF-formatted file.
-            self._nc_concat(fileid_obj=fileid_obj, fileconcat_obj=fileconcat_obj)
+            self._nc_concat(fileid_obj=fileid_obj,
+                            fileconcat_obj=fileconcat_obj)
 
     def get_hash_index(self, filepath: str, hash_level: str = None) -> str:
         """
@@ -898,6 +902,30 @@ class Staging:
 
             timestamps_list = sorted(list(set(timestamps_list)))
 
+        # For each timestamp, check that the timestamps are valid;
+        # proceed accordingly.
+        timestamps_list_check = timestamps_list
+        for timestamp in timestamps_list:
+
+            # If the timestamp is outside of the specified stream
+            # start and stop timestamps, proceed accordingly.
+            if (int(timestamp) < int(fileid_obj.stream_start)) or \
+                    (int(timestamp) > int(fileid_obj.stream_stop)):
+
+                # Remove the respective timestamp from the list.
+                msg = (f"The timestamp {timestamp} is not within the specified "
+                       f"stream range {fileid_obj.stream_start} and "
+                       f"{fileid_obj.stream_stop} and will not be "
+                       "included/retrieved.")
+                self.logger.warn(msg=msg)
+                timestamps_list_check.remove(timestamp)
+
+            else:
+
+                msg = (f"The timestamp {timestamp} is within the specified "
+                       "stream range and will be collected.")
+                self.logger.info(msg=msg)
+
         # Update the file identifier object.
         fileid_out_obj = parser_interface.object_deepcopy(object_in=fileid_obj)
         fileid_out_obj = parser_interface.object_setattr(
@@ -945,7 +973,8 @@ class Staging:
         # path; proceed accordingly.
         if hash_index is not None:
 
-            fileio_interface.dirpath_tree(path=os.path.dirname(checksum_filepath))
+            fileio_interface.dirpath_tree(
+                path=os.path.dirname(checksum_filepath))
 
             with open(checksum_filepath, "a", encoding="utf-8") as file:
                 file.write(f"{hash_index} {local_path}\n")
