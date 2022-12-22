@@ -1,5 +1,7 @@
 [![Unit Tests](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml)
 [![Python Coding Standards](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml)
+[Github license]<a href='https://github.com/shivamkapasia0' target="_blank"><img alt='license' src='https://img.shields.io/badge/github-100000?style=for-the-badge&logo=license&logoColor=1FDD0D&labelColor=black&color=black'/></a>
+
 [[Github license](https://img.shields.io/badge/license/github/license/HenryWinterbottom-NOAA/ufs_apps)
 
 
