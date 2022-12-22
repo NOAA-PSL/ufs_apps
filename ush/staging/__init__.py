@@ -818,9 +818,6 @@ class Staging:
 
             timestamps_list.append(timestamp)
 
-        print(timestamps_list)
-        quit()
-
         if multifile_dict is not None:
 
             # Collect the multiple file attributes from the experiment
@@ -886,6 +883,9 @@ class Staging:
                 out_frmttyp=timestamp_interface.GLOBAL,
                 offset_seconds=offset_seconds,
             )
+
+            print(timestamps_list)
+            quit()
 
             # Build a list of timestamps within the specified window;
             # proceed accordingly.
