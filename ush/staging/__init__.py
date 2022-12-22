@@ -818,6 +818,9 @@ class Staging:
 
             timestamps_list.append(timestamp)
 
+        print(timestamps_list)
+        quit()
+
         if multifile_dict is not None:
 
             # Collect the multiple file attributes from the experiment
