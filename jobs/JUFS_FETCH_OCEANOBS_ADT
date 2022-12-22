@@ -1,0 +1,81 @@
+#!/bin/bash --posix
+
+################################################################################
+## 
+## Script name:         JUFS_FETCH_OCEANOBS_ADT
+##
+## Script description:  Launch the UFS workflow ocean advanced dynamic
+##                      topography (ADT) observation collection
+##                      application.
+##
+## Author R. Winterbottom 
+##
+## Date:                2022-12-22         
+##
+## Script history log:  
+##
+##   2022-12-22: Henry R. Winterbottom -- Original version.
+##
+## Usage: sh JUFS_FETCH_OCEANOBS_ADT
+##
+##   Imported Shell Variables:
+##
+##     CYCLEufs:        The respective UFS forecast cycle; the format is
+##                       %Y%m%d%H%M%S assuming the POSIX convention.
+##
+##     HOMEufs:          The top-level working directory for all UFS
+##                       applications.
+##
+##     PREufs:           The full-path to the (supported) platform-dependent
+##                       required utilities and/or modules script.
+##
+##     YAMLufs:          The YAML-formatted configuration file for the
+##                       respective UFS experiment.
+##
+##   Exported Shell Variables:
+##
+##     PYTHONPATH:       Python library path for the respective UFS
+##                       application(s).
+##
+##     UFS_STAGE:        UFS workflow environment variable for the respective
+##                       task(s).
+##
+##     pid:              UNIX system processes identifier.  
+##
+## Remarks:
+##
+##   Condition codes:
+##
+##      0 - no problem encountered
+##     >0 - some problem encountered
+##
+## Attributes:
+##
+##   Language: POSIX shell
+##   Machine:  Linux
+##
+################################################################################
+
+set -e -u
+
+#----
+
+# Load all modules required by utilities referenced by this script.
+export UFS_STAGE=1
+. ${PREufs}
+
+# Define the run-time environment for the respective UFS-RNR
+# application.
+export PYTHONPATH=${HOMEufs}/ush:${PYTHONPATH}
+
+# Get processor id (pid).
+export pid=$$
+
+# Launch the UFS-RNR experiment application.
+${PYTHONufs} ${HOMEufs}/scripts/exufs_fetch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --fetch_opt=adt_obs
+
+#----
+
+# Collect (any) error information and exit.
+export ERR=$?
+exit ${ERR}
