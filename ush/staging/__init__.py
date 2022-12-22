@@ -904,7 +904,7 @@ class Staging:
 
         # For each timestamp, check that the timestamps are valid;
         # proceed accordingly.
-        timestamps_list_check = timestamp_list
+        timestamps_list_check = timestamps_list
         for timestamp in timestamps_list:
 
             # If the timestamp is outside of the specified stream
