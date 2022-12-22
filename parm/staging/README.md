@@ -18,9 +18,14 @@ application.
 - [Latency to the closest AWS region](https://docs.aws.amazon.com/whitepapers/latest/best-practices-deploying-amazon-workspaces/how-to-check-latency-to-the-closest-aws-region.html)
 - [Global latency monitoring for all AWS regions](https://www.cloudping.co/grid/latency/timeframe/1D)
 
-The relevant attributes are the respective AWS regions. Performance
-can be optimized by choosing the AWS region nearest to the request
-location with the lowest latency.
+The relevant attributes for optimization are the respective AWS
+regions. Performance can be optimized by choosing the AWS region
+nearest to the request location with the lowest latency. Once a region
+is chosen, the `region` attribute within the user `~/.aws/config`
+corresponding to the respective profile should be updated. See
+[updating AWS
+configure](https://docs.aws.amazon.com/cli/latest/reference/configure/)
+for additional information.
 
 ## Building a Fetching Application Configuration
 
