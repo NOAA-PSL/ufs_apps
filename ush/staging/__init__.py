@@ -383,6 +383,9 @@ class Staging:
             object_in=fileid_obj, key="timestamps_list", force=True
         )
 
+        print(timestamps_list)
+        quit()
+
         if timestamps_list is None:
             msg = (
                 "The attribute timestamps_list could not be determined "
@@ -913,11 +916,18 @@ class Staging:
                     (int(timestamp) > int(fileid_obj.stream_stop)):
 
                 # Remove the respective timestamp from the list.
-                msg = (f"The timestamp {timestamp} is not within the range "
-                       f"{fileid_obj.stream_start} and {fileid_obj.stream_stop} "
-                       "and will not be included/retrieve.")
+                msg = (f"The timestamp {timestamp} is not within the specified "
+                       f"stream range {fileid_obj.stream_start} and "
+                       f"{fileid_obj.stream_stop} and will not be "
+                       "included/retrieved.")
                 self.logger.warn(msg=msg)
                 timestamps_list_check.remove(timestamp)
+
+            else:
+
+                msg = (f"The timestamp {timestamp} is within the specified "
+                       "stream range and will be collected.")
+                self.logger.info(msg=msg)
 
         # Update the file identifier object.
         fileid_out_obj = parser_interface.object_deepcopy(object_in=fileid_obj)
