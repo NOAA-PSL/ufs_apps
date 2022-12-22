@@ -902,9 +902,6 @@ class Staging:
 
             timestamps_list = sorted(list(set(timestamps_list)))
 
-        print(timestamps_list)
-        quit()
-
         # For each timestamp, check that the timestamps are valid;
         # proceed accordingly.
         timestamps_list_check = timestamps_list
@@ -928,9 +925,6 @@ class Staging:
                 msg = (f"The timestamp {timestamp} is within the specified "
                        "stream range and will be collected.")
                 self.logger.info(msg=msg)
-
-        print(timestamps_list)
-        quit()
 
         # Update the file identifier object.
         fileid_out_obj = parser_interface.object_deepcopy(object_in=fileid_obj)
