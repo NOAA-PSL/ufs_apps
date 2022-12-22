@@ -1,7 +1,7 @@
 [![License](https://img.shields.io/badge/license-lgpl_v2.1-blue)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/blob/develop/LICENSE)
 [![Python Version](https://img.shields.io/badge/python-3.5|3.6|3.7-blue)]()
 
-[![Linux](https://img.shields.io/badge/linux-ubuntu%7Ccentos-orange)]()
+[![Linux](https://img.shields.io/badge/linux-ubuntu%7Ccentos-orange)]
 [![Dependencies](https://img.shields.io/badge/dependencies-ufs__pyutils-orange)](https://github.com/HenryWinterbottom-NOAA/ufs_pyutils)
 
 [![Unit Tests](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml)
