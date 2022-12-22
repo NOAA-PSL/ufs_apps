@@ -884,9 +884,6 @@ class Staging:
                 offset_seconds=offset_seconds,
             )
 
-            print(timestamps_list)
-            quit()
-
             # Build a list of timestamps within the specified window;
             # proceed accordingly.
             timestamp = start_timestamp
@@ -904,6 +901,9 @@ class Staging:
                 )
 
             timestamps_list = sorted(list(set(timestamps_list)))
+
+        print(timestamps_list)
+        quit()
 
         # For each timestamp, check that the timestamps are valid;
         # proceed accordingly.
