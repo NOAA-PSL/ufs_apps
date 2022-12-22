@@ -44,17 +44,17 @@ fetch:
                          # Define the total number of seconds, prior
                          # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
-                         start_offset_seconds: -43200
+                         start_offset_seconds: -86400
 
                          # Define the total number of seconds,
                          # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
-                         stop_offset_seconds: 43200
+                         stop_offset_seconds: 86400
 
                          # Define the total number of seconds
                          # specifying the interval at which to collect
                          # member files.
-                         offset_seconds: 43200
+                         offset_seconds: 21600
 
                     # Define the netCDF-formatted member file
                     # concatenation attributes.
@@ -103,17 +103,17 @@ fetch:
                          # Define the total number of seconds, prior
                          # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
-                         start_offset_seconds: -43200
+                         start_offset_seconds: -86400
 
                          # Define the total number of seconds,
                          # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
-                         stop_offset_seconds: 43200
+                         stop_offset_seconds: 86400
 
                          # Define the total number of seconds
                          # specifying the interval at which to collect
                          # member files.
-                         offset_seconds: 43200
+                         offset_seconds: 21600
 
                     # Define the netCDF-formatted member file
                     # concatenation attributes.
@@ -162,17 +162,17 @@ fetch:
                          # Define the total number of seconds, prior
                          # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
-                         start_offset_seconds: -43200
+                         start_offset_seconds: -86400
 
                          # Define the total number of seconds,
                          # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
-                         stop_offset_seconds: 43200
+                         stop_offset_seconds: 86400
 
                          # Define the total number of seconds
                          # specifying the interval at which to collect
                          # member files.
-                         offset_seconds: 43200
+                         offset_seconds: 21600
 
                     # Define the netCDF-formatted member file
                     # concatenation attributes.
@@ -221,17 +221,17 @@ fetch:
                          # Define the total number of seconds, prior
                          # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
-                         start_offset_seconds: -43200
+                         start_offset_seconds: -86400
 
                          # Define the total number of seconds,
                          # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
-                         stop_offset_seconds: 43200
+                         stop_offset_seconds: 86400
 
                          # Define the total number of seconds
                          # specifying the interval at which to collect
                          # member files.
-                         offset_seconds: 43200
+                         offset_seconds: 21600
 
                     # Define the netCDF-formatted member file
                     # concatenation attributes.
@@ -280,17 +280,17 @@ fetch:
                          # Define the total number of seconds, prior
                          # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
-                         start_offset_seconds: -43200
+                         start_offset_seconds: -86400
 
                          # Define the total number of seconds,
                          # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
-                         stop_offset_seconds: 43200
+                         stop_offset_seconds: 86400
 
                          # Define the total number of seconds
                          # specifying the interval at which to collect
                          # member files.
-                         offset_seconds: 43200
+                         offset_seconds: 21600
 
                     # Define the netCDF-formatted member file
                     # concatenation attributes.
@@ -338,17 +338,17 @@ fetch:
                          # Define the total number of seconds, prior
                          # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
-                         start_offset_seconds: -43200
+                         start_offset_seconds: -86400
 
                          # Define the total number of seconds,
                          # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
-                         stop_offset_seconds: 43200
+                         stop_offset_seconds: 86400
 
                          # Define the total number of seconds
                          # specifying the interval at which to collect
                          # member files.
-                         offset_seconds: 43200
+                         offset_seconds: 21600
 
                     # Define the netCDF-formatted member file
                     # concatenation attributes.
@@ -396,17 +396,17 @@ fetch:
                          # Define the total number of seconds, prior
                          # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
-                         start_offset_seconds: -43200
+                         start_offset_seconds: -86400
 
                          # Define the total number of seconds,
                          # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
-                         stop_offset_seconds: 43200
+                         stop_offset_seconds: 86400
 
                          # Define the total number of seconds
                          # specifying the interval at which to collect
                          # member files.
-                         offset_seconds: 43200
+                         offset_seconds: 21600
 
                     # Define the netCDF-formatted member file
                     # concatenation attributes.
@@ -454,17 +454,17 @@ fetch:
                          # Define the total number of seconds, prior
                          # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
-                         start_offset_seconds: -43200
+                         start_offset_seconds: -86400
 
                          # Define the total number of seconds,
                          # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
-                         stop_offset_seconds: 43200
+                         stop_offset_seconds: 86400
 
                          # Define the total number of seconds
                          # specifying the interval at which to collect
                          # member files.
-                         offset_seconds: 43200
+                         offset_seconds: 21600
 
                     # Define the netCDF-formatted member file
                     # concatenation attributes.
@@ -513,17 +513,17 @@ fetch:
                          # Define the total number of seconds, prior
                          # to the relevant analysis timestamp, from
                          # which to begin collecting member files.
-                         start_offset_seconds: -43200
+                         start_offset_seconds: -86400
 
                          # Define the total number of seconds,
                          # following the relevant the analysis timestamp,
                          # from which to end collecting member files.
-                         stop_offset_seconds: 43200
+                         stop_offset_seconds: 86400
 
                          # Define the total number of seconds
                          # specifying the interval at which to collect
                          # member files.
-                         offset_seconds: 43200
+                         offset_seconds: 21600
 
                     # Define the netCDF-formatted member file
                     # concatenation attributes.
