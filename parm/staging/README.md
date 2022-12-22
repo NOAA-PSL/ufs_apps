@@ -18,6 +18,10 @@ application.
 - [Latency to the closest AWS region](https://docs.aws.amazon.com/whitepapers/latest/best-practices-deploying-amazon-workspaces/how-to-check-latency-to-the-closest-aws-region.html)
 - [Global latency monitoring for all AWS regions](https://www.cloudping.co/grid/latency/timeframe/1D)
 
+The relevant attributes are the respective AWS regions. Performance
+can be optimized by choosing the AWS region nearest to the request
+location with the lowest latency.
+
 ## Building a Fetching Application Configuration
 
 The following YAML snippet provides an example architecture for the
@@ -249,9 +253,15 @@ fetch:
                          ncfrmt: NETCDF4
 ~~~
 
-### Available Fetch Application Configurations
+### Pre-configured Fetch Applications
 
+<div align="center">
 
+| Configuration | Description |
+| :-------------: | :-------------: |
+| [`fetch.adt.reanalysis.yaml`](./fetch.adt.reanalysis.yaml) | <div align="left">Ocean absolute dynamic topography observations for the UFS reanalysis project. </div>|
+
+</div>
 
 #
 
