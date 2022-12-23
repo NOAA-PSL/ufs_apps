@@ -12,7 +12,7 @@ fetch:
      aws_s3:
 
           # Define the fetching type; this example corresponds to
-          # ocean observations.
+          # ocean ADT observations.
           adt_obs:
 
                # Define the file identifier.

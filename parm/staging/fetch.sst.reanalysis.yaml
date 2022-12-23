@@ -12,61 +12,8 @@ fetch:
      aws_s3:
 
           # Define the fetching type; this example corresponds to
-          # ocean observations.
-          ocean_obs:
-
-               # Define the file identifier.
-               adt.nesdis.cryosat2:
-                    
-                    # Define the attributes corresponding to the
-                    # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.cryosat2.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
-                    
-                    # Define the AWS s3 attributes for the respective
-                    # file identifier.
-                    bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/adt/nesdis/cryosat2/%Y/%m/24h/cryosat2.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    profile_name: noaa_bdp
-                    ignore_missing: True
-
-                    # Define the attributes for multiple (i.e.,
-                    # member file) collection applications; these are
-                    # a single file containing all member files within
-                    # the specified window.
-                    multifile:
-
-                         # Define the total number of seconds, prior
-                         # to the relevant analysis timestamp, from
-                         # which to begin collecting member files.
-                         start_offset_seconds: -43200
-
-                         # Define the total number of seconds,
-                         # following the relevant the analysis timestamp,
-                         # from which to end collecting member files.
-                         stop_offset_seconds: 43200
-
-                         # Define the total number of seconds
-                         # specifying the interval at which to collect
-                         # member files.
-                         offset_seconds: 43200
-
-                    # Define the netCDF-formatted member file
-                    # concatenation attributes.
-                    nc_concat:
-
-                         # Define the dimension name along which to
-                         # concatenate the respective member files.
-                         ncdim: nlocs
-
-                         # Define the netCDF-formatted file path to
-                         # contain the results of the concatenated
-                         # member files.
-                         ncfile: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.cryosat2.adt.nc
-
-                         # Define the netCDF-formatted concatenated
-                         # file path format.
-                         ncfrmt: NETCDF4
+          # ocean SST observations.
+          sst_obs:
 
                # Define the file identifier.
                sst.nesdis_avhrr_noaa07:
@@ -82,6 +29,12 @@ fetch:
                     object_path: observations/reanalysis/sst/nesdis/noaa07/%Y/%m/1h/superob_0p25/nesdis.avhrr_noaa07.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 19810901000000
+                    stream_stop: 19850202000000
 
                     # Define the attributes for multiple (i.e.,
                     # member file) collection applications; these are
@@ -136,6 +89,12 @@ fetch:
                     profile_name: noaa_bdp
                     ignore_missing: True
 
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 19850131000000
+                    stream_stop: 19850202000000
+
                     # Define the attributes for multiple (i.e.,
                     # member file) collection applications; these are
                     # a single file containing all member files within
@@ -188,6 +147,12 @@ fetch:
                     object_path: observations/reanalysis/sst/nesdis/noaa11/%Y/%m/1h/superob_0p25/nesdis.avhrr_noaa11.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 19850131000000
+                    stream_stop: 19850202000000
 
                     # Define the attributes for multiple (i.e.,
                     # member file) collection applications; these are
@@ -242,6 +207,12 @@ fetch:
                     profile_name: noaa_bdp
                     ignore_missing: True
 
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 19850131000000
+                    stream_stop: 19850202000000
+
                     # Define the attributes for multiple (i.e.,
                     # member file) collection applications; these are
                     # a single file containing all member files within
@@ -294,6 +265,12 @@ fetch:
                     object_path: observations/reanalysis/sst/nesdis/noaa14/%Y/%m/1h/superob_0p25/nesdis.avhrr_noaa14.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 19850131000000
+                    stream_stop: 19850202000000
 
                     # Define the attributes for multiple (i.e.,
                     # member file) collection applications; these are
@@ -348,6 +325,11 @@ fetch:
                     profile_name: noaa_bdp
                     ignore_missing: True
 
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 19981101000000
+
                     # Define the attributes for multiple (i.e.,
                     # member file) collection applications; these are
                     # a single file containing all member files within
@@ -400,6 +382,12 @@ fetch:
                     object_path: observations/reanalysis/sst/nesdis/noaa16/%Y/%m/1h/superob_0p25/nesdis.avhrr_noaa16.sst.%Y%m%d.T%H%M%SZ.iodav2.so0p25.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 19850131000000
+                    stream_stop: 19850202000000
 
                     # Define the attributes for multiple (i.e.,
                     # member file) collection applications; these are
