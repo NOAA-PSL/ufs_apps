@@ -1,8 +1,9 @@
 [![License](https://img.shields.io/badge/license-lgpl_v2.1-blue)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/blob/develop/LICENSE)
 ![Python Version](https://img.shields.io/badge/python-3.5|3.6|3.7-blue)
 
-![Linux](https://img.shields.io/badge/linux-ubuntu%7Ccentos-orange)
-[![Dependencies](https://img.shields.io/badge/dependencies-ufs__pyutils-orange)](https://github.com/HenryWinterbottom-NOAA/ufs_pyutils)
+![Linux](https://img.shields.io/badge/linux-ubuntu%7Ccentos-black)
+
+[![Dependencies](https://img.shields.io/badge/dependencies-ufs__pyutils-blueviolet)](https://github.com/HenryWinterbottom-NOAA/ufs_pyutils)
 
 [![Unit Tests](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml)
 [![Python Coding Standards](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml)
@@ -51,13 +52,13 @@ user@host:$ git clone --recursive https://github.com/HenryWinterbottom-NOAA/ufs_
 
 If a user wishes to contribute modifications done within their
 respective fork(s) to the authoritative repository, we request that
-the user first submit an issue and that the branch naming conventions
+the user first submit an issue and that the fork naming conventions
 follow those listed below.
 
-- `docs/user_branch_name`: Documenation additions and/or corrections for the UFS applications.
+- `docs/user_branch_name`: Documenation additions and/or corrections for the application(s).
 
-- `feature/user_branch_name`: Additions, enhancements, and/or upgrades for the UFS applications.
+- `feature/user_branch_name`: Additions, enhancements, and/or upgrades for the application(s).
 
-- `fix/user_branch_name`: Bug-type fixes for the UFS applications that do not require immediate attention.
+- `fix/user_branch_name`: Bug-type fixes for the application(s) that do not require immediate attention.
 
-- `hotfix/user_branch_name`: Bug-type fixes which require immediate attention to fix issues that compromise the integrity of the respective UFS applications. 
+- `hotfix/user_branch_name`: Bug-type fixes which require immediate attention to fix issues that compromise the integrity of the respective application(s).  
