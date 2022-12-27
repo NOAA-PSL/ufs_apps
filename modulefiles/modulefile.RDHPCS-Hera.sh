@@ -27,6 +27,9 @@
 ##     run-time environment, the respective application modules will
 ##     be loaded.
 ##
+##     UFS_LAUNCH:       UFS workflow environment variable for the UFS
+##                       launcher application.
+##
 ##     UFS_STAGE:        UFS workflow environment variable for the UFS
 ##                       staging application.
 ##
@@ -75,6 +78,17 @@ exit_script(){
 # and the script exits gracefully.
 
 load_modules(){
+
+    # Query the run-time environment and proceed accordingly.
+    if [[ ${UFS_LAUNCH} -eq 1 ]]; then
+
+	# Load the modules for the respective application.
+	. ${MODULESufs}/launch.env
+
+	# List modules and exit gracefully.
+	exit_script
+
+    fi # [[ ${UFS_LAUNCH} -eq 1 ]]   
 
     # Query the run-time environment and proceed accordingly.
     if [[ ${UFS_STAGE} -eq 1 ]]; then
