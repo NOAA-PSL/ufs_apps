@@ -93,7 +93,7 @@ class Launch:
                 f"The YAML-formatted configuration file {self.yaml_file} "
                 "does not exist. Aborting!!!"
             )
-            raise StagingError(msg=msg)
+            raise LaunchError(msg=msg)
 
         # Parse the configuration file.
         self.yaml_dict = fileio_interface.read_yaml(yaml_file=self.yaml_file)
