@@ -123,13 +123,28 @@ class Launch:
         # Define the YAML-formatted file attributes.
         yaml_file_list = [filename for (_, filename) in self.yaml_dict.items()]
 
-        # Build the concatenated YAML-formatted files.
+        # Build the experiment configuration files.
         for config_file in config_files:
 
+            # Build the YAML-formatted experiment configuration file.
             if ".yaml" in config_file.lower():
-
                 YAML().concat_yaml(yaml_file_list=yaml_file_list, yaml_file_out=config_file,
                                    fail_nonvalid=False, ignore_missing=True)
+
+        for config_file in config_files:
+
+            # Build the JSON-formatted experiment configuration files.
+            if ".json" in config_file.lower():
+
+                # Collect the attributes from the corresponding
+                # YAML-formatted file.
+                yaml_file = config_file.replace(".yaml", ".json")
+                yaml_dict = YAML().read_yaml(yaml_file=yaml_file)
+
+                # Write the JSON-formatted experiment configuration
+                # file.
+                fileio_interface.write_json(
+                    json_file=config_file, in_dict=yaml_dict)
 
     def build_dirpath(self) -> None:
         """ """
