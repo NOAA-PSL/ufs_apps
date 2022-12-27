@@ -116,13 +116,20 @@ class Launch:
     def build_configs(self) -> None:
         """ """
 
+        # Define the configuration file paths.
+        config_files = [os.path.join(path, filename) for filename in [
+            self.json_config_path, self.yaml_config_path] for path in self.dirpaths_list]
+
         # Define the YAML-formatted file attributes.
-        yaml_files = list(self.yaml_dict.keys())
+        yaml_file_list = list(self.yaml_dict.keys())
 
-        config_files = list(set([os.path.join(path, filename) for filename in [
-            self.json_config_path, self.yaml_config_path] for path in self.dirpaths_list]))
+        # Build the concatenated YAML-formatted files.
+        for config_file in config_files:
 
-        print(config_files)
+            if ".yaml" in config_file.lower():
+
+                YAML().concat_yaml(yaml_file_list=yaml_file_list, yaml_file_out=config_file,
+                                   fail_nonvalid=False, ignore_missing=True)
 
     def build_dirpath(self) -> None:
         """ """
