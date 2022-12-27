@@ -101,24 +101,41 @@ class Launch:
         # Parse the configuration file.
         self.yaml_dict = YAML().read_yaml(yaml_file=self.yaml_file)
 
-    def build_config(self) -> None:
+        # Define the directory tree paths relative to the respective
+        # forecast cycle.
+        self.com_root = os.path.join(
+            self.work_path, self.expt_name, "com", self.cycle)
+        self.itrc_root = os.path.join(
+            self.work_path, self.expt_name, self.cycle, "intercom")
+
+        # Define the JSON- and YAML-formatted experiment configuration
+        # files.
+        self.json_config_path = f"ufs.{self.expt_name}.{self.cycle}.json"
+        self.yaml_config_path = f"ufs.{self.expt_name}.{self.cycle}.yaml"
+
+    def build_configs(self) -> None:
         """ """
 
+        # Define the YAML-formatted file attributes.
         yaml_files = list(self.yaml_dict.keys())
-        print(yaml_files)
+
+        config_files = [os.path.join(path, filename) for filename in [
+            self.json_config_path, self.yaml_config_path] for path in self.dirpaths_list]
+
+        print(config_files)
 
     def build_dirpath(self) -> None:
         """ """
 
         # Define the mandatory directory tree paths for the respective
         # forecast cycle.
-        dirpaths_list = [os.path.join(self.work_path, self.expt_name, self.cycle, "intercom"),
-                         os.path.join(self.work_path,
-                                      self.expt_name, "com", self.cycle)
-                         ]
+        self.dirpaths_list = [os.path.join(self.work_path, self.expt_name, self.cycle, "intercom"),
+                              os.path.join(self.work_path,
+                                           self.expt_name, "com", self.cycle)
+                              ]
 
         # Build the respective directory tree paths.
-        for dirpath in dirpaths_list:
+        for dirpath in self.dirpaths_list:
 
             msg = f"Building directory tree {dirpath}."
             self.logger.info(msg=msg)
@@ -134,7 +151,7 @@ class Launch:
         self.build_dirpath()
 
         # Define the experiment configuration.
-        self.build_config()
+        self.build_configs()
 
 # ----
 
