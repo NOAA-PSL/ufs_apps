@@ -99,7 +99,7 @@ class Launch:
             raise LaunchError(msg=msg)
 
         # Parse the configuration file.
-        self.yaml_dict = fileio_interface.read_yaml(yaml_file=self.yaml_file)
+        self.yaml_dict = YAML().read_yaml(yaml_file=self.yaml_file)
 
     def build_config(self) -> None:
         """ """
