@@ -84,6 +84,20 @@ class Launch:
             out_frmttyp=timestamp_interface.GLOBAL,
         )
 
+        # Check that the YAML-formatted configuration file exists;
+        # proceed accordingly.
+        exist = fileio_interface.fileexist(path=self.yaml_file)
+
+        if not exist:
+            msg = (
+                f"The YAML-formatted configuration file {self.yaml_file} "
+                "does not exist. Aborting!!!"
+            )
+            raise StagingError(msg=msg)
+
+        # Parse the configuration file.
+        self.yaml_dict = fileio_interface.read_yaml(yaml_file=self.yaml_file)
+
     def run(self) -> None:
         """
 
@@ -91,6 +105,7 @@ class Launch:
         """
 
         # Define the experiment configuration.
+        print(self.yaml_dict)
 
 # ----
 
