@@ -23,6 +23,7 @@
 
 # ----
 
+from conf.yaml_interface import YAML
 from tools import fileio_interface
 from tools import parser_interface
 from utils import timestamp_interface
@@ -98,14 +99,37 @@ class Launch:
         # Parse the configuration file.
         self.yaml_dict = fileio_interface.read_yaml(yaml_file=self.yaml_file)
 
+    def build_config(self) -> None:
+        """ """
+
+        yaml_files = list(self.yaml_dict.keys())
+
+    def build_dirpath(self) -> None:
+        """ """
+
+        # Define the mandatory directory tree paths for the respective
+        # forecast cycle.
+        dirpaths_list = [os.path.join(self.work_path, self.expt_name, self.cycle, "intercom"),
+                         os.path.join(self.work_path,
+                                      self.expt_name, "com", self.cycle)
+                         ]
+
+        # Build the respective directory tree paths.
+        for dirpath in dirpaths_list:
+
+            fileio_interface.dirpath_tree(path=dirpath)
+
     def run(self) -> None:
         """
 
 
         """
 
+        # Build the forecast cycle experiment directory tree.
+        self.build_dirpath()
+
         # Define the experiment configuration.
-        print(self.yaml_dict)
+        self.build_config()
 
 # ----
 
