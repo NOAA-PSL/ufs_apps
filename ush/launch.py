@@ -138,7 +138,7 @@ class Launch:
 
                 # Collect the attributes from the corresponding
                 # YAML-formatted file.
-                yaml_file = config_file.replace(".yaml", ".json")
+                yaml_file = config_file.replace(".json", ".yaml")
                 yaml_dict = YAML().read_yaml(yaml_file=yaml_file)
 
                 # Write the JSON-formatted experiment configuration
