@@ -25,6 +25,7 @@
 
 import os
 
+from confs import json_interface
 from confs.yaml_interface import YAML
 from tools import fileio_interface
 from tools import parser_interface
@@ -150,7 +151,7 @@ class Launch:
 
                 # Write the JSON-formatted experiment configuration
                 # file.
-                fileio_interface.write_json(
+                json_interface.write_json(
                     json_file=config_file, in_dict=yaml_dict)
 
     def build_dirpath(self) -> None:
