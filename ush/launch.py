@@ -123,7 +123,7 @@ class Launch:
         # Define the YAML-formatted file attributes.
         yaml_file_list = [filename for (_, filename) in self.yaml_dict.items()]
 
-        # Build the experiment configuration files.
+        # Build the YAML-formatted experiment configuration files.
         for config_file in config_files:
 
             # Build the YAML-formatted experiment configuration file.
@@ -131,6 +131,13 @@ class Launch:
                 YAML().concat_yaml(yaml_file_list=yaml_file_list, yaml_file_out=config_file,
                                    fail_nonvalid=False, ignore_missing=True)
 
+        # ADD INFORMATION HERE REGARDING WARM versus COLD START, etc.,
+
+        # Using the built YAML-formatted experiment configuration
+        # files, build the corresponding JSON-formatted experiment
+        # configuration files; this step is implemented to provide
+        # functionality across different applications (namely
+        # UFS-RNR).
         for config_file in config_files:
 
             # Build the JSON-formatted experiment configuration files.
