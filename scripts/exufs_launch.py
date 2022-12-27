@@ -21,15 +21,12 @@
 Script
 ------
 
-    exufs_fetch.py
+    exufs_launch.py
 
 Description
 -----------
 
-    This script contains a functional application interface to
-    construct the respective experiment forecast cycle directory tree
-    as well as the input files required for the respective
-    applications.
+
 
 Functions
 ---------
