@@ -117,9 +117,12 @@ class Launch:
                          ]
 
         # Build the respective directory tree paths.
-        for dirpath in dirpaths_list:
 
-            fileio_interface.dirpath_tree(path=dirpath)
+        print(dir(fileio_interface))
+
+        # for dirpath in dirpaths_list:
+
+        #    fileio_interface.dirpath_tree(path=dirpath)
 
     def run(self) -> None:
         """
