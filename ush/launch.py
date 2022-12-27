@@ -23,7 +23,7 @@
 
 # ----
 
-from conf.yaml_interface import YAML
+from confs.yaml_interface import YAML
 from tools import fileio_interface
 from tools import parser_interface
 from utils import timestamp_interface
