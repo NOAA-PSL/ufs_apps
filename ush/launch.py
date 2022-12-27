@@ -105,6 +105,7 @@ class Launch:
         """ """
 
         yaml_files = list(self.yaml_dict.keys())
+        print(yaml_files)
 
     def build_dirpath(self) -> None:
         """ """
