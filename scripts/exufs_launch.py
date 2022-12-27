@@ -70,7 +70,7 @@ __email__ = "henry.winterbottom@noaa.gov"
 # ----
 
 
-def main():  # -> None:
+def main() -> None:
     """
     Description
     -----------
