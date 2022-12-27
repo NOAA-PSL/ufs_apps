@@ -23,6 +23,8 @@
 
 # ----
 
+import os
+
 from confs.yaml_interface import YAML
 from tools import fileio_interface
 from tools import parser_interface
