@@ -119,8 +119,8 @@ class Launch:
         # Define the YAML-formatted file attributes.
         yaml_files = list(self.yaml_dict.keys())
 
-        config_files = [os.path.join(path, filename) for filename in [
-            self.json_config_path, self.yaml_config_path] for path in self.dirpaths_list]
+        config_files = list(set([os.path.join(path, filename) for filename in [
+            self.json_config_path, self.yaml_config_path] for path in self.dirpaths_list]))
 
         print(config_files)
 
