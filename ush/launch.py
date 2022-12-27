@@ -121,7 +121,7 @@ class Launch:
             self.json_config_path, self.yaml_config_path] for path in self.dirpaths_list]
 
         # Define the YAML-formatted file attributes.
-        yaml_file_list = list(self.yaml_dict.keys())
+        yaml_file_list = [filename for (_, filename) in self.yaml_dict.items()]
 
         # Build the concatenated YAML-formatted files.
         for config_file in config_files:
