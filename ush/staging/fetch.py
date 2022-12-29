@@ -139,6 +139,38 @@ class Fetch(Staging):
         # Define the file identifiers to be collected.
         self.fileids = self._get_fileids()
 
+    def _get_fetch_types(self) -> list:
+        """
+        Description
+        -----------
+
+        This method defines a list of fetch types in accordance with
+        the base-class attributes.
+
+        Returns
+        -------
+
+        fetch_types_list: list
+
+            A Python list of fetch types determined in accordance with
+            the base-class attributes.
+
+        """
+
+        # Define a list of unique fetch types in accordance with the
+        # base-class attributes.
+        fetch_types_list = list(set(self.fetch_type_opt.split(",")))
+
+        # Check if list is empty; proceed accordingly.
+        if not fetch_types_list:
+            msg = (
+                "The fetch types list is empty and/or cannot be determine "
+                "from the base-class attributes. Aborting!!!"
+            )
+            staging_error(msg=msg)
+
+        return fetch_types_list
+
     def _get_fileids(self) -> list:
         """
         Description
@@ -460,7 +492,7 @@ class Fetch(Staging):
                 fetch_types = list(filesdict.keys())
 
             if self.fetch_type_opt is not None:
-                fetch_types = [self.fetch_type_opt]
+                fetch_types = self._get_fetch_types()
 
             # Collect files in accordance with the configuration and
             # options.
@@ -474,7 +506,7 @@ class Fetch(Staging):
                 if fetch_type not in filesdict:
                     msg = (
                         "The configuration file does not specify a key "
-                        f"for fetch type {fetch_type} and {fetch_type} files "
+                        f"for fetch type {fetch_type}; {fetch_type} files "
                         "will not be collected."
                     )
                     self.logger.warn(msg=msg)
