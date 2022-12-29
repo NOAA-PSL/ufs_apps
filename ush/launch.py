@@ -171,6 +171,12 @@ class Launch:
             self.logger.info(msg=msg)
             fileio_interface.dirpath_tree(path=dirpath)
 
+    def parse_env(self) -> None:
+        """ 
+
+
+        """
+
     def run(self) -> None:
         """
 
