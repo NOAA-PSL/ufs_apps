@@ -59,13 +59,13 @@ History
 
 # pylint: disable=attribute-defined-outside-init
 # pylint: disable=no-member
-# pylint: disable=wrong-import-order
 
 # ----
 
-from staging import Staging
-from staging import StagingError
 from tools import parser_interface
+
+from staging import Staging
+from staging import error as staging_error
 
 # ----
 
@@ -133,6 +133,127 @@ class Fetch(Staging):
             object_in=self.options_obj, key="fetch_type", force=True
         )
 
+        # Define the interface/platform types to be collected.
+        self.platforms = self._get_platforms()
+
+        # Define the file identifiers to be collected.
+        self.fileids = self._get_fileids()
+
+    def _get_fetch_types(self) -> list:
+        """
+        Description
+        -----------
+
+        This method defines a list of fetch types in accordance with
+        the base-class attributes.
+
+        Returns
+        -------
+
+        fetch_types_list: list
+
+            A Python list of fetch types determined in accordance with
+            the base-class attributes.
+
+        """
+
+        # Define a list of unique fetch types in accordance with the
+        # base-class attributes.
+        fetch_types_list = list(set(self.fetch_type_opt.split(",")))
+
+        # Check if list is empty; proceed accordingly.
+        if not fetch_types_list:
+            msg = (
+                "The fetch types list is empty and/or cannot be determine "
+                "from the base-class attributes. Aborting!!!"
+            )
+            staging_error(msg=msg)
+
+        return fetch_types_list
+
+    def _get_fileids(self) -> list:
+        """
+        Description
+        -----------
+
+        This method defines the base-class attribute fileids with
+        respect to the command line option attribute fileid.
+
+        Returns
+        -------
+
+        fileids: list
+
+            A Python list of file identifiers to be collected.
+
+        """
+
+        # Check whether the base-class arguments contain the file
+        # identifier attribute; proceed accordingly.
+        fileids = None
+        fileid_opt = parser_interface.object_getattr(
+            object_in=self.options_obj, key="fileid", force=True
+        )
+
+        # If the file identifier attribute has been specified, define
+        # a list of values to be returned.
+        if fileid_opt is not None:
+
+            fileids = list(set(fileid_opt.split(",")))
+
+        return fileids
+
+    def _get_platforms(self) -> list:
+        """
+        Description
+        -----------
+
+        This method defines the base-class attribute platforms with
+        respect to the command line option attribute platform.
+
+        Returns
+        -------
+
+        platforms: list
+
+            A Python list of interface/platforms to be collected.
+
+        Raises
+        ------
+
+        StagingError:
+
+            * raised if a specified platform is not supported by this
+              application.
+
+        """
+
+        # Check whether the base-class arguments contain the
+        # respective interface/platform type; proceed accordingly.
+        platform_opt = parser_interface.object_getattr(
+            object_in=self.options_obj, key="platform", force=True
+        )
+
+        if platform_opt is None:
+
+            # Define a list of interface/platform types using the
+            # base-class attributes.
+            platforms = list(self.fetch_methods_dict.keys())
+
+        if platform_opt is not None:
+
+            # Define a list of unique interface/platform types.
+            platforms = list(set(platform_opt.split(",")))
+
+            # Check that the interface/platform is supported; proceed
+            # accordingly.
+            for platform in platforms:
+                if platform not in self.fetch_methods_dict:
+                    msg = f"The interface/platform type {platform} is not supported. Aborting!!!"
+                    staging_error(msg=msg)
+
+        return platforms
+
     def aws_s3(self, filesdict):
         """
         Description
@@ -154,6 +275,41 @@ class Fetch(Staging):
             AWS s3 object paths.
 
         """
+
+        # Check whether file identifiers have been specified; proceed
+        # accordingly.
+        if self.fileids is not None:
+
+            # Define a Python dictionary containing only the specified
+            # file identifiers and overwrite the Python dictionary
+            # specified upon entry; proceed accordingly.
+            tmpdict = {}
+            # fileids = [item for item in self.fileids if item in
+            #           list(filesdict.keys())]
+            for fileid in self.fileids:
+
+                if fileid in filesdict:  # list(filesdict.keys()):
+                    tmpdict[fileid] = parser_interface.dict_key_value(
+                        dict_in=filesdict, key=fileid, force=True, no_split=True
+                    )
+
+                if fileid not in filesdict:  # list(filesdict.keys()):
+                    msg = (
+                        f"Attributes for file identifier {fileid} could "
+                        "not be determined from the configuration file "
+                        "and will not be collected."
+                    )
+                    self.logger.warn(msg=msg)
+
+            filesdict = tmpdict
+            if len(filesdict.keys()) <= 0:
+                msg = (
+                    "No valid file identifiers has been specified; "
+                    "nothing will be collected."
+                )
+                self.logger.warn(msg=msg)
+
+                return None
 
         # Collect the AWS s3 checksum index attributes.
         checksum_obj = parser_interface.object_define()
@@ -214,6 +370,8 @@ class Fetch(Staging):
             # accordance with the experiment configuration.
             self.concat_filepath(fileid_obj=fileid_obj)
 
+        return None
+
     def build_fetch_dict(self) -> dict:
         """
         Description
@@ -259,7 +417,7 @@ class Fetch(Staging):
                 f"YAML-formatted configuration file {self.yaml_file}. "
                 "Aborting!!!"
             )
-            raise StagingError(msg=msg)
+            staging_error(msg=msg)
 
         return fetch_dict
 
@@ -303,7 +461,7 @@ class Fetch(Staging):
         # For each supported interface/platform type, collect (i.e.,
         # fetch) the attributes specified in the YAML-formatted
         # configuration file.
-        for (fetch_method, _) in self.fetch_methods_dict.items():
+        for fetch_method in self.platforms:
 
             # Define the base-class method to be used for collecting
             # from the supported interfaces/platforms; proceed
@@ -320,7 +478,7 @@ class Fetch(Staging):
                     f"A method for collecting files from the {fetch_method} "
                     "platform is not supported. Aborting!!!"
                 )
-                raise StagingError(msg=msg)
+                staging_error(msg=msg)
 
             # Define the respective file attributes for the respective
             # supported interface/platform.
@@ -334,14 +492,24 @@ class Fetch(Staging):
                 fetch_types = list(filesdict.keys())
 
             if self.fetch_type_opt is not None:
-                fetch_types = [self.fetch_type_opt]
+                fetch_types = self._get_fetch_types()
 
             # Collect files in accordance with the configuration and
             # options.
             for fetch_type in fetch_types:
-                msg = f"Collecting files for fetch type {fetch_type}."
-                self.logger.info(msg=msg)
-                method(filesdict=filesdict[fetch_type])
+
+                if fetch_type in filesdict:
+                    msg = f"Collecting files for fetch type {fetch_type}."
+                    self.logger.info(msg=msg)
+                    method(filesdict=filesdict[fetch_type])
+
+                if fetch_type not in filesdict:
+                    msg = (
+                        "The configuration file does not specify a key "
+                        f"for fetch type {fetch_type}; {fetch_type} files "
+                        "will not be collected."
+                    )
+                    self.logger.warn(msg=msg)
 
     def get_checksum_info(self, fetch_dict: dict) -> None:
         """

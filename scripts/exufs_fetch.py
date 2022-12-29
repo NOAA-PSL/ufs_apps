@@ -38,6 +38,11 @@ Functions
         This is the driver-level method to invoke the tasks within
         this script.
 
+Usage
+-----
+
+    user@host:$ python exufs_fetch.py --<yaml_file> --<cycle> [--platform] [--fetch_type] [--fileid]
+
 Author(s)
 ---------
 
@@ -59,6 +64,7 @@ History
 import os
 import time
 
+from schema import Optional, Or
 from staging.fetch import Fetch
 from utils.arguments_interface import Arguments
 from utils.logger_interface import Logger
@@ -73,8 +79,7 @@ __email__ = "henry.winterbottom@noaa.gov"
 
 
 def main() -> None:
-    """
-    Description
+    """Description
     -----------
 
     This is the driver-level function to invoke the tasks within this
@@ -112,7 +117,25 @@ def main() -> None:
     Keywords
     --------
 
-    fetch_type: str
+    platform: str, optional
+
+        A Python string specifying the supported interface/platform
+        types from which files are to be fetched; this argument may
+        also contain a comma-delimited string for multiple supported
+        interface/platform options (no spaces between comma-delimited
+        values).
+
+        For files to be fetched from the 'spam' platform, the keyword
+        value may be entered as:
+
+        --platform=spam or -platform=spam
+
+        For files to be fetched from both the 'spam' and the 'ham'
+        platforms, the keyword value may be entered as:
+
+        --platform=spam,ham or -platform=spam,ham
+
+    fetch_type: str, optional
 
         A Python string specifying the file types to be collected; an
         example is as follows:
@@ -121,31 +144,72 @@ def main() -> None:
 
             interface:
 
-                foo:
+                spam:
 
-                bar:
+                ham:
 
-                ocean_stuff:
-
-        if fetch_type is specified as 'foo', all files for the
+        if fetch_type is specified as 'spam', all files for the
         respective interface (i.e., AWS s3, NOAA HPSS, etc.,) beneath
-        the ocean_stuff block will be collected; if the keyword is not
+        the 'spam' block will be collected; if the keyword is not
         specified or NoneType upon entry, the attributes beneath both
-        'foo' and 'bar' will be returned.
+        'spam' and 'ham' will be returned.
 
-        For the 'foo' example above, the keyword value may be entered
+        For the 'spam' example above, the keyword value may be entered
         as:
 
-        --fetch_type=foo or -fetch_type=foo
+        --fetch_type=spam or -fetch_type=spam
+
+    fileid: str, optional
+
+        A Python string specifying the file identifiers to be
+        collected; this argument may also contain a comma-delimited
+        string for multiple file identifiers (no spaces between
+        comma-delimited values); if not specified, all file
+        identifiers (or as a function of fetch_type above) within the
+        experiment configuration will be collected; example is as
+        follows:
+
+        fetch:
+
+            interface:
+
+                spam:
+
+                    ham:
+
+                    eggs:
+
+        The 'ham' and 'eggs' attributes are the file identifiers
+        within the configuration file and may be used to retrieve
+        specific (a) file(s). For a respective file identifier, 'ham'
+        for example, to be collected, the keyword value may be entered
+        as:
+
+        --fileid=ham or -fileid=ham
+
+        For multiple file identifiers to be collect, 'ham' and 'eggs'
+        in this example, the keyword value may be entered as (no
+        spaces between comma-delimited values):
+
+        --fileid=ham,eggs or -fileid=ham,eggs
 
     """
+
+    # Define the schema attributes.
+    cls_schema = {
+        "yaml_file": str,
+        "cycle": Or(str, int),
+        Optional("fetch_type"): str,
+        Optional("platform"): str,
+        Optional("fileid"): str,
+    }
 
     # Collect the command line arguments.
     script_name = os.path.basename(__file__)
     start_time = time.time()
     msg = f"Beginning application {script_name}."
     Logger().info(msg=msg)
-    options_obj = Arguments().run()
+    options_obj = Arguments().run(eval_schema=True, cls_schema=cls_schema)
 
     # Launch the task.
     task = Fetch(options_obj=options_obj)
