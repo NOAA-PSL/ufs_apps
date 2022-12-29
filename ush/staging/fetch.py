@@ -59,12 +59,11 @@ History
 
 # pylint: disable=attribute-defined-outside-init
 # pylint: disable=no-member
-# pylint: disable=wrong-import-order
 
 # ----
 
+from staging import error as staging_error
 from staging import Staging
-from staging import StagingError
 from tools import parser_interface
 
 # ----
@@ -259,7 +258,7 @@ class Fetch(Staging):
                 f"YAML-formatted configuration file {self.yaml_file}. "
                 "Aborting!!!"
             )
-            raise StagingError(msg=msg)
+            staging_error(msg=msg)
 
         return fetch_dict
 
@@ -320,7 +319,7 @@ class Fetch(Staging):
                     f"A method for collecting files from the {fetch_method} "
                     "platform is not supported. Aborting!!!"
                 )
-                raise StagingError(msg=msg)
+                staging_error(msg=msg)
 
             # Define the respective file attributes for the respective
             # supported interface/platform.
@@ -339,9 +338,17 @@ class Fetch(Staging):
             # Collect files in accordance with the configuration and
             # options.
             for fetch_type in fetch_types:
-                msg = f"Collecting files for fetch type {fetch_type}."
-                self.logger.info(msg=msg)
-                method(filesdict=filesdict[fetch_type])
+
+                if fetch_type in filesdict:
+                    msg = f"Collecting files for fetch type {fetch_type}."
+                    self.logger.info(msg=msg)
+                    method(filesdict=filesdict[fetch_type])
+
+                if fetch_type not in filesdict:
+                    msg = ("The configuration file does not specify a key "
+                           f"for fetch type {fetch_type} and {fetch_type} files "
+                           "will not be collected.")
+                    self.logger.warn(msg=msg)
 
     def get_checksum_info(self, fetch_dict: dict) -> None:
         """

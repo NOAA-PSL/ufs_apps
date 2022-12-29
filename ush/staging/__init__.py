@@ -37,11 +37,6 @@ Classes
         This is the base-class object for all staging (i.e., fetching
         and storing) applications.
 
-    StagingError(msg)
-
-        This is the base-class for all exceptions; it is a sub-class
-        of Error.
-
 Requirements
 ------------
 
@@ -62,13 +57,14 @@ History
 # ----
 
 # pylint: disable=no-member
-# pylint: disable=wrong-import-order
 
 # ----
 
 import numpy
 import os
 
+from confs.yaml_interface import YAML
+from exceptions_interface import StagingError
 from ioapps import boto3_interface
 from ioapps import hashlib_interface
 from ioapps import netcdf4_interface
@@ -76,7 +72,7 @@ from tools import datetime_interface
 from tools import fileio_interface
 from tools import parser_interface
 from utils import timestamp_interface
-from utils.error_interface import Error
+from utils.error_interface import msg_except_handle
 from utils.logger_interface import Logger
 
 # ----
@@ -149,7 +145,7 @@ class Staging:
                     "The option attributes provided to the base-class does not "
                     f"contain the mandatory attribute {mand_arg}. Aborting!!!"
                 )
-                raise StagingError(msg=msg)
+                __error__(msg=msg)
 
             # Update the base-class object attribute.
             self = parser_interface.object_setattr(
@@ -173,10 +169,10 @@ class Staging:
                 f"The YAML-formatted configuration file {self.yaml_file} "
                 "does not exist. Aborting!!!"
             )
-            raise StagingError(msg=msg)
+            __error__(msg=msg)
 
         # Parse the configuration file.
-        self.yaml_dict = fileio_interface.read_yaml(yaml_file=self.yaml_file)
+        self.yaml_dict = YAML().read_yaml(yaml_file=self.yaml_file)
 
     def _nc_concat(self, fileid_obj: object, fileconcat_obj: object) -> None:
         """
@@ -273,7 +269,7 @@ class Staging:
                         f"attribute {ncconcat_attr} cannot be NoneType. "
                         "Aborting!!!"
                     )
-                    raise StagingError(msg=msg)
+                    __error__(msg=msg)
 
             # Update the attribute value; proceed accordingly.
             try:
@@ -388,7 +384,7 @@ class Staging:
                 "The attribute timestamps_list could not be determined "
                 "from the specified file identifier object. Aborting!!!"
             )
-            raise StagingError(msg=msg)
+            __error__(msg=msg)
 
         # Loop through each specified time and determine whether the
         # request AWS s3 bucket and object path exists; if so, update
@@ -608,7 +604,7 @@ class Staging:
                         f"be determined for file identifier {fileid}. "
                         "Aborting!!!"
                     )
-                    raise StagingError(msg=msg)
+                    __error__(msg=msg)
 
                 # Define the respective Python object attribute.
                 fileid_obj = parser_interface.object_setattr(
@@ -689,7 +685,7 @@ class Staging:
                 "supported for a respective file identifier; "
                 "Aborting!!!"
             )
-            raise StagingError(msg=msg)
+            __error__(msg=msg)
 
         # Concatenate the local file paths in accordance with the file
         # identifier object upon entry.
@@ -845,7 +841,7 @@ class Staging:
                         f"attribute {multifile_attr} cannot be NoneType. "
                         "Aborting!!!"
                     )
-                    raise StagingError(msg=msg)
+                    __error__(msg=msg)
 
                 multifile_obj = parser_interface.object_setattr(
                     object_in=multifile_obj, key=multifile_attr, value=value
@@ -860,7 +856,7 @@ class Staging:
                     f"zero; received {multifile_obj.offset_seconds} "
                     "upon entry. Aborting!!!"
                 )
-                raise StagingError(msg=msg)
+                __error__(msg=msg)
 
             # Define the beginning of the timestamp window.
             offset_seconds = (
@@ -979,33 +975,23 @@ class Staging:
             with open(checksum_filepath, "a", encoding="utf-8") as file:
                 file.write(f"{hash_index} {local_path}\n")
 
-
 # ----
 
 
-class StagingError(Error):
+@msg_except_handle(StagingError)
+def error(msg: str) -> None:
     """
     Description
     -----------
 
-    This is the base-class for all exceptions; it is a sub-class of
-    Error.
+    This function is the exception handler for the respective module.
 
     Parameters
     ----------
 
     msg: str
 
-        A Python string to accompany the raised exception.
+        A Python string containing a message to accompany the
+        exception.
 
     """
-
-    def __init__(self, msg: str):
-        """
-        Description
-        -----------
-
-        Creates a new StagingError object.
-
-        """
-        super().__init__(msg=msg)
