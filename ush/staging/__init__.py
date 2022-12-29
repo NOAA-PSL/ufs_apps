@@ -37,6 +37,14 @@ Classes
         This is the base-class object for all staging (i.e., fetching
         and storing) applications.
 
+Functions
+---------
+
+    error(msg)
+
+        This function is the exception handler for the respective
+        module.
+
 Requirements
 ------------
 
@@ -57,20 +65,18 @@ History
 # ----
 
 # pylint: disable=no-member
+# pylint: disable=too-many-lines
+# pylint: disable=unused-argument
 
 # ----
 
-import numpy
 import os
 
+import numpy
 from confs.yaml_interface import YAML
 from exceptions_interface import StagingError
-from ioapps import boto3_interface
-from ioapps import hashlib_interface
-from ioapps import netcdf4_interface
-from tools import datetime_interface
-from tools import fileio_interface
-from tools import parser_interface
+from ioapps import boto3_interface, hashlib_interface, netcdf4_interface
+from tools import datetime_interface, fileio_interface, parser_interface
 from utils import timestamp_interface
 from utils.error_interface import msg_except_handle
 from utils.logger_interface import Logger
@@ -145,7 +151,7 @@ class Staging:
                     "The option attributes provided to the base-class does not "
                     f"contain the mandatory attribute {mand_arg}. Aborting!!!"
                 )
-                __error__(msg=msg)
+                error(msg=msg)
 
             # Update the base-class object attribute.
             self = parser_interface.object_setattr(
@@ -169,7 +175,7 @@ class Staging:
                 f"The YAML-formatted configuration file {self.yaml_file} "
                 "does not exist. Aborting!!!"
             )
-            __error__(msg=msg)
+            error(msg=msg)
 
         # Parse the configuration file.
         self.yaml_dict = YAML().read_yaml(yaml_file=self.yaml_file)
@@ -240,8 +246,7 @@ class Staging:
 
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
-        ncconcat_attrs_dict = {"ncdim": numpy.nan,
-                               "ncfile": numpy.nan, "ncfrmt": None}
+        ncconcat_attrs_dict = {"ncdim": numpy.nan, "ncfile": numpy.nan, "ncfrmt": None}
 
         ncconcat_obj = parser_interface.object_define()
         for (ncconcat_attr, _) in ncconcat_attrs_dict.items():
@@ -269,7 +274,7 @@ class Staging:
                         f"attribute {ncconcat_attr} cannot be NoneType. "
                         "Aborting!!!"
                     )
-                    __error__(msg=msg)
+                    error(msg=msg)
 
             # Update the attribute value; proceed accordingly.
             try:
@@ -289,15 +294,13 @@ class Staging:
 
         # Check that netCDF-formatted member files exist; proceed accordingly.
         if (
-            sum(fileio_interface.fileexist(path=filename)
-                for filename in ncfilelist)
+            sum(fileio_interface.fileexist(path=filename) for filename in ncfilelist)
             > 0
         ):
 
             # Check that the directory tree corresponding to the
             # concatenated output file exists; proceed accordingly.
-            fileio_interface.dirpath_tree(
-                path=os.path.dirname(ncconcat_obj.ncfile))
+            fileio_interface.dirpath_tree(path=os.path.dirname(ncconcat_obj.ncfile))
 
             # Concatenate the respective files to the specified output
             # file path.
@@ -384,7 +387,7 @@ class Staging:
                 "The attribute timestamps_list could not be determined "
                 "from the specified file identifier object. Aborting!!!"
             )
-            __error__(msg=msg)
+            error(msg=msg)
 
         # Loop through each specified time and determine whether the
         # request AWS s3 bucket and object path exists; if so, update
@@ -604,7 +607,7 @@ class Staging:
                         f"be determined for file identifier {fileid}. "
                         "Aborting!!!"
                     )
-                    __error__(msg=msg)
+                    error(msg=msg)
 
                 # Define the respective Python object attribute.
                 fileid_obj = parser_interface.object_setattr(
@@ -685,7 +688,7 @@ class Staging:
                 "supported for a respective file identifier; "
                 "Aborting!!!"
             )
-            __error__(msg=msg)
+            error(msg=msg)
 
         # Concatenate the local file paths in accordance with the file
         # identifier object upon entry.
@@ -694,8 +697,7 @@ class Staging:
         if str(concat_type).lower() == "nc_concat":
 
             # Concatenate the respective netCDF-formatted file.
-            self._nc_concat(fileid_obj=fileid_obj,
-                            fileconcat_obj=fileconcat_obj)
+            self._nc_concat(fileid_obj=fileid_obj, fileconcat_obj=fileconcat_obj)
 
     def get_hash_index(self, filepath: str, hash_level: str = None) -> str:
         """
@@ -841,7 +843,7 @@ class Staging:
                         f"attribute {multifile_attr} cannot be NoneType. "
                         "Aborting!!!"
                     )
-                    __error__(msg=msg)
+                    error(msg=msg)
 
                 multifile_obj = parser_interface.object_setattr(
                     object_in=multifile_obj, key=multifile_attr, value=value
@@ -856,7 +858,7 @@ class Staging:
                     f"zero; received {multifile_obj.offset_seconds} "
                     "upon entry. Aborting!!!"
                 )
-                __error__(msg=msg)
+                error(msg=msg)
 
             # Define the beginning of the timestamp window.
             offset_seconds = (
@@ -905,21 +907,26 @@ class Staging:
 
             # If the timestamp is outside of the specified stream
             # start and stop timestamps, proceed accordingly.
-            if (int(timestamp) < int(fileid_obj.stream_start)) or \
-                    (int(timestamp) > int(fileid_obj.stream_stop)):
+            if (int(timestamp) < int(fileid_obj.stream_start)) or (
+                int(timestamp) > int(fileid_obj.stream_stop)
+            ):
 
                 # Remove the respective timestamp from the list.
-                msg = (f"The timestamp {timestamp} is not within the specified "
-                       f"stream range {fileid_obj.stream_start} and "
-                       f"{fileid_obj.stream_stop} and will not be "
-                       "included/retrieved.")
+                msg = (
+                    f"The timestamp {timestamp} is not within the specified "
+                    f"stream range {fileid_obj.stream_start} and "
+                    f"{fileid_obj.stream_stop} and will not be "
+                    "included/retrieved."
+                )
                 self.logger.warn(msg=msg)
                 timestamps_list_check.remove(timestamp)
 
             else:
 
-                msg = (f"The timestamp {timestamp} is within the specified "
-                       "stream range and will be collected.")
+                msg = (
+                    f"The timestamp {timestamp} is within the specified "
+                    "stream range and will be collected."
+                )
                 self.logger.info(msg=msg)
 
         # Update the file identifier object.
@@ -969,11 +976,11 @@ class Staging:
         # path; proceed accordingly.
         if hash_index is not None:
 
-            fileio_interface.dirpath_tree(
-                path=os.path.dirname(checksum_filepath))
+            fileio_interface.dirpath_tree(path=os.path.dirname(checksum_filepath))
 
             with open(checksum_filepath, "a", encoding="utf-8") as file:
                 file.write(f"{hash_index} {local_path}\n")
+
 
 # ----
 
