@@ -57,6 +57,7 @@ History
 # ----
 
 import os
+from schema import Optional, Or
 import time
 
 from staging.fetch import Fetch
@@ -140,12 +141,20 @@ def main() -> None:
 
     """
 
+    # Define the schema attributes.
+    cls_schema = {'yaml_file': str,
+                  'cycle': Or(str, int),
+                  Optional('fetch_type'): str,
+                  Optional('platform_opt'): str,
+                  Optional('fileid_opt'): str
+                  }
+
     # Collect the command line arguments.
     script_name = os.path.basename(__file__)
     start_time = time.time()
     msg = f"Beginning application {script_name}."
     Logger().info(msg=msg)
-    options_obj = Arguments().run()
+    options_obj = Arguments().run(eval_schema=True, cls_schema=cls_schema)
 
     # Launch the task.
     task = Fetch(options_obj=options_obj)
