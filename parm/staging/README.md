@@ -265,6 +265,13 @@ fetch:
 | Configuration | Description |
 | :-------------: | :-------------: |
 | [`fetch.adt.reanalysis.yaml`](fetch.adt.reanalysis.yaml) | <div align="left">UFS reanalysis project ocean absolute dynamic topography observations. </div>|
+| [`fetch.airs.reanalysis.yaml`](fetch.airs.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric infrared sounder observations. </div>|
+| [`fetch.amsu.reanalysis.yaml`](fetch.amsu.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Advanced Microwave Sounding Unit-A and B (AMSU-A and AMSU-B) observations. </div>|
+| [`fetch.atms.reanalysis.yaml`](fetch.atms.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Advanced Technology Microwave Sounder (ATMS) observations. </div>|
+| [`fetch.cris.reanalysis.yaml`](fetch.cris.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Cross-track Infrared Sounder (CrIS) observations. </div>|
+| [`fetch.gpsro.reanalysis.yaml`](fetch.gpsro.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Global Positioning System Radio Occultation observations. </div>|
+| [`fetch.hirs.reanalysis.yaml`](fetch.hirs.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric High-resolution Infrared Radiation Sounder observations. </div>|
+| [`fetch.sst.reanalysis.yaml`](fetch.sst.reanalysis.yaml) | <div align="left">UFS reanalysis project ocean sea-surface temperature observations. </div>|
 
 </div>
 
