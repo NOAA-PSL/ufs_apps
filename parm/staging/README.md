@@ -258,7 +258,7 @@ fetch:
                          ncfrmt: NETCDF4
 ~~~
 
-### Available Fetch Applications Configurations
+### Available UFS Reanalysis Fetch Applications Configurations
 
 <div align="center">
 
@@ -271,6 +271,7 @@ fetch:
 | [`fetch.cris.reanalysis.yaml`](fetch.cris.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Cross-track Infrared Sounder (CrIS) observations. </div>|
 | [`fetch.gpsro.reanalysis.yaml`](fetch.gpsro.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Global Positioning System Radio Occultation observations. </div>|
 | [`fetch.hirs.reanalysis.yaml`](fetch.hirs.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric High-resolution Infrared Radiation Sounder observations. </div>|
+| [`fetch.iasi.reanalysis.yaml`](fetch.iasi.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Infrared Atmospheric Sounding Interferometer observations. </div>|
 | [`fetch.sst.reanalysis.yaml`](fetch.sst.reanalysis.yaml) | <div align="left">UFS reanalysis project ocean sea-surface temperature observations. </div>|
 
 </div>
