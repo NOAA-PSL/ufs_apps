@@ -2,21 +2,21 @@
 
 ################################################################################
 ## 
-## Script name:         JUFS_FETCH_AWSS3_ADT
+## Script name:         JUFS_LAUNCH
 ##
-## Script description:  Launch the UFS workflow Amazon Web Services
-##                      (AWS) s3 advanced dynamic topography (ADT)
-##                      observation collection application.
+## Script description:  Launch the UFS workflow forecast cycle
+##                      directory tree and input file generation
+##                      application.
 ##
-## Author R. Winterbottom 
+## Author:              Henry R. Winterbottom 
 ##
-## Date:                2022-12-22         
+## Date:                2022-12-26        
 ##
 ## Script history log:  
 ##
-##   2022-12-22: Henry R. Winterbottom -- Original version.
+##   2022-12-26: Henry R. Winterbottom -- Original version.
 ##
-## Usage: sh JUFS_FETCH_AWSS3_ADT
+## Usage: sh JUFS_LAUNCH
 ##
 ##   Imported Shell Variables:
 ##
@@ -37,7 +37,7 @@
 ##     PYTHONPATH:       Python library path for the respective UFS
 ##                       application(s).
 ##
-##     UFS_STAGE:        UFS workflow environment variable for the respective
+##     UFS_LAUNCH:       UFS workflow environment variable for the respective
 ##                       task(s).
 ##
 ##     pid:              UNIX system processes identifier.  
@@ -61,7 +61,7 @@ set -e
 #----
 
 # Load all modules required by utilities referenced by this script.
-export UFS_STAGE=1
+export UFS_LAUNCH=1
 . ${PREufs}
 
 # Define the run-time environment for the respective UFS-RNR
@@ -72,7 +72,7 @@ export PYTHONPATH=${HOMEufs}/ush:${PYTHONPATH}
 export pid=$$
 
 # Launch the UFS-RNR experiment application.
-${PYTHONufs} ${HOMEufs}/scripts/exufs_fetch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --fetch_type=adt_obs --platform=aws_s3
+${PYTHONufs} ${HOMEufs}/scripts/exufs_launch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --expt_name=${EXPTufs} --work_path=${WORKufs}
 
 #----
 

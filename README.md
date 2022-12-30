@@ -3,6 +3,7 @@
 ![Python Version](https://img.shields.io/badge/python-3.5|3.6|3.7-blue)
 [![Dependencies](https://img.shields.io/badge/dependencies-ufs__pyutils-orange)](https://github.com/HenryWinterbottom-NOAA/ufs_pyutils)
 
+
 [![Unit Tests](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml)
 [![Python Coding Standards](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml)
 
@@ -50,7 +51,7 @@ user@host:$ git clone --recursive https://github.com/HenryWinterbottom-NOAA/ufs_
 
 If a user wishes to contribute modifications done within their
 respective fork(s) to the authoritative repository, we request that
-the user first submit an issue and that the branch naming conventions
+the user first submit an issue and that the fork naming conventions
 follow those listed below.
 
 - `docs/user_fork_name`: Documenation additions and/or corrections for the UFS applications.
