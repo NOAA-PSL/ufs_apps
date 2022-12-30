@@ -4,7 +4,7 @@ fetch:
      # Define the checksum hash index attributes.
      checksum:
 
-       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.obs.md5     
+       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.sst.md5     
        aws_s3_hash: md5
   
      # Define a supported the interface platform from which to collect

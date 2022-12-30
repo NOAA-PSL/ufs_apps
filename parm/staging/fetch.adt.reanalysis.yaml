@@ -4,7 +4,7 @@ fetch:
      # Define the checksum hash index attributes.
      checksum:
 
-       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.obs.md5     
+       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.adt.md5     
        aws_s3_hash: md5
   
      # Define a supported the interface platform from which to collect
@@ -21,7 +21,7 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.cryosat2.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
@@ -79,7 +79,7 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.ers1.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
@@ -138,7 +138,7 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.ers2.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
@@ -197,7 +197,7 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.jason2.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
@@ -256,7 +256,7 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.jason3.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
@@ -315,7 +315,7 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.saral.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
@@ -373,7 +373,7 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.sentinel3a.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
@@ -431,7 +431,7 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.sentinel3b.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
@@ -489,7 +489,7 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.topex_poseidon.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
