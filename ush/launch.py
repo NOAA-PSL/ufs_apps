@@ -64,6 +64,11 @@ History
 
 # ----
 
+# pylint: disable=no-member
+# pylint: disable=unused-argument
+
+# ----
+
 import os
 
 from confs.yaml_interface import YAML
@@ -277,13 +282,13 @@ class Launch:
 
         # Define the mandatory directory tree paths for the respective
         # forecast cycle.
-        self.dirpaths_list = [os.path.join(self.work_path, self.expt_name, self.cycle, "intercom"),
-                              os.path.join(self.work_path,
-                                           self.expt_name, "com", self.cycle)
-                              ]
+        dirpaths_list = [os.path.join(self.work_path, self.expt_name, self.cycle, "intercom"),
+                         os.path.join(self.work_path,
+                                      self.expt_name, "com", self.cycle)
+                         ]
 
         # Build the respective directory tree paths.
-        for dirpath in self.dirpaths_list:
+        for dirpath in dirpaths_list:
 
             msg = f"Building directory tree {dirpath}."
             self.logger.info(msg=msg)
