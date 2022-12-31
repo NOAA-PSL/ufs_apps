@@ -174,22 +174,23 @@ class Launch:
 
         # Define the directory tree paths relative to the respective
         # forecast cycle.
-        self.com_root = os.path.join(
-            self.work_path, self.expt_name, "com", self.cycle)
+        self.com_root = os.path.join(self.work_path, self.expt_name, "com", self.cycle)
         self.itrc_root = os.path.join(
-            self.work_path, self.expt_name, self.cycle, "intercom")
+            self.work_path, self.expt_name, self.cycle, "intercom"
+        )
 
         # Define the YAML-formatted experiment configuration file;
         # proceed accordingly.
         self.yaml_config_path = parser_interface.dict_key_value(
-            dict_in=self.yaml_dict, key='expt_yaml', force=True,
-            no_split=True)
+            dict_in=self.yaml_dict, key="expt_yaml", force=True, no_split=True
+        )
 
         if self.yaml_config_path is None:
             self.yaml_config_path = f"ufs.{self.expt_name}.{self.cycle}.yaml"
 
-        self = parser_interface.object_setattr(object_in=self, key='expt_yaml',
-                                               value=self.yaml_config_path)
+        self = parser_interface.object_setattr(
+            object_in=self, key="expt_yaml", value=self.yaml_config_path
+        )
         msg = f"The YAML-formatted experiment configuration file name is {self.yaml_config_path}."
         self.logger.warn(msg=msg)
 
@@ -214,14 +215,20 @@ class Launch:
 
         # Define the mandatory experiment attributes within the
         # YAML-formatted configuration file.
-        attrs_list = ['com_root', 'cycle', 'expt_name', 'expt_yaml',
-                      'itrc_root', 'work_path']
+        attrs_list = [
+            "com_root",
+            "cycle",
+            "expt_name",
+            "expt_yaml",
+            "itrc_root",
+            "work_path",
+        ]
 
         # Create the respective configuration files.
-        config_files_list = [os.path.join(self.com_root, self.yaml_config_path),
-                             os.path.join(self.itrc_root,
-                                          self.yaml_config_path)
-                             ]
+        config_files_list = [
+            os.path.join(self.com_root, self.yaml_config_path),
+            os.path.join(self.itrc_root, self.yaml_config_path),
+        ]
 
         for config_file in config_files_list:
 
@@ -243,30 +250,38 @@ class Launch:
 
                 if not YAML().check_yaml(attr_value=attr_value):
                     value = parser_interface.dict_key_value(
-                        dict_in=self.yaml_dict, key=attr_key, no_split=True)
+                        dict_in=self.yaml_dict, key=attr_key, no_split=True
+                    )
                     in_dict[attr_key] = value
 
             # Add the experiment attributes to the YAML-formatted
             # configuration file; proceed accordingly.
             for attr in attrs_list:
                 value = parser_interface.object_getattr(
-                    object_in=self, key=attr, force=True)
+                    object_in=self, key=attr, force=True
+                )
 
                 if value is None:
-                    msg = (f"The mandatory attribute {attr} has not been "
-                           "specified. Aborting!!!")
+                    msg = (
+                        f"The mandatory attribute {attr} has not been "
+                        "specified. Aborting!!!"
+                    )
                     error(msg=msg)
                 in_dict[attr] = value
 
             # Concatenate the respective YAML-formatted files list and
             # subsequently write all configuration attributes to the
             # respetive YAML-formatted configuration file.
-            YAML().concat_yaml(yaml_file_list=yaml_file_list,
-                               yaml_file_out=config_file, ignore_missing=True)
+            YAML().concat_yaml(
+                yaml_file_list=yaml_file_list,
+                yaml_file_out=config_file,
+                ignore_missing=True,
+            )
             YAML().write_yaml(yaml_file=config_file, in_dict=in_dict, append=True)
 
             timestamp = datetime_interface.current_date(
-                frmttyp=timestamp_interface.INFO, is_utc=True)
+                frmttyp=timestamp_interface.INFO, is_utc=True
+            )
             with open(config_file, "a", encoding="utf-8") as file:
                 file.write(f"\n# Created {timestamp} from {self.yaml_file}.\n")
 
@@ -282,10 +297,10 @@ class Launch:
 
         # Define the mandatory directory tree paths for the respective
         # forecast cycle.
-        dirpaths_list = [os.path.join(self.work_path, self.expt_name, self.cycle, "intercom"),
-                         os.path.join(self.work_path,
-                                      self.expt_name, "com", self.cycle)
-                         ]
+        dirpaths_list = [
+            os.path.join(self.work_path, self.expt_name, self.cycle, "intercom"),
+            os.path.join(self.work_path, self.expt_name, "com", self.cycle),
+        ]
 
         # Build the respective directory tree paths.
         for dirpath in dirpaths_list:
@@ -313,6 +328,7 @@ class Launch:
 
         # Define the experiment configuration.
         self.build_configs()
+
 
 # ----
 
