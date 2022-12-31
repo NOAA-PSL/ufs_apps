@@ -1,4 +1,4 @@
-# Experiment Configurations
+# Configuring Experiments
 
 The Unified Forecast System (UFS) workflow configuration requires
 YAML-formatted configuration files specifying various YAML keys
@@ -29,13 +29,19 @@ expt_yaml: !ENV ufs.${EXPTufs}.${CYCLEufs}.yaml
 
 # ----
 
-# UFS application configuration files.
-fetch: /path/to/fetch_config
-stage: /path/to/stage_config
+# UFS application YAML-formatted configuration files.
+fetch: /path/to/fetch_config_yaml
+stage: /path/to/stage_config_yaml
   .
   .
   .
 ~~~
+
+The above configuration configures a cycling and coupled UFS
+application. The environment variables `EXPTufs` and `CYCLEufs` are
+assumed collected from the run-time environment. The `fetch` and
+`stage` attributes, as an example, specify the YAML-formatted file
+paths for the UFS fetch and staging applications.
 
 Please direct questions to [Henry
 R. Winterbottom](mailto:henry.winterbottom@noaa.gov?subject=[UFS-Applications])
