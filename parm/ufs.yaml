@@ -1,0 +1,17 @@
+# Experiment configuration YAML-formatted file; this file will be
+# written beneath the respective experiment/cycle /com and /intercom
+# paths.
+expt_yaml: !ENV ufs.${EXPTufs}.${CYCLEufs}.yaml
+
+# Specify whether the UFS application is a coupled model application.
+coupled: True
+
+# Specify whether the UFS application is cycling (i.e., has previous
+# forecast cycle dependencies).
+cycling: True
+
+# ----
+
+# Fetching applications.
+fetch_adt: !ENV ${HOMEufs}/parm/staging/fetch.adt.reanalysis.yaml
+fetch_sst: !ENV ${HOMEufs}/parm/staging/fetch.sst.reanalysis.yaml

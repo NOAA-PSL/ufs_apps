@@ -79,7 +79,8 @@ __email__ = "henry.winterbottom@noaa.gov"
 
 
 def main() -> None:
-    """Description
+    """
+    Description
     -----------
 
     This is the driver-level function to invoke the tasks within this
