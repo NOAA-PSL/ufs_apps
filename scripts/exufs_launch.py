@@ -94,18 +94,18 @@ def main() -> None:
         that at minimum the following keys exist and are defined
         accordingly.
 
-        expt_yaml: # This is a Python string that defines the
-                   # base-name to contain the experiment configuration
-                   # attributes; this file will be written beneath the
-                   # respective experiment /com and /intercom paths.
-
         coupled: # This is a Python boolean valued variable specifying
                  # whether the UFS application is a coupled model
                  # application.
 
         cycling: # This is a Python boolean valued variable specifying
                  # whether the UFS application is cycling (i.e., has
-                 # previous forecast dependencies).
+                 # previous forecast cycle dependencies).
+
+        expt_yaml: # This is a Python string that defines the
+                   # base-name to contain the experiment configuration
+                   # attributes; this file will be written beneath the
+                   # respective experiment /com and /intercom paths.
 
         Enter the parameter value as:
 
