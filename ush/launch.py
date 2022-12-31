@@ -174,8 +174,7 @@ class Launch:
 
         # Define the directory tree paths relative to the respective
         # forecast cycle.
-        self.com_root = os.path.join(
-            self.work_path, self.expt_name, "com", self.cycle)
+        self.com_root = os.path.join(self.work_path, self.expt_name, "com", self.cycle)
         self.itrc_root = os.path.join(
             self.work_path, self.expt_name, self.cycle, "intercom"
         )
@@ -300,8 +299,7 @@ class Launch:
         # Define the mandatory directory tree paths for the respective
         # forecast cycle.
         dirpaths_list = [
-            os.path.join(self.work_path, self.expt_name,
-                         self.cycle, "intercom"),
+            os.path.join(self.work_path, self.expt_name, self.cycle, "intercom"),
             os.path.join(self.work_path, self.expt_name, "com", self.cycle),
         ]
 
