@@ -74,7 +74,7 @@ import os
 
 import numpy
 from confs.yaml_interface import YAML
-from exceptions_interface import StagingError
+from exceptions import StagingError
 from ioapps import boto3_interface, hashlib_interface, netcdf4_interface
 from tools import datetime_interface, fileio_interface, parser_interface
 from utils import timestamp_interface
@@ -246,7 +246,8 @@ class Staging:
 
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
-        ncconcat_attrs_dict = {"ncdim": numpy.nan, "ncfile": numpy.nan, "ncfrmt": None}
+        ncconcat_attrs_dict = {"ncdim": numpy.nan,
+                               "ncfile": numpy.nan, "ncfrmt": None}
 
         ncconcat_obj = parser_interface.object_define()
         for (ncconcat_attr, _) in ncconcat_attrs_dict.items():
