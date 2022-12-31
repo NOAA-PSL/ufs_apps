@@ -18,6 +18,47 @@
 # =========================================================================
 
 """
+Module
+------
+
+    launch.py
+
+Description
+-----------
+
+    This module contains classes and methods to create the path and
+    configuration files for a respective experiment.
+
+Classes
+-------
+
+    Launch(options_obj)
+
+        This is the base-class object for all experiment configuration
+        applications.
+
+Functions
+---------
+
+    error(msg)
+
+        This function is the exception handler for the respective
+        module.
+
+Requirements
+------------
+
+- ufs_pyutils; https://github.com/HenryWinterbottom-NOAA/ufs_pyutils
+
+Author(s)
+---------
+
+    Henry R. Winterbottom; 30 December 2022
+
+History
+-------
+
+    2022-12-30: Henry Winterbottom -- Initial implementation.
 
 """
 
@@ -25,19 +66,43 @@
 
 import os
 
-from confs import json_interface
 from confs.yaml_interface import YAML
-from tools import fileio_interface
-from tools import parser_interface
+from tools import datetime_interface, fileio_interface, parser_interface
 from utils import timestamp_interface
-from utils.error_interface import Error
+from utils.error_interface import msg_except_handle
 from utils.logger_interface import Logger
+
+from exceptions import LaunchError
 
 # ----
 
 
 class Launch:
     """
+    Description
+    -----------
+
+    This is the base-class object for all experiment configuration
+    applications.
+
+    Parameters
+    ----------
+
+    options_obj: object
+
+        A Python object containing the attributes collect via the
+        command line from the application driver script.
+
+    Raises
+    ------
+
+    LaunchError:
+
+        * raised if the command line arguments do not contain a
+          mandatory attribute.
+
+        * raised if the path to the YAML-formatted file specified by
+          the command line attribute "yaml_file" does not exist.
 
     """
 
@@ -73,7 +138,7 @@ class Launch:
                     "The option attributes provided to the base-class does not "
                     f"contain the mandatory attribute {mand_arg}. Aborting!!!"
                 )
-                raise LaunchError(msg=msg)
+                error(msg=msg)
 
             # Update the base-class object attribute.
             self = parser_interface.object_setattr(
@@ -97,7 +162,7 @@ class Launch:
                 f"The YAML-formatted configuration file {self.yaml_file} "
                 "does not exist. Aborting!!!"
             )
-            raise LaunchError(msg=msg)
+            error(msg=msg)
 
         # Parse the configuration file.
         self.yaml_dict = YAML().read_yaml(yaml_file=self.yaml_file)
@@ -109,53 +174,106 @@ class Launch:
         self.itrc_root = os.path.join(
             self.work_path, self.expt_name, self.cycle, "intercom")
 
-        # Define the JSON- and YAML-formatted experiment configuration
-        # files.
-        self.json_config_path = f"ufs.{self.expt_name}.{self.cycle}.json"
-        self.yaml_config_path = f"ufs.{self.expt_name}.{self.cycle}.yaml"
+        # Define the YAML-formatted experiment configuration file;
+        # proceed accordingly.
+        self.yaml_config_path = parser_interface.dict_key_value(
+            dict_in=self.yaml_dict, key='expt_yaml', force=True,
+            no_split=True)
+
+        if self.yaml_config_path is None:
+            self.yaml_config_path = f"ufs.{self.expt_name}.{self.cycle}.yaml"
+
+        self = parser_interface.object_setattr(object_in=self, key='expt_yaml',
+                                               value=self.yaml_config_path)
+        msg = f"The YAML-formatted experiment configuration file name is {self.yaml_config_path}."
+        self.logger.warn(msg=msg)
 
     def build_configs(self) -> None:
-        """ """
+        """
+        Description
+        -----------
 
-        # Define the configuration file paths.
-        config_files = [os.path.join(path, filename) for filename in [
-            self.json_config_path, self.yaml_config_path] for path in self.dirpaths_list]
+        This method builds the YAML-formatted experiment configuration
+        files within the respective experiment /com and /intercom
+        paths.
 
-        # Define the YAML-formatted file attributes.
-        yaml_file_list = [filename for (_, filename) in self.yaml_dict.items()]
+        Raises
+        -------
 
-        # Build the YAML-formatted experiment configuration files.
-        for config_file in config_files:
+        LaunchError:
 
-            # Build the YAML-formatted experiment configuration file.
-            if ".yaml" in config_file.lower():
-                YAML().concat_yaml(yaml_file_list=yaml_file_list, yaml_file_out=config_file,
-                                   fail_nonvalid=False, ignore_missing=True)
+            * raised if a mandatory experiment attribute has not been
+              defined.
 
-        # ADD INFORMATION HERE REGARDING WARM versus COLD START, etc.,
+        """
 
-        # Using the built YAML-formatted experiment configuration
-        # files, build the corresponding JSON-formatted experiment
-        # configuration files; this step is implemented to provide
-        # functionality across different applications (namely
-        # UFS-RNR).
-        for config_file in config_files:
+        # Define the mandatory experiment attributes within the
+        # YAML-formatted configuration file.
+        attrs_list = ['com_root', 'cycle', 'expt_name', 'expt_yaml',
+                      'itrc_root', 'work_path']
 
-            # Build the JSON-formatted experiment configuration files.
-            if ".json" in config_file.lower():
+        # Create the respective configuration files.
+        config_files_list = [os.path.join(self.com_root, self.yaml_config_path),
+                             os.path.join(self.itrc_root,
+                                          self.yaml_config_path)
+                             ]
 
-                # Collect the attributes from the corresponding
-                # YAML-formatted file.
-                yaml_file = config_file.replace(".json", ".yaml")
-                yaml_dict = YAML().read_yaml(yaml_file=yaml_file)
+        for config_file in config_files_list:
 
-                # Write the JSON-formatted experiment configuration
-                # file.
-                json_interface.write_json(
-                    json_file=config_file, in_dict=yaml_dict)
+            # Compile a list of YAML-formatted files collected from
+            # the experiment configuration; it not a YAML-formatted
+            # file, update the Python dictionary with the respective
+            # key and value pair.
+            (in_dict, yaml_file_list) = ({}, [])
+
+            # Check that the respective attribute value; proceed
+            # accordingly.
+            for (attr_key, attr_value) in self.yaml_dict.items():
+
+                # If the respective attribute is a YAML-formatted
+                # file, update the list of YAML-formatted files to be
+                # concatenated.
+                if YAML().check_yaml(attr_value=attr_value):
+                    yaml_file_list.append(attr_value)
+
+                if not YAML().check_yaml(attr_value=attr_value):
+                    value = parser_interface.dict_key_value(
+                        dict_in=self.yaml_dict, key=attr_key, no_split=True)
+                    in_dict[attr_key] = value
+
+            # Add the experiment attributes to the YAML-formatted
+            # configuration file; proceed accordingly.
+            for attr in attrs_list:
+                value = parser_interface.object_getattr(
+                    object_in=self, key=attr, force=True)
+
+                if value is None:
+                    msg = (f"The mandatory attribute {attr} has not been "
+                           "specified. Aborting!!!")
+                    error(msg=msg)
+                in_dict[attr] = value
+
+            # Concatenate the respective YAML-formatted files list and
+            # subsequently write all configuration attributes to the
+            # respetive YAML-formatted configuration file.
+            YAML().concat_yaml(yaml_file_list=yaml_file_list,
+                               yaml_file_out=config_file, ignore_missing=True)
+            YAML().write_yaml(yaml_file=config_file, in_dict=in_dict, append=True)
+
+            timestamp = datetime_interface.current_date(
+                frmttyp=timestamp_interface.INFO, is_utc=True)
+            with open(config_file, "a", encoding="utf-8") as file:
+                file.write(f"\n# Created {timestamp} from {self.yaml_file}.\n")
 
     def build_dirpath(self) -> None:
-        """ """
+        """
+        Description
+        -----------
+
+        This method builds the directory path tree for the respective
+        experiment.
+
+        """
 
         # Define the mandatory directory tree paths for the respective
         # forecast cycle.
@@ -171,15 +289,17 @@ class Launch:
             self.logger.info(msg=msg)
             fileio_interface.dirpath_tree(path=dirpath)
 
-    def parse_env(self) -> None:
-        """ 
-
-
-        """
-
     def run(self) -> None:
         """
+        Description
+        -----------
 
+        This method performs the following tasks:
+
+        (1) Builds the directory tree for the respective experiment.
+
+        (2) Builds the YAML-formatted experiment configuration files
+            for the respective experiment.
 
         """
 
@@ -192,29 +312,20 @@ class Launch:
 # ----
 
 
-class LaunchError(Error):
+@msg_except_handle(LaunchError)
+def error(msg: str) -> None:
     """
     Description
     -----------
 
-    This is the base-class for all exceptions; it is a sub-class of
-    Error.
+    This function is the exception handler for the respective module.
 
     Parameters
     ----------
 
     msg: str
 
-        A Python string to accompany the raised exception.
+        A Python string containing a message to accompany the
+        exception.
 
     """
-
-    def __init__(self, msg: str):
-        """
-        Description
-        -----------
-
-        Creates a new LaunchError object.
-
-        """
-        super().__init__(msg=msg)
