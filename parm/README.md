@@ -21,7 +21,21 @@ applications are listed in the following table.
 
 An example YAML-formatted configuration file is as follows.
 
+~~~
+# Experiment configuration.
+coupled: True
+cycling: True
+expt_yaml: !ENV ufs.${EXPTufs}.${CYCLEufs}.yaml
 
+# ----
+
+# UFS application configuration files.
+fetch: /path/to/fetch_config
+stage: /path/to/stage_config
+  .
+  .
+  .
+~~~
 
 Please direct questions to [Henry
 R. Winterbottom](mailto:henry.winterbottom@noaa.gov?subject=[UFS-Applications])
