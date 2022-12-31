@@ -138,7 +138,7 @@ def main() -> None:
         "yaml_file": str,
         "cycle": Or(str, int),
         "expt_name": str,
-        "work_path": str
+        "work_path": str,
     }
 
     # Collect the command line arguments.
