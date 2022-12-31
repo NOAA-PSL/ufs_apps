@@ -5,7 +5,7 @@ YAML-formatted configuration files specifying various YAML keys
 relative to specific (available) applications. The YAML-formatted
 configuration files may be created manually or using the tools
 available from
-[`ufs_pyutils`](https://github.com/HenryWinterbottom-NOAA/ufs_pyutils). The
+[ufs_pyutils](https://github.com/HenryWinterbottom-NOAA/ufs_pyutils). The
 mandatory YAML key and value pairs that are required of all
 applications are listed in the following table.
 
