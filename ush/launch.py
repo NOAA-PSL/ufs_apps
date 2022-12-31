@@ -174,7 +174,8 @@ class Launch:
 
         # Define the directory tree paths relative to the respective
         # forecast cycle.
-        self.com_root = os.path.join(self.work_path, self.expt_name, "com", self.cycle)
+        self.com_root = os.path.join(
+            self.work_path, self.expt_name, "com", self.cycle)
         self.itrc_root = os.path.join(
             self.work_path, self.expt_name, self.cycle, "intercom"
         )
@@ -246,7 +247,8 @@ class Launch:
                 # file, update the list of YAML-formatted files to be
                 # concatenated.
                 if YAML().check_yaml(attr_value=attr_value):
-                    yaml_file_list.append(attr_value)
+                    if fileio_interface.fileexist(path=attr_value):
+                        yaml_file_list.append(attr_value)
 
                 if not YAML().check_yaml(attr_value=attr_value):
                     value = parser_interface.dict_key_value(
@@ -298,7 +300,8 @@ class Launch:
         # Define the mandatory directory tree paths for the respective
         # forecast cycle.
         dirpaths_list = [
-            os.path.join(self.work_path, self.expt_name, self.cycle, "intercom"),
+            os.path.join(self.work_path, self.expt_name,
+                         self.cycle, "intercom"),
             os.path.join(self.work_path, self.expt_name, "com", self.cycle),
         ]
 
