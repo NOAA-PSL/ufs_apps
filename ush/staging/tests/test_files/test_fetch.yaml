@@ -1,0 +1,29 @@
+# All attributes that follow are for the UFS fetching application.
+fetch:
+
+     # Define the checksum hash index attributes.
+     checksum:
+          
+          aws_s3_hash: md5
+
+     # Define a supported the interface platform from which to collect
+     # the respective files.
+     aws_s3:
+
+          # Define the fetching type.
+          test_awss3:
+
+               # Define the file identifier.
+               test_awss3_file:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: aws_s3_local_path.file
+                    offset_seconds: 0
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: aws-s3-test-bucket
+                    object_path: aws_s3_object_path.file
+                    profile_name: unit_tests
+                    ignore_missing: False

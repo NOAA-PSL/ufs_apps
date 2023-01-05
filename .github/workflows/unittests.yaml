@@ -29,12 +29,12 @@
 # Author(s)
 # ---------
 
-#    Henry R. Winterbottom; 12 December 2022
+#    Henry R. Winterbottom; 04 January 2023
 
 # History
 # -------
 
-#    2022-12-12: Henry Winterbottom -- Initial implementation.
+#    2023-01-04: Henry Winterbottom -- Initial implementation.
 
 #----
 
@@ -58,7 +58,7 @@ jobs:
   # Define the container image.
   build:
     runs-on: ubuntu-latest
-    name: Run the ufs_fetchapp unit-tests.
+    name: Run the ufs_apps unit-tests.
         
     steps:
 
@@ -76,38 +76,29 @@ jobs:
         pip install croniter
         pip install pytest==7.2.0
         pip install pytest-order
+        pip install moto
         conda install -c anaconda pyyaml
         conda install -c anaconda boto3
 
-    # Clone the ufs_fetchapp repository branch.
-    - name: Checkout ufs_fetchapp.
-      uses: actions/checkout@v2
+    # Clone the ufs_apps repository branch.
+    - name: Checkout ufs_apps.
+      uses: actions/checkout@v3
       with:
-        path: ufs_fetchapp
+        path: ufs_apps
 
     # Clone the ufs_pyutils repository branch.
     - name: Checkout ufs_pyutils.
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
-        path: ufs_pytils    
-
-    # Execute the fetchapp package unit-tests.
-    - name: Run fetcahapp package unit-tests.
+        repository: HenryWinterbottom-NOAA/ufs_pyutils
+        path: ufs_pyutils
+         
+    # Execute the fetch application unit-tests.
+    - name: Run ufs_apps package fetch application unit-tests.
       run: |
-        export PYTHONPATH="$GITHUB_WORKSPACE/ufs_pyutils":"GITHUB_WORKSPACE/ufs_fetchapp"
-        cd $GITHUB_WORKSPACE/ufs_fetchapp
-#        pytest
+        export PYTHONPATH=$GITHUB_WORKSPACE/ufs_pyutils:$GITHUB_WORKSPACE/ufs_apps/ush
+        cd $GITHUB_WORKSPACE/ufs_apps/ush/staging/tests
+        mkdir -p ~/.aws/
+        cp $GITHUB_WORKSPACE/ufs_apps/ush/staging/tests/test_files/aws_credentials ~/.aws/credentials 
+        pytest
 
-    # Execute the tools package unit-tests.
-#    - name: Run tools package unit-tests.
-#      run: |
-#        export PYTHONPATH="$GITHUB_WORKSPACE/ufs_pyutils"
-#        cd ufs_pyutils/tools
-#        pytest 
-
-    # Execute the confs package unit-tests.
-#    - name: Run tools package unit-tests.
-#      run: |
-#        export PYTHONPATH="$GITHUB_WORKSPACE/ufs_pyutils"
-#        cd ufs_pyutils/confs
-#        pytest 
