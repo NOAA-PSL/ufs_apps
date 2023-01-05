@@ -22,5 +22,7 @@
 | [`fetch.ssmis.reanalysis.yaml`](fetch.ssmis.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Special Sensor Microwave Imager/Sounder observations. </div>|
 | [`fetch.ssu.reanalysis.yaml`](fetch.ssu.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Stratospheric Sounder Unit observations. </div>|
 
+</div>
+
 Please direct questions to [Henry
 R. Winterbottom](mailto:henry.winterbottom@noaa.gov?subject=[UFS-Applications])
