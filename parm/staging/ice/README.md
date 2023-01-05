@@ -2,10 +2,10 @@
 
 <div align="center">
 
-| Configuration | Description |
+| Configuration[^1] | Description |
 | :-------------: | :-------------: |
-| [`fetch.icec.reanalysis.yaml`](fetch.icec.reanalysis.yaml)[^1] | <div align="left">UFS reanalysis project ice concentration observations. </div>|
-| [`fetch.icefb.reanalysis.yaml`](fetch.icefb.reanalysis.yaml)[^1] | <div align="left">UFS reanalysis project ice thickness (freeboard) observations. </div>|
+| [`fetch.icec.reanalysis.yaml`](fetch.icec.reanalysis.yaml) | <div align="left">UFS reanalysis project ice concentration observations. </div>|
+| [`fetch.icefb.reanalysis.yaml`](fetch.icefb.reanalysis.yaml) | <div align="left">UFS reanalysis project ice thickness (freeboard) observations. </div>|
 
 </div>
 
