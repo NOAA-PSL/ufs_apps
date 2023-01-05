@@ -100,9 +100,9 @@ jobs:
         ls $GITHUB_WORKSPACE
         echo "LOOKING AT  $GITHUB_WORKSPACE/ufs_apps"
         ls $GITHUB_WORKSPACE/ufs_apps/
-        echo "LOOKING AT  $GITHUB_WORKSPACE/ufs_apps/ufs_pyutils"
+        echo "LOOKING AT  $GITHUB_WORKSPACE/ufs_pyutils"
         ls  $GITHUB_WORKSPACE/ufs_apps/ufs_pyutils
-        export PYTHONPATH=$GITHUB_WORKSPACE/ufs_apps/ufs_pyutils:$GITHUB_WORKSPACE/ufs_apps/ush
+        export PYTHONPATH=$GITHUB_WORKSPACE/ufs_pyutils:$GITHUB_WORKSPACE/ufs_apps/ush
         echo "PYTHONPATH" $PYTHONPATH
         echo "LOOKING AT $GITHUB_WORKSPACE/ufs_apps/ush/staging/tests""
         cd $GITHUB_WORKSPACE/ufs_apps/ush/staging/tests
