@@ -84,13 +84,13 @@ jobs:
     - name: Checkout ufs_apps.
       uses: actions/checkout@v2
       with:
-        path: ufs_apps
+        path: .
 
     # Clone the ufs_pyutils repository branch.
     - name: Checkout ufs_pyutils.
       uses: actions/checkout@v2
       with:
-        path: ufs_pyutils    
+        path: .   
 
     # Execute the fetch application unit-tests.
     - name: Run ufs_apps package fetch application unit-tests.
