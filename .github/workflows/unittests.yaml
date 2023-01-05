@@ -82,7 +82,7 @@ jobs:
 
     # Clone the ufs_apps repository branch.
     - name: Checkout ufs_apps.
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         path: ufs_apps
 
@@ -91,6 +91,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: HenryWinterbottom-NOAA/ufs_pyutils
+        token: ${{ secrets.GH_PAT }}
         path: ufs_pyutils
          
     # Execute the fetch application unit-tests.
