@@ -10,7 +10,7 @@
 </div>
 
 
-[^1] Testing footnotes
+[^1]: Testing footnotes
 
 
 ##### ADD NOTE REGARDING TIMESTAMPS AND STREAM DATES; ALSO DO FOR OCEAN #####
