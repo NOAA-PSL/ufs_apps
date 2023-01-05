@@ -9,7 +9,7 @@
 
 </div>
 
-[^1]: The ice observations for the UFS reanalysis are collected from the [JCSDA](https://www.jcsda.org/) [SOCA-science](https://github.com/jcsda-internal/soca-science) [NG-GODAS](https://tinyurl.com/SOCA-NGGODAS) experiment. For the respective experiments observations are assimilated every 24-hours and assuming the observations centered at 1200 UTC for the respective day. The time-stamps within the respective YAML-formatted configuration files have been defined such that the 1200 UTC-centered observations are collected for each ice analysis time such that the data-assimilation application is able to parse and use the available observations.
+[^1]: The ice observations for the UFS reanalysis are collected from the [JCSDA](https://www.jcsda.org/) [SOCA-science](https://github.com/jcsda-internal/soca-science) [NG-GODAS](https://tinyurl.com/SOCA-NGGODAS) experiment. For the respective experiments observations are assimilated every 24-hours at 1200 UTC for the respective day. The time-stamps within the YAML-formatted configuration files have been defined such that the 1200 UTC-centered observations are collected for each ice analysis time such that the data-assimilation application is able to parse and use the available observations.
 
 #
 
