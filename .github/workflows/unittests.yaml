@@ -91,23 +91,12 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: HenryWinterbottom-NOAA/ufs_pyutils
-        token: ${{ secrets.MY_TOKEN || github.token }}
         path: ufs_pyutils
          
     # Execute the fetch application unit-tests.
     - name: Run ufs_apps package fetch application unit-tests.
       run: |
-        echo $GITHUB_WORKSPACE
-        echo "LOOKING AT  $GITHUB_WORKSPACE"
-        ls $GITHUB_WORKSPACE
-        echo "LOOKING AT  $GITHUB_WORKSPACE/ufs_apps"
-        ls $GITHUB_WORKSPACE/ufs_apps/
-        echo "LOOKING AT  $GITHUB_WORKSPACE/ufs_pyutils"
-        ls  $GITHUB_WORKSPACE/ufs_pyutils
         export PYTHONPATH=$GITHUB_WORKSPACE/ufs_pyutils:$GITHUB_WORKSPACE/ufs_apps/ush
-        echo "PYTHONPATH" $PYTHONPATH
-        echo "LOOKING AT $GITHUB_WORKSPACE/ufs_apps/ush/staging/tests"
-        cd $GITHUB_WORKSPACE/ufs_apps/ush/staging/tests
-        ls
-        #pytest
+        cd $GITHUB_WORKSPACE/ufs_apps/ush/staging/test
+        pytest
 
