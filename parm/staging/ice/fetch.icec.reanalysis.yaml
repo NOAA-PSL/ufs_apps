@@ -1,0 +1,82 @@
+# All attributes that follow are for the UFS fetching application.
+fetch:
+
+     # Define the checksum hash index attributes.
+     checksum:
+
+       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.icec.md5     
+       aws_s3_hash: md5
+  
+     # Define a supported the interface platform from which to collect
+     # the respective files.
+     aws_s3:
+
+          # Define the fetching type; this example corresponds to
+          # ice concentration observations.
+          icec_obs:
+
+               # Define the file identifier.
+               icec.emc_dmsp:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ice/icec.emc.ssmi_l1b_dmsp.%Y%m%dT%H%M%SZ.iodav2.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/icec/emc/dmsp/%Y/%m/24h/icec.emc.ssmi_l1b_dmsp.%Y%m%dT120000Z.iodav2.nc
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 200305310000000
+
+               # Define the file identifier.
+               icec.nsidc_nh:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ice/icec.nsidc.nh.%Y%m%dT%H%M%SZ.iodav2.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path:  observations/reanalysis/icec/nsidc/nh/%Y/%m/24h/icec.nsidc.nh.%Y%m%dT120000Z.iodav2.nc
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 19790531000000
+                    stream_stop: 20050602000000
+
+               # Define the file identifier.
+               icec.nsidc_sh:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ice/icec.nsidc.sh.%Y%m%dT%H%M%SZ.iodav2.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/icec/nsidc/sh/%Y/%m/24h/icec.nsidc.sh.%Y%m%dT120000Z.iodav2.nc
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 19790601000000
+                    stream_stop: 20050602000000
+
+
+
+
