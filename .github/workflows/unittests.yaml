@@ -90,13 +90,12 @@ jobs:
     - name: Checkout ufs_pyutils.
       uses: actions/checkout@v2
       with:
-        path: ufs_pyutils   
+        path: $GITHUB_WORKSPACE/ufs_pyutils
 
     # Execute the fetch application unit-tests.
     - name: Run ufs_apps package fetch application unit-tests.
       run: |
         export PYTHONPATH=$GITHUB_WORKSPACE/ufs_pyutils:$GITHUB_WORKSPACE/ufs_apps/ush
-        ls *
-
-        #pytest
+        cd $GITHUB_WORKSPACE/ufs_apps/ush/staging/tests
+        pytest
 
