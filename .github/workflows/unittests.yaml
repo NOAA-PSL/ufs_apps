@@ -97,6 +97,6 @@ jobs:
     - name: Run ufs_apps package fetch application unit-tests.
       run: |
         export PYTHONPATH=$GITHUB_WORKSPACE/ufs_pyutils:$GITHUB_WORKSPACE/ufs_apps/ush
-        cd $GITHUB_WORKSPACE/ufs_apps/ush/staging/test
+        cd $GITHUB_WORKSPACE/ufs_apps/ush/staging/tests
         pytest
 
