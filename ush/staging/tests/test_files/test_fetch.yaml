@@ -1,14 +1,19 @@
+# All attributes that follow are for the UFS fetching application.
 fetch:
 
+     # Define the checksum hash index attributes.
      checksum:
+          
           aws_s3_hash: md5
 
      # Define a supported the interface platform from which to collect
      # the respective files.
      aws_s3:
 
+          # Define the fetching type.
           test_awss3:
 
+               # Define the file identifier.
                test_awss3_file:
 
                     # Define the attributes corresponding to the
