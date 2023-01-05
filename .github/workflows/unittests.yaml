@@ -99,6 +99,6 @@ jobs:
         export PYTHONPATH=$GITHUB_WORKSPACE/ufs_pyutils:$GITHUB_WORKSPACE/ufs_apps/ush
         cd $GITHUB_WORKSPACE/ufs_apps/ush/staging/tests
         mkdir -p ~/.aws/
-        cp $GITHUB_WORKSPACE/ufs_apps/ush/staging/tests/aws_credentials ~/.aws/credentials 
+        cp $GITHUB_WORKSPACE/ufs_apps/ush/staging/tests/test_files/aws_credentials ~/.aws/credentials 
         pytest
 
