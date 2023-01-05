@@ -90,7 +90,7 @@ jobs:
     - name: Checkout ufs_pyutils.
       uses: actions/checkout@v2
       with:
-        path: ufs_pytils    
+        path: ufs_pyutils    
 
     # Execute the fetch application unit-tests.
     - name: Run ufs_apps package fetch application unit-tests.
