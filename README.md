@@ -61,5 +61,3 @@ follow those listed below.
 - `fix/user_fork_name`: Bug-type fixes for the UFS applications that do not require immediate attention.
 
 - `hotfix/user_fork_name`: Bug-type fixes which require immediate attention to fix issues that compromise the integrity of the respective UFS applications. 
-
-
