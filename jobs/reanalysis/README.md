@@ -7,6 +7,7 @@ in the following table.
 <div align="center">
 
 | Script | Description/Purpose |
+| :-------------: | :-------------: |
 | `JUFS_FETCH_AWSS3_ADT` | <div align="left">Launch the UFS workflow Amazon Web Services (AWS) s3 ocean advanced dynamic topography (ADT) observation collection application. </div> |
 
 | `JUFS_FETCH_AWSS3_AIRS` | |
