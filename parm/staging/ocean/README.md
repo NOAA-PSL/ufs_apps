@@ -6,7 +6,7 @@
 | :-------------: | :-------------: |
 | [`fetch.adt.reanalysis.yaml`](fetch.adt.reanalysis.yaml) | <div align="left">UFS reanalysis project ocean absolute dynamic topography observations. </div>|
 | [`fetch.insitu.reanalysis.yaml`](fetch.insitu.reanalysis.yaml) | <div align="left">UFS reanalysis project ocean insitu observations. </div>|
-| [`fetch.sst.reanalysis.yaml`](fetch.sst.reanalysis.yaml) | <div align="left">UFS reanalysis project ocean sea-surface salinity observations. </div>|
+| [`fetch.sss.reanalysis.yaml`](fetch.sss.reanalysis.yaml) | <div align="left">UFS reanalysis project ocean sea-surface salinity observations. </div>|
 | [`fetch.sst.reanalysis.yaml`](fetch.sst.reanalysis.yaml) | <div align="left">UFS reanalysis project ocean sea-surface temperature observations. </div>|
 
 </div>
