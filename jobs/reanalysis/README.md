@@ -9,7 +9,7 @@ in the following table.
 | Script | Description/Purpose |
 | :-------------: | :-------------: |
 | [`JUFS_FETCH_AWSS3_ADT`](JUFS_FETCH_AWSS3_ADT.sh) | <div align="left">Launch the UFS workflow Amazon Web Services (AWS) s3 ocean advanced dynamic topography (ADT) observation collection application. </div> |
-| [`JUFS_FETCH_AWSS3_AIRS`](JUFS_FETCH_AWSS3_ADT.sh) | |
+| [`JUFS_FETCH_AWSS3_AIRS`](JUFS_FETCH_AWSS3_AIRS.sh) | |
 | [`JUFS_FETCH_AWSS3_AMSU`](JUFS_FETCH_AWSS3_AMSU.sh) | |
 | [`JUFS_FETCH_AWSS3_AMV`]](JUFS_FETCH_AWSS3_AMV.sh)| |
 | [`JUFS_FETCH_AWSS3_ATMS`](JUFS_FETCH_AWSS3_ATMS.sh) | |
