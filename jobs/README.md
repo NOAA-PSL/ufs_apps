@@ -21,7 +21,7 @@ common to each job-level script are listed in the following table.
 The `PREufs` environment variable specifies the bash script for a
 supported Linux platform which defines the run-time environment
 instructions for each respective task. This script is typically found
-beneath the `ufs_apps` `modulefiles` path. The environment variables
+beneath the [UFS applications](https://github.com/HenryWinterbottom-NOAA/ufs_apps) `modulefiles` path. The environment variables
 corresponding to the run-time environment to be loaded for a
 respective job-level script/task are provided in the following table.
 
