@@ -63,11 +63,3 @@ follow those listed below.
 
 - `hotfix/user_fork_name`: Bug-type fixes which require immediate attention to fix issues that compromise the integrity of the respective UFS applications. 
 
-- `docs/user_branch_name`: Documenation additions and/or corrections for the application(s).
-
-- `feature/user_branch_name`: Additions, enhancements, and/or upgrades for the application(s).
-
-- `fix/user_branch_name`: Bug-type fixes for the application(s) that do not require immediate attention.
-
-- `hotfix/user_branch_name`: Bug-type fixes which require immediate attention to fix issues that compromise the integrity of the respective application(s).  
->>>>>>> c778ebd (README cosmetic updates.)
