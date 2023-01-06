@@ -1,14 +1,9 @@
 [![License](https://img.shields.io/badge/license-LGPL_v2.1-lightgray)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/blob/develop/LICENSE)
 ![Linux](https://img.shields.io/badge/linux-ubuntu%7Ccentos-black)
 ![Python Version](https://img.shields.io/badge/python-3.5|3.6|3.7-blue)
-<<<<<<< HEAD
+
 [![Dependencies](https://img.shields.io/badge/dependencies-ufs__pyutils-orange)](https://github.com/HenryWinterbottom-NOAA/ufs_pyutils)
-=======
 
-![Linux](https://img.shields.io/badge/linux-ubuntu%7Ccentos-black)
-
-[![Dependencies](https://img.shields.io/badge/dependencies-ufs__pyutils-blueviolet)](https://github.com/HenryWinterbottom-NOAA/ufs_pyutils)
->>>>>>> c778ebd (README cosmetic updates.)
 
 [![Unit Tests](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml)
 [![Python Coding Standards](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml)
@@ -60,7 +55,6 @@ respective fork(s) to the authoritative repository, we request that
 the user first submit an issue and that the fork naming conventions
 follow those listed below.
 
-<<<<<<< HEAD
 - `docs/user_fork_name`: Documenation additions and/or corrections for the UFS applications.
 
 - `feature/user_fork_name`: Additions, enhancements, and/or upgrades for the UFS applications.
@@ -68,7 +62,7 @@ follow those listed below.
 - `fix/user_fork_name`: Bug-type fixes for the UFS applications that do not require immediate attention.
 
 - `hotfix/user_fork_name`: Bug-type fixes which require immediate attention to fix issues that compromise the integrity of the respective UFS applications. 
-=======
+
 - `docs/user_branch_name`: Documenation additions and/or corrections for the application(s).
 
 - `feature/user_branch_name`: Additions, enhancements, and/or upgrades for the application(s).
