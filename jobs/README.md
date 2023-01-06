@@ -41,6 +41,11 @@ the following table.
 
 | Subdirectory | Description |
 | :-------------: | :-------------: |
-| `reanalysis` | <div align="left">UFS reanalysis experiment(s) applications. </div> |
+| [`reanalysis`](https://github.com/HenryWinterbottom-NOAA/ufs_apps/jobs/reanalysis) | <div align="left">UFS reanalysis experiment(s) applications. </div> |
 
 </div>
+
+#
+
+Please direct questions to [Henry
+R. Winterbottom](mailto:henry.winterbottom@noaa.gov?subject=[UFS-Applications])
