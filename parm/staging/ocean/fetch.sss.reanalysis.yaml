@@ -1,0 +1,63 @@
+# All attributes that follow are for the UFS fetching application.
+fetch:
+
+     # Define the checksum hash index attributes.
+     checksum:
+
+       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.sss.md5     
+       aws_s3_hash: md5
+  
+     # Define a supported the interface platform from which to collect
+     # the respective files.
+     aws_s3:
+
+          # Define the fetching type; this example corresponds to
+          # ocean SSS observations.
+          sss_obs:
+
+               # Define the file identifier.
+               sss.esa_smos:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/sss.esa.smos_l2_miras.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/sss/esa/smos/%Y/%m/24h/sss.esa.smos_l2_miras.%Y%m%d.T120000Z.iodav2.nc
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 20150101000000
+                    stream_stop: 20151231000000
+
+               # Define the file identifier.
+               sst.jpl_sentinel1a:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/sss.jpl.smap_l2_sentinel1a.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/sss/jpl/sentinel1a/%Y/%m/24h/sss.jpl.smap_l2_sentinel1a.%Y%m%d.T120000Z.iodav2.nc
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 20150401000000
+                    stream_stop: 20200731000000
+
+
+
+
+

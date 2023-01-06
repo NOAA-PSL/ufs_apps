@@ -2,24 +2,26 @@
 
 ################################################################################
 ## 
-## Script name:         JUFS_FETCH_OCEANOBS
+## Script name:         JUFS_FETCH_AWSS3_GOES
 ##
-## Script description:  Launch the UFS workflow ocean observation
+## Script description:  Launch the UFS workflow Amazon Web Services
+##                      (AWS) s3 atmospheric Geostationary Operational
+##                      Environmental Satellite (GOES) observation
 ##                      collection application.
 ##
-## Author:              Henry R. Winterbottom 
+## Author R. Winterbottom 
 ##
-## Date:                2022-12-19         
+## Date:                2023-01-05         
 ##
 ## Script history log:  
 ##
-##   2022-12-19: Henry R. Winterbottom -- Original version.
+##   2023-01-05: Henry R. Winterbottom -- Original version.
 ##
-## Usage: sh JUFS_FETCH_OCEANOBS
+## Usage: sh JUFS_FETCH_AWSS3_GOES
 ##
 ##   Imported Shell Variables:
 ##
-##     CYCLEufs:        The respective UFS forecast cycle; the format is
+##     CYCLEufs:         The respective UFS forecast cycle; the format is
 ##                       %Y%m%d%H%M%S assuming the POSIX convention.
 ##
 ##     HOMEufs:          The top-level working directory for all UFS
@@ -63,15 +65,14 @@ set -e -u
 export UFS_STAGE=1
 . ${PREufs}
 
-# Define the run-time environment for the respective UFS-RNR
-# application.
+Define the run-time environment for the respective UFS application.
 export PYTHONPATH=${HOMEufs}/ush:${PYTHONPATH}
 
 # Get processor id (pid).
 export pid=$$
 
-# Launch the UFS-RNR experiment application.
-${PYTHONufs} ${HOMEufs}/scripts/exufs_fetch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --fetch_opt=ocean_obs
+# Launch the UFS experiment application.
+${PYTHONufs} ${HOMEufs}/scripts/exufs_fetch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --fetch_type=goes_obs --platform=aws_s3
 
 #----
 

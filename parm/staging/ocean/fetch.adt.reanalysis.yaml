@@ -4,7 +4,7 @@ fetch:
      # Define the checksum hash index attributes.
      checksum:
 
-       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.obs.md5     
+       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.adt.md5     
        aws_s3_hash: md5
   
      # Define a supported the interface platform from which to collect
@@ -21,12 +21,12 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.cryosat2.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/adt/nesdis/cryosat2/%Y/%m/24h/cryosat2.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    object_path: observations/reanalysis/adt/nesdis/cryosat2/%Y/%m/24h/cryosat2.nesdis.adt.%Y%m%d.T120000Z.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
@@ -79,12 +79,12 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.ers1.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/adt/nesdis/ers1/%Y/%m/24h/ers1.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    object_path: observations/reanalysis/adt/nesdis/ers1/%Y/%m/24h/ers1.nesdis.adt.%Y%m%d.T120000Z.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
@@ -138,12 +138,12 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.ers2.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/adt/nesdis/ers2/%Y/%m/24h/ers2.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    object_path: observations/reanalysis/adt/nesdis/ers2/%Y/%m/24h/ers2.nesdis.adt.%Y%m%d.T120000Z.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
@@ -197,12 +197,12 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.jason2.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/adt/nesdis/jason2/%Y/%m/24h/jason2.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    object_path: observations/reanalysis/adt/nesdis/jason2/%Y/%m/24h/jason2.nesdis.adt.%Y%m%d.T120000Z.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
@@ -256,12 +256,12 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.jason3.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/adt/nesdis/jason3/%Y/%m/24h/jason3.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    object_path: observations/reanalysis/adt/nesdis/jason3/%Y/%m/24h/jason3.nesdis.adt.%Y%m%d.T120000Z.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
@@ -315,12 +315,12 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.saral.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/adt/nesdis/saral/%Y/%m/24h/saral.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    object_path: observations/reanalysis/adt/nesdis/saral/%Y/%m/24h/saral.nesdis.adt.%Y%m%d.T120000.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
@@ -373,12 +373,12 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.sentinel3a.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/adt/nesdis/sentinel3a/%Y/%m/24h/sentinel3a.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    object_path: observations/reanalysis/adt/nesdis/sentinel3a/%Y/%m/24h/sentinel3a.nesdis.adt.%Y%m%d.T120000Z.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
@@ -431,12 +431,12 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.sentinel3b.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/adt/nesdis/sentinel3b/%Y/%m/24h/sentinel3b.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    object_path: observations/reanalysis/adt/nesdis/sentinel3b/%Y/%m/24h/sentinel3b.nesdis.adt.%Y%m%d.T120000Z.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
@@ -489,12 +489,12 @@ fetch:
                     # Define the attributes corresponding to the
                     # respective file identifier.
                     local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ocean/nesdis.topex_poseidon.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
-                    offset_seconds: 0
+                    offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/adt/nesdis/topex_poseidon/%Y/%m/24h/topex_poseidon.nesdis.adt.%Y%m%d.T%H%M%SZ.iodav2.nc
+                    object_path: observations/reanalysis/adt/nesdis/topex_poseidon/%Y/%m/24h/topex_poseidon.nesdis.adt.%Y%m%d.T120000Z.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
