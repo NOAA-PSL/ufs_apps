@@ -21,11 +21,7 @@ common to each job-level script are listed in the following table.
 The `PREufs` environment variable specifies the bash script for a
 supported Linux platform which defines the run-time environment
 instructions for each respective task. This script is typically found
-<<<<<<< HEAD
 beneath the [UFS applications](https://github.com/HenryWinterbottom-NOAA/ufs_apps) `modulefiles` path. The environment variables
-=======
-beneath the `ufs_apps` `modulefiles` path. The environment variables
->>>>>>> 60858cd (Task-level scripts, README updates, and reorganization.)
 corresponding to the run-time environment to be loaded for a
 respective job-level script/task are provided in the following table.
 
@@ -45,7 +41,6 @@ the following table.
 
 | Subdirectory | Description |
 | :-------------: | :-------------: |
-<<<<<<< HEAD
 | [`reanalysis`](https://github.com/HenryWinterbottom-NOAA/ufs_apps/jobs/reanalysis) | <div align="left">UFS reanalysis experiment(s) applications. </div> |
 
 </div>
@@ -54,8 +49,4 @@ the following table.
 
 Please direct questions to [Henry
 R. Winterbottom](mailto:henry.winterbottom@noaa.gov?subject=[UFS-Applications])
-=======
-| `reanalysis` | <div align="left">UFS reanalysis experiment(s) applications. </div> |
 
-</div>
->>>>>>> 60858cd (Task-level scripts, README updates, and reorganization.)
