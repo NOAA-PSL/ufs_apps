@@ -55,7 +55,7 @@ respective fork(s) to the authoritative repository, we request that
 the user first submit an issue and that the fork naming conventions
 follow those listed below.
 
-- `docs/user_fork_name`: Documenation additions and/or corrections for the UFS applications.
+- `docs/user_fork_name`: Documentation additions and/or corrections for the UFS applications.
 
 - `feature/user_fork_name`: Additions, enhancements, and/or upgrades for the UFS applications.
 
