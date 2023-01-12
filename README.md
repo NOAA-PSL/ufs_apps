@@ -3,7 +3,7 @@
 ![Python Version](https://img.shields.io/badge/python-3.5|3.6|3.7-blue)
 
 [![Dependencies](https://img.shields.io/badge/dependencies-ufs__pyutils-orange)](https://github.com/HenryWinterbottom-NOAA/ufs_pyutils)
-
+[![Optional Dependencies](https://img.shields.io/badge/dependencies-ufs__engines-orange)](https://github.com/HenryWinterbottom-NOAA/ufs_engines)
 
 [![Unit Tests](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml)
 [![Python Coding Standards](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml)
