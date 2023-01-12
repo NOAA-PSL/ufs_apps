@@ -29,6 +29,7 @@ respective job-level script/task are provided in the following table.
 
 | Environment Variable | Description |
 | :-------------: | :-------------: |
+| `UFS_LAUNCH=1`| <div align="left">Load all run-time modules for the UFS experiment launch task. </div> | 
 | `UFS_STAGE=1` | <div align="left">Load all run-time modules for staging (e.g., fetching and storing) remotely or locally hosted files required for a UFS experiment. </div> | 
 
 </div>
@@ -41,7 +42,7 @@ the following table.
 
 | Subdirectory | Description |
 | :-------------: | :-------------: |
-| [`reanalysis`](https://github.com/HenryWinterbottom-NOAA/ufs_apps/jobs/reanalysis) | <div align="left">UFS reanalysis experiment(s) applications. </div> |
+| [`reanalysis`](https://github.com/HenryWinterbottom-NOAA/ufs_apps/jobs/ufs/reanalysis) | <div align="left">UFS reanalysis experiment(s) applications. </div> |
 
 </div>
 
