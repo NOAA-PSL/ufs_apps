@@ -262,6 +262,9 @@ class Launch:
             # Concatenate the respective YAML-formatted files list and
             # subsequently write all configuration attributes to the
             # respetive YAML-formatted configuration file.
+            msg = f"Writing configuration file {config_file}."
+            self.logger.info(msg=msg)
+
             YAML().concat_yaml(
                 yaml_file_list=yaml_file_list,
                 yaml_file_out=config_file,
@@ -274,10 +277,6 @@ class Launch:
             )
             with open(config_file, "a", encoding="utf-8") as file:
                 file.write(f"\n# Created {timestamp} from {self.yaml_file}.\n")
-
-            print(config_file)
-
-        quit()
 
     def build_dirpath(self) -> None:
         """
