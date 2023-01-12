@@ -49,6 +49,10 @@
 ##
 ################################################################################
 
+set -o nounset
+
+# ----
+
 # Function
 # --------
 
@@ -62,7 +66,7 @@ exit_script(){
     module list
 }
 
-#----
+# ----
 
 # Function
 # --------
@@ -76,6 +80,7 @@ exit_script(){
 load_modules(){
 
     # Query the run-time environment and proceed accordingly.
+    UFS_LAUNCH=${UFS_LAUNCH:-}
     if [[ ${UFS_LAUNCH} -eq 1 ]]; then
 
 	# Load the modules for the respective application.
@@ -98,7 +103,7 @@ load_modules(){
     fi # [[ ${UFS_STAGE} -eq 1 ]]   
 }
 
-#----
+# ----
 
 # (1) Define the path to all UFS application environment variables for
 #     the respective supported platform.
