@@ -1,0 +1,83 @@
+# =========================================================================
+
+# YAML: cylc/tasks/tasks.ufs.rdhpcs-hera.slurm.yaml
+
+# Email: henry.winterbottom@noaa.gov
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the respective public license published by the
+# Free Software Foundation and included with the repository within
+# which this application is contained.
+
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+# =========================================================================
+
+# Description
+# -----------
+
+# This YAML-formatted file contains task attributes for all tasks
+# available for integration into a Cylc engine workflow suite; the
+# task attributes are relative to the SLURM scheduler.
+
+# Notes
+# -----
+
+# For the respective SLURM directives, the --<directive> = value will
+# be created for each respective task (YAML key); the '--' will be
+# appended to the respective SLURM directive key at run-time of the
+# Cylc engine launcher script.
+
+# hello_world:
+#    account: gsienkf
+#    ntasks: 1
+#    partition: service
+#    time: "5:00"    
+#    exclusive: ""
+
+# In the above example not that if a SLURM directive does not have a
+# value for the respective key (e.g., exclusive), the value must be
+# defined as an empty string (e.g., ""); further all wall-clock
+# attributes (e.g., time) for each task must be enclosed in
+# quotations.
+
+# References
+# ----------
+
+# SLURM job directives: https://tinyurl.com/slurm-job-directives
+
+# Author
+# ------
+
+# Henry R. Winterbottom
+
+# Date
+# ----
+
+# 12 January 2023
+
+# History
+# -------
+
+# 2023-01-12: Henry Winterbottom -- Original version.
+
+# ----
+
+# Collect atmosphere observations from a specified AWS s3 bucket using
+# the UFS fetching applications.
+UFS_FETCH_ATMOS_AWSS3:
+     account: gsienkf
+     ntasks: 1
+     partition: service
+     time: "20:00"
+
+# ----
+
+# Launch the UFS experiment.
+ufs_launch:
+     account: gsienkf
+     ntasks: 1
+     partition: service
+     time: "5:00"

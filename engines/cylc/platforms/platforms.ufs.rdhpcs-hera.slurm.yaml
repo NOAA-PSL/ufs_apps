@@ -1,0 +1,46 @@
+# =========================================================================
+
+# YAML: cylc/platforms/platforms.ufs.rdhpcs-hera.slurm.yaml
+
+# Email: henry.winterbottom@noaa.gov
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the respective public license published by the
+# Free Software Foundation and included with the repository within
+# which this application is contained.
+
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+# =========================================================================
+
+# Description
+# -----------
+
+# This YAML-formatted file contains platform attributes for a Cylc
+# engine workflow suite; the task attributes are relative to the
+# RDHPCS-Hera platform and SLURM scheduler.
+
+# Author
+# ------
+
+# Henry R. Winterbottom
+
+# Date
+# ----
+
+# 12 January 2023
+
+# History
+# -------
+
+# 2023-01-12: Henry Winterbottom -- Original version.
+
+# ----
+
+EXEC_RETRIES_COUNT: 3
+EXEC_RETRIES_INTERVAL_SECONDS: 30
+PLATFORM: rdhpcs_hera
+PREufs: !ENV ${HOMEufs}/modulefiles/modulefile.rdhpcs-hera.sh
+SCHEDULER: slurm
