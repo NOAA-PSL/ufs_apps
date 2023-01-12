@@ -57,9 +57,9 @@
 ##
 ################################################################################
 
-set -e -u
+set -e
 
-#----
+# ----
 
 # Load all modules required by utilities referenced by this script.
 export UFS_STAGE=1
@@ -74,7 +74,7 @@ export pid=$$
 # Launch the UFS experiment application.
 ${PYTHONufs} ${HOMEufs}/scripts/exufs_fetch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --work_path=${WORKufs} --expt_name=${EXPTufs} --fetch_type=${FETCH_TYPE} --platform=aws_s3
 
-#----
+# ----
 
 # Collect (any) error information and exit.
 export ERR=$?

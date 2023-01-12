@@ -58,7 +58,7 @@
 
 set -e
 
-#----
+# ----
 
 # Load all modules required by utilities referenced by this script.
 export UFS_LAUNCH=1
@@ -72,9 +72,9 @@ export PYTHONPATH=${HOMEufs}/ush:${PYTHONPATH}
 export pid=$$
 
 # Launch the UFS-RNR experiment application.
-${PYTHONufs} ${HOMEufs}/scripts/exufs_launch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --expt_name=${EXPTufs} --work_path=${WORKufs}
+${PYTHONufs} ${HOMEufs}/scripts/ufs/exufs_launch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --expt_name=${EXPTufs} --work_path=${WORKufs}
 
-#----
+# ----
 
 # Collect (any) error information and exit.
 export ERR=$?
