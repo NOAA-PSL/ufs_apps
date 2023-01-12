@@ -275,6 +275,10 @@ class Launch:
             with open(config_file, "a", encoding="utf-8") as file:
                 file.write(f"\n# Created {timestamp} from {self.yaml_file}.\n")
 
+            print(config_file)
+
+        quit()
+
     def build_dirpath(self) -> None:
         """
         Description
