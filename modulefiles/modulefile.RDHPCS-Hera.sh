@@ -92,6 +92,7 @@ load_modules(){
     fi # [[ ${UFS_LAUNCH} -eq 1 ]]   
 
     # Query the run-time environment and proceed accordingly.
+    UFS_STAGE=${UFS_STAGE:-}
     if [[ ${UFS_STAGE} -eq 1 ]]; then
 
 	# Load the modules for the respective application.
