@@ -1,0 +1,31 @@
+# Experiment configuration YAML-formatted file; this file will be
+# written beneath the respective experiment/cycle /com and /intercom
+# paths.
+expt_yaml: !ENV ufs.${EXPTufs}.${CYCLEufs}.yaml
+
+# Specify whether the UFS application is a coupled model application.
+coupled: True
+
+# Specify whether the UFS application is cycling (i.e., has previous
+# forecast cycle dependencies).
+cycling: True
+
+# ----
+
+# Atmosphere observation fetching applications.
+fetch_atmos_airs: !ENV ${HOMEufs}/parm/staging/atmos/fetch.airs.reanalysis.yaml
+fetch_atmos_amsu: !ENV ${HOMEufs}/parm/staging/atmos/fetch.amsu.reanalysis.yaml
+fetch_atmos_amv: !ENV ${HOMEufs}/parm/staging/atmos/fetch.amv.reanalysis.yaml
+fetch_atmos_atms: !ENV ${HOMEufs}/parm/staging/atmos/fetch.atms.reanalysis.yaml
+fetch_atmos_cris: !ENV ${HOMEufs}/parm/staging/atmos/fetch.cris.reanalysis.yaml
+fetch_atmos_goes: !ENV ${HOMEufs}/parm/staging/atmos/fetch.goes.reanalysis.yaml
+fetch_atmos_gpsro: !ENV ${HOMEufs}/parm/staging/atmos/fetch.gpsro.reanalysis.yaml
+fetch_atmos_hirs: !ENV ${HOMEufs}/parm/staging/atmos/fetch.hirs.reanalysis.yaml
+fetch_atmos_iasi: !ENV ${HOMEufs}/parm/staging/atmos/fetch.iasi.reanalysis.yaml
+fetch_atmos_mhs: !ENV ${HOMEufs}/parm/staging/atmos/fetch.mhs.reanalysis.yaml
+fetch_atmos_msu: !ENV ${HOMEufs}/parm/staging/atmos/fetch.msu.reanalysis.yaml
+fetch_atmos_saphir: !ENV ${HOMEufs}/parm/staging/atmos/fetch.saphir.reanalysis.yaml
+fetch_atmos_seviri: !ENV ${HOMEufs}/parm/staging/atmos/fetch.seviri.reanalysis.yaml
+fetch_atmos_ssmi: !ENV ${HOMEufs}/parm/staging/atmos/fetch.ssmi.reanalysis.yaml
+fetch_atmos_ssmis: !ENV ${HOMEufs}/parm/staging/atmos/fetch.ssmis.reanalysis.yaml
+fetch_atmos_ssu: !ENV ${HOMEufs}/parm/staging/atmos/fetch.ssu.reanalysis.yaml
