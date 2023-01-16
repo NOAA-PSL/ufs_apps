@@ -31,6 +31,11 @@ Description
 Classes
 -------
 
+    LaunchError()
+
+        This is the base-class for exceptions encountered within the
+        ush/launch module; it is a sub-class of Error.
+
     StagingError()
 
         This is the base-class for exceptions encountered within the
