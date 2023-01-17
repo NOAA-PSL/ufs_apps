@@ -7,6 +7,7 @@
 
 [![Unit Tests](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/unittests.yaml)
 [![Python Coding Standards](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/pycodestyle.yaml)
+[![Container Builds](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/containers.yaml/badge.svg)](https://github.com/HenryWinterbottom-NOAA/ufs_apps/actions/workflows/containers.yaml)
 
 # Disclaimer
 
