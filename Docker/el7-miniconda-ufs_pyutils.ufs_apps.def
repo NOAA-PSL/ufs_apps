@@ -19,9 +19,19 @@
 # -----------
 
 #    This Singularity definition file builds a Singularity image file
-#    containing the ufs_pyutils package built upon a Centos 7
-#    base-Linux platform and Miniconda Python 3.9+ software stack
-#    required for the respective ufs_apps applications.
+#    containing the following packages.
+
+#    - AMD 64 CentOS 7 base Linux image;
+
+#    - Docker Engine (https://docs.docker.com/engine/);
+
+#    - GO programming language (https://go.dev/; required by Singularity);
+
+#    - Singularity (https://sylabs.io/singularity/).
+
+#    - Miniconda Python 3.9+ stack;
+
+#    - ufs_pyutils applications.
 
 # Singularity Instructions
 # ------------------------
@@ -75,7 +85,7 @@ From: noaaufsrnr/el7-miniconda-ufs_pyutils.ufs_apps:latest
 %help
     The Singularity container application may be executed as follows:
 
-    user@host: singularity exec el7_miniconda_ufs_pyutils_.ufs_apps_<TAG>.sif <X> <Y>
+    user@host: singularity exec el7_miniconda_ufs_pyutils.ufs_apps_<TAG>.sif <X> <Y>
 
     where <X> is an executable or application within the Singularity
     container (e.g., Python) and <Y> is an application exist on the

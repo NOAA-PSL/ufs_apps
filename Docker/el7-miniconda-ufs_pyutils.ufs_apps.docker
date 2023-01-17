@@ -19,9 +19,19 @@
 # -----------
 
 #    This Docker recipe file builds a Docker image containing the
-#    ufs_pyutils package built upon a Centos 7 base-Linux platform and
-#    Miniconda Python 3.9+ software stack required for the respective
-#    ufs_apps applications.
+#    following packages.
+
+#    - AMD 64 CentOS 7 base Linux image;
+
+#    - Docker Engine (https://docs.docker.com/engine/);
+
+#    - GO programming language (https://go.dev/; required by Singularity);
+
+#    - Singularity (https://sylabs.io/singularity/).
+
+#    - Miniconda Python 3.9+ stack;
+
+#    - ufs_pyutils applications.
 
 # Docker Instructions
 # -------------------

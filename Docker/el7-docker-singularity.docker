@@ -19,9 +19,15 @@
 # -----------
 
 #    This Docker recipe file builds a Docker image containing the
-#    Docker Engine and Singularity applications build Centos 7
-#    base-Linux platform image. The GO programming language is also
-#    installed as a result of the Singularity dependencies.
+#    following packages.
+
+#    - AMD 64 CentOS 7 base Linux image;
+
+#    - Docker Engine (https://docs.docker.com/engine/);
+
+#    - GO programming language (https://go.dev/; required by Singularity);
+
+#    - Singularity (https://sylabs.io/singularity/).
 
 # Docker Instructions
 # -------------------
@@ -56,8 +62,6 @@
 # -----------------------------
 
 #    go; https://go.dev/ (version 1.19.3)
-
-#    miniconda; https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh
 
 #    singularity; https://github.com/sylabs/singularity.git
 
