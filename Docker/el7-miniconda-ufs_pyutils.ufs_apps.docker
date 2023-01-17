@@ -19,12 +19,9 @@
 # -----------
 
 #    This Docker recipe file builds a Docker image containing the
-#    ufs_pyutils package upon a Centos 7 base-Linux platform and
+#    ufs_pyutils package built upon a Centos 7 base-Linux platform and
 #    Miniconda Python 3.9+ software stack required for the respective
 #    ufs_apps applications.
-
-#    Additionally the GO programming language and Singularity are also
-#    compiled within this container.
 
 # Docker Instructions
 # -------------------
@@ -40,23 +37,6 @@
 #    where <TAG> is the tag identifier/name for the respective image
 #    and <DOCKER LOGIN> is the user Docker Hub login name.
 
-# Singularity Instructions
-# ------------------------
-
-#    To build the respective Singularity image file (i.e., container),
-#    do as follows.
-
-#    user@host:$ singularity build el7-miniconda-ufs_pyutils.ufs_apps_<TAG>.sif docker://noaaufsrnr/noaaufsrnr/el7-miniconda-ufs_pyutils.ufs_apps:<TAG>
-
-#    In order to execute and application within the Singularity
-#    container, do as follows.
-
-#    user@host:$ singularity exec el7-miniconda-ufs_pyutils.ufs_apps_<TAG>.sif <X> <Y>
-
-#    where <X> is an executable or application within the Singularity
-#    container (e.g., Python) and <Y> is an application exist on the
-#    local host disk (i.e., a Python script/application).
-
 # Author(s)
 # ---------
 
@@ -70,7 +50,7 @@
 # Base Image Attributes
 # ---------------------
 
-#    Linux Image and Tag: amd64/centos:7
+#    Image and Tag: noaaufsrnr/el7-docker-singularity:latest
 
 # External Package Dependencies
 # -----------------------------
@@ -88,50 +68,11 @@
 
 #    Docker Hub: docker pull noaaufsrnr/el7-miniconda-ufs_pyutils.ufs_apps:<TAG>
 
-#    Sylabs: singularity pull--arch amd64 library://noaaufsrnr/noaaufsrnr/el7-miniconda-ufs_pyutils.ufs_apps:<TAG> 
-
 # ----
 
 # Define the container base information.
-FROM amd64/centos:7
+FROM noaaufsrnr/el7-docker-singularity:latest
 MAINTAINER "Henry R. Winterbottom (Henry.Winterbottom@noaa.gov)" 
-
-# ----
-
-# Build the Linux platform.
-RUN yum groupinstall -y 'Development Tools' && \
-    yum install -y git && \
-    yum install -y wget && \
-    yum install -y libseccomp-devel && \
-    yum install -y glib2-devel && \
-    yum install -y squashfs-tools && \
-    yum install -y cryptsetup && \
-    yum install -y runc && \
-    yum install -y which && \
-    yum install -y vim && \
-    yum install -y glibc-devel.i686 && \
-    yum install -y libstdc++-devel.i686 && \
-    rm -rf /var/lib/apt/lists/*
-
-# ----
-
-# Collect and build the GO programming language.
-RUN export VERSION=1.19.3 OS=linux ARCH=386 && \
-    wget -O /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz https://dl.google.com/go/go${VERSION}.${OS}-${ARCH}.tar.gz && \
-    tar -C /usr/local -xzf /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz && \
-    echo 'export PATH=$PATH:/usr/local/go/bin' >> /root/.bashrc && \
-    rm -rf /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz
-
-# ----
-
-# Collect and build the Singularity application.
-RUN git clone --recurse-submodules https://github.com/sylabs/singularity.git && \
-    cd singularity && \
-    source /root/.bashrc && \
-    ./mconfig --without-suid --without-conmon --without-seccomp && \
-    export LD_LIBRARY_PATH=/usr/lib64:${LD_LIBRARY_PATH} && \
-    make -C builddir && \
-    make -C builddir install
 
 # ----
 
