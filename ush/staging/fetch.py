@@ -135,21 +135,25 @@ class Fetch(Staging):
         if self.fetch_type_opt is not None:
             fetch_types = self.fetch_type_opt.split(",")
             task_id = task_id + "."
-            task_id = "_".join([fetch_type for fetch_type in fetch_types])
+            task_id = task_id + \
+                "_".join([fetch_type for fetch_type in fetch_types])
 
         # Define the interface/platform types to be collected; update
         # the task identifier string accordingly.
         self.platforms = self._get_platforms(options_obj=options_obj)
         if self.platforms is not None:
             task_id = task_id + "."
-            task_id = "_".join([platform for platform in self.platforms])
+            task_id = task_id + "_".join([platform for platform in self.platforms])
 
         # Define the file identifiers to be collected; update the task
         # identifier string accordingly.
         self.fileids = self._get_fileids(options_obj=options_obj)
         if self.fileids is not None:
             task_id = task_id + "."
-            task_id = "_".join([fileid for fileid in self.fileids])
+            task_id = task_id + "_".join([fileid for fileid in self.fileids])
+
+        print(task_id)
+        quit()
 #                task_id + f"{fileid}" for fileid in self.fileids]
 #        task_id = str(task_id[0])
 
