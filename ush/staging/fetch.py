@@ -136,28 +136,22 @@ class Fetch(Staging):
             fetch_types = self.fetch_type_opt.split(",")
             task_id = task_id + "."
             task_id = "_".join([fetch_type for fetch_type in fetch_types])
-#                task_id + f"{fetch_type}" for fetch_type in fetch_types]
-#            task_id = str(task_id[0])
-
-        print(task_id)
-        quit()
 
         # Define the interface/platform types to be collected; update
         # the task identifier string accordingly.
         self.platforms = self._get_platforms(options_obj=options_obj)
         if self.platforms is not None:
             task_id = task_id + "."
-            task_id = [
-                task_id + f"{platform}" for platform in self.platforms]
+            task_id = "_".join([platform for platform in self.platforms])
 
         # Define the file identifiers to be collected; update the task
         # identifier string accordingly.
         self.fileids = self._get_fileids(options_obj=options_obj)
         if self.fileids is not None:
             task_id = task_id + "."
-            task_id = [
-                task_id + f"{fileid}" for fileid in self.fileids]
-        task_id = str(task_id[0])
+            task_id = "_".join([fileid for fileid in self.fileids])
+#                task_id + f"{fileid}" for fileid in self.fileids]
+#        task_id = str(task_id[0])
 
         # Define the base-class attributes.
         super().__init__(options_obj=options_obj, task_id=task_id)
@@ -221,15 +215,15 @@ class Fetch(Staging):
 
         # Check whether the base-class arguments contain the file
         # identifier attribute; proceed accordingly.
-        fileids = None
-        fileid_opt = parser_interface.object_getattr(
-            object_in=options_obj, key="fileid", force=True
+        fileids=None
+        fileid_opt=parser_interface.object_getattr(
+            object_in = options_obj, key = "fileid", force = True
         )
 
         # If the file identifier attribute has been specified, define
         # a list of values to be returned.
         if fileid_opt is not None:
-            fileids = list(set(fileid_opt.split(",")))
+            fileids=list(set(fileid_opt.split(",")))
 
         return fileids
 
@@ -268,26 +262,26 @@ class Fetch(Staging):
 
         # Check whether the base-class arguments contain the
         # respective interface/platform type; proceed accordingly.
-        platform_opt = parser_interface.object_getattr(
-            object_in=options_obj, key="platform", force=True
+        platform_opt=parser_interface.object_getattr(
+            object_in = options_obj, key = "platform", force = True
         )
         if platform_opt is None:
 
             # Define a list of interface/platform types using the
             # base-class attributes.
-            platforms = list(self.fetch_methods_dict.keys())
+            platforms=list(self.fetch_methods_dict.keys())
 
         if platform_opt is not None:
 
             # Define a list of unique interface/platform types.
-            platforms = list(set(platform_opt.split(",")))
+            platforms=list(set(platform_opt.split(",")))
 
             # Check that the interface/platform is supported; proceed
             # accordingly.
             for platform in platforms:
                 if platform not in self.fetch_methods_dict:
-                    msg = f"The interface/platform type {platform} is not supported. Aborting!!!"
-                    staging_error(msg=msg)
+                    msg=f"The interface/platform type {platform} is not supported. Aborting!!!"
+                    staging_error(msg = msg)
 
         return platforms
 
@@ -320,14 +314,14 @@ class Fetch(Staging):
             # Define a Python dictionary containing only the specified
             # file identifiers and overwrite the Python dictionary
             # specified upon entry; proceed accordingly.
-            tmpdict = {}
+            tmpdict={}
             # fileids = [item for item in self.fileids if item in
             #           list(filesdict.keys())]
             for fileid in self.fileids:
 
                 if fileid in filesdict:  # list(filesdict.keys()):
-                    tmpdict[fileid] = parser_interface.dict_key_value(
-                        dict_in=filesdict, key=fileid, force=True, no_split=True
+                    tmpdict[fileid]=parser_interface.dict_key_value(
+                        dict_in = filesdict, key = fileid, force = True, no_split = True
                     )
 
                 if fileid not in filesdict:  # list(filesdict.keys()):
