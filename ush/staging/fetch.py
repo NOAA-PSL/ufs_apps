@@ -141,7 +141,7 @@ class Fetch(Staging):
         if self.platforms is not None:
             task_id = task_id + "."
             task_id = [
-                task_id + f"_{platform}" for platform in self.platforms]
+                task_id + f"{platform}" for platform in self.platforms]
             task_id = str(task_id[0])
             print(task_id)
 
@@ -150,7 +150,7 @@ class Fetch(Staging):
         if self.fileids is not None:
             task_id = task_id + "."
             task_id = [
-                task_id + f"_{fileid}" for fileid in self.fileids.split()]
+                task_id + f"{fileid}" for fileid in self.fileids.split()]
             task_id = str(task_id[0])
 
         print(str(task_id))
