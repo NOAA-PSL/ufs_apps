@@ -192,10 +192,10 @@ class Launch:
 
         if task_id is not None:
 
-            self.yaml_config_path=f"{task_id}.{self.expt_name}.{self.cycle}.yaml"
+            self.yaml_config_path = f"{task_id}.{self.expt_name}.{self.cycle}.yaml"
 
         self=parser_interface.object_setattr(
-            object_in = self, key = "expt_yaml", value = self.yaml_config_path
+            object_in = self, key = "expt_yaml", value = self.yaml_config_path)
 
         msg = f"The YAML-formatted experiment configuration file name is {self.yaml_config_path}."
         self.logger.warn(msg=msg)
