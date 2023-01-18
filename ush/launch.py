@@ -182,16 +182,21 @@ class Launch:
 
         # Define the YAML-formatted experiment configuration file;
         # proceed accordingly.
-        self.yaml_config_path = parser_interface.dict_key_value(
-            dict_in=self.yaml_dict, key="expt_yaml", force=True, no_split=True
-        )
+        if task_id is None:
+            self.yaml_config_path = parser_interface.dict_key_value(
+                dict_in=self.yaml_dict, key="expt_yaml", force=True, no_split=True
+            )
 
-        if self.yaml_config_path is None:
-            self.yaml_config_path = f"ufs.{self.expt_name}.{self.cycle}.yaml"
+            if self.yaml_config_path is None:
+                self.yaml_config_path = f"ufs.{self.expt_name}.{self.cycle}.yaml"
 
-        self = parser_interface.object_setattr(
-            object_in=self, key="expt_yaml", value=self.yaml_config_path
-        )
+        if task_id is not None:
+
+            self.yaml_config_path=f"{task_id}.{self.expt_name}.{self.cycle}.yaml"
+
+        self=parser_interface.object_setattr(
+            object_in = self, key = "expt_yaml", value = self.yaml_config_path
+
         msg = f"The YAML-formatted experiment configuration file name is {self.yaml_config_path}."
         self.logger.warn(msg=msg)
 
