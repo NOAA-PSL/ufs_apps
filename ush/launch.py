@@ -112,7 +112,7 @@ class Launch:
     """
 
     @classmethod
-    def __init__(cls, options_obj: object):
+    def __init__(cls, options_obj: object, task: str = None):
         """
         Description
         -----------
