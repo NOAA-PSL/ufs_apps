@@ -135,23 +135,21 @@ class Fetch(Staging):
         if self.fetch_type_opt is not None:
             fetch_types = self.fetch_type_opt.split(",")
             task_id = task_id + "."
-            task_id = task_id + \
-                "_".join([fetch_type for fetch_type in fetch_types])
+            task_id = task_id + "_".join(list(fetch_types))
 
         # Define the interface/platform types to be collected; update
         # the task identifier string accordingly.
         self.platforms = self._get_platforms(options_obj=options_obj)
         if self.platforms is not None:
             task_id = task_id + "."
-            task_id = task_id + \
-                "_".join([platform for platform in self.platforms])
+            task_id = task_id + "_".join(list(self.platforms))
 
         # Define the file identifiers to be collected; update the task
         # identifier string accordingly.
         self.fileids = self._get_fileids(options_obj=options_obj)
         if self.fileids is not None:
             task_id = task_id + "."
-            task_id = task_id + "_".join([fileid for fileid in self.fileids])
+            task_id = task_id + "_".join(list(self.fileids))
 
         # Define the base-class attributes.
         super().__init__(options_obj=options_obj, task_id=task_id)
@@ -314,14 +312,14 @@ class Fetch(Staging):
             # Define a Python dictionary containing only the specified
             # file identifiers and overwrite the Python dictionary
             # specified upon entry; proceed accordingly.
-            tmpdict={}
+            tmpdict = {}
             # fileids = [item for item in self.fileids if item in
             #           list(filesdict.keys())]
             for fileid in self.fileids:
 
                 if fileid in filesdict:  # list(filesdict.keys()):
-                    tmpdict[fileid]=parser_interface.dict_key_value(
-                        dict_in = filesdict, key = fileid, force = True, no_split = True
+                    tmpdict[fileid] = parser_interface.dict_key_value(
+                        dict_in=filesdict, key=fileid, force=True, no_split=True
                     )
 
                 if fileid not in filesdict:  # list(filesdict.keys()):
