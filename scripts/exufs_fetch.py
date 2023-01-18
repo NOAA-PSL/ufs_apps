@@ -41,7 +41,7 @@ Functions
 Usage
 -----
 
-    user@host:$ python exufs_fetch.py --<yaml_file> --<cycle> [--platform] [--fetch_type] [--fileid]
+    user@host:$ python exufs_fetch.py --<yaml_file> --<cycle> --<work_path> --<expt_name> [--platform] [--fetch_type] [--fileid]
 
 Author(s)
 ---------

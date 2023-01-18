@@ -124,9 +124,6 @@ class Fetch(Staging):
         # Define the base-class attributes.
         super().__init__(options_obj=options_obj)
 
-        print(vars(options_obj))
-        quit()
-
         # Define the supported fetch application interfaces.
         self.fetch_methods_dict = {"aws_s3": self.aws_s3}
 
