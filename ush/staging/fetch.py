@@ -133,8 +133,10 @@ class Fetch(Staging):
         if self.fetch_type_opt is not None:
             task_id = task_id + "."
             task_id = [
-                task_id + f"_{fetch_type}" for fetch_type in self.fetch_type_opt.split()]
+                task_id + f"_{fetch_type}" for fetch_type in self.fetch_type_opt]
             task_id = str(task_id[0])
+            print(task_id)
+            quit()
 
         # Define the interface/platform types to be collected.
         self.platforms = self._get_platforms(options_obj=options_obj)
@@ -220,8 +222,8 @@ class Fetch(Staging):
 
         # Check whether the base-class arguments contain the file
         # identifier attribute; proceed accordingly.
-        fileids=None
-        fileid_opt=parser_interface.object_getattr(
+        fileids = None
+        fileid_opt = parser_interface.object_getattr(
             object_in=options_obj, key="fileid", force=True
         )
 
@@ -229,7 +231,7 @@ class Fetch(Staging):
         # a list of values to be returned.
         if fileid_opt is not None:
 
-            fileids=list(set(fileid_opt.split(",")))
+            fileids = list(set(fileid_opt.split(",")))
 
         return fileids
 
