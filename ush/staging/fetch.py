@@ -132,7 +132,7 @@ class Fetch(Staging):
         )
 
         # Define the interface/platform types to be collected.
-        self.platforms = self._get_platforms()
+        self.platforms = self._get_platforms(options_obj=options_obj)
         print(self.platforms)
 
         # Define the file identifiers to be collected.
