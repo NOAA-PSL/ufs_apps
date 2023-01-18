@@ -139,6 +139,10 @@ class Fetch(Staging):
         # Define the file identifiers to be collected.
         self.fileids = self._get_fileids()
 
+        print(self.fileids)
+
+        quit()
+
     def _get_fetch_types(self) -> list:
         """
         Description

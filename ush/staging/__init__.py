@@ -121,7 +121,7 @@ class Staging:
     """
 
     @classmethod
-    def __init__(cls, options_obj: object):
+    def __init__(cls, options_obj: object, task: str = None):
         """
         Description
         -----------
@@ -134,7 +134,7 @@ class Staging:
         self = cls
         self.options_obj = options_obj
         self.logger = Logger()
-        self.launch = Launch(options_obj=self.options_obj)
+        self.launch = Launch(options_obj=self.options_obj, task=task)
         self.launch.build_dirpath()
         self.launch.build_configs()
 
