@@ -180,6 +180,9 @@ class Staging:
         # Parse the configuration file.
         self.yaml_dict = YAML().read_yaml(yaml_file=self.yaml_file)
 
+        print(self.yaml_dict)
+        quit()
+
     def _nc_concat(self, fileid_obj: object, fileconcat_obj: object) -> None:
         """
         Description
@@ -295,7 +298,8 @@ class Staging:
 
         # Check that netCDF-formatted member files exist; proceed accordingly.
         if (
-            sum(fileio_interface.fileexist(path=filename) for filename in ncfilelist)
+            sum(fileio_interface.fileexist(path=filename)
+                for filename in ncfilelist)
             > 0
         ):
 
