@@ -134,7 +134,7 @@ class Fetch(Staging):
         if self.fetch_type_opt is not None:
             task_id = task_id + "."
             task_id = [
-                task_id + f"{fetch_type}" for fetch_type in self.fetch_type_opt.split()]
+                task_id.strip(",") + f"{fetch_type}" for fetch_type in self.fetch_type_opt.split()]
             task_id = str(task_id[0])
 
         # Define the interface/platform types to be collected; update
