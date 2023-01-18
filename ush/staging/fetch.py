@@ -141,7 +141,7 @@ class Fetch(Staging):
         if self.platforms is not None:
             task_id = task_id + "."
             task_id = [
-                task_id + f"_{platform}" for platform in self.platforms.split()]
+                task_id + f"_{platform}" for platform in self.platforms]
             task_id = str(task_id[0])
             print(task_id)
 
