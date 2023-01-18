@@ -213,7 +213,6 @@ class Launch:
             "com_root",
             "cycle",
             "expt_name",
-            "expt_yaml",
             "itrc_root",
             "work_path",
         ]
