@@ -133,7 +133,6 @@ class Fetch(Staging):
 
         # Define the interface/platform types to be collected.
         self.platforms = self._get_platforms(options_obj=options_obj)
-        print(self.platforms)
 
         # Define the file identifiers to be collected.
         self.fileids = self._get_fileids(options_obj=options_obj)
@@ -141,7 +140,7 @@ class Fetch(Staging):
         # Define the base-class attributes.
         super().__init__(options_obj=options_obj)
 
-        print(self.fileids)
+        print(self.fileids, self.fetch_type_opt)
 
         quit()
 
