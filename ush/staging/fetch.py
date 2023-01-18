@@ -133,21 +133,23 @@ class Fetch(Staging):
         if self.fetch_type_opt is not None:
             task_id = task_id + "."
             task_id = [
-                task_id + f"_{fetch_type}" for fetch_type in self.fetch_type_opt]
+                task_id + f"_{fetch_type}" for fetch_type in self.fetch_type_opt.split()]
             task_id = str(task_id[0])
 
         # Define the interface/platform types to be collected.
         self.platforms = self._get_platforms(options_obj=options_obj)
         if self.platforms is not None:
             task_id = task_id + "."
-            task_id = [task_id + f"_{platform}" for platform in self.platforms]
+            task_id = [
+                task_id + f"_{platform}" for platform in self.platforms.split()]
             task_id = str(task_id[0])
 
         # Define the file identifiers to be collected.
         self.fileids = self._get_fileids(options_obj=options_obj)
         if self.fileids is not None:
             task_id = task_id + "."
-            task_id = [task_id + f"_{fileid}" for fileid in self.fileids]
+            task_id = [
+                task_id + f"_{fileid}" for fileid in self.fileids.split()]
             task_id = str(task_id[0])
 
         print(str(task_id))
@@ -183,7 +185,7 @@ class Fetch(Staging):
 
         # Check if list is empty; proceed accordingly.
         if not fetch_types_list:
-            msg=(
+            msg = (
                 "The fetch types list is empty and/or cannot be determine "
                 "from the base-class attributes. Aborting!!!"
             )
