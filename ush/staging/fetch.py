@@ -121,10 +121,8 @@ class Fetch(Staging):
 
         """
 
-        # Define the base-class attributes.
-        super().__init__(options_obj=options_obj)
-
         # Define the supported fetch application interfaces.
+        task_id = str()
         self.fetch_methods_dict = {"aws_s3": self.aws_s3}
 
         # Check whether the base-class arguments contain the
@@ -133,13 +131,15 @@ class Fetch(Staging):
             object_in=options_obj, key="fetch_type", force=True
         )
 
-        print(self.fetch_type_opt)
-
         # Define the interface/platform types to be collected.
         self.platforms = self._get_platforms()
+        print(self.platforms)
 
         # Define the file identifiers to be collected.
         self.fileids = self._get_fileids()
+
+        # Define the base-class attributes.
+        super().__init__(options_obj=options_obj)
 
         print(self.fileids)
 
