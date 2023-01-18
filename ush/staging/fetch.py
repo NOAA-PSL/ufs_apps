@@ -150,12 +150,12 @@ class Fetch(Staging):
             task_id = [task_id + f"_{fileid}" for fileid in self.fileids]
             task_id = str(task_id[0])
 
-        print(str(task_id[0]))
+        print(str(task_id))
 
         # Define the base-class attributes.
         super().__init__(options_obj=options_obj)
 
-        #print(self.fileids, self.fetch_type_opt)
+        # print(self.fileids, self.fetch_type_opt)
 
         quit()
 
@@ -183,7 +183,7 @@ class Fetch(Staging):
 
         # Check if list is empty; proceed accordingly.
         if not fetch_types_list:
-            msg = (
+            msg=(
                 "The fetch types list is empty and/or cannot be determine "
                 "from the base-class attributes. Aborting!!!"
             )
@@ -218,8 +218,8 @@ class Fetch(Staging):
 
         # Check whether the base-class arguments contain the file
         # identifier attribute; proceed accordingly.
-        fileids = None
-        fileid_opt = parser_interface.object_getattr(
+        fileids=None
+        fileid_opt=parser_interface.object_getattr(
             object_in=options_obj, key="fileid", force=True
         )
 
@@ -227,7 +227,7 @@ class Fetch(Staging):
         # a list of values to be returned.
         if fileid_opt is not None:
 
-            fileids = list(set(fileid_opt.split(",")))
+            fileids=list(set(fileid_opt.split(",")))
 
         return fileids
 
@@ -266,7 +266,7 @@ class Fetch(Staging):
 
         # Check whether the base-class arguments contain the
         # respective interface/platform type; proceed accordingly.
-        platform_opt = parser_interface.object_getattr(
+        platform_opt=parser_interface.object_getattr(
             object_in=options_obj, key="platform", force=True
         )
 
@@ -274,18 +274,18 @@ class Fetch(Staging):
 
             # Define a list of interface/platform types using the
             # base-class attributes.
-            platforms = list(self.fetch_methods_dict.keys())
+            platforms=list(self.fetch_methods_dict.keys())
 
         if platform_opt is not None:
 
             # Define a list of unique interface/platform types.
-            platforms = list(set(platform_opt.split(",")))
+            platforms=list(set(platform_opt.split(",")))
 
             # Check that the interface/platform is supported; proceed
             # accordingly.
             for platform in platforms:
                 if platform not in self.fetch_methods_dict:
-                    msg = f"The interface/platform type {platform} is not supported. Aborting!!!"
+                    msg=f"The interface/platform type {platform} is not supported. Aborting!!!"
                     staging_error(msg=msg)
 
         return platforms
@@ -319,18 +319,18 @@ class Fetch(Staging):
             # Define a Python dictionary containing only the specified
             # file identifiers and overwrite the Python dictionary
             # specified upon entry; proceed accordingly.
-            tmpdict = {}
+            tmpdict={}
             # fileids = [item for item in self.fileids if item in
             #           list(filesdict.keys())]
             for fileid in self.fileids:
 
                 if fileid in filesdict:  # list(filesdict.keys()):
-                    tmpdict[fileid] = parser_interface.dict_key_value(
+                    tmpdict[fileid]=parser_interface.dict_key_value(
                         dict_in=filesdict, key=fileid, force=True, no_split=True
                     )
 
                 if fileid not in filesdict:  # list(filesdict.keys()):
-                    msg = (
+                    msg=(
                         f"Attributes for file identifier {fileid} could "
                         "not be determined from the configuration file "
                         "and will not be collected."
