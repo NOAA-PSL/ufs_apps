@@ -137,7 +137,6 @@ class Launch:
             value = parser_interface.object_getattr(
                 object_in=self.options_obj, key=mand_arg, force=True
             )
-
             if value is None:
                 msg = (
                     "The option attributes provided to the base-class does not "
@@ -161,7 +160,6 @@ class Launch:
         # Check that the YAML-formatted configuration file exists;
         # proceed accordingly.
         exist = fileio_interface.fileexist(path=self.yaml_file)
-
         if not exist:
             msg = (
                 f"The YAML-formatted configuration file {self.yaml_file} "
@@ -184,8 +182,8 @@ class Launch:
         # the respective task.
         self.yaml_config_path = f"{task_id}.{self.expt_name}.{self.cycle}.yaml"
 
-        self = parser_interface.object_setattr(
-            object_in=self, key="expt_yaml", value=self.yaml_config_path)
+        # self = parser_interface.object_setattr(
+        #    object_in=self, key="expt_yaml", value=self.yaml_config_path)
 
         msg = f"The YAML-formatted experiment configuration file name is {self.yaml_config_path}."
         self.logger.warn(msg=msg)
@@ -257,7 +255,6 @@ class Launch:
                 value = parser_interface.object_getattr(
                     object_in=self, key=attr, force=True
                 )
-
                 if value is None:
                     msg = (
                         f"The mandatory attribute {attr} has not been "
@@ -302,7 +299,6 @@ class Launch:
 
         # Build the respective directory tree paths.
         for dirpath in dirpaths_list:
-
             msg = f"Building directory tree {dirpath}."
             self.logger.info(msg=msg)
             fileio_interface.dirpath_tree(path=dirpath)

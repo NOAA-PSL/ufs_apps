@@ -228,7 +228,6 @@ class Fetch(Staging):
         # If the file identifier attribute has been specified, define
         # a list of values to be returned.
         if fileid_opt is not None:
-
             fileids = list(set(fileid_opt.split(",")))
 
         return fileids
@@ -271,7 +270,6 @@ class Fetch(Staging):
         platform_opt = parser_interface.object_getattr(
             object_in=options_obj, key="platform", force=True
         )
-
         if platform_opt is None:
 
             # Define a list of interface/platform types using the
@@ -359,7 +357,6 @@ class Fetch(Staging):
             )
 
             if value is None:
-
                 value = parser_interface.dict_key_value(
                     dict_in=checksum_attrs_dict,
                     key=checksum_attr,
@@ -535,7 +532,6 @@ class Fetch(Staging):
             # Collect files in accordance with the configuration and
             # options.
             for fetch_type in fetch_types:
-
                 if fetch_type in filesdict:
                     msg = f"Collecting files for fetch type {fetch_type}."
                     self.logger.info(msg=msg)
