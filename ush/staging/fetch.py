@@ -135,8 +135,8 @@ class Fetch(Staging):
         if self.fetch_type_opt is not None:
             fetch_types = self.fetch_type_opt.split(",")
             task_id = task_id + "."
-            task_id = [
-                task_id + f"{fetch_type}" for fetch_type in fetch_types]
+            task_id = "_".join([fetch_type for fetch_type in fetch_types])
+#                task_id + f"{fetch_type}" for fetch_type in fetch_types]
 #            task_id = str(task_id[0])
 
         print(task_id)
