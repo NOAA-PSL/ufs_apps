@@ -126,7 +126,8 @@ class Fetch(Staging):
         self.fetch_methods_dict = {"aws_s3": self.aws_s3}
 
         # Check whether the base-class arguments contain the
-        # respective supported fetch types; proceed accordingly
+        # respective supported fetch types; update the task identifier
+        # string accordingly.
         self.fetch_type_opt = parser_interface.object_getattr(
             object_in=options_obj, key="fetch_type", force=True
         )
@@ -136,22 +137,22 @@ class Fetch(Staging):
                 task_id + f"{fetch_type}" for fetch_type in self.fetch_type_opt.split()]
             task_id = str(task_id[0])
 
-        # Define the interface/platform types to be collected.
+        # Define the interface/platform types to be collected; update
+        # the task identifier string accordingly.
         self.platforms = self._get_platforms(options_obj=options_obj)
         if self.platforms is not None:
             task_id = task_id + "."
             task_id = [
                 task_id + f"{platform}" for platform in self.platforms]
 
-        # Define the file identifiers to be collected.
+        # Define the file identifiers to be collected; update the task
+        # identifier string accordingly.
         self.fileids = self._get_fileids(options_obj=options_obj)
         if self.fileids is not None:
             task_id = task_id + "."
             task_id = [
                 task_id + f"{fileid}" for fileid in self.fileids]
             task_id = str(task_id[0])
-
-        print(str(task_id))
 
         # Define the base-class attributes.
         super().__init__(options_obj=options_obj, task_id=task_id)
