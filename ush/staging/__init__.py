@@ -136,6 +136,7 @@ class Staging:
         self.logger = Logger()
         self.launch = Launch(options_obj=self.options_obj)
         self.launch.build_dirpath()
+        self.launch.build_configs()
 
         # Check that the mandatory arguments have been provided within
         # the options_obj parameter; proceed accordingly.
