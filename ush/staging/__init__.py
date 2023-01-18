@@ -178,8 +178,7 @@ class Staging:
             error(msg=msg)
 
         # Parse the configuration file.
-        self.yaml_dict = YAML().read_yaml(yaml_file=self.yaml_file,
-                                          concat_yamls=True)
+        self.yaml_dict = YAML().read_concat_yaml(yaml_file=self.yaml_file)
 
     def _nc_concat(self, fileid_obj: object, fileconcat_obj: object) -> None:
         """
