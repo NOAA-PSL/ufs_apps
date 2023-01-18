@@ -200,6 +200,8 @@ def main() -> None:
     cls_schema = {
         "yaml_file": str,
         "cycle": Or(str, int),
+        "work_path": str,
+        "expt_name": str,
         Optional("fetch_type"): str,
         Optional("platform"): str,
         Optional("fileid"): str,
