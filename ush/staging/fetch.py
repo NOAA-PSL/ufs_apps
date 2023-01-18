@@ -123,8 +123,7 @@ class Fetch(Staging):
 
         # Define the supported fetch application interfaces.
         task_id = "fetch"
-        self.fetch_methods_dict = {"aws_s3": self.aws_s3,
-                                   "aws_test": self.aws_s3}  # TEST
+        self.fetch_methods_dict = {"aws_s3": self.aws_s3}
 
         # Check whether the base-class arguments contain the
         # respective supported fetch types; update the task identifier
@@ -153,11 +152,6 @@ class Fetch(Staging):
         if self.fileids is not None:
             task_id = task_id + "."
             task_id = task_id + "_".join([fileid for fileid in self.fileids])
-
-        print(task_id)
-        quit()
-#                task_id + f"{fileid}" for fileid in self.fileids]
-#        task_id = str(task_id[0])
 
         # Define the base-class attributes.
         super().__init__(options_obj=options_obj, task_id=task_id)
@@ -229,7 +223,7 @@ class Fetch(Staging):
         # If the file identifier attribute has been specified, define
         # a list of values to be returned.
         if fileid_opt is not None:
-            fileids=list(set(fileid_opt.split(",")))
+            fileids = list(set(fileid_opt.split(",")))
 
         return fileids
 
@@ -268,26 +262,26 @@ class Fetch(Staging):
 
         # Check whether the base-class arguments contain the
         # respective interface/platform type; proceed accordingly.
-        platform_opt=parser_interface.object_getattr(
-            object_in = options_obj, key = "platform", force = True
+        platform_opt = parser_interface.object_getattr(
+            object_in=options_obj, key="platform", force=True
         )
         if platform_opt is None:
 
             # Define a list of interface/platform types using the
             # base-class attributes.
-            platforms=list(self.fetch_methods_dict.keys())
+            platforms = list(self.fetch_methods_dict.keys())
 
         if platform_opt is not None:
 
             # Define a list of unique interface/platform types.
-            platforms=list(set(platform_opt.split(",")))
+            platforms = list(set(platform_opt.split(",")))
 
             # Check that the interface/platform is supported; proceed
             # accordingly.
             for platform in platforms:
                 if platform not in self.fetch_methods_dict:
-                    msg=f"The interface/platform type {platform} is not supported. Aborting!!!"
-                    staging_error(msg = msg)
+                    msg = f"The interface/platform type {platform} is not supported. Aborting!!!"
+                    staging_error(msg=msg)
 
         return platforms
 
