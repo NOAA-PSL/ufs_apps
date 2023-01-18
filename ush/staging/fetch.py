@@ -133,7 +133,7 @@ class Fetch(Staging):
         if self.fetch_type_opt is not None:
             task_id = task_id + "."
             task_id = [
-                task_id + f"_{fetch_type}" for fetch_type in self.fetch_type_opt]
+                task_id + f"_{fetch_type}" for fetch_type in self.fetch_type_opt.split()]
             #task_id = str(task_id[0])
             print(task_id)
             quit()
@@ -323,7 +323,7 @@ class Fetch(Staging):
             # Define a Python dictionary containing only the specified
             # file identifiers and overwrite the Python dictionary
             # specified upon entry; proceed accordingly.
-            tmpdict={}
+            tmpdict = {}
             # fileids = [item for item in self.fileids if item in
             #           list(filesdict.keys())]
             for fileid in self.fileids:
