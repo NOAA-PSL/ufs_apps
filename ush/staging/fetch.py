@@ -148,13 +148,13 @@ class Fetch(Staging):
         if self.fileids is not None:
             task_id = task_id + "."
             task_id = [
-                task_id + f"{fileid}" for fileid in self.fileids.split()]
+                task_id + f"{fileid}" for fileid in self.fileids]
             task_id = str(task_id[0])
 
         print(str(task_id))
 
         # Define the base-class attributes.
-        super().__init__(options_obj=options_obj)
+        super().__init__(options_obj=options_obj, task_id=task_id)
 
         # print(self.fileids, self.fetch_type_opt)
 
