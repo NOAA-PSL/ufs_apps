@@ -1,0 +1,129 @@
+# =========================================================================
+
+# Docker Recipe File: Docker/el7-docker-singularity.docker
+
+# Email: henry.winterbottom@noaa.gov
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the respective public license published by the
+# Free Software Foundation and included with the repository within
+# which this application is contained.
+
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+# =========================================================================
+
+# Description
+# -----------
+
+#    This Docker recipe file builds a Docker image containing the
+#    following packages.
+
+#    - AMD 64 CentOS 7 base Linux image;
+
+#    - Docker Engine (https://docs.docker.com/engine/);
+
+#    - GO programming language (https://go.dev/; required by Singularity);
+
+#    - Singularity (https://sylabs.io/singularity/).
+
+# Docker Instructions
+# -------------------
+
+#    The Docker container image should be built as follows.
+
+#    user@host:$ docker build -f el7-docker-singularity.docker --tag el7-docker-singularity:<TAG> .
+
+#    user@host:$ docker tag el7-docker-singularity:<TAG> <DOCKER LOGIN>/el7-docker-singularity:<TAG>
+
+#    user@host:$ docker push <DOCKER LOGIN>/el7-docker-singularity:<TAG>
+
+#    where <TAG> is the tag identifier/name for the respective image
+#    and <DOCKER LOGIN> is the user Docker Hub login name.
+
+# Author(s)
+# ---------
+
+#    Henry R. Winterbottom; 14 January 2023
+
+# History
+# -------
+
+#    2023-01-14: Henry R. Winterbottom -- Initial implementation.
+
+# Base Image Attributes
+# ---------------------
+
+#    Image and Tag: amd64/centos:7
+
+# External Package Dependencies
+# -----------------------------
+
+#    go; https://go.dev/ (version 1.19.3)
+
+#    singularity; https://github.com/sylabs/singularity.git
+
+# Container Image Downloads
+# -------------------------
+
+#    Docker Hub: docker pull noaaufsrnr/el7-docker-singularity:<TAG>
+
+# ----
+
+# Define the container base information.
+FROM amd64/centos:7
+MAINTAINER "Henry R. Winterbottom (Henry.Winterbottom@noaa.gov)"
+
+# ----
+
+# Build the Linux platform.
+RUN yum groupinstall -y 'Development Tools' && \
+    yum install -y git && \
+    yum install -y wget && \
+    yum install -y libseccomp-devel && \
+    yum install -y glib2-devel && \
+    yum install -y squashfs-tools && \
+    yum install -y cryptsetup && \
+    yum install -y runc && \
+    yum install -y which && \
+    yum install -y vim && \
+    yum install -y glibc-devel.i686 && \
+    yum install -y libstdc++-devel.i686 && \
+    rm -rf /var/lib/apt/lists/*
+
+# ----
+
+# Build and install the Docker Engine application.
+RUN yum remove docker && \
+    yum remove docker-client && \
+    yum remove docker-client-latest && \
+    yum remove docker-common && \
+    yum remove docker-latest && \
+    yum remove docker-latest-logrotate && \
+    yum remove docker-logrotate && \
+    yum remove docker-engine && \
+    yum install -y yum-utils && \
+    yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && \
+    yum install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# ----
+
+# Collect and build the GO programming language.
+RUN export VERSION=1.19.3 OS=linux ARCH=386 && \
+    wget -O /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz https://dl.google.com/go/go${VERSION}.${OS}-${ARCH}.tar.gz && \
+    tar -C /usr/local -xzf /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz && \
+    echo 'export PATH=$PATH:/usr/local/go/bin' >> /root/.bashrc && \
+    rm -rf /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz
+
+# ----
+
+# Collect and build the Singularity application.
+RUN git clone --recurse-submodules https://github.com/sylabs/singularity.git && \
+    cd singularity && \
+    source /root/.bashrc && \
+    ./mconfig --without-suid --without-conmon --without-seccomp && \
+    export LD_LIBRARY_PATH=/usr/lib64:${LD_LIBRARY_PATH} && \
+    make -C builddir && \
+    make -C builddir install
