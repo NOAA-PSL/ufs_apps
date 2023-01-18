@@ -130,15 +130,21 @@ class Fetch(Staging):
         self.fetch_type_opt = parser_interface.object_getattr(
             object_in=options_obj, key="fetch_type", force=True
         )
+        if self.fetch_type_opt is not None:
+            task_id = task_id + "."
+            task_id = [
+                task_id + f"_{fetch_type}" for fetch_type in self.fetch_type_opt]
 
         # Define the interface/platform types to be collected.
         self.platforms = self._get_platforms(options_obj=options_obj)
         if self.platforms is not None:
+            task_id = task_id + "."
             task_id = [task_id + f"_{platform}" for platform in self.platforms]
 
         # Define the file identifiers to be collected.
         self.fileids = self._get_fileids(options_obj=options_obj)
         if self.fileids is not None:
+            task_id = task_id + "."
             task_id = [task_id + f"_{fileid}" for fileid in self.fileids]
 
         print(str(task_id[0]))
