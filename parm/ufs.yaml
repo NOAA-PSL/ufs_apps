@@ -14,5 +14,6 @@ cycling: True
 
 # Fetching applications.
 fetch_adt: !ENV ${HOMEufs}/parm/staging/ocean/fetch.adt.reanalysis.yaml
-fetch_sst: !ENV ${HOMEufs}/parm/staging/ocean/fetch.sst.reanalysis.yaml
 fetch_gpsro: !ENV ${HOMEufs}/parm/staging/atmos/fetch.gpsro.reanalysis.yaml
+fetch_sss: !ENV ${HOMEufs}/parm/staging/ocean/fetch.sss.reanalysis.yaml
+fetch_sst: !ENV ${HOMEufs}/parm/staging/ocean/fetch.sst.reanalysis.yaml
