@@ -154,9 +154,6 @@ class Fetch(Staging):
                 task_id + f"{fileid}" for fileid in self.fileids]
         task_id = str(task_id[0])
 
-        print(task_id)
-        quit()
-
         # Define the base-class attributes.
         super().__init__(options_obj=options_obj, task_id=task_id)
 
