@@ -157,10 +157,6 @@ class Fetch(Staging):
         # Define the base-class attributes.
         super().__init__(options_obj=options_obj, task_id=task_id)
 
-        # print(self.fileids, self.fetch_type_opt)
-
-        quit()
-
     def _get_fetch_types(self) -> list:
         """
         Description
