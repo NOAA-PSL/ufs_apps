@@ -179,7 +179,7 @@ class Staging:
 
         # Parse the configuration file.
         self.yaml_dict = YAML().read_yaml(yaml_file=self.yaml_file,
-                                          yaml_concat=True)
+                                          concat_yamls=True)
 
     def _nc_concat(self, fileid_obj: object, fileconcat_obj: object) -> None:
         """
