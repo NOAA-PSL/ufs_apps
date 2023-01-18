@@ -134,7 +134,7 @@ class Fetch(Staging):
             task_id = task_id + "."
             task_id = [
                 task_id + f"_{fetch_type}" for fetch_type in self.fetch_type_opt.split()]
-            #task_id = str(task_id[0])
+            task_id = str(task_id[0])
             print(task_id)
             quit()
 
@@ -329,7 +329,7 @@ class Fetch(Staging):
             for fileid in self.fileids:
 
                 if fileid in filesdict:  # list(filesdict.keys()):
-                    tmpdict[fileid]=parser_interface.dict_key_value(
+                    tmpdict[fileid] = parser_interface.dict_key_value(
                         dict_in=filesdict, key=fileid, force=True, no_split=True
                     )
 
