@@ -177,13 +177,21 @@ class Fetch(Staging):
 
         return fetch_types_list
 
-    def _get_fileids(self) -> list:
+    def _get_fileids(self, options_obj: object) -> list:
         """
         Description
         -----------
 
         This method defines the base-class attribute fileids with
         respect to the command line option attribute fileid.
+
+        Parameters
+        ----------
+
+        options_obj: object
+
+            A Python object containing the attributes collect via the
+            command line from the application driver script.
 
         Returns
         -------
@@ -198,7 +206,7 @@ class Fetch(Staging):
         # identifier attribute; proceed accordingly.
         fileids = None
         fileid_opt = parser_interface.object_getattr(
-            object_in=self.options_obj, key="fileid", force=True
+            object_in=options_obj, key="fileid", force=True
         )
 
         # If the file identifier attribute has been specified, define
