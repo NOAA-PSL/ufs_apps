@@ -130,8 +130,10 @@ class Fetch(Staging):
         # Check whether the base-class arguments contain the
         # respective supported fetch types; proceed accordingly
         self.fetch_type_opt = parser_interface.object_getattr(
-            object_in=self.options_obj, key="fetch_type", force=True
+            object_in=options_obj, key="fetch_type", force=True
         )
+
+        print(self.fetch_type_opt)
 
         # Define the interface/platform types to be collected.
         self.platforms = self._get_platforms()
