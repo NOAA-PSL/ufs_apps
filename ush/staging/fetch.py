@@ -152,7 +152,7 @@ class Fetch(Staging):
             task_id = task_id + "."
             task_id = [
                 task_id + f"{fileid}" for fileid in self.fileids]
-        task_id = str(task_id[:])
+        task_id = str(task_id[0])
 
         print(task_id)
         quit()
