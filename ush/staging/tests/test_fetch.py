@@ -165,6 +165,12 @@ class TestFetchMethods(TestCase):
         options_obj = parser_interface.object_setattr(
             object_in=options_obj, key="platform", value=platform
         )
+        options_obj = parser_interface.object_setattr(
+            object_in=options_obj, key="expt_name", value="UNIT_TEST"
+        )
+        options_obj = parser_interface.object_setattr(
+            object_in=options_obj, key="work_path", value=os.getcwd()
+        )
 
         # Initialize the fetch application.
         fetch = Fetch(options_obj=options_obj)
