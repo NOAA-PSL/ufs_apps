@@ -180,19 +180,9 @@ class Launch:
             self.work_path, self.expt_name, self.cycle, "intercom"
         )
 
-        # Define the YAML-formatted experiment configuration file;
-        # proceed accordingly.
-        if task_id is None:
-            self.yaml_config_path = parser_interface.dict_key_value(
-                dict_in=self.yaml_dict, key="expt_yaml", force=True, no_split=True
-            )
-
-            if self.yaml_config_path is None:
-                self.yaml_config_path = f"launch.{self.expt_name}.{self.cycle}.yaml"
-
-        if task_id is not None:
-
-            self.yaml_config_path = f"{task_id}.{self.expt_name}.{self.cycle}.yaml"
+        # Define the YAML-formatted experiment configuration file for
+        # the respective task.
+        self.yaml_config_path = f"{task_id}.{self.expt_name}.{self.cycle}.yaml"
 
         self = parser_interface.object_setattr(
             object_in=self, key="expt_yaml", value=self.yaml_config_path)
