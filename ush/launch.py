@@ -112,7 +112,7 @@ class Launch:
     """
 
     @classmethod
-    def __init__(cls, options_obj: object, task_id: str = None):
+    def __init__(cls, options_obj: object, task_id: str = "launch"):
         """
         Description
         -----------
@@ -188,14 +188,14 @@ class Launch:
             )
 
             if self.yaml_config_path is None:
-                self.yaml_config_path = f"ufs.{self.expt_name}.{self.cycle}.yaml"
+                self.yaml_config_path = f"launch.{self.expt_name}.{self.cycle}.yaml"
 
         if task_id is not None:
 
             self.yaml_config_path = f"{task_id}.{self.expt_name}.{self.cycle}.yaml"
 
-        self=parser_interface.object_setattr(
-            object_in = self, key = "expt_yaml", value = self.yaml_config_path)
+        self = parser_interface.object_setattr(
+            object_in=self, key="expt_yaml", value=self.yaml_config_path)
 
         msg = f"The YAML-formatted experiment configuration file name is {self.yaml_config_path}."
         self.logger.warn(msg=msg)

@@ -1,8 +1,3 @@
-# Experiment configuration YAML-formatted file; this file will be
-# written beneath the respective experiment/cycle /com and /intercom
-# paths.
-expt_yaml: !ENV ufs.${EXPTufs}.${CYCLEufs}.yaml
-
 # Specify whether the UFS application is a coupled model application.
 coupled: True
 
