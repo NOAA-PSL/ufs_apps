@@ -138,6 +138,8 @@ class Fetch(Staging):
 
         # Define the interface/platform types to be collected.
         self.platforms = self._get_platforms(options_obj=options_obj)
+        print(self.platforms)
+        quit()
         if self.platforms is not None:
             task_id = task_id + "."
             task_id = [
