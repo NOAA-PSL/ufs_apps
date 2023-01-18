@@ -122,7 +122,7 @@ class Fetch(Staging):
         """
 
         # Define the supported fetch application interfaces.
-        task_id = str()
+        task_id = "fetch"
         self.fetch_methods_dict = {"aws_s3": self.aws_s3}
 
         # Check whether the base-class arguments contain the
