@@ -115,6 +115,17 @@ def main() -> None:
 
         --cycle=20000101000000 or -cycle=20000101000000
 
+    expt_name: str
+
+        A Python string specifying an (unique) name for the respective
+        experiment.
+
+    work_path: str
+
+        A Python string specifying the path to where the experiment
+        directory trees will be built and the respective experiment
+        will be executed.
+
     Keywords
     --------
 
