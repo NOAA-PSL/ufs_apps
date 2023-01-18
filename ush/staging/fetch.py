@@ -131,6 +131,9 @@ class Fetch(Staging):
         self.fetch_type_opt = parser_interface.object_getattr(
             object_in=options_obj, key="fetch_type", force=True
         )
+        print(self.fetch_type_opt)
+        quit()
+
         if self.fetch_type_opt is not None:
             task_id = task_id + "."
             task_id = [
