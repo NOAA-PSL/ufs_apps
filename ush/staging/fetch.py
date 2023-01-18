@@ -135,8 +135,6 @@ class Fetch(Staging):
             task_id = [
                 task_id + f"_{fetch_type}" for fetch_type in self.fetch_type_opt.split()]
             task_id = str(task_id[0])
-            print(task_id)
-            quit()
 
         # Define the interface/platform types to be collected.
         self.platforms = self._get_platforms(options_obj=options_obj)
@@ -145,6 +143,7 @@ class Fetch(Staging):
             task_id = [
                 task_id + f"_{platform}" for platform in self.platforms.split()]
             task_id = str(task_id[0])
+            print(task_id)
 
         # Define the file identifiers to be collected.
         self.fileids = self._get_fileids(options_obj=options_obj)
@@ -334,7 +333,7 @@ class Fetch(Staging):
                     )
 
                 if fileid not in filesdict:  # list(filesdict.keys()):
-                    msg=(
+                    msg = (
                         f"Attributes for file identifier {fileid} could "
                         "not be determined from the configuration file "
                         "and will not be collected."
