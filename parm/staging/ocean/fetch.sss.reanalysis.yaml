@@ -37,7 +37,7 @@ fetch:
                     stream_stop: 20151231000000
 
                # Define the file identifier.
-               sst.jpl_sentinel1a:
+               sss.jpl_sentinel1a:
 
                     # Define the attributes corresponding to the
                     # respective file identifier.
