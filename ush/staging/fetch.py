@@ -136,7 +136,7 @@ class Fetch(Staging):
         print(self.platforms)
 
         # Define the file identifiers to be collected.
-        self.fileids = self._get_fileids()
+        self.fileids = self._get_fileids(options_obj=options_obj)
 
         # Define the base-class attributes.
         super().__init__(options_obj=options_obj)
