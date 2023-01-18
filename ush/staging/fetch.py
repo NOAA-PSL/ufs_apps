@@ -209,13 +209,21 @@ class Fetch(Staging):
 
         return fileids
 
-    def _get_platforms(self) -> list:
+    def _get_platforms(self, options_obj: object) -> list:
         """
         Description
         -----------
 
         This method defines the base-class attribute platforms with
         respect to the command line option attribute platform.
+
+        Parameters
+        ----------
+
+        options_obj: object
+
+            A Python object containing the attributes collect via the
+            command line from the application driver script.
 
         Returns
         -------
@@ -237,7 +245,7 @@ class Fetch(Staging):
         # Check whether the base-class arguments contain the
         # respective interface/platform type; proceed accordingly.
         platform_opt = parser_interface.object_getattr(
-            object_in=self.options_obj, key="platform", force=True
+            object_in=options_obj, key="platform", force=True
         )
 
         if platform_opt is None:
