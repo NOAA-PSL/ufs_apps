@@ -130,15 +130,11 @@ class Fetch(Staging):
         self.fetch_type_opt = parser_interface.object_getattr(
             object_in=options_obj, key="fetch_type", force=True
         )
-
-        print(self.fetch_type_opt)
-        quit()
-
         if self.fetch_type_opt is not None:
             task_id = task_id + "."
             task_id = [
                 task_id + f"_{fetch_type}" for fetch_type in self.fetch_type_opt]
-            task_id = str(task_id[0])
+            #task_id = str(task_id[0])
             print(task_id)
             quit()
 
@@ -282,18 +278,18 @@ class Fetch(Staging):
 
             # Define a list of interface/platform types using the
             # base-class attributes.
-            platforms=list(self.fetch_methods_dict.keys())
+            platforms = list(self.fetch_methods_dict.keys())
 
         if platform_opt is not None:
 
             # Define a list of unique interface/platform types.
-            platforms=list(set(platform_opt.split(",")))
+            platforms = list(set(platform_opt.split(",")))
 
             # Check that the interface/platform is supported; proceed
             # accordingly.
             for platform in platforms:
                 if platform not in self.fetch_methods_dict:
-                    msg=f"The interface/platform type {platform} is not supported. Aborting!!!"
+                    msg = f"The interface/platform type {platform} is not supported. Aborting!!!"
                     staging_error(msg=msg)
 
         return platforms
