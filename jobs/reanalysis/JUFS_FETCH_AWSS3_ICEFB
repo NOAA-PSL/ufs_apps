@@ -71,7 +71,7 @@ export PYTHONPATH=${HOMEufs}/ush:${PYTHONPATH}
 export pid=$$
 
 # Launch the UFS experiment application.
-${PYTHONufs} ${HOMEufs}/scripts/exufs_fetch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --fetch_type=icefb_obs --platform=aws_s3
+${PYTHONufs} ${HOMEufs}/scripts/exufs_fetch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --work_path=${WORKufs} --expt_name=${EXPTufs} --fetch_type=icefb_obs --platform=aws_s3
 
 #----
 

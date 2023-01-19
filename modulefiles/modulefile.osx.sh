@@ -2,7 +2,7 @@
 
 ################################################################################
 ## 
-## Script name:         modulefiles/modulefile.RDHPCS-Hera.sh
+## Script name:         modulefiles/modulefile.osx.sh
 ##
 ## Script description:  Load the specified application(s) run-time
 ##                      environment(s) for the respective supported
@@ -10,13 +10,13 @@
 ##
 ## Author:              Henry R. Winterbottom 
 ##
-## Date:                2022-12-19         
+## Date:                2022-12-29         
 ##
 ## Script history log:  
 ##
-##   2022-12-19: Henry R. Winterbottom -- Original version.
+##   2022-12-29: Henry R. Winterbottom -- Original version.
 ##
-## Usage: sh modulefile.RDHPCS-Hera.sh
+## Usage: sh modulefile.osx.sh
 ##
 ##   Imported Shell Variables:
 ##
@@ -26,9 +26,6 @@
 ##     If the following imported shell variables are equal to 1 in the
 ##     run-time environment, the respective application modules will
 ##     be loaded.
-##
-##     UFS_LAUNCH:       UFS workflow environment variable for the UFS
-##                       launcher application.
 ##
 ##     UFS_STAGE:        UFS workflow environment variable for the UFS
 ##                       staging application.
@@ -49,9 +46,9 @@
 ##
 ################################################################################
 
-set -o nounset
+set -e
 
-# ----
+#----
 
 # Function
 # --------
@@ -62,11 +59,11 @@ set -o nounset
 
 exit_script(){
 
-    # List the loaded modules.
-    module list
+    # This function does nothing other than exit the script.
+    echo "Exiting the script."
 }
 
-# ----
+#----
 
 # Function
 # --------
@@ -80,19 +77,6 @@ exit_script(){
 load_modules(){
 
     # Query the run-time environment and proceed accordingly.
-    UFS_LAUNCH=${UFS_LAUNCH:-}
-    if [[ ${UFS_LAUNCH} -eq 1 ]]; then
-
-	# Load the modules for the respective application.
-	. ${MODULESufs}/launch.env
-
-	# List modules and exit gracefully.
-	exit_script
-
-    fi # [[ ${UFS_LAUNCH} -eq 1 ]]   
-
-    # Query the run-time environment and proceed accordingly.
-    UFS_STAGE=${UFS_STAGE:-}
     if [[ ${UFS_STAGE} -eq 1 ]]; then
 
 	# Load the modules for the respective application.
@@ -104,14 +88,14 @@ load_modules(){
     fi # [[ ${UFS_STAGE} -eq 1 ]]   
 }
 
-# ----
+#----
 
 # (1) Define the path to all UFS application environment variables for
 #     the respective supported platform.
-export MODULESufs=${HOMEufs}/modulefiles/platforms/rdhpcs-hera
+export MODULESufs=${HOMEufs}/modulefiles/platforms/osx
 
 # (2) Define the platform specific environment attributes.
-. ${HOMEufs}/modulefiles/platforms/platform.rdhpcs-hera.env
+. ${HOMEufs}/modulefiles/platforms/platform.osx.env
 
 # (3) Load the respective application module(s) for the supported
 #     platform.

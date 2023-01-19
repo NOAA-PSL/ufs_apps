@@ -2,27 +2,27 @@
 
 ################################################################################
 ## 
-## Script name:         JUFS_FETCH_AWSS3_HIRS
+## Script name:         JUFS_FETCH_AWSS3
 ##
 ## Script description:  Launch the UFS workflow Amazon Web Services
-##                      (AWS) s3 atmospheric High-resolution Infrared
-##                      Radiation Sounder (HIRS) observation
-##                      collection application.
+##                      (AWS) s3 collection application.
 ##
 ## Author R. Winterbottom 
 ##
-## Date:                2023-01-05         
+## Date:                2023-01-11         
 ##
 ## Script history log:  
 ##
-##   2023-01-05: Henry R. Winterbottom -- Original version.
+##   2023-01-11: Henry R. Winterbottom -- Original version.
 ##
-## Usage: sh JUFS_FETCH_AWSS3_HIRS
+## Usage: sh JUFS_FETCH_AWSS3
 ##
 ##   Imported Shell Variables:
 ##
 ##     CYCLEufs:         The respective UFS forecast cycle; the format is
 ##                       %Y%m%d%H%M%S assuming the POSIX convention.
+##
+##     FETCH_TYPE:       The fetch type for the fetching application.
 ##
 ##     HOMEufs:          The top-level working directory for all UFS
 ##                       applications.
@@ -72,7 +72,7 @@ export PYTHONPATH=${HOMEufs}/ush:${PYTHONPATH}
 export pid=$$
 
 # Launch the UFS experiment application.
-${PYTHONufs} ${HOMEufs}/scripts/exufs_fetch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --work_path=${WORKufs} --expt_name=${EXPTufs} --fetch_type=hirs_obs --platform=aws_s3
+${PYTHONufs} ${HOMEufs}/scripts/exufs_fetch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --work_path=${WORKufs} --expt_name=${EXPTufs} --fetch_type=${FETCH_TYPE} --platform=aws_s3
 
 #----
 
