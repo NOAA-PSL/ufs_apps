@@ -98,6 +98,15 @@ class Launch:
         A Python object containing the attributes collect via the
         command line from the application driver script.
 
+    Keywords
+    --------
+
+    task_id: str, optional
+
+        A Python string specifying the calling task; this is use to
+        construct the YAML-formatted configuration file for the
+        respective caller task.
+
     Raises
     ------
 

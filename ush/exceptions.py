@@ -36,6 +36,11 @@ Classes
         This is the base-class for exceptions encountered within the
         ush/launch module; it is a sub-class of Error.
 
+    SOCAError()
+
+        This is the base-class for exceptions encountered within the
+        ush/gdas/soca module; it is a sub-class of Error.
+
     StagingError()
 
         This is the base-class for exceptions encountered within the
@@ -63,6 +68,7 @@ from utils.error_interface import Error
 # Define all available attributes.
 __all__ = [
     "LaunchError",
+    "SOCAError",
     "StagingError",
 ]
 
@@ -82,6 +88,19 @@ class LaunchError(Error):
 
     This is the base-class for exceptions encountered within the
     ush/launch module; it is a sub-class of Error.
+
+    """
+
+# ----
+
+
+class SOCAError(Error):
+    """
+    Description
+    -----------
+
+    This is the base-class for exceptions encountered within the
+    ush/gdas/soca module; it is a sub-class of Error.
 
     """
 

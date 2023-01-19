@@ -1,0 +1,24 @@
+soca:
+
+     var3d:
+
+          # Define the analysis times, in seconds, relative to the
+          # 0000 UTC; this information is used to determine whether
+          # the respective analysis cycle is one for which to perform
+          # the respective SOCA application.
+          analysis_time_seconds: 0, 21600, 43200, 64800
+          
+          # Define the analysis interval; this is the frequency at
+          # which the SOCA application is to be used to update a given
+          # background forecast state.
+          analysis_interval_seconds: 21600
+
+          # Define the path to the YAML-formatted file containing the
+          # fixed-files for the respective SOCA application.
+          fixed_file_config: !ENV ${HOMEufs}/parm/gdas/soca/fixed-files/fixed_file.var3d.1p0.yaml
+
+          
+
+          
+
+          

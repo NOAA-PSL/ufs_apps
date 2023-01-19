@@ -107,6 +107,15 @@ class Staging:
         A Python object containing the attributes collect via the
         command line from the application driver script.
 
+    Keywords
+    --------
+
+    task_id: str, optional
+
+        A Python string specifying the calling task; this is use to
+        construct the YAML-formatted configuration file for the
+        respective caller task.
+
     Raises
     ------
 
@@ -172,7 +181,7 @@ class Staging:
 
         # Check that the YAML-formatted configuration file exists;
         # proceed accordingly.
-        exist = fileio_interface.fileexist(path=self.yaml_file)
+        exist = fileio_interface.fileexist(path=self..yaml_file)
 
         if not exist:
             msg = (
@@ -252,7 +261,8 @@ class Staging:
 
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
-        ncconcat_attrs_dict = {"ncdim": numpy.nan, "ncfile": numpy.nan, "ncfrmt": None}
+        ncconcat_attrs_dict = {"ncdim": numpy.nan,
+                               "ncfile": numpy.nan, "ncfrmt": None}
 
         ncconcat_obj = parser_interface.object_define()
         for (ncconcat_attr, _) in ncconcat_attrs_dict.items():
@@ -300,13 +310,15 @@ class Staging:
 
         # Check that netCDF-formatted member files exist; proceed accordingly.
         if (
-            sum(fileio_interface.fileexist(path=filename) for filename in ncfilelist)
+            sum(fileio_interface.fileexist(path=filename)
+                for filename in ncfilelist)
             > 0
         ):
 
             # Check that the directory tree corresponding to the
             # concatenated output file exists; proceed accordingly.
-            fileio_interface.dirpath_tree(path=os.path.dirname(ncconcat_obj.ncfile))
+            fileio_interface.dirpath_tree(
+                path=os.path.dirname(ncconcat_obj.ncfile))
 
             # Concatenate the respective files to the specified output
             # file path.
@@ -703,7 +715,8 @@ class Staging:
         if str(concat_type).lower() == "nc_concat":
 
             # Concatenate the respective netCDF-formatted file.
-            self._nc_concat(fileid_obj=fileid_obj, fileconcat_obj=fileconcat_obj)
+            self._nc_concat(fileid_obj=fileid_obj,
+                            fileconcat_obj=fileconcat_obj)
 
     def get_hash_index(self, filepath: str, hash_level: str = None) -> str:
         """
@@ -982,7 +995,8 @@ class Staging:
         # path; proceed accordingly.
         if hash_index is not None:
 
-            fileio_interface.dirpath_tree(path=os.path.dirname(checksum_filepath))
+            fileio_interface.dirpath_tree(
+                path=os.path.dirname(checksum_filepath))
 
             with open(checksum_filepath, "a", encoding="utf-8") as file:
                 file.write(f"{hash_index} {local_path}\n")
