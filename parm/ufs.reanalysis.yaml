@@ -1,8 +1,3 @@
-# Experiment configuration YAML-formatted file; this file will be
-# written beneath the respective experiment/cycle /com and /intercom
-# paths.
-expt_yaml: !ENV ufs.${EXPTufs}.${CYCLEufs}.yaml
-
 # Specify whether the UFS application is a coupled model application.
 coupled: True
 
@@ -17,6 +12,7 @@ fetch_atmos_airs: !ENV ${HOMEufs}/parm/staging/atmos/fetch.airs.reanalysis.yaml
 fetch_atmos_amsu: !ENV ${HOMEufs}/parm/staging/atmos/fetch.amsu.reanalysis.yaml
 fetch_atmos_amv: !ENV ${HOMEufs}/parm/staging/atmos/fetch.amv.reanalysis.yaml
 fetch_atmos_atms: !ENV ${HOMEufs}/parm/staging/atmos/fetch.atms.reanalysis.yaml
+fetch_atmos_conv: !ENV ${HOMEufs}/parm/staging/atmos/fetch.conv.reanalysis.yaml
 fetch_atmos_cris: !ENV ${HOMEufs}/parm/staging/atmos/fetch.cris.reanalysis.yaml
 fetch_atmos_goes: !ENV ${HOMEufs}/parm/staging/atmos/fetch.goes.reanalysis.yaml
 fetch_atmos_gpsro: !ENV ${HOMEufs}/parm/staging/atmos/fetch.gpsro.reanalysis.yaml
