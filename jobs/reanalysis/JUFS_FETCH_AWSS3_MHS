@@ -65,7 +65,7 @@ set -e -u
 export UFS_STAGE=1
 . ${PREufs}
 
-Define the run-time environment for the respective UFS application.
+# Define the run-time environment for the respective UFS application.
 export PYTHONPATH=${HOMEufs}/ush:${PYTHONPATH}
 
 # Get processor id (pid).
