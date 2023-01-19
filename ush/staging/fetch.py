@@ -121,23 +121,38 @@ class Fetch(Staging):
 
         """
 
-        # Define the base-class attributes.
-        super().__init__(options_obj=options_obj)
-
         # Define the supported fetch application interfaces.
+        task_id = "fetch"
         self.fetch_methods_dict = {"aws_s3": self.aws_s3}
 
         # Check whether the base-class arguments contain the
-        # respective supported fetch types; proceed accordingly
+        # respective supported fetch types; update the task identifier
+        # string accordingly.
         self.fetch_type_opt = parser_interface.object_getattr(
-            object_in=self.options_obj, key="fetch_type", force=True
+            object_in=options_obj, key="fetch_type", force=True
         )
 
-        # Define the interface/platform types to be collected.
-        self.platforms = self._get_platforms()
+        if self.fetch_type_opt is not None:
+            fetch_types = self.fetch_type_opt.split(",")
+            task_id = task_id + "."
+            task_id = task_id + "_".join(list(fetch_types))
 
-        # Define the file identifiers to be collected.
-        self.fileids = self._get_fileids()
+        # Define the interface/platform types to be collected; update
+        # the task identifier string accordingly.
+        self.platforms = self._get_platforms(options_obj=options_obj)
+        if self.platforms is not None:
+            task_id = task_id + "."
+            task_id = task_id + "_".join(list(self.platforms))
+
+        # Define the file identifiers to be collected; update the task
+        # identifier string accordingly.
+        self.fileids = self._get_fileids(options_obj=options_obj)
+        if self.fileids is not None:
+            task_id = task_id + "."
+            task_id = task_id + "_".join(list(self.fileids))
+
+        # Define the base-class attributes.
+        super().__init__(options_obj=options_obj, task_id=task_id)
 
     def _get_fetch_types(self) -> list:
         """
@@ -171,13 +186,21 @@ class Fetch(Staging):
 
         return fetch_types_list
 
-    def _get_fileids(self) -> list:
+    def _get_fileids(self, options_obj: object) -> list:
         """
         Description
         -----------
 
         This method defines the base-class attribute fileids with
         respect to the command line option attribute fileid.
+
+        Parameters
+        ----------
+
+        options_obj: object
+
+            A Python object containing the attributes collect via the
+            command line from the application driver script.
 
         Returns
         -------
@@ -192,24 +215,31 @@ class Fetch(Staging):
         # identifier attribute; proceed accordingly.
         fileids = None
         fileid_opt = parser_interface.object_getattr(
-            object_in=self.options_obj, key="fileid", force=True
+            object_in=options_obj, key="fileid", force=True
         )
 
         # If the file identifier attribute has been specified, define
         # a list of values to be returned.
         if fileid_opt is not None:
-
             fileids = list(set(fileid_opt.split(",")))
 
         return fileids
 
-    def _get_platforms(self) -> list:
+    def _get_platforms(self, options_obj: object) -> list:
         """
         Description
         -----------
 
         This method defines the base-class attribute platforms with
         respect to the command line option attribute platform.
+
+        Parameters
+        ----------
+
+        options_obj: object
+
+            A Python object containing the attributes collect via the
+            command line from the application driver script.
 
         Returns
         -------
@@ -231,9 +261,8 @@ class Fetch(Staging):
         # Check whether the base-class arguments contain the
         # respective interface/platform type; proceed accordingly.
         platform_opt = parser_interface.object_getattr(
-            object_in=self.options_obj, key="platform", force=True
+            object_in=options_obj, key="platform", force=True
         )
-
         if platform_opt is None:
 
             # Define a list of interface/platform types using the
@@ -321,7 +350,6 @@ class Fetch(Staging):
             )
 
             if value is None:
-
                 value = parser_interface.dict_key_value(
                     dict_in=checksum_attrs_dict,
                     key=checksum_attr,
@@ -497,7 +525,6 @@ class Fetch(Staging):
             # Collect files in accordance with the configuration and
             # options.
             for fetch_type in fetch_types:
-
                 if fetch_type in filesdict:
                     msg = f"Collecting files for fetch type {fetch_type}."
                     self.logger.info(msg=msg)

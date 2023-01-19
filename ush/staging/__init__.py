@@ -76,6 +76,7 @@ import numpy
 from confs.yaml_interface import YAML
 from exceptions import StagingError
 from ioapps import boto3_interface, hashlib_interface, netcdf4_interface
+from launch import Launch
 from tools import datetime_interface, fileio_interface, parser_interface
 from utils import timestamp_interface
 from utils.error_interface import msg_except_handle
@@ -120,7 +121,7 @@ class Staging:
     """
 
     @classmethod
-    def __init__(cls, options_obj: object):
+    def __init__(cls, options_obj: object, task_id: str = None):
         """
         Description
         -----------
@@ -133,6 +134,9 @@ class Staging:
         self = cls
         self.options_obj = options_obj
         self.logger = Logger()
+        self.launch = Launch(options_obj=self.options_obj, task_id=task_id)
+        self.launch.build_dirpath()
+        self.launch.build_configs()
 
         # Check that the mandatory arguments have been provided within
         # the options_obj parameter; proceed accordingly.
@@ -178,7 +182,9 @@ class Staging:
             error(msg=msg)
 
         # Parse the configuration file.
-        self.yaml_dict = YAML().read_yaml(yaml_file=self.yaml_file)
+        self.yaml_dict = YAML().read_concat_yaml(
+            yaml_file=self.yaml_file, return_obj=False
+        )
 
     def _nc_concat(self, fileid_obj: object, fileconcat_obj: object) -> None:
         """
@@ -246,8 +252,7 @@ class Staging:
 
         # Define the netCDF concatenation attributes to be
         # collected from the experiment configuration.
-        ncconcat_attrs_dict = {"ncdim": numpy.nan,
-                               "ncfile": numpy.nan, "ncfrmt": None}
+        ncconcat_attrs_dict = {"ncdim": numpy.nan, "ncfile": numpy.nan, "ncfrmt": None}
 
         ncconcat_obj = parser_interface.object_define()
         for (ncconcat_attr, _) in ncconcat_attrs_dict.items():

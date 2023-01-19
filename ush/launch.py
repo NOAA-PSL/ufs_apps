@@ -112,7 +112,7 @@ class Launch:
     """
 
     @classmethod
-    def __init__(cls, options_obj: object):
+    def __init__(cls, options_obj: object, task_id: str = "launch"):
         """
         Description
         -----------
@@ -137,7 +137,6 @@ class Launch:
             value = parser_interface.object_getattr(
                 object_in=self.options_obj, key=mand_arg, force=True
             )
-
             if value is None:
                 msg = (
                     "The option attributes provided to the base-class does not "
@@ -161,7 +160,6 @@ class Launch:
         # Check that the YAML-formatted configuration file exists;
         # proceed accordingly.
         exist = fileio_interface.fileexist(path=self.yaml_file)
-
         if not exist:
             msg = (
                 f"The YAML-formatted configuration file {self.yaml_file} "
@@ -179,18 +177,10 @@ class Launch:
             self.work_path, self.expt_name, self.cycle, "intercom"
         )
 
-        # Define the YAML-formatted experiment configuration file;
-        # proceed accordingly.
-        self.yaml_config_path = parser_interface.dict_key_value(
-            dict_in=self.yaml_dict, key="expt_yaml", force=True, no_split=True
-        )
+        # Define the YAML-formatted experiment configuration file for
+        # the respective task.
+        self.yaml_config_path = f"{task_id}.{self.expt_name}.{self.cycle}.yaml"
 
-        if self.yaml_config_path is None:
-            self.yaml_config_path = f"ufs.{self.expt_name}.{self.cycle}.yaml"
-
-        self = parser_interface.object_setattr(
-            object_in=self, key="expt_yaml", value=self.yaml_config_path
-        )
         msg = f"The YAML-formatted experiment configuration file name is {self.yaml_config_path}."
         self.logger.warn(msg=msg)
 
@@ -219,7 +209,6 @@ class Launch:
             "com_root",
             "cycle",
             "expt_name",
-            "expt_yaml",
             "itrc_root",
             "work_path",
         ]
@@ -261,7 +250,6 @@ class Launch:
                 value = parser_interface.object_getattr(
                     object_in=self, key=attr, force=True
                 )
-
                 if value is None:
                     msg = (
                         f"The mandatory attribute {attr} has not been "
@@ -305,7 +293,6 @@ class Launch:
 
         # Build the respective directory tree paths.
         for dirpath in dirpaths_list:
-
             msg = f"Building directory tree {dirpath}."
             self.logger.info(msg=msg)
             fileio_interface.dirpath_tree(path=dirpath)

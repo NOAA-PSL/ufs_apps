@@ -41,7 +41,8 @@ Functions
 Usage
 -----
 
-    user@host:$ python exufs_fetch.py --<yaml_file> --<cycle> [--platform] [--fetch_type] [--fileid]
+    user@host:$ python exufs_fetch.py --<yaml_file> --<cycle> --<work_path> \
+                    --<expt_name> [--platform] [--fetch_type] [--fileid]
 
 Author(s)
 ---------
@@ -114,6 +115,17 @@ def main() -> None:
         forecast cycle beginning 0000 UTC 01 January 2000:
 
         --cycle=20000101000000 or -cycle=20000101000000
+
+    expt_name: str
+
+        A Python string specifying an (unique) name for the respective
+        experiment.
+
+    work_path: str
+
+        A Python string specifying the path to where the experiment
+        directory trees will be built and the respective experiment
+        will be executed.
 
     Keywords
     --------
@@ -200,6 +212,8 @@ def main() -> None:
     cls_schema = {
         "yaml_file": str,
         "cycle": Or(str, int),
+        "work_path": str,
+        "expt_name": str,
         Optional("fetch_type"): str,
         Optional("platform"): str,
         Optional("fileid"): str,

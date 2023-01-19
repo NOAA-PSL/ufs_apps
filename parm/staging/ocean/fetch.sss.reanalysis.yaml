@@ -26,7 +26,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/sss/esa/smos/%Y/%m/24h/sss.esa.smos_l2_miras.%Y%m%d.T120000Z.iodav2.nc
+                    object_path: observations/reanalysis/sss/esa/smos/%Y/%m/24h/sss.esa.smos_l2_miras.%Y%m%d.T120000.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
@@ -37,7 +37,7 @@ fetch:
                     stream_stop: 20151231000000
 
                # Define the file identifier.
-               sst.jpl_sentinel1a:
+               sss.jpl_sentinel1a:
 
                     # Define the attributes corresponding to the
                     # respective file identifier.
@@ -47,7 +47,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/sss/jpl/sentinel1a/%Y/%m/24h/sss.jpl.smap_l2_sentinel1a.%Y%m%d.T120000Z.iodav2.nc
+                    object_path: observations/reanalysis/sss/jpl/sentinel1a/%Y/%m/24h/sss.jpl.smap_l2_sentinel1a.%Y%m%d.T120000.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
