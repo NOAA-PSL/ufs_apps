@@ -65,7 +65,7 @@ fetch:
                     
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.rtgssthr.grb
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.t%Hz.rtgssthr.grb
                     offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
@@ -80,7 +80,7 @@ fetch:
                     
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.snogrb
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.t%Hz.snogrb
                     offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
@@ -95,7 +95,7 @@ fetch:
                     
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.snogrb_t1534.3072.1536
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.t%Hz.snogrb_t1534.3072.1536
                     offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
@@ -110,7 +110,7 @@ fetch:
                     
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.snogrb_t574
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.t%Hz.snogrb_t574
                     offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
@@ -125,7 +125,7 @@ fetch:
                     
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.snogrb_t574.1152.576
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.t%Hz.snogrb_t574.1152.576
                     offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
@@ -140,7 +140,7 @@ fetch:
                     
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.sstgrb
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.t%Hz.sstgrb
                     offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
