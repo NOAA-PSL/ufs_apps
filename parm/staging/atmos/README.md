@@ -8,6 +8,7 @@
 | [`fetch.amsu.reanalysis.yaml`](fetch.amsu.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Advanced Microwave Sounding Unit-A and B (AMSU-A and AMSU-B) observations. </div>|
 | [`fetch.amv.reanalysis.yaml`](fetch.amv.reanalysis.yaml) | <div align="left">UFS reanalysis project Atmosphere Motion Vector observations. </div>|
 | [`fetch.atms.reanalysis.yaml`](fetch.atms.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Advanced Technology Microwave Sounder (ATMS) observations. </div>|
+| [`fetch.conv.reanalysis.yaml`](fetch.conv.reanalysis.yaml) | <div align="left">UFS reanalysis project conventional atmospheric observations; this include aircraft observations and [GRIB-formatted](https://weather.gc.ca/grib/what_is_GRIB_e.html) files required for the respective UFS applications. </div>|
 | [`fetch.cris.reanalysis.yaml`](fetch.cris.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Cross-track Infrared Sounder (CrIS) observations. </div>|
 | [`fetch.goes.reanalysis.yaml`](fetch.goes.reanalysis.yaml) |  <div align="left">UFS reanalysis project atmospheric Geostationary Operational Environmental Satellite (GOES) observations. </div>|
 | [`fetch.gpsro.reanalysis.yaml`](fetch.gpsro.reanalysis.yaml) | <div align="left">UFS reanalysis project atmospheric Global Positioning System Radio Occultation (GPSRO) observations. </div>|
