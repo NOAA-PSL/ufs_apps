@@ -1,0 +1,151 @@
+# All attributes that follow are for the UFS fetching application.
+fetch:
+
+     # Define the checksum hash index attributes.
+     checksum:
+
+       aws_s3_filepath: !ENV ${WORKufs}/${EXPTufs}/com/${CYCLEufs}/aws_s3.fetch.conv.md5     
+       aws_s3_hash: md5
+  
+     # Define a supported the interface platform from which to collect
+     # the respective files.
+     aws_s3:
+
+          # Define the fetching type; this example corresponds to
+          # atmosphere conventional observations.
+          conv_obs:
+
+               # Define the file identifier.
+               gdas_prepbufr:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.t%Hz.prepbufr.nr
+                    offset_seconds: 21600
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/conv/prepbufr/%Y/%m/prepbufr/gdas.%Y%m%d.t%Hz.prepfur.nr
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+               # Define the file identifier.
+               gdas_prepbufr_acft:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.t%Hz.acft_profiles.nr
+                    offset_seconds: 21600
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/conv/prepbufr.acft_profiles/%Y/%m/bufr/gdas.%Y%m%d.t%Hz.prepbufr.acft_profiles.nr
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+               # Define the file identifier.
+               gdas_engicegrb:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.t%Hz.engicegrb
+                    offset_seconds: 21600
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/atmos/gefsv13_reanalysis-md5/%Y%m%d%H%M%S/bufr/gdas.t%Hz.engicegrb
+                    profile_name: noaa_bdp
+                    ignore_missing: True              
+
+               # Define the file identifier.
+               gdas_rtgssthr:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.rtgssthr.grb
+                    offset_seconds: 21600
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/atmos/gefsv13_reanalysis-md5/%Y%m%d%H%M%S/bufr/gdas.t%Hz.rtgssthr.grb
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+               # Define the file identifier.
+               gdas_snogrb:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.snogrb
+                    offset_seconds: 21600
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/atmos/gefsv13_reanalysis-md5/%Y%m%d%H%M%S/bufr/gdas.t%Hz.snogrb
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+               # Define the file identifier.
+               gdas_snogrb_t1534.3072.1536:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.snogrb_t1534.3072.1536
+                    offset_seconds: 21600
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/atmos/gefsv13_reanalysis-md5/%Y%m%d%H%M%S/bufr/gdas.t%Hz.snogrb_t1534.3072.1536
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+               # Define the file identifier.
+               gdas_snogrb_t574:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.snogrb_t574
+                    offset_seconds: 21600
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/atmos/gefsv13_reanalysis-md5/%Y%m%d%H%M%S/bufr/gdas.t%Hz.snogrb_t574
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+               # Define the file identifier.
+               gdas_snogrb_t574.1152.576:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.snogrb_t574.1152.576
+                    offset_seconds: 21600
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/atmos/gefsv13_reanalysis-md5/%Y%m%d%H%M%S/bufr/gdas.t%Hz.snogrb_t574.1152.576
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+               # Define the file identifier.
+               gdas_sstgrb:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.%Hz.sstgrb
+                    offset_seconds: 21600
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/atmos/gefsv13_reanalysis-md5/%Y%m%d%H%M%S/bufr/gdas.t%Hz.sstgrb
+                    profile_name: noaa_bdp
+                    ignore_missing: True
