@@ -71,13 +71,26 @@ History
 
 import os
 
+from schema import Or
+
 from confs.yaml_interface import YAML
 from tools import datetime_interface, fileio_interface, parser_interface
 from utils import timestamp_interface
+from utils import schema_interface
 from utils.error_interface import msg_except_handle
 from utils.logger_interface import Logger
 
 from exceptions import LaunchError
+
+# ----
+
+# Define the experiment configuration file attribute schema.
+cls_schema = {
+    "coupled": bool,
+    "cycling": bool,
+    str: Or(str, int, float, bool, dict, list, tuple)
+}
+
 
 # ----
 
@@ -223,6 +236,50 @@ class Launch:
             "work_path",
         ]
 
+        # Compile a list of YAML-formatted files collected from
+        # the experiment configuration; it not a YAML-formatted
+        # file, update the Python dictionary with the respective
+        # key and value pair.
+        (in_dict, yaml_file_list) = ({}, [])
+
+        # Check that the respective attribute value; proceed
+        # accordingly.
+        for (attr_key, attr_value) in self.yaml_dict.items():
+
+            # If the respective attribute is a YAML-formatted
+            # file, update the list of YAML-formatted files to be
+            # concatenated.
+            if YAML().check_yaml(attr_value=attr_value):
+                if fileio_interface.fileexist(path=attr_value):
+                    yaml_file_list.append(attr_value)
+
+            if not YAML().check_yaml(attr_value=attr_value):
+                value = parser_interface.dict_key_value(
+                    dict_in=self.yaml_dict, key=attr_key, no_split=True
+                )
+                in_dict[attr_key] = value
+
+        # Add the experiment attributes to the YAML-formatted
+        # configuration file; proceed accordingly.
+        for attr in attrs_list:
+            value = parser_interface.object_getattr(
+                object_in=self, key=attr, force=True
+            )
+            if value is None:
+                msg = (
+                    f"The mandatory attribute {attr} has not been "
+                    "specified. Aborting!!!"
+                )
+                error(msg=msg)
+            in_dict[attr] = value
+
+        # Check that the experiment configuration file
+        # requirements are met.
+        schema_interface.validate_opts(
+            cls_schema=cls_schema, cls_opts=in_dict)
+        msg = "Experiment configuration passes schema validation."
+        self.logger.info(msg=msg)
+
         # Create the respective configuration files.
         config_files_list = [
             os.path.join(self.com_root, self.yaml_config_path),
@@ -230,43 +287,6 @@ class Launch:
         ]
 
         for config_file in config_files_list:
-
-            # Compile a list of YAML-formatted files collected from
-            # the experiment configuration; it not a YAML-formatted
-            # file, update the Python dictionary with the respective
-            # key and value pair.
-            (in_dict, yaml_file_list) = ({}, [])
-
-            # Check that the respective attribute value; proceed
-            # accordingly.
-            for (attr_key, attr_value) in self.yaml_dict.items():
-
-                # If the respective attribute is a YAML-formatted
-                # file, update the list of YAML-formatted files to be
-                # concatenated.
-                if YAML().check_yaml(attr_value=attr_value):
-                    if fileio_interface.fileexist(path=attr_value):
-                        yaml_file_list.append(attr_value)
-
-                if not YAML().check_yaml(attr_value=attr_value):
-                    value = parser_interface.dict_key_value(
-                        dict_in=self.yaml_dict, key=attr_key, no_split=True
-                    )
-                    in_dict[attr_key] = value
-
-            # Add the experiment attributes to the YAML-formatted
-            # configuration file; proceed accordingly.
-            for attr in attrs_list:
-                value = parser_interface.object_getattr(
-                    object_in=self, key=attr, force=True
-                )
-                if value is None:
-                    msg = (
-                        f"The mandatory attribute {attr} has not been "
-                        "specified. Aborting!!!"
-                    )
-                    error(msg=msg)
-                in_dict[attr] = value
 
             # Concatenate the respective YAML-formatted files list and
             # subsequently write all configuration attributes to the
