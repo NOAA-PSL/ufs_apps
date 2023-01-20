@@ -149,7 +149,7 @@ cls_schema = {
     "work_path": str,
     "expt_name": str,
     "app": str,
-    "app_type": str
+    "app_type": str,
 }
 
 # ----
