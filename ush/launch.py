@@ -71,12 +71,10 @@ History
 
 import os
 
-from schema import Or
-
 from confs.yaml_interface import YAML
+from schema import Or
 from tools import datetime_interface, fileio_interface, parser_interface
-from utils import timestamp_interface
-from utils import schema_interface
+from utils import schema_interface, timestamp_interface
 from utils.error_interface import msg_except_handle
 from utils.logger_interface import Logger
 
@@ -88,7 +86,7 @@ from exceptions import LaunchError
 cls_schema = {
     "coupled": bool,
     "cycling": bool,
-    str: Or(str, int, float, bool, dict, list, tuple)
+    str: Or(str, int, float, bool, dict, list, tuple),
 }
 
 
@@ -194,8 +192,7 @@ class Launch:
 
         # Define the directory tree paths relative to the respective
         # forecast cycle.
-        self.com_root = os.path.join(
-            self.work_path, self.expt_name, "com", self.cycle)
+        self.com_root = os.path.join(self.work_path, self.expt_name, "com", self.cycle)
         self.itrc_root = os.path.join(
             self.work_path, self.expt_name, self.cycle, "intercom"
         )
@@ -275,8 +272,7 @@ class Launch:
 
         # Check that the experiment configuration file
         # requirements are met.
-        schema_interface.validate_opts(
-            cls_schema=cls_schema, cls_opts=in_dict)
+        schema_interface.validate_opts(cls_schema=cls_schema, cls_opts=in_dict)
         msg = "Experiment configuration passes schema validation."
         self.logger.info(msg=msg)
 
@@ -320,8 +316,7 @@ class Launch:
         # Define the mandatory directory tree paths for the respective
         # forecast cycle.
         dirpaths_list = [
-            os.path.join(self.work_path, self.expt_name,
-                         self.cycle, "intercom"),
+            os.path.join(self.work_path, self.expt_name, self.cycle, "intercom"),
             os.path.join(self.work_path, self.expt_name, "com", self.cycle),
         ]
 
