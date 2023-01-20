@@ -1,18 +1,75 @@
+# =========================================================================
+
+# Module: ush/gdas/soca/var3d.py
+
+# Author: Henry R. Winterbottom
+
+# Email: henry.winterbottom@noaa.gov
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the respective public license published by the
+# Free Software Foundation and included with the repository within
+# which this application is contained.
+
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+# =========================================================================
+
+"""
+
+"""
+
+# ----
+
+import os
+
 from gdas.soca import SOCA
 
+# ----
 
-class Global3DVAR():
+
+class Global3DVAR(SOCA):
+    """
+    Description
+    -----------
+
+    This is the base-class object for all Sea-ice and Ocean Coupled
+    Analysis (SOCA) global 3-dimensional variational (3DVAR)
+    applications; it is a sub-class of SOCA.
+
+    Parameters
+    ----------
+
+    options_obj: object
+
+        A Python object containing the attributes collect via the
+        command line from the application driver script.
+
+    """
 
     def __init__(self, options_obj: object):
+        """
+        Description
+        -----------
 
+        Creates a new Global3DVAR object.
+
+        """
+
+        # Define the base-class attributes.
         self.options_obj = options_obj
-
-        # super().__init__(options_obj=self.options_obj,
-        #                 task_id="soca_3dvar"
-        #                 )
+        task_id = "global_soca_3dvar"
+        super().__init__(options_obj=self.options_obj,
+                         task_id="global_soca_3dvar"
+                         )
+        self.dirpath = os.path.join(self.expt_path, "soca", task_id)
 
     def run(self):
         """
 
         """
-        print('hello')
+
+        # Build the directory tree for the respective application.
+        self.build_dirtree(dirpath=self.dirpath, is_ens=False)
