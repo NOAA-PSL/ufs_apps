@@ -181,7 +181,7 @@ class Staging:
 
         # Check that the YAML-formatted configuration file exists;
         # proceed accordingly.
-        exist = fileio_interface.fileexist(path=self..yaml_file)
+        exist = fileio_interface.fileexist(path=self.yaml_file)
 
         if not exist:
             msg = (
