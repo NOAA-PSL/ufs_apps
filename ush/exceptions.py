@@ -31,6 +31,11 @@ Description
 Classes
 -------
 
+    GDASError()
+
+        This is the base-class for exceptions encountered within the
+        ush/gdas module; it is a sub-class of Error.
+
     LaunchError()
 
         This is the base-class for exceptions encountered within the
@@ -67,6 +72,7 @@ from utils.error_interface import Error
 
 # Define all available attributes.
 __all__ = [
+    "GDASError",
     "LaunchError",
     "SOCAError",
     "StagingError",
@@ -77,6 +83,19 @@ __all__ = [
 __author__ = "Henry R. Winterbottom"
 __maintainer__ = "Henry R. Winterbottom"
 __email__ = "henry.winterbottom@noaa.gov"
+
+# ----
+
+
+class GDASError(Error):
+    """
+    Description
+    -----------
+
+    This is the base-class for exceptions encountered within the
+    ush/gdas module; it is a sub-class of Error.
+
+    """
 
 # ----
 

@@ -62,6 +62,9 @@ class SOCA:
         self.launch.build_dirpath()
         self.launch.build_configs()
 
+    def build_dirtree(self, dirpath: str, is_ens: bool = False) -> None:
+        """ """
+
 
 # ----
 
