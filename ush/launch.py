@@ -192,7 +192,8 @@ class Launch:
 
         # Define the directory tree paths relative to the respective
         # forecast cycle.
-        self.com_root = os.path.join(self.work_path, self.expt_name, "com", self.cycle)
+        self.com_root = os.path.join(
+            self.work_path, self.expt_name, "com", self.cycle)
         self.itrc_root = os.path.join(
             self.work_path, self.expt_name, self.cycle, "intercom"
         )
@@ -303,7 +304,7 @@ class Launch:
             with open(config_file, "a", encoding="utf-8") as file:
                 file.write(f"\n# Created {timestamp} from {self.yaml_file}.\n")
 
-    def build_dirpath(self) -> None:
+    def build_dirpath(self) -> str:
         """
         Description
         -----------
@@ -311,12 +312,21 @@ class Launch:
         This method builds the directory path tree for the respective
         experiment.
 
+        Returns
+        -------
+
+        dirpath: str
+
+            A Python string specifying the path for the respective
+            caller application.
+
         """
 
         # Define the mandatory directory tree paths for the respective
         # forecast cycle.
         dirpaths_list = [
-            os.path.join(self.work_path, self.expt_name, self.cycle, "intercom"),
+            os.path.join(self.work_path, self.expt_name,
+                         self.cycle, "intercom"),
             os.path.join(self.work_path, self.expt_name, "com", self.cycle),
         ]
 
@@ -325,6 +335,10 @@ class Launch:
             msg = f"Building directory tree {dirpath}."
             self.logger.info(msg=msg)
             fileio_interface.dirpath_tree(path=dirpath)
+
+        dirpath = os.path.join(self.work_path, self.expt_name, self.cycle)
+
+        return dirpath
 
     def run(self) -> None:
         """
