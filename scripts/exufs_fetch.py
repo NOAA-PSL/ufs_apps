@@ -51,8 +51,9 @@ Parameters
 
         A Python string specifying the path to the YAML-formatted
         configuration file; this script and it's child modules assume
-        that the fetch key is specified within the top-level YAML keys
-        of the respective file as follows:
+        that, in addition to the mandatory variables specified within
+        the launch module, the fetch key is specified within the
+        top-level YAML keys of the respective file as follows:
 
         fetch:
 
