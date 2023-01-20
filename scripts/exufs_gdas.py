@@ -1,6 +1,6 @@
 # =========================================================================
 
-# Script: scripts/exufs_fetch.py
+# Script: scripts/exufs_gdas.py
 
 # Author: Henry R. Winterbottom
 
@@ -21,14 +21,14 @@
 Script
 ------
 
-    exufs_fetch.py
+    exufs_gdas.py
 
 Description
 -----------
 
-    This script contains a functional application interface to collect
-    (i.e., fetch) file paths specified within a YAML-formatted
-    application file.
+    This script contains a functional application interface to the
+    Global Data Assimilation System (GDAS) supported applications and
+    application types.
 
 Functions
 ---------
@@ -41,8 +41,8 @@ Functions
 Usage
 -----
 
-    user@host:$ python exufs_fetch.py --<yaml_file> --<cycle> --<work_path> \
-                    --<expt_name> [--platform] [--fetch_type] [--fileid]
+    user@host:$ python exufs_gdas.py --<yaml_file> <--cycle> --<work_path> \
+                    --<expt_name> --<app> --<app_type>
 
 Parameters
 ----------
@@ -52,14 +52,18 @@ Parameters
         A Python string specifying the path to the YAML-formatted
         configuration file; this script and it's child modules assume
         that, in addition to the mandatory variables specified within
-        the launch module, the fetch key is specified within the
+        the launch module, the gdas key is specified within the
         top-level YAML keys of the respective file as follows:
 
-        fetch:
+        gdas:
 
-            some_stuff:
+            gsi:
 
-                some_more_stuff:
+                some_gsi_stuff:
+
+            soca:
+
+                some_soca_stuff:
 
         Enter the parameter value as:
 
@@ -90,105 +94,39 @@ Parameters
 
         --work_path /path/for/spam/experiment or -work_path /path/for/spam/experiment
 
-    Keywords
-    --------
+    app: str
 
-    platform: str, optional
+        A Python string specifying the supported data assimilation
+        application (i.e., GSI, SOCA, etc.,).
 
-        A Python string specifying the supported interface/platform
-        types from which files are to be fetched; this argument may
-        also contain a comma-delimited string for multiple supported
-        interface/platform options (no spaces between comma-delimited
-        values).
+    app_type: str
 
-        For files to be fetched from the "spam" platform, the keyword
-        value may be entered as:
-
-        --platform spam or -platform spam
-
-        For files to be fetched from both the "spam" and the "ham"
-        platforms, the keyword value may be entered as:
-
-        --platform spam,ham or -platform spam,ham
-
-    fetch_type: str, optional
-
-        A Python string specifying the file types to be collected; an
-        example is as follows:
-
-        fetch:
-
-            interface:
-
-                spam:
-
-                ham:
-
-        if fetch_type is specified as "spam", all files for the
-        respective interface (i.e., AWS s3, NOAA HPSS, etc.,) beneath
-        the "spam" block will be collected; if the keyword is not
-        specified or NoneType upon entry, the attributes beneath both
-        "spam" and "ham" will be returned.
-
-        For the "spam" example above, the keyword value may be entered
-        as:
-
-        --fetch_type spam or -fetch_type spam
-
-    fileid: str, optional
-
-        A Python string specifying the file identifiers to be
-        collected; this argument may also contain a comma-delimited
-        string for multiple file identifiers (no spaces between
-        comma-delimited values); if not specified, all file
-        identifiers (or as a function of fetch_type above) within the
-        experiment configuration will be collected; example is as
-        follows:
-
-        fetch:
-
-            interface:
-
-                spam:
-
-                    ham:
-
-                    eggs:
-
-        The "ham" and "eggs" attributes are the file identifiers
-        within the configuration file and may be used to retrieve
-        specific (a) file(s). For a respective file identifier, "ham"
-        for example, to be collected, the keyword value may be entered
-        as:
-
-        --fileid ham or -fileid ham
-
-        For multiple file identifiers to be collect, "ham" and "eggs"
-        in this example, the keyword value may be entered as (no
-        spaces between comma-delimited values):
-
-        --fileid ham,eggs or -fileid ham,eggs
-
+        A Python string specifying the supported data assimilation
+        application type (i.e., global_3dvar, regional_enkf, etc.,).
 
 Author(s)
 ---------
 
-    Henry R. Winterbottom; 12 December 2022
+    Henry R. Winterbottom; 20 January 2023
 
 History
 -------
 
-    2022-12-12: Henry Winterbottom -- Initial implementation.
+    2023-01-20: Henry Winterbottom -- Initial implementation.
 
 """
+
+# ----
+
+# pylint: disable=no-name-in-module
 
 # ----
 
 import os
 import time
 
-from schema import Optional, Or
-from staging.fetch import Fetch
+from gdas import GDAS
+from schema import Or
 from utils.arguments_interface import Arguments
 from utils.logger_interface import Logger
 
@@ -210,9 +148,8 @@ cls_schema = {
     "cycle": Or(str, int),
     "work_path": str,
     "expt_name": str,
-    Optional("fetch_type"): Or(str, None),
-    Optional("platform"): Or(str, None),
-    Optional("fileid"): Or(str, None),
+    "app": str,
+    "app_type": str,
 }
 
 # ----
@@ -236,7 +173,7 @@ def main() -> None:
     options_obj = Arguments().run(eval_schema=EVAL_SCHEMA, cls_schema=cls_schema)
 
     # Launch the task.
-    task = Fetch(options_obj=options_obj)
+    task = GDAS(options_obj=options_obj)
     task.run()
     stop_time = time.time()
     msg = f"Completed application {script_name}."

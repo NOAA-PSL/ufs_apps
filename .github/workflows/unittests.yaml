@@ -71,11 +71,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install netcdf4
         conda install numpy
+        pip install numpy==1.22.4
         pip install astropy
         pip install bs4
         pip install croniter
         pip install pytest==7.2.0
         pip install pytest-order
+        pip install schema
+        pip install typing_extensions
         pip install moto
         conda install -c anaconda pyyaml
         conda install -c anaconda boto3

@@ -1,3 +1,7 @@
+# These are mandatory configuration attributes.
+coupled: False
+cycling: False
+
 # All attributes that follow are for the UFS fetching application.
 fetch:
 
