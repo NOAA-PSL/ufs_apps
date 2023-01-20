@@ -144,7 +144,7 @@ class Staging:
         self.options_obj = options_obj
         self.logger = Logger()
         self.launch = Launch(options_obj=self.options_obj, task_id=task_id)
-        self.launch.build_dirpath()
+        self.dirpath = self.launch.build_dirpath()
         self.launch.build_configs()
 
         # Check that the mandatory arguments have been provided within

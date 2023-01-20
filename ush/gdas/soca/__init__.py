@@ -19,33 +19,50 @@
 
 """
 
+PLACE HOLDER
 
 """
 
 # ----
 
+# pylint: disable=line-too-long
+# pylint: disable=unused-argument
 
 # ----
 
+
+# ----
+
+import os
+
+from dataclasses import dataclass
+
 from confs.yaml_interface import YAML
+from exceptions import SOCAError
 from launch import Launch
 from tools import datetime_interface, fileio_interface, parser_interface
 from utils import timestamp_interface
 from utils.error_interface import msg_except_handle
 from utils.logger_interface import Logger
 
-from exceptions import SOCAError
+# ----
+
+__author__ = "Henry R. Winterbottom"
+__maintainer__ = "Henry R. Winterbottom"
+__email__ = "henry.winterbottom@noaa.gov"
 
 # ----
 
 
+@dataclass
 class SOCA:
     """
 
+    PLACE HOLDER
+
     """
 
-    @classmethod
-    def __init__(cls, options_obj: object, task_id: str = None):
+    def __init__(self, options_obj: object, task_id: str):
         """
         Description
         -----------
@@ -55,16 +72,58 @@ class SOCA:
         """
 
         # Define the base-class attributes.
-        self = cls
         self.options_obj = options_obj
-        self.logger = Logger()
         self.launch = Launch(options_obj=self.options_obj, task_id=task_id)
-        self.launch.build_dirpath()
+        self.expt_path = self.launch.build_dirpath()
         self.launch.build_configs()
 
-    def build_dirtree(self, dirpath: str, is_ens: bool = False) -> None:
-        """ """
+        # Parse the YAML-formatted file and build the working
+        # directory; proceed accordingly.
+        self.yaml_dict = YAML().read_concat_yaml(yaml_file=self.options_obj.yaml_file)
 
+    def build_dirtree(self, dirpath: str, is_ens: bool = False) -> None:
+        """
+        Description
+        -----------
+
+        This method builds the sub-directory tree beneath the
+        top-level directory path (specified upon entry) in accordance
+        with the SOCA application attributes.
+
+        Parameters
+        ----------
+
+        dirpath: str
+
+            A Python string specifying the top-level directory path
+            beneath which the sub-directory tree will be built.
+
+        Keywords
+        --------
+
+        is_ens: bool, optional
+
+            A Python boolean valued variable specifying whether the
+            sub-directory tree for an SOCA ensemble-based application
+            is to be built.
+
+        """
+
+        # Define the list of sub-directories to be created; proceed
+        # accordingly.
+        subdirs_list = ["ANALYSIS", "bump", "INPUT", "obs", "OUTPUT",
+                        "RESTART", "RESTART_IN"]
+
+        # If working within ensemble based SOCA applications, proceed
+        # accordingly.
+        if is_ens:
+            subdirs_list = [subdirs_list.append(subdir) for subdir in ["ensemble", "letkf_observer_obs", "letkf_solver_obs",
+                                                                       "update"]]
+
+        # Build the directory tree path(s).
+        for subdir in subdirs_list:
+            path = os.path.join(dirpath, subdir)
+            fileio_interface.dirpath_tree(path=path)
 
 # ----
 

@@ -78,6 +78,7 @@ from utils.error_interface import msg_except_handle
 from utils.logger_interface import Logger
 
 from gdas.soca.var3d import Global3DVAR as soca_global_3dvar
+from gdas.soca.letkf import GlobalLETKF as soca_global_letkf
 
 # ----
 
@@ -95,7 +96,9 @@ from gdas.soca.var3d import Global3DVAR as soca_global_3dvar
 # respective GDAS application supported appliction types (e.g.,
 # app_type); finally, the "eggs" references are the GDAS sub-classes
 # corresponding to the respective (supported) application type.
-gdas_configs = {"soca": {"global_3dvar": soca_global_3dvar}}
+gdas_configs = {"soca": {"global_3dvar": soca_global_3dvar,
+                         "global_letkf": soca_global_letkf}
+                }
 
 # ----
 
