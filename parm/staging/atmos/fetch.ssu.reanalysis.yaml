@@ -34,5 +34,5 @@ fetch:
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.                    
                     stream_start: 19900101000000
-                    stream_stop: 
+                    stream_stop: 20060505000000
 
