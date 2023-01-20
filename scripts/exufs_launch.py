@@ -41,7 +41,7 @@ Usage
 -----
 
     user@host:$ python exufs_launch.py --<yaml_file> --<cycle> --<work_path> \
-                    --<expt_name> 
+                    --<expt_name>
 
 Parameters
 ----------
