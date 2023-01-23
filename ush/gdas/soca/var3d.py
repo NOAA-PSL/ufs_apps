@@ -78,4 +78,4 @@ class Global3DVAR(SOCA):
         self.build_dirtree(dirpath=self.dirpath, is_ens=False)
 
         # Link and configure the observation attributes.
-        self.config_obs(dirpath=self.dirpath,
+        # self.config_obs(dirpath=self.dirpath,
