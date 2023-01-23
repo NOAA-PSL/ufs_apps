@@ -66,6 +66,9 @@ class Global3DVAR(SOCA):
                          )
         self.dirpath = os.path.join(self.expt_path, "soca", task_id)
 
+        # Collect the configuration attributes.
+        self.soca_app_config = parser_interface.object_define()
+
     def run(self):
         """
 
@@ -73,3 +76,6 @@ class Global3DVAR(SOCA):
 
         # Build the directory tree for the respective application.
         self.build_dirtree(dirpath=self.dirpath, is_ens=False)
+
+        # Link and configure the observation attributes.
+        self.config_obs(dirpath=self.dirpath,
