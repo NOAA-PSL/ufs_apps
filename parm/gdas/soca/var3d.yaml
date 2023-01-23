@@ -17,6 +17,15 @@ soca:
           # fixed-files for the respective SOCA application.
           fixed_file_config: !ENV ${HOMEufs}/parm/gdas/soca/fixed-files/fixed_file.var3d.1p0.yaml
 
+          # Define the path to the YAML-formatted file containing
+          # observation attributes; this file includes the observation
+          # types, observation file name possibilities, and the
+          # YAML-formatted configuration file for the SOCA
+          # application; see the README.md beneath /obs for additional
+          # information and a description of the YAML-formatted
+          # observation attribute file.
+          obs_config: !ENV ${HOMEufs}/parm/gdas/soca/obs/obs.var3d.yaml
+
           
 
           

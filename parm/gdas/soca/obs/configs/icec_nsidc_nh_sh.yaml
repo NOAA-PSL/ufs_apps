@@ -1,5 +1,5 @@
 obs space:
-  name: icec_nsidc_nh
+  name: <OBS_SPACE_NAME>
   obsdatain:
     engine:
       type: H5File
