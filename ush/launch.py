@@ -283,7 +283,7 @@ class Launch:
             os.path.join(self.itrc_root, self.yaml_config_path),
         ]
 
-        print(os.path.join(self.com_root, self.yaml_config_path))
+        print(yaml_file_list)
         quit()
 
         for config_file in config_files_list:
