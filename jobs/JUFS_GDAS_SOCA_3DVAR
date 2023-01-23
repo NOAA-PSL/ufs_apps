@@ -73,7 +73,7 @@ export PYTHONPATH=${HOMEufs}/ush:${PYTHONPATH}
 export pid=$$
 
 # Launch the UFS-RNR experiment application.
-${PYTHONufs} ${HOMEufs}/scripts/exufs_gdas.py --yaml_file ${YAMLufs} --cycle ${CYCLEufs} --expt_name ${EXPTufs} --work_path ${WORKufs} --app soca --app_type 3dvar
+${PYTHONufs} ${HOMEufs}/scripts/exufs_gdas.py --yaml_file ${YAMLufs} --cycle ${CYCLEufs} --expt_name ${EXPTufs} --work_path ${WORKufs} --app soca --app_type var3d
 
 #----
 
