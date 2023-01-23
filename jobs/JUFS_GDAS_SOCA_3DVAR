@@ -62,7 +62,7 @@ set -e
 #----
 
 # Load all modules required by utilities referenced by this script.
-export UFS_LAUNCH=1
+export UFS_GDAS_SOCA=1
 . ${PREufs}
 
 # Define the run-time environment for the respective UFS-RNR
@@ -73,7 +73,7 @@ export PYTHONPATH=${HOMEufs}/ush:${PYTHONPATH}
 export pid=$$
 
 # Launch the UFS-RNR experiment application.
-${PYTHONufs} ${HOMEufs}/scripts/exufs_gdas.py --yaml_file ${YAMLufs} --cycle ${CYCLEufs} --expt_name ${EXPTufs} --work_path ${WORKufs} --app soca --app_type var3d
+${PYTHONufs} ${HOMEufs}/scripts/exufs_gdas.py --yaml_file ${YAMLufs} --cycle ${CYCLEufs} --expt_name ${EXPTufs} --work_path ${WORKufs} --app soca --app_type global_3dvar
 
 #----
 
