@@ -26,7 +26,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/icec/emc/dmsp/%Y/%m/24h/icec.emc.ssmi_l1b_dmsp.%Y%m%dT120000Z.iodav2.nc
+                    object_path: observations/reanalysis/icec/emc/dmsp/%Y/%m/24h/icec.emc.ssmi_l1b_dmsp.20160101.T120000Z.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
