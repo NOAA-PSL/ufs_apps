@@ -283,6 +283,9 @@ class Launch:
             os.path.join(self.itrc_root, self.yaml_config_path),
         ]
 
+        print(os.path.join(self.com_root, self.yaml_config_path))
+        quit()
+
         for config_file in config_files_list:
 
             # Concatenate the respective YAML-formatted files list and
