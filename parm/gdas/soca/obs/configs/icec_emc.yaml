@@ -1,0 +1,15 @@
+obs space:
+  name: icec_emc
+  obsdatain:
+    engine:
+      type: H5File
+      obsfile: <OBS_DATAFILE_IN>
+  obsdataout:
+    engine:
+      type: H5File
+      obsfile: <OBS_DATAFILE_OUT>
+  simulated variables: [sea_ice_area_fraction]
+obs operator:
+  name: Identity
+obs error:
+  covariance model: diagonal

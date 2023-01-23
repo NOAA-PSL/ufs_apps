@@ -1,0 +1,43 @@
+# Define the ice area fraction observation attributes.
+ice_fraction:
+
+     # Ice area fraction observation platform; this string will be
+     # used to generate the output file (obsdataout) name.
+     ice.emc.ssmi_l1b_dmsp:
+          
+          # Define the observation input file basename; timestamps may
+          # be templated using the POSIX convention; this path is
+          # relative to ${WORKufs}/${EXPTufs}/${CYCLEufs}.
+          obsdatain: /intercom/inputs/obs/ice/icec.emc.ssmi_l1b_dmsp.%Y%m%d.T%H%M%SZ.iodav2.nc
+
+          # Define the observation type YAML-formatted template file.
+          yaml_tmpl: !ENV ${HOMEufs}/parm/gdas/soca/obs/configs/ice_emc.yaml
+
+     # Ice area fraction observation platform; this string will be
+     # used to generate the output file (obsdataout) name.
+     ice.nsidc.nh:
+          
+          # Define the observation input file basename; timestamps may
+          # be templated using the POSIX convention; this path is
+          # relative to ${WORKufs}/${EXPTufs}/${CYCLEufs}.
+          obsdatain: /intercom/inputs/obs/ice/icec.nsidc.nh.%Y%m%d.T%H%M%SZ.iodav2.nc
+
+          # Define the observation type YAML-formatted template file.
+          yaml_tmpl: !ENV ${HOMEufs}/parm/gdas/soca/obs/configs/icec_nsidc_nh.yaml
+
+     # Ice area fraction observation platform; this string will be
+     # used to generate the output file (obsdataout) name.
+     ice.nsidc.sh:
+          
+          # Define the observation input file basename; timestamps may
+          # be templated using the POSIX convention; this path is
+          # relative to ${WORKufs}/${EXPTufs}/${CYCLEufs}.
+          obsdatain: /intercom/inputs/obs/ice/icec.nsidc.sh.%Y%m%d.T%H%M%SZ.iodav2.nc
+
+          # Define the observation type YAML-formatted template file.
+          yaml_tmpl: !ENV ${HOMEufs}/parm/gdas/soca/obs/configs/icec_nsidc_sh.yaml
+
+# ----
+
+
+
