@@ -20,7 +20,7 @@ fetch:
 
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ice/icec.emc.ssmi_l1b_dmsp.%Y%m%dT%H%M%SZ.iodav2.nc
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ice/icec.emc.ssmi_l1b_dmsp.%Y%m%d.T%H%M%SZ.iodav2.nc
                     offset_seconds: 21600
 
                     # Define the AWS s3 attributes for the respective
@@ -46,7 +46,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path:  observations/reanalysis/icec/nsidc/nh/%Y/%m/24h/icec.nsidc.nh.%Y%m%dT120000Z.iodav2.nc
+                    object_path:  observations/reanalysis/icec/nsidc/nh/%Y/%m/24h/icec.nsidc.nh.%Y%m%d.T120000Z.iodav2.nc
                     profile_name: noaa_bdp
                     ignore_missing: True
 
