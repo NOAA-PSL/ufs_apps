@@ -34,7 +34,6 @@ fetch:
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.
                     stream_start: 20030531000000
-                    stream_stop: 20991231180000
 
                # Define the file identifier.
                icec.nsidc_nh:
