@@ -72,7 +72,7 @@ export PYTHONPATH=${HOMEufs}/ush:${PYTHONPATH}
 export pid=$$
 
 # Launch the UFS-RNR experiment application.
-${PYTHONufs} ${HOMEufs}/scripts/exufs_launch.py --yaml_file=${YAMLufs} --cycle=${CYCLEufs} --expt_name=${EXPTufs} --work_path=${WORKufs}
+${PYTHONufs} ${HOMEufs}/scripts/exufs_launch.py --yaml_file ${YAMLufs} --cycle ${CYCLEufs} --expt_name ${EXPTufs} --work_path ${WORKufs}
 
 #----
 
