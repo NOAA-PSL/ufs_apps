@@ -30,3 +30,7 @@ fetch_atmos_ssu: !ENV ${HOMEufs}/parm/staging/atmos/fetch.ssu.reanalysis.yaml
 fetch_ice_icec: !ENV ${HOMEufs}/parm/staging/ice/fetch.icec.reanalysis.yaml
 fetch_ice_icefb: !ENV ${HOMEufs}/parm/staging/ice/fetch.icefb.reanalysis.yaml
 
+# ----
+
+# GDAS SOCA application configuration.
+gdas_soca_global_3dvar: !ENV ${HOMEufs}/parm/gdas/soca/var3d.yaml
