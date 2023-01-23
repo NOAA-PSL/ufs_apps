@@ -81,7 +81,7 @@ class SOCA:
         # directory; proceed accordingly.
         self.yaml_dict = YAML().read_concat_yaml(yaml_file=self.options_obj.yaml_file)
 
-        print(self.yaml_dict)
+        print(self.yaml_dict.keys())
         quit()
 
     def build_dirtree(self, dirpath: str, is_ens: bool = False) -> None:
