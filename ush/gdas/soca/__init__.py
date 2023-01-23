@@ -117,13 +117,34 @@ class SOCA:
         # If working within ensemble based SOCA applications, proceed
         # accordingly.
         if is_ens:
-            subdirs_list = [subdirs_list.append(subdir) for subdir in ["ensemble", "letkf_observer_obs", "letkf_solver_obs",
-                                                                       "update"]]
+            subdirs_list = [subdirs_list.append(subdir) for subdir
+                            in ["ensemble", "letkf_observer_obs", "letkf_solver_obs",
+                                "update"]]
 
         # Build the directory tree path(s).
         for subdir in subdirs_list:
             path = os.path.join(dirpath, subdir)
             fileio_interface.dirpath_tree(path=path)
+
+    def config_obs(self, dirpath: str, obspath: str, obs_config_yaml:
+                   str) -> None:
+        """ """
+
+        # Check that the observation configuration file exists;
+        # proceed accordingly.
+        exist = fileio_interface.fileexist(path=obs_config_yaml)
+        if not exist:
+            msg = (f"The YAML-formatted file path {obs_config_yaml} does not "
+                   "exist. Aborting!!!")
+            error(msg=msg)
+
+        # Parse the YAML-formatted observation configuration file and
+        # proceed accordingly.
+        obs_yaml_dict = YAML().read_yaml(yaml_file=obs_config_yaml)
+        for obs_type in obs_yaml_dict:
+
+            # Link the observation file to the working directory.
+            print(obs_type)
 
 # ----
 
