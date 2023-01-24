@@ -21,7 +21,7 @@ ice_fraction:
           obs_datafile_out: icec.emc.ssmi_l1b_dmsp.%Y%m%d.T%H%M%SZ.nc
 
           # Define the observation type YAML-formatted template file.
-          yaml_tmpl: !ENV ${HOMEufs}/parm/gdas/soca/obs/configs/ice_emc.yaml
+          yaml_tmpl: !ENV ${HOMEufs}/parm/gdas/soca/obs/configs/icec_emc.yaml
 
      # Ice area fraction observation platform; this string will be
      # used to generate the YAML-formatted file corresponding to the
