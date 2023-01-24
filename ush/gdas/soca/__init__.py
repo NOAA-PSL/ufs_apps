@@ -158,10 +158,12 @@ class SOCA:
                    f"file {obs_config_yaml}. Aborting!!!")
             error(msg=msg)
 
+        # Configure the respective observation(s) for the GDAS SOCA
+        # application.
         for obs_type in obs_yaml_dict:
 
             # Link the observation file to the working directory.
-            print(obs_type)
+            print(obs_yaml_dict[obs_type])
 
 # ----
 
