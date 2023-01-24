@@ -77,9 +77,6 @@ class SOCA:
         self.expt_path = self.launch.build_dirpath()
         self.launch.build_configs()
 
-        print(self.launch.cycle)
-        quit()
-
         # Parse the YAML-formatted file and configure the SOCA
         # application; proceed accordingly.
         self.yaml_dict = YAML().read_concat_yaml(yaml_file=self.options_obj.yaml_file)
@@ -191,8 +188,10 @@ class SOCA:
                     # attributes for the respective observation type.
                     value = parser_interface.dict_key_value(
                         dict_in=obs_dict, key=obs_attr, no_split=True)
-                    # value = datetime_interface.datestrupdate(
-                    #    datestr=self.
+                    value = datetime_interface.datestrupdate(
+                        datestr=self.launch.cycle, in_frmt=timestamp_interface.GLOBAL,
+                        out_frmt=value,
+                        offset_seconds=self.soca_config_obj.analysis_interval)
 
                     print(value)
 
@@ -209,13 +208,13 @@ class SOCA:
                        )
                 error(msg=msg)
 
-            exist=fileio_interface.fileexist(path=yaml_file)
+            exist = fileio_interface.fileexist(path=yaml_file)
             if not exist:
                 msg = (f"The YAML-formatted file path {yaml_file}for observation type "
                        f"{obs_type} does not exist. Aborting!!!")
                 error(msg=msg)
 
-            yaml_dict=YAML().read_yaml(yaml_file=yaml_file)
+            yaml_dict = YAML().read_yaml(yaml_file=yaml_file)
             print(yaml_dict)
 
 # ----
