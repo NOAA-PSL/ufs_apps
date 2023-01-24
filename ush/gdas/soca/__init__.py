@@ -193,11 +193,8 @@ class SOCA:
                         in_frmttyp=timestamp_interface.GLOBAL,
                         out_frmttyp=value,
                         offset_seconds=self.soca_config_obj.analysis_interval_seconds)
-
-                    print(value)
-
-                parser_interface.enviro_set(envvar=obs_attr.upper(),
-                                            value=value)
+                    parser_interface.enviro_set(envvar=obs_attr.upper(),
+                                                value=value)
 
             # Generate the YAML-formatted file containing the SOCA
             # application configuration; proceed accordingly.
