@@ -196,24 +196,25 @@ class SOCA:
                     parser_interface.enviro_set(envvar=obs_attr.upper(),
                                                 value=value)
 
-            # Generate the YAML-formatted file containing the SOCA
-            # application configuration; proceed accordingly.
-            yaml_file = parser_interface.dict_key_value(
-                dict_in=obs_dict, key="yaml_tmpl", force=True, no_split=True)
-            if yaml_file is None:
-                msg = ("A YAML-template file path has not been specified for observation "
-                       f"type {obs_type} in file path {obs_config_yaml}. Aborting!!!"
-                       )
-                error(msg=msg)
+                # Generate the YAML-formatted file containing the SOCA
+                # application configuration; proceed accordingly.
+                yaml_file = parser_interface.dict_key_value(
+                    dict_in=obs_dict, key="yaml_tmpl", force=True, no_split=True)
+                if yaml_file is None:
+                    msg = ("A YAML-template file path has not been specified for observation "
+                           f"type {obs_type} in file path {obs_config_yaml}. Aborting!!!"
+                           )
+                    error(msg=msg)
 
-            exist = fileio_interface.fileexist(path=yaml_file)
-            if not exist:
-                msg = (f"The YAML-formatted file path {yaml_file}for observation type "
-                       f"{obs_type} does not exist. Aborting!!!")
-                error(msg=msg)
+                exist = fileio_interface.fileexist(path=yaml_file)
+                if not exist:
+                    msg = (f"The YAML-formatted file path {yaml_file}for observation type "
+                           f"{obs_type} does not exist. Aborting!!!")
+                    error(msg=msg)
 
-            yaml_dict = YAML().read_yaml(yaml_file=yaml_file)
-            print(yaml_dict)
+                yaml_dict = YAML().read_yaml(yaml_file=yaml_file)
+                YAML().write_yaml(yaml_file=os.path.join(dirpath, f"{obs_type}.yaml"),
+                                  yaml_dict=yaml_dict)
 
 # ----
 
