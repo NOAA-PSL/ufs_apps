@@ -9,7 +9,7 @@ ice_fraction:
           # Define the observation input file path relative to
           # respective experiment working directory;; timestamps may
           # be templated using the POSIX convention; comma-delimited.
-          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ice/icec.emc.ssmi_l1b_dmsp.%Y%m%d.T%H%M%SZ.iodav2.nc
+          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ice/icec.emc.ssmi_l1b_dmsp.%Y%m%d.T%H%M%SZ.iodav2.nc
 
           # Define the observation space name for the observation
           # type.
@@ -31,7 +31,7 @@ ice_fraction:
           # Define the observation input file path relative to
           # respective experiment working directory;; timestamps may
           # be templated using the POSIX convention; comma-delimited.
-          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ice/icec.nsidc.nh.%Y%m%d.T%H%M%SZ.iodav2.nc
+          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ice/icec.nsidc.nh.%Y%m%d.T%H%M%SZ.iodav2.nc
 
           # Define the observation space name for the observation
           # type.
@@ -53,7 +53,7 @@ ice_fraction:
           # Define the observation input file path relative to the
           # respective experiment working directory; timestamps may be
           # templated using the POSIX convention; comma-delimited.
-          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ice/icec.nsidc.sh.%Y%m%d.T%H%M%SZ.iodav2.nc
+          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ice/icec.nsidc.sh.%Y%m%d.T%H%M%SZ.iodav2.nc
 
           # Define the observation space name for the observation
           # type.
@@ -79,7 +79,7 @@ ice_thickness:
           # Define the observation input file path relative to the
           # respective experiment working directory; timestamps may be
           # templated using the POSIX convention; comma-delimited.
-          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ice/icefb.esa.l2_cryosat2.%Y%m%d.T%H%M%SZ.iodav2.nc
+          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/obsprep/ice/icefb.esa.l2_cryosat2.%Y%m%d.T%H%M%SZ.iodav2.nc
 
           # Define the observation space name for the observation
           # type.
