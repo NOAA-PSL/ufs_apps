@@ -77,6 +77,9 @@ class SOCA:
         self.expt_path = self.launch.build_dirpath()
         self.launch.build_configs()
 
+        print(dir(self.launch))
+        quit()
+
         # Parse the YAML-formatted file and configure the SOCA
         # application; proceed accordingly.
         self.yaml_dict = YAML().read_concat_yaml(yaml_file=self.options_obj.yaml_file)
@@ -93,9 +96,6 @@ class SOCA:
                 dict_in=soca_app_dict, key=soca_item, no_split=True)
             self.soca_config_obj = parser_interface.object_setattr(
                 object_in=self.soca_config_obj, key=soca_item, value=value)
-
-        print(self.soca_config_obj)
-        quit()
 
     def build_dirtree(self, dirpath: str, is_ens: bool = False) -> None:
         """
@@ -192,6 +192,7 @@ class SOCA:
                     value = parser_interface.dict_key_value(
                         dict_in=obs_dict, key=obs_attr, no_split=True)
                     # value = datetime_interface.datestrupdate(
+                    #    datestr=self.
 
                     print(value)
 
@@ -200,15 +201,15 @@ class SOCA:
 
             # Generate the YAML-formatted file containing the SOCA
             # application configuration; proceed accordingly.
-            yaml_file = parser_interface.dict_key_value(
+            yaml_file=parser_interface.dict_key_value(
                 dict_in=obs_dict, key="yaml_tmpl", force=True, no_split=True)
             if yaml_file is None:
-                msg = ("A YAML-template file path has not been specified for observation "
+                msg=("A YAML-template file path has not been specified for observation "
                        f"type {obs_type} in file path {obs_config_yaml}. Aborting!!!"
                        )
                 error(msg=msg)
 
-            exist = fileio_interface.fileexist(path=yaml_file)
+            exist=fileio_interface.fileexist(path=yaml_file)
             if not exist:
                 msg = (f"The YAML-formatted file path {yaml_file}for observation type "
                        f"{obs_type} does not exist. Aborting!!!")
