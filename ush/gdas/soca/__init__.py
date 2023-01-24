@@ -214,7 +214,7 @@ class SOCA:
 
                 yaml_dict = YAML().read_yaml(yaml_file=yaml_file)
                 YAML().write_yaml(yaml_file=os.path.join(dirpath, f"{obs_type}.yaml"),
-                                  yaml_dict=yaml_dict)
+                                  in_dict=yaml_dict)
 
 # ----
 
