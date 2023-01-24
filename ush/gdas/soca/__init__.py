@@ -179,7 +179,7 @@ class SOCA:
                 # attributes for the respective observation type.
                 value = parser_interface.dict_key_value(
                     dict_in=obs_dict, key=obs_attr, no_split=True)
-                parser_interface.envvar_set(envvar=obs_attr.upper(),
+                parser_interface.enviro_set(envvar=obs_attr.upper(),
                                             value=value)
 
             # Generate the YAML-formatted file containing the SOCA
