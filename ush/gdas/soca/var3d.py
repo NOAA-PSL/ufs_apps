@@ -80,4 +80,4 @@ class Global3DVAR(SOCA):
 
         # Link and configure the observation attributes.
         self.config_obs(dirpath=self.dirpath,
-                        obs_config_yaml=self.soca_config_obj.obs_config_yaml)
+                        obs_config_yaml=self.soca_config_obj.obs_config)
