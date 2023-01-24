@@ -160,31 +160,36 @@ class SOCA:
 
         # Configure the respective observation(s) for the GDAS SOCA
         # application.
-        for obs_type in yaml_dict:
+        for obs_types in yaml_dict:
 
             # Define the attributes required to build the respective
             # YAML-formatted files for the SOCA application; proceed
             # accordingly.
-            obs_type_dict = parser_interface.dict_key_value(
-                dict_in=yaml_dict, key=obs_type, force=True)
-            if obs_type_dict is None:
+            obs_types_dict = parser_interface.dict_key_value(
+                dict_in=yaml_dict, key=obs_types, force=True)
+            if obs_types_dict is None:
                 msg = ("The observation attributes could not be determined "
-                       f"for observation type {obs_type} from YAML-formatted "
+                       f"for observation type {obs_types} from YAML-formatted "
                        f"file path {obs_config_yaml}. Aborting!!!")
                 error(msg=msg)
 
-            print(obs_type_dict)
-            quit()
+            for obs_type in obs_types_dict:
+                obs_dict = parser_interface.dict_key_value(
+                    dict_in=obs_types_dict, key=obs_type, force=True)
+                if obs_dict is None:
+                    msg = ("Observation attributes could not be determined for "
+                           f"observation type {obs_type} within YAML-formatted "
+                           f"file path {obs_config_yaml}. Aborting!!!")
+                    error(msg=msg)
 
-            for obs_attr in obs_dict:
+                for obs_attr in obs_dict:
 
-                # Define the environment variables using the
-                # attributes for the respective observation type.
-                value = parser_interface.dict_key_value(
-                    dict_in=obs_dict, key=obs_attr, no_split=True)
+                    # Define the environment variables using the
+                    # attributes for the respective observation type.
+                    value = parser_interface.dict_key_value(
+                        dict_in=obs_dict, key=obs_attr, no_split=True)
 
-                print(obs_dict)
-                print(value)
+                    print(value)
                 quit()
 
                 parser_interface.enviro_set(envvar=obs_attr.upper(),
