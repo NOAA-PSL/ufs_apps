@@ -173,6 +173,9 @@ class SOCA:
                        f"file path {obs_config_yaml}. Aborting!!!")
                 error(msg=msg)
 
+            print(obs_dict)
+            quit()
+
             for obs_attr in obs_dict:
 
                 # Define the environment variables using the
