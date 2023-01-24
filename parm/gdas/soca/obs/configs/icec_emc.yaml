@@ -1,13 +1,13 @@
 obs space:
-  name: <OBS_SPACE_NAME>
+  name: !ENV ${OBS_SPACE_NAME}
   obsdatain:
     engine:
       type: H5File
-      obsfile: <OBS_DATAFILE_IN>
+      obsfile: !ENV ${OBS_DATAFILE_IN}
   obsdataout:
     engine:
       type: H5File
-      obsfile: <OBS_DATAFILE_OUT>
+      obsfile: !ENV ${OBS_DATAFILE_OUT}
   simulated variables: [sea_ice_area_fraction]
 obs operator:
   name: Identity

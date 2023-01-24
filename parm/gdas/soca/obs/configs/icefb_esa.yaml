@@ -1,13 +1,13 @@
 obs space:
-  name: <OBS_SPACE_IN>
+  name: !ENV ${OBS_SPACE_IN}
   obsdatain:
     engine:
       type: H5File
-      obsfile: <OBS_DATAFILE_IN>
+      obsfile: !ENV ${OBS_DATAFILE_IN}
   obsdataout:
     engine:
       type: H5File
-      obsfile: <OBS_DATAFILE_OUT>
+      obsfile: !ENV ${OBS_DATAFILE_OUT}
   simulated variables:  [sea_ice_freeboard]
   io pool:
     max pool size: 1
