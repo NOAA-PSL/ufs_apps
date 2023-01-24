@@ -191,7 +191,7 @@ class SOCA:
                     # attributes for the respective observation type.
                     value = parser_interface.dict_key_value(
                         dict_in=obs_dict, key=obs_attr, no_split=True)
-                    value = datetime_interface.datestrupdate(
+                    # value = datetime_interface.datestrupdate(
 
                     print(value)
 
@@ -200,17 +200,17 @@ class SOCA:
 
             # Generate the YAML-formatted file containing the SOCA
             # application configuration; proceed accordingly.
-            yaml_file=parser_interface.dict_key_value(
+            yaml_file = parser_interface.dict_key_value(
                 dict_in=obs_dict, key="yaml_tmpl", force=True, no_split=True)
             if yaml_file is None:
-                msg=("A YAML-template file path has not been specified for observation "
+                msg = ("A YAML-template file path has not been specified for observation "
                        f"type {obs_type} in file path {obs_config_yaml}. Aborting!!!"
                        )
                 error(msg=msg)
 
-            exist=fileio_interface.fileexist(path=yaml_file)
+            exist = fileio_interface.fileexist(path=yaml_file)
             if not exist:
-                msg=(f"The YAML-formatted file path {yaml_file}for observation type "
+                msg = (f"The YAML-formatted file path {yaml_file}for observation type "
                        f"{obs_type} does not exist. Aborting!!!")
                 error(msg=msg)
 
