@@ -162,13 +162,21 @@ class SOCA:
         # application.
         for obs_type in obs_yaml_dict:
 
+            # Define the attributes required to build the respective
+            # YAML-formatted files for the SOCA application.
+
+            obs_config_dict = {"OBS_DATAFILE_IN": "obsdatain",
+                               "OBS_DATAFILE_OUT": os.path.join(parser_interface.dict_key_value(
+                                   dict_in=obs_yaml_dict[obs_type], key="obsdatain"))
+                               }
+
             # Link the observation file to the working directory.
             print(obs_yaml_dict[obs_type])
 
 # ----
 
 
-@msg_except_handle(SOCAError)
+@ msg_except_handle(SOCAError)
 def error(msg: str) -> None:
     """
     Description
