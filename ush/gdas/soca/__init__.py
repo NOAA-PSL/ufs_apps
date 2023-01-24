@@ -76,6 +76,7 @@ class SOCA:
         self.launch = Launch(options_obj=self.options_obj, task_id=task_id)
         self.expt_path = self.launch.build_dirpath()
         self.launch.build_configs()
+        self.logger = Logger()
 
         # Parse the YAML-formatted file and configure the SOCA
         # application; proceed accordingly.
