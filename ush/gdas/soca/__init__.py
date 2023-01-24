@@ -153,8 +153,10 @@ class SOCA:
         # Parse the YAML-formatted observation configuration file and
         # proceed accordingly.
         obs_yaml_dict = YAML().read_yaml(yaml_file=obs_config_yaml)
-        print(obs_yaml_dict)
-        quit()
+        if obs_yaml_dict is None:
+            msg = ("The SOCA observation attributes cannot be determined from "
+                   f"file {obs_config_yaml}. Aborting!!!")
+            error(msg=msg)
 
         for obs_type in obs_yaml_dict:
 
