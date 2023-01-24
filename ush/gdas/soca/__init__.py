@@ -165,6 +165,10 @@ class SOCA:
             # Define the attributes required to build the respective
             # YAML-formatted files for the SOCA application; proceed
             # accordingly.
+            msg = (f"Building YAML-formatted configuration file(s) for {obs_types} "
+                   "observations.")
+            self.logger.info(msg=msg)
+
             obs_types_dict = parser_interface.dict_key_value(
                 dict_in=obs_yaml_dict, key=obs_types, force=True)
             if obs_types_dict is None:
@@ -212,9 +216,11 @@ class SOCA:
                            f"{obs_type} does not exist. Aborting!!!")
                     error(msg=msg)
 
+                obs_config_yaml = os.path.join(dirpath, f"{obs_type}.yaml")
+                msg = f"Building SOCA YAML-formatted observation configuration file {obs_config_yaml}."
+                self.logger.info(msg=msg)
                 yaml_dict = YAML().read_yaml(yaml_file=yaml_file)
-                YAML().write_yaml(yaml_file=os.path.join(dirpath, f"{obs_type}.yaml"),
-                                  in_dict=yaml_dict)
+                YAML().write_yaml(yaml_file=obs_config_yaml, in_dict=yaml_dict)
 
 # ----
 
