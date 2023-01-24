@@ -77,7 +77,7 @@ class SOCA:
         self.expt_path = self.launch.build_dirpath()
         self.launch.build_configs()
 
-        print(dir(self.launch))
+        print(self.launch.cycle)
         quit()
 
         # Parse the YAML-formatted file and configure the SOCA
@@ -201,10 +201,10 @@ class SOCA:
 
             # Generate the YAML-formatted file containing the SOCA
             # application configuration; proceed accordingly.
-            yaml_file=parser_interface.dict_key_value(
+            yaml_file = parser_interface.dict_key_value(
                 dict_in=obs_dict, key="yaml_tmpl", force=True, no_split=True)
             if yaml_file is None:
-                msg=("A YAML-template file path has not been specified for observation "
+                msg = ("A YAML-template file path has not been specified for observation "
                        f"type {obs_type} in file path {obs_config_yaml}. Aborting!!!"
                        )
                 error(msg=msg)
