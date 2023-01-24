@@ -141,7 +141,31 @@ class SOCA:
             fileio_interface.dirpath_tree(path=path)
 
     def config_obs(self, dirpath: str, obs_config_yaml: str) -> None:
-        """ """
+        """Description
+        -----------
+
+        This method builds the YAML-formatted file observation
+        configuration files for each observation (and associated
+        attributes) define in the obs_config attribute of the SOCA
+        application experiment configuration file; the respective
+        configuration files are concatenated into a single
+        YAML-formatted file to be used for the respective SOCA
+        application YAML-formatted configuration file.
+
+        Parameters
+        ----------
+
+        dirpath: str
+
+            A Python string specifying the top-level directory path
+            beneath which the sub-directory tree will be built.
+
+        obs_config_yaml: str
+
+            A Python string specifying the path to the YAML-formatted
+            file contain the observation attributes.
+
+        """
 
         # Check that the observation configuration file exists;
         # proceed accordingly.
@@ -161,6 +185,7 @@ class SOCA:
 
         # Configure the respective observation(s) for the GDAS SOCA
         # application.
+        obs_yaml_list = []
         for obs_types in obs_yaml_dict:
 
             # Define the attributes required to build the respective
@@ -222,11 +247,14 @@ class SOCA:
                 self.logger.info(msg=msg)
                 yaml_dict = YAML().read_yaml(yaml_file=yaml_file)
                 YAML().write_yaml(yaml_file=obs_config_yaml, in_dict=yaml_dict)
+                obs_yaml_list.append(obs_config_yaml)
+
+        print(obs_yaml_list)
 
 # ----
 
 
-@ msg_except_handle(SOCAError)
+@msg_except_handle(SOCAError)
 def error(msg: str) -> None:
     """
     Description
