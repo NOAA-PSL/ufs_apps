@@ -194,7 +194,6 @@ class SOCA:
                     value = datetime_interface.datestrupdate(
 
                     print(value)
-                quit()
 
                 parser_interface.enviro_set(envvar=obs_attr.upper(),
                                             value=value)
