@@ -7,9 +7,9 @@ ice_fraction:
      icec.emc.ssmi_l1b_dmsp:
           
           # Define the observation input file path relative to
-          # ${WORKufs}/${EXPTufs}/${CYCLEufs}; timestamps may be
-          # templated using the POSIX convention; comma-delimited.
-          obs_data_in: /intercom/inputs/obs/ice/icec.emc.ssmi_l1b_dmsp.%Y%m%d.T%H%M%SZ.iodav2.nc
+          # respective experiment working directory;; timestamps may
+          # be templated using the POSIX convention; comma-delimited.
+          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ice/icec.emc.ssmi_l1b_dmsp.%Y%m%d.T%H%M%SZ.iodav2.nc
 
           # Define the observation space name for the observation
           # type.
@@ -29,9 +29,9 @@ ice_fraction:
      icec.nsidc.nh:
           
           # Define the observation input file path relative to
-          # ${WORKufs}/${EXPTufs}/${CYCLEufs}; timestamps may be
-          # templated using the POSIX convention; comma-delimited.
-          obs_data_in: /intercom/inputs/obs/ice/icec.nsidc.nh.%Y%m%d.T%H%M%SZ.iodav2.nc
+          # respective experiment working directory;; timestamps may
+          # be templated using the POSIX convention; comma-delimited.
+          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ice/icec.nsidc.nh.%Y%m%d.T%H%M%SZ.iodav2.nc
 
           # Define the observation space name for the observation
           # type.
@@ -50,10 +50,10 @@ ice_fraction:
      # observation type.
      icec.nsidc.sh:
           
-          # Define the observation input file path relative to
-          # ${WORKufs}/${EXPTufs}/${CYCLEufs}; timestamps may be
+          # Define the observation input file path relative to the
+          # respective experiment working directory; timestamps may be
           # templated using the POSIX convention; comma-delimited.
-          obs_data_in: /intercom/inputs/obs/ice/icec.nsidc.sh.%Y%m%d.T%H%M%SZ.iodav2.nc
+          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ice/icec.nsidc.sh.%Y%m%d.T%H%M%SZ.iodav2.nc
 
           # Define the observation space name for the observation
           # type.
@@ -76,11 +76,19 @@ ice_thickness:
      # used to generate the output file (obsdataout) name.
      icefb.esa.cryosat2_l2:
           
-          # Define the observation input file basename; timestamps may
-          # be templated using the POSIX convention; this path is
-          # relative to ${WORKufs}/${EXPTufs}/${CYCLEufs};
-          # comma-delimited.
-          obs_data_in: /intercom/inputs/obs/ice/icefb.esa.l2_cryosat2.%Y%m%d.T%H%M%SZ.iodav2.nc
+          # Define the observation input file path relative to the
+          # respective experiment working directory; timestamps may be
+          # templated using the POSIX convention; comma-delimited.
+          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ice/icefb.esa.l2_cryosat2.%Y%m%d.T%H%M%SZ.iodav2.nc
+
+          # Define the observation space name for the observation
+          # type.
+          obs_space_name: icefb.esa.cryosat2_l2
+
+          # Define the observation output file basename name; this
+          # file will be written beneath /obs in the SOCA experiment
+          # path.
+          obs_datafile_out: icefb.esa.cryosat2_l2.%Y%m%d.T%H%M%SZ.nc
 
           # Define the observation type YAML-formatted template file.
           yaml_tmpl: !ENV ${HOMEufs}/parm/gdas/soca/obs/configs/icefb_esa.yaml
