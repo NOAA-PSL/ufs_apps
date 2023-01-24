@@ -175,6 +175,9 @@ class SOCA:
 
             for obs_attr in obs_dict:
 
+                print(obs_attr)
+                quit()
+
                 # Define the environment variables using the
                 # attributes for the respective observation type.
                 value = parser_interface.dict_key_value(
