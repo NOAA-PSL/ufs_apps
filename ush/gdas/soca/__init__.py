@@ -140,8 +140,9 @@ class SOCA:
             path = os.path.join(dirpath, subdir)
             fileio_interface.dirpath_tree(path=path)
 
-    def config_obs(self, dirpath: str, obs_config_yaml: str) -> None:
-        """Description
+    def config_obs(self, dirpath: str, obs_config_yaml: str) -> list:
+        """
+        Description
         -----------
 
         This method builds the YAML-formatted file observation
@@ -165,6 +166,14 @@ class SOCA:
             A Python string specifying the path to the YAML-formatted
             file contain the observation attributes.
 
+        Returns
+        -------
+
+        obs_yaml_list: list
+
+            A Python list containing the paths to the respective
+            YAML-formatted observation configuration files.
+
         """
 
         # Check that the observation configuration file exists;
@@ -186,29 +195,29 @@ class SOCA:
         # Configure the respective observation(s) for the GDAS SOCA
         # application.
         obs_yaml_list = []
-        for obs_types in obs_yaml_dict:
+        for ob_types in obs_yaml_dict:
 
             # Define the attributes required to build the respective
             # YAML-formatted files for the SOCA application; proceed
             # accordingly.
-            msg = (f"Building YAML-formatted configuration file(s) for {obs_types} "
+            msg = (f"Building YAML-formatted configuration file(s) for {ob_types} "
                    "observations.")
             self.logger.info(msg=msg)
 
-            obs_types_dict = parser_interface.dict_key_value(
-                dict_in=obs_yaml_dict, key=obs_types, force=True)
-            if obs_types_dict is None:
+            ob_types_dict = parser_interface.dict_key_value(
+                dict_in=obs_yaml_dict, key=ob_types, force=True)
+            if ob_types_dict is None:
                 msg = ("The observation attributes could not be determined "
-                       f"for observation type {obs_types} from YAML-formatted "
+                       f"for observation type {ob_types} from YAML-formatted "
                        f"file path {obs_config_yaml}. Aborting!!!")
                 error(msg=msg)
 
-            for obs_type in obs_types_dict:
+            for ob_type in ob_types_dict:
                 obs_dict = parser_interface.dict_key_value(
-                    dict_in=obs_types_dict, key=obs_type, force=True)
+                    dict_in=ob_types_dict, key=ob_type, force=True)
                 if obs_dict is None:
                     msg = ("Observation attributes could not be determined for "
-                           f"observation type {obs_type} within YAML-formatted "
+                           f"observation type {ob_type} within YAML-formatted "
                            f"file path {obs_config_yaml}. Aborting!!!")
                     error(msg=msg)
 
@@ -232,24 +241,28 @@ class SOCA:
                     dict_in=obs_dict, key="yaml_tmpl", force=True, no_split=True)
                 if yaml_file is None:
                     msg = ("A YAML-template file path has not been specified for observation "
-                           f"type {obs_type} in file path {obs_config_yaml}. Aborting!!!"
+                           f"type {ob_type} in file path {obs_config_yaml}. Aborting!!!"
                            )
                     error(msg=msg)
 
                 exist = fileio_interface.fileexist(path=yaml_file)
                 if not exist:
                     msg = (f"The YAML-formatted file path {yaml_file} for observation type "
-                           f"{obs_type} does not exist. Aborting!!!")
+                           f"{ob_type} does not exist. Aborting!!!")
                     error(msg=msg)
 
-                obs_config_yaml = os.path.join(dirpath, f"{obs_type}.yaml")
+                obs_config_yaml = os.path.join(dirpath, f"{ob_type}.yaml")
                 msg = f"Building SOCA YAML-formatted observation configuration file {obs_config_yaml}."
                 self.logger.info(msg=msg)
                 yaml_dict = YAML().read_yaml(yaml_file=yaml_file)
                 YAML().write_yaml(yaml_file=obs_config_yaml, in_dict=yaml_dict)
+
+                # Update the Python list containing the file paths for
+                # the respective YAML-formatted files.
                 obs_yaml_list.append(obs_config_yaml)
 
-        print(obs_yaml_list)
+        return obs_yaml_list
+
 
 # ----
 
