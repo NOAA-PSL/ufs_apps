@@ -153,6 +153,9 @@ class SOCA:
         # Parse the YAML-formatted observation configuration file and
         # proceed accordingly.
         obs_yaml_dict = YAML().read_yaml(yaml_file=obs_config_yaml)
+        print(obs_yaml_dict)
+        quit()
+
         for obs_type in obs_yaml_dict:
 
             # Link the observation file to the working directory.
