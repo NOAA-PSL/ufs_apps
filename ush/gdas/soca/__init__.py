@@ -189,8 +189,9 @@ class SOCA:
                     value = parser_interface.dict_key_value(
                         dict_in=obs_dict, key=obs_attr, no_split=True)
                     value = datetime_interface.datestrupdate(
-                        datestr=self.launch.cycle, in_frmt=timestamp_interface.GLOBAL,
-                        out_frmt=value,
+                        datestr=self.launch.cycle,
+                        in_frmttyp=timestamp_interface.GLOBAL,
+                        out_frmttyp=value,
                         offset_seconds=self.soca_config_obj.analysis_interval_seconds)
 
                     print(value)
