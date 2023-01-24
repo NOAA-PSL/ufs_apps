@@ -77,9 +77,22 @@ class SOCA:
         self.expt_path = self.launch.build_dirpath()
         self.launch.build_configs()
 
-        # Parse the YAML-formatted file and build the working
-        # directory; proceed accordingly.
+        # Parse the YAML-formatted file and configure the SOCA
+        # application; proceed accordingly.
         self.yaml_dict = YAML().read_concat_yaml(yaml_file=self.options_obj.yaml_file)
+        soca_app_dict = parser_interface.dict_key_value(
+            dict_in=self.yaml_dict, key="soca", force=True, no_split=True)
+        if soca_app_dict is None:
+            msg = (f"The experiment configuration file {self.options_obj.yaml_file} "
+                   "does not contain the attribute 'soca'. Aborting!!!")
+            error(msg=msg)
+
+        self.soca_config_obj = parser_interface.object_define()
+        for soca_item in soca_app_dict:
+            value = parser_interface.dict_key_value(
+                dict_in=soca_app_dict, key=soca_item, no_split=True)
+            self.soca_config_obj = parser_interface.object_setattr(
+                object_in=self.soca_config_obj, key=soca_item, value=value)
 
     def build_dirtree(self, dirpath: str, is_ens: bool = False) -> None:
         """
@@ -126,8 +139,7 @@ class SOCA:
             path = os.path.join(dirpath, subdir)
             fileio_interface.dirpath_tree(path=path)
 
-    def config_obs(self, dirpath: str, obspath: str, obs_config_yaml:
-                   str) -> None:
+    def config_obs(self, dirpath: str, obs_config_yaml: str) -> None:
         """ """
 
         # Check that the observation configuration file exists;
@@ -140,7 +152,7 @@ class SOCA:
 
         # Parse the YAML-formatted observation configuration file and
         # proceed accordingly.
-        obs_yaml_dict = YAML().read_yaml(yaml_file=obs_config_yaml)
+        obs_yaml_dict = YAML().read_yaml(yaml_file=self.soca_config_obj.obs_config_yaml)
         for obs_type in obs_yaml_dict:
 
             # Link the observation file to the working directory.
