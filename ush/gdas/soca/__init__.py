@@ -191,7 +191,7 @@ class SOCA:
                     value = datetime_interface.datestrupdate(
                         datestr=self.launch.cycle, in_frmt=timestamp_interface.GLOBAL,
                         out_frmt=value,
-                        offset_seconds=self.soca_config_obj.analysis_interval)
+                        offset_seconds=self.soca_config_obj.analysis_interval_seconds)
 
                     print(value)
 
