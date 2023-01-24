@@ -180,6 +180,7 @@ class SOCA:
                 value = parser_interface.dict_key_value(
                     dict_in=obs_dict, key=obs_attr, no_split=True)
 
+                print(obs_dict)
                 print(value)
                 quit()
 
