@@ -208,7 +208,7 @@ class SOCA:
 
                 exist = fileio_interface.fileexist(path=yaml_file)
                 if not exist:
-                    msg = (f"The YAML-formatted file path {yaml_file}for observation type "
+                    msg = (f"The YAML-formatted file path {yaml_file} for observation type "
                            f"{obs_type} does not exist. Aborting!!!")
                     error(msg=msg)
 
