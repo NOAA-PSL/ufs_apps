@@ -163,20 +163,48 @@ class SOCA:
         for obs_type in obs_yaml_dict:
 
             # Define the attributes required to build the respective
-            # YAML-formatted files for the SOCA application.
+            # YAML-formatted files for the SOCA application; proceed
+            # accordingly.
+            obs_dict = parser_interface.dict_key_value(
+                dict_in=obs_yaml_dict, key=obs_type, force=True)
+            if obs_dict is None:
+                msg = ("The observation attributes could not be determined "
+                       f"for observation type {obs_type} from YAML-formatted "
+                       f"file path {obs_config_yaml}. Aborting!!!")
+                error(msg=msg)
 
-            # obs_config_dict = {"OBS_DATAFILE_IN": "obsdatain",
-            #                   "OBS_DATAFILE_OUT": os.path.join(parser_interface.dict_key_value(
-            #                       dict_in=obs_yaml_dict[obs_type], key="obsdatain"))
-            #                   }
+            for obs_attr in obs_dict:
 
-            # Link the observation file to the working directory.
-            print(obs_yaml_dict[obs_type])
+                # Define the environment variables using the
+                # attributes for the respective observation type.
+                value = parser_interface.dict_key_value(
+                    dict_in=obs_dict, key=obs_attr, no_split=True)
+                parser_interface.envvar_set(envvar=obs_attr.upper(),
+                                            value=value)
+
+            # Generate the YAML-formatted file containing the SOCA
+            # application configuration; proceed accordingly.
+            yaml_file = parser_interface.dict_key_value(
+                dict_in=obs_dict, key="yaml_tmpl", force=True, no_split=True)
+            if yaml_file is None:
+                msg = ("A YAML-template file path has not been specified for observation "
+                       f"type {obs_type} in file path {obs_config_yaml}. Aborting!!!"
+                       )
+                error(msg=msg)
+
+            exist = fileio_interface.fileexist(path=yaml_file)
+            if not exist:
+                msg = (f"The YAML-formatted file path {yaml_file}for observation type "
+                       f"{obs_type} does not exist. Aborting!!!")
+                error(msg=msg)
+
+            yaml_dict = YAML().read_yaml(yaml_file=yaml_file)
+            print(yaml_dict)
 
 # ----
 
 
-@ msg_except_handle(SOCAError)
+@msg_except_handle(SOCAError)
 def error(msg: str) -> None:
     """
     Description
