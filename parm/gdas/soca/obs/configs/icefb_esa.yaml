@@ -1,5 +1,5 @@
 obs space:
-  name: !ENV ${OBS_SPACE_IN}
+  name: !ENV ${OBS_SPACE_NAME}
   obsdatain:
     engine:
       type: H5File
