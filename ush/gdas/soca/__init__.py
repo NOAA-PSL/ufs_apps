@@ -152,31 +152,28 @@ class SOCA:
 
         # Parse the YAML-formatted observation configuration file and
         # proceed accordingly.
-        obs_yaml_dict = YAML().read_yaml(yaml_file=obs_config_yaml)
-        if obs_yaml_dict is None:
+        yaml_dict = YAML().read_yaml(yaml_file=obs_config_yaml)
+        if yaml_dict is None:
             msg = ("The SOCA observation attributes cannot be determined from "
                    f"file {obs_config_yaml}. Aborting!!!")
             error(msg=msg)
 
-        print(obs_yaml_dict)
-        quit()
-
         # Configure the respective observation(s) for the GDAS SOCA
         # application.
-        for obs_type in obs_yaml_dict:
+        for obs_type in yaml_dict:
 
             # Define the attributes required to build the respective
             # YAML-formatted files for the SOCA application; proceed
             # accordingly.
-            obs_dict = parser_interface.dict_key_value(
-                dict_in=obs_yaml_dict, key=obs_type, force=True)
-            if obs_dict is None:
+            obs_type_dict = parser_interface.dict_key_value(
+                dict_in=yaml_dict, key=obs_type, force=True)
+            if obs_type_dict is None:
                 msg = ("The observation attributes could not be determined "
                        f"for observation type {obs_type} from YAML-formatted "
                        f"file path {obs_config_yaml}. Aborting!!!")
                 error(msg=msg)
 
-            print(obs_dict)
+            print(obs_type_dict)
             quit()
 
             for obs_attr in obs_dict:
