@@ -23,7 +23,9 @@
 
 # ----
 
+
 import os
+from collections import OrderedDict
 
 from confs.yaml_interface import YAML
 from gdas.soca import SOCA
@@ -98,13 +100,8 @@ class Global3DVAR(SOCA):
 
         # Build the YAML-formatted SOCA application configuration
         # file.
-        yaml_dict = YAML().read_yaml(yaml_file=self.soca_config_obj.soca_config)
-
-        print(yaml_dict)
-        quit()
-
-        #print(yaml.dump(yaml_dict, Dumper=NoAliasDumper))
-
+        yaml_dict = OrderedDict(YAML().read_yaml(
+            yaml_file=self.soca_config_obj.soca_config))
         YAML().write_yaml(yaml_file=self.soca_config_yaml, in_dict=yaml_dict)
 
     def run(self) -> None:
