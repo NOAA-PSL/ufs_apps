@@ -91,4 +91,4 @@ class Global3DVAR(SOCA):
         # Concatenate the YAML-formatted files containing the
         # respective observation attributes.
         fileio_interface.concatenate(
-            filelist=obs_yaml_list, concatfile=self.soca_observations_yaml)
+            filelist=obs_yaml_list, concatfile=self.soca_observations_yaml, sepfiles=True)
