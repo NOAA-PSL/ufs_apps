@@ -4,7 +4,7 @@ cost function:
   window_begin: !ENV "${ATM_WINDOW_BEGIN}"
   window_length: !ENV ${ATM_WINDOW_LENGTH}
   observations: !INC ./soca_observations.yaml
-  analysis variables: &a_vars !INC ./analysis_variables.yaml
+  analysis variables: !INC ./analysis_variables.yaml
        #!ENV ${ANALYSIS_VARIABLES}
   geometry:
     mom6_input_nml: mom_input.nml
