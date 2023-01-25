@@ -26,6 +26,7 @@
 import os
 
 from gdas.soca import SOCA
+from tools import fileio_interface
 from tools import parser_interface
 
 # ----
