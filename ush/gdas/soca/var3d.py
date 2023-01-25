@@ -100,6 +100,9 @@ class Global3DVAR(SOCA):
         # file.
         yaml_dict = YAML().read_yaml(yaml_file=self.soca_config_obj.soca_config)
 
+        print(yaml_dict)
+        quit()
+
         #print(yaml.dump(yaml_dict, Dumper=NoAliasDumper))
 
         YAML().write_yaml(yaml_file=self.soca_config_yaml, in_dict=yaml_dict)
