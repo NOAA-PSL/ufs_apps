@@ -25,14 +25,11 @@
 
 
 import os
-from collections import OrderedDict
 
 from confs.yaml_interface import YAML
-from gdas.soca import SOCA, error  # as __error__
+from gdas.soca import SOCA, error
 from tools import fileio_interface
 from tools import parser_interface
-
-import yaml
 
 # ----
 
@@ -66,9 +63,8 @@ class Global3DVAR(SOCA):
         """
 
         # Define the base-class attributes.
-        self.options_obj = options_obj
         task_id = "global_soca_3dvar"
-        super().__init__(options_obj=self.options_obj,
+        super().__init__(options_obj=options_obj,
                          task_id="global_soca_3dvar"
                          )
         self.dirpath = os.path.join(self.expt_path, "soca", task_id)
