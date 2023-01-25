@@ -262,7 +262,8 @@ class SOCA:
                 # the respective YAML-formatted files.
                 obs_yaml_list.append(obs_config_yaml)
 
-        # Build a YAML-formatted file
+        # Build a YAML-formatted file containing the observation file
+        # paths.
         with open(soca_obs_file, "w", encoding="utf-8") as file:
             for obs_yaml in obs_yaml_list:
                 msg = (
@@ -272,13 +273,17 @@ class SOCA:
 
     def check_mandvars(self, mandvar_list):
         """ """
-        print(vars(self.soca_config_obj))
-        quit()
+
+        missing_vars = list(
+            sorted(set(vars(self.soca_config_obj)) - set(mandvar_list)))
+
+        print(missing_vars)
+
 
 # ----
 
 
-@msg_except_handle(SOCAError)
+@ msg_except_handle(SOCAError)
 def error(msg: str) -> None:
     """
     Description
