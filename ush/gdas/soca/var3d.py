@@ -88,8 +88,8 @@ class Global3DVAR(SOCA):
 
         # Build the YAML-formatted SOCA application configuration
         # file.
-        # yaml_dict =
-        print(self.soca_config_obj)
+        yaml_dict = YAML().read_yaml(yaml_file=self.soca_config_obj.soca_config)
+        print(yaml_dict)
 
     def run(self) -> None:
         """
