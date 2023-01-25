@@ -94,6 +94,8 @@ class Global3DVAR(SOCA):
             value = parser_interface.object_getattr(
                 object_in=self.soca_config_obj, key=config_var, force=True)
 
+            print(type(value))
+
             if value is None:
                 msg = (f"The SOCA configuration attribute {config_var} cannot "
                        "be NoneType. Aborting!!!")
