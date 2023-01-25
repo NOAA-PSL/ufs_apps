@@ -1,7 +1,3 @@
-#observations: &observations !INC ./soca_observations.yaml
-
-# ----
-
 
 cost function:
 
