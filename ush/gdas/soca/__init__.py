@@ -263,7 +263,9 @@ class SOCA:
 
         with open("./soca_observations.yaml", "w", encoding="utf-8") as file:
             for obs_yaml in obs_yaml_list:
-                file.write(f"- {obs_yaml}")
+                file.write(f"- !INC {obs_yaml}")
+
+        print(os.getcwd())
 
         quit()
 
