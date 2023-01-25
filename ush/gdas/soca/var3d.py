@@ -89,16 +89,16 @@ class Global3DVAR(SOCA):
         # Concatenate the YAML-formatted files containing the
         # respective observation attributes.
         os.chdir(self.dirpath)
-        fileio_interface.concatenate(
-            filelist=obs_yaml_list, concatfile=self.soca_observations_yaml,
-            sepfiles=True)
+        # fileio_interface.concatenate(
+        #    filelist=obs_yaml_list, concatfile=self.soca_observations_yaml,
+        #    sepfiles=True)
 
         # Build the YAML-formatted SOCA application configuration
         # file.
         yaml_dict = YAML().read_yaml(yaml_file=self.soca_config_obj.soca_config)
 
-        print(yaml_dict)
-        quit()
+        # print(yaml_dict)
+        # quit()
 
         YAML().write_yaml(yaml_file=self.soca_config_yaml, in_dict=yaml_dict)
 
