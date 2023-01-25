@@ -1,9 +1,8 @@
-observations: &observations !INC ./soca_observations.yaml
+#observations: &observations !INC ./soca_observations.yaml
 
 # ----
 
 
 cost function:
 
-  observations:
-       <<: !INC ./soca_observations.yaml
+  observations: !INC ./soca_observations.yaml
