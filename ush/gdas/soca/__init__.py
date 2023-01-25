@@ -265,6 +265,8 @@ class SOCA:
             for obs_yaml in obs_yaml_list:
                 file.write(f"- {obs_yaml}")
 
+        quit()
+
         # CREATE YAML FILE HERE CONTAINING !INC <PATH TO OBS YAML>
         # HERE.
 
