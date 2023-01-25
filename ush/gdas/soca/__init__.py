@@ -275,7 +275,7 @@ class SOCA:
         """ """
 
         missing_vars = list(
-            sorted(set(vars(self.soca_config_obj)) - set(mandvar_list)))
+            sorted(set(mandvar_list)) - set(vars(self.soca_config_obj)))
 
         print(missing_vars)
 
