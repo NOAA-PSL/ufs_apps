@@ -111,8 +111,9 @@ class Global3DVAR(SOCA):
         self.build_dirtree(dirpath=self.dirpath, is_ens=False)
 
         # Link and configure the observation attributes.
-        obs_yaml_list = self.config_obs(dirpath=self.dirpath,
-                                        obs_config_yaml=self.soca_config_obj.obs_config)
+        self.config_obs(dirpath=self.dirpath,
+                        obs_config_yaml=self.soca_config_obj.obs_config,
+                        soca_obs_file=self.soca_observations_yaml)
 
         # Configure the SOCA application.
         self.config_soca(obs_yaml_list=obs_yaml_list)

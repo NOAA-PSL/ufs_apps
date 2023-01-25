@@ -140,7 +140,8 @@ class SOCA:
             path = os.path.join(dirpath, subdir)
             fileio_interface.dirpath_tree(path=path)
 
-    def config_obs(self, dirpath: str, obs_config_yaml: str) -> list:
+    def config_obs(self, dirpath: str, obs_config_yaml: str,
+                   soca_obs_file: str) -> list:
         """
         Description
         -----------
@@ -261,13 +262,9 @@ class SOCA:
                 # the respective YAML-formatted files.
                 obs_yaml_list.append(obs_config_yaml)
 
-        with open("./soca_observations.yaml", "w", encoding="utf-8") as file:
+        with open(soca_obs_file, "w", encoding="utf-8") as file:
             for obs_yaml in obs_yaml_list:
-                file.write(f"- !INC {obs_yaml}")
-
-        print(os.getcwd())
-
-        quit()
+                file.write(f"- !INC {obs_yaml}\n")
 
         # CREATE YAML FILE HERE CONTAINING !INC <PATH TO OBS YAML>
         # HERE.
