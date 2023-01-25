@@ -1,3 +1,71 @@
 cost function:
 
+  cost type: 4D-Var
+  window_begin: !ENV "${ATM_WINDOW_BEGIN}"
+  window_length: !ENV ${ATM_WINDOW_LENGTH}
   observations: !INC ./soca_observations.yaml
+  analysis variables: &a_vars !ENV ${ANALYSIS_VARIABLES}
+  geometry:
+    mom6_input_nml: mom_input.nml
+    fields metadata: ./fields_metadata.yaml
+
+  model:
+    name: PseudoModel
+    tstep: PT1H
+    state variables: &model_vars !ENV ${STATE_VARIABLES}
+    states: !INC ${BKG_LIST}
+
+  background:
+    read_from_file: 1
+    basename: ./INPUT/
+    ocn_filename: MOM.res.nc
+    ice_filename: cice.res.nc
+    date: !ENV "{ATM_WINDOW_BEGIN}"
+    state variables: *model_vars
+  background error: !INC ${BKG_ERROR}
+
+variational:
+  minimizer:
+    algorithm: RPCG
+  iterations:
+  - geometry:
+      mom6_input_nml: mom_input.nml
+      fields metadata: ./fields_metadata.yaml
+    linear model:
+      name: Identity
+      increment variables: *a_vars
+      variable change: Identity
+      tstep: PT1H
+    ninner: !ENV ${NINNER}
+    gradient norm reduction: 1e-10
+    test: on
+    diagnostics:
+      departures: ombg
+    online diagnostics:
+      write increment: true
+      increment:
+        datadir: Data
+        date: !ENV "${ATM_WINDOW_BEGIN}"
+        exp: iter1
+        type: incr
+
+minimizer:
+  algorithm: RPCG
+
+output:
+  datadir: Data
+  exp: 3dvarfgat_pseudo
+  type: an
+
+final:
+  diagnostics:
+    departures: oman
+  increment:
+    output:
+      datadir: Data
+      date: '{{ATM_WINDOW_BEGIN}}'
+      exp: 3dvarfgat_pseudo
+      type: incr
+    geometry:
+      mom6_input_nml: mom_input.nml
+      fields metadata: ./fields_metadata.yaml

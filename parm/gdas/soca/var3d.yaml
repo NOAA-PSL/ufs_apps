@@ -27,7 +27,8 @@ soca:
      # application configuration (e.g., YAML-formatted) file.
      soca_config: !ENV ${HOMEufs}/parm/gdas/soca/configs/var3dfgat.yaml
 
-          
+     # Define the list of analysis variables; comma-delimited.
+     analysis_variables: cicen, hicen, socn, tocn, ssh
 
           
 
