@@ -28,7 +28,7 @@ import os
 from collections import OrderedDict
 
 from confs.yaml_interface import YAML
-from gdas.soca import SOCA, error as __error__
+from gdas.soca import SOCA, error  # as __error__
 from tools import fileio_interface
 from tools import parser_interface
 
@@ -91,9 +91,9 @@ class Global3DVAR(SOCA):
         os.chdir(self.dirpath)
 
         # Collect the SOCA application configuration attributes.
-        if any(self.config_var_list) not in vars(self.soca_config_obj):
+        if all(self.config_var_list) not in vars(self.soca_config_obj):
             msg = ('ERROR')
-            __error__(msg=msg)
+            error(msg=msg)
 
         # Build the YAML-formatted SOCA application configuration
         # file.
