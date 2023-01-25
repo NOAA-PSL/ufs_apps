@@ -25,6 +25,7 @@
 
 import os
 
+from confs.yaml_interface import YAML
 from gdas.soca import SOCA
 from tools import fileio_interface
 from tools import parser_interface
@@ -76,7 +77,21 @@ class Global3DVAR(SOCA):
         self.soca_observations_yaml = os.path.join(
             self.dirpath, "soca_observations.yaml")
 
-    def run(self):
+    def config_soca(self, obs_yaml_list: list) -> None:
+        """ """
+
+        # Concatenate the YAML-formatted files containing the
+        # respective observation attributes.
+        fileio_interface.concatenate(
+            filelist=obs_yaml_list, concatfile=self.soca_observations_yaml,
+            sepfiles=True)
+
+        # Build the YAML-formatted SOCA application configuration
+        # file.
+        # yaml_dict =
+        print(self.yaml_dict)
+
+    def run(self) -> None:
         """
 
         """
@@ -88,7 +103,5 @@ class Global3DVAR(SOCA):
         obs_yaml_list = self.config_obs(dirpath=self.dirpath,
                                         obs_config_yaml=self.soca_config_obj.obs_config)
 
-        # Concatenate the YAML-formatted files containing the
-        # respective observation attributes.
-        fileio_interface.concatenate(
-            filelist=obs_yaml_list, concatfile=self.soca_observations_yaml, sepfiles=True)
+        # Configure the SOCA application.
+        self.config_soca(obs_yaml_list=obs_yaml_list)
