@@ -12,7 +12,7 @@ cost function:
   model:
     name: PseudoModel
     tstep: PT1H
-    state variables: &model_vars !ENV [${STATE_VARIABLES}]
+    state variables: &model_vars !ENV "[${STATE_VARIABLES}]"
     #states: !INC ${BKG_LIST}
 
   background:
