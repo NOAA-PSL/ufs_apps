@@ -28,10 +28,10 @@ soca:
      soca_config: !ENV ${HOMEufs}/parm/gdas/soca/configs/var3dfgat.yaml
 
      # Define the list of analysis variables; comma-delimited.
-     analysis_variables: cicen, hicen, socn, tocn, ssh
+     analysis_variables: [cicen, hicen, socn, tocn, ssh]
 
      # Define the forecast model state variables; comman-delimited.
-     state_variables: cicen, hicen, hsnon, socn, tocn, ssh, hocn, uocn, vocn, mld, layer_depth
+     state_variables: [cicen, hicen, hsnon, socn, tocn, ssh, hocn, uocn, vocn, mld, layer_depth]
 
           
 
