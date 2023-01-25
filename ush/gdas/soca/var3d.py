@@ -35,6 +35,11 @@ import yaml
 # ----
 
 
+class NoAliasDumper(yaml.SafeDumper):
+    def ignore_aliases(self, data):
+        return True
+
+
 class Global3DVAR(SOCA):
     """
     Description
@@ -95,7 +100,7 @@ class Global3DVAR(SOCA):
         # file.
         yaml_dict = YAML().read_yaml(yaml_file=self.soca_config_obj.soca_config)
 
-        print(yaml.safe_dump(yaml_dict))
+        print(yaml.safe_dump(yaml_dict, Dumper=NoAliasDumper))
 
         #YAML().write_yaml(yaml_file=self.soca_config_yaml, in_dict=yaml_dict)
 
