@@ -277,13 +277,17 @@ class SOCA:
         missing_vars = list(
             sorted(set(mandvar_list) - set(vars(self.soca_config_obj))))
 
-        print(missing_vars)
+        if len(missing_vars) > 0:
+            msg = ("The following mandatory SOCA configuration variables have not been "
+                   "specified in the experiment configuration file path "
+                   f"{self.options_obj.yaml_file}. Aborting!!!")
+            error(msg=msg)
 
 
 # ----
 
 
-@ msg_except_handle(SOCAError)
+@msg_except_handle(SOCAError)
 def error(msg: str) -> None:
     """
     Description
