@@ -1,10 +1,13 @@
+_: 
+
 cost function:
 
   cost type: 4D-Var
   window_begin: !ENV "${ATM_WINDOW_BEGIN}"
   window_length: !ENV ${ATM_WINDOW_LENGTH}
   observations: !INC ./soca_observations.yaml
-  analysis variables: &a_vars !ENV ${ANALYSIS_VARIABLES}
+  analysis variables: &a_vars !INC ./analysis_variables.yaml
+       #!ENV ${ANALYSIS_VARIABLES}
   geometry:
     mom6_input_nml: mom_input.nml
     fields metadata: ./fields_metadata.yaml
@@ -12,7 +15,8 @@ cost function:
   model:
     name: PseudoModel
     tstep: PT1H
-    state variables: &model_vars "[" !ENV ${STATE_VARIABLES} "]"
+    state variables: &model_vars !INC ./state_variables.yaml
+#!ENV ${STATE_VARIABLES}
     #states: !INC ${BKG_LIST}
 
   background:
