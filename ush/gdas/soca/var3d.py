@@ -99,7 +99,7 @@ class Global3DVAR(SOCA):
                 error(msg=msg)
 
             with open(f"{config_var}.yaml", "w", encoding="utf-8") as file:
-                file.write(f"-INC {value}")
+                file.write(f"-!INC {value}")
 
             # parser_interface.enviro_set(
             #    envvar=config_var.upper(), value=list(value))
