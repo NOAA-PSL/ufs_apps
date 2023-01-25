@@ -7,5 +7,5 @@ observations2: &observations2 !INC ./soca_observations.yaml
 
 cost function:
 
-  *observations
-  *observations2
+  observations: *observations
+  observations2: *observations2
