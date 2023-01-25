@@ -280,7 +280,7 @@ class SOCA:
         if len(missing_vars) > 0:
             msg = ("The following mandatory SOCA configuration variables have not been "
                    "specified in the experiment configuration file path "
-                   f"{self.options_obj.yaml_file}: {missing_vars}.\n Aborting!!!")
+                   f"{self.options_obj.yaml_file}: {missing_vars}. Aborting!!!")
             error(msg=msg)
 
 

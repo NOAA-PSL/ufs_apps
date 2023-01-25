@@ -94,10 +94,18 @@ class Global3DVAR(SOCA):
         # least) the mandatory attributes.
         self.check_mandvars(mandvar_list=self.config_var_list)
 
-        # Collect the SOCA application configuration attributes.
-        # if not in vars(self.soca_config_obj):
-        #    msg = ('ERROR')
-        #    error(msg=msg)
+        # Establish the environment variables and values required to
+        # build the YAML-formatted SOCA application configuration
+        # file.
+        for config_var in self.config_var_list:
+            value = parser_interface.object_getattr(
+                object_in=self.soca_config_obj, key=config_var, force=True)
+            if value is None:
+                msg = (f"The SOCA configuration attribute {config_var} cannot "
+                       "be NoneType. Aborting!!!")
+                error(msg=msg)
+
+            parser_interface.enviro_set(envvar=config_var.upper(), value=value)
 
         # Build the YAML-formatted SOCA application configuration
         # file.
