@@ -1,4 +1,5 @@
-&observations: !INC ./soca_observations.yaml
+&observations:
+     observations: !INC ./soca_observations.yaml
 
 
 
