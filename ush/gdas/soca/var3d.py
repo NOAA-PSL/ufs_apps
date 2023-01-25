@@ -76,6 +76,8 @@ class Global3DVAR(SOCA):
         # for the SOCA application.
         self.soca_observations_yaml = os.path.join(
             self.dirpath, "soca_observations.yaml")
+        self.soca_config_yaml = os.path.join(
+            self.dirpath, "soca.global_3dvar.yaml")
 
     def config_soca(self, obs_yaml_list: list) -> None:
         """ """
@@ -90,7 +92,7 @@ class Global3DVAR(SOCA):
         # Build the YAML-formatted SOCA application configuration
         # file.
         yaml_dict = YAML().read_yaml(yaml_file=self.soca_config_obj.soca_config)
-        print(yaml_dict)
+        YAML().write_yaml(yaml_file=self.soca_config_yaml, in_dict=yaml_dict)
 
     def run(self) -> None:
         """
