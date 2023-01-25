@@ -270,6 +270,11 @@ class SOCA:
                 self.logger.info(msg=msg)
                 file.write(f"- !INC {obs_yaml}\n")
 
+    def check_mandvars(self, mandvar_list):
+        """ """
+        print(vars(self.soca_config_obj))
+        quit()
+
 # ----
 
 

@@ -90,10 +90,14 @@ class Global3DVAR(SOCA):
         """ """
         os.chdir(self.dirpath)
 
+        # Check that the SOCA application configuration contains (at
+        # least) the mandatory attributes.
+        self.check_mandvars(mandvar_list=self.config_var_list)
+
         # Collect the SOCA application configuration attributes.
-        if all(self.config_var_list) not in vars(self.soca_config_obj):
-            msg = ('ERROR')
-            error(msg=msg)
+        # if not in vars(self.soca_config_obj):
+        #    msg = ('ERROR')
+        #    error(msg=msg)
 
         # Build the YAML-formatted SOCA application configuration
         # file.
