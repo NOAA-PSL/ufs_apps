@@ -95,7 +95,7 @@ class Global3DVAR(SOCA):
                 object_in=self.soca_config_obj, key=config_var, force=True)
             if isinstance(value, list):
                 value = list(value)
-            print(config_var, value)
+            print(config_var, value, value.type)
 
             if value is None:
                 msg = (f"The SOCA configuration attribute {config_var} cannot "
