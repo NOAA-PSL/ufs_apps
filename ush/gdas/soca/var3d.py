@@ -70,6 +70,11 @@ class Global3DVAR(SOCA):
         # Collect the configuration attributes.
         self.soca_app_config = parser_interface.object_define()
 
+        # Define the YAML-formatted file to contain the observations
+        # for the SOCA application.
+        self.soca_observations_yaml = os.path.join(
+            self.dirpath, "soca_observations.yaml")
+
     def run(self):
         """
 
@@ -79,5 +84,10 @@ class Global3DVAR(SOCA):
         self.build_dirtree(dirpath=self.dirpath, is_ens=False)
 
         # Link and configure the observation attributes.
-        self.config_obs(dirpath=self.dirpath,
-                        obs_config_yaml=self.soca_config_obj.obs_config)
+        obs_yaml_list = self.config_obs(dirpath=self.dirpath,
+                                        obs_config_yaml=self.soca_config_obj.obs_config)
+
+        # Concatenate the YAML-formatted files containing the
+        # respective observation attributes.
+        fileio_interface.concatenate(
+            filelist=obs_yaml_list, concatfile=self.soca_observations_yaml)

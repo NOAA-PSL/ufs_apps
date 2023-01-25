@@ -23,6 +23,10 @@ soca:
      # description of the YAML-formatted observation attribute file.
      obs_config: !ENV ${HOMEufs}/parm/gdas/soca/obs/obs.var3d.yaml
 
+     # Define the path to the YAML-formatted file containing the SOCA
+     # application configuration (e.g., YAML-formatted) file.
+     soca_config: !ENV ${HOMEufs}/parm/gdas/soca/configs/var3dfgat.yaml
+
           
 
           
