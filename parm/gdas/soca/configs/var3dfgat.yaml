@@ -4,8 +4,7 @@ cost function:
   window_begin: !ENV "${ATM_WINDOW_BEGIN}"
   window_length: !ENV ${ATM_WINDOW_LENGTH}
   observations: !INC ./soca_observations.yaml
-  analysis variables: !INC ./analysis_variables.yaml
-       #!ENV ${ANALYSIS_VARIABLES}
+  analysis variables: &analy_vars !INC ./analysis_variables.yaml
   geometry:
     mom6_input_nml: mom_input.nml
     fields metadata: ./fields_metadata.yaml
@@ -14,7 +13,6 @@ cost function:
     name: PseudoModel
     tstep: PT1H
     state variables: &model_vars !INC ./state_variables.yaml
-#!ENV ${STATE_VARIABLES}
     #states: !INC ${BKG_LIST}
 
   background:
@@ -35,7 +33,7 @@ variational:
       fields metadata: ./fields_metadata.yaml
     linear model:
       name: Identity
-      increment variables: !INC ./analysis_variables.yaml #*a_vars
+      increment variables: *analy_vars
       variable change: Identity
       tstep: PT1H
     ninner: !ENV ${NINNER}
