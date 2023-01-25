@@ -73,8 +73,11 @@ class Global3DVAR(SOCA):
                          )
         self.dirpath = os.path.join(self.expt_path, "soca", task_id)
 
+        # Define the mandatory configuration variables.
+        self.config_var_list = ["analysis_variables", "state_variables"]
+
         # Collect the configuration attributes.
-        self.soca_app_config = parser_interface.object_define()
+        #self.soca_app_config = parser_interface.object_define()
 
         # Define the YAML-formatted file to contain the observations
         # for the SOCA application.
@@ -85,11 +88,14 @@ class Global3DVAR(SOCA):
 
     def config_soca(self) -> None:
         """ """
+        os.chdir(self.dirpath)
+
+        # Collect the SOCA application configuration attributes.
+        print(vars(self.soca_config_obj))
+        quit()
 
         # Build the YAML-formatted SOCA application configuration
         # file.
-        os.chdir(self.dirpath)
-
         yaml_dict = YAML().read_yaml(yaml_file=self.soca_config_obj.soca_config)
         YAML().write_yaml(yaml_file=self.soca_config_yaml, in_dict=yaml_dict)
 
