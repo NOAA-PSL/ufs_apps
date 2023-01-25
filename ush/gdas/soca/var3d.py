@@ -83,7 +83,7 @@ class Global3DVAR(SOCA):
         self.soca_config_yaml = os.path.join(
             self.dirpath, "soca.global_3dvar.yaml")
 
-    def config_soca(self, obs_yaml_list: list) -> None:
+    def config_soca(self) -> None:
         """ """
 
         # Concatenate the YAML-formatted files containing the
@@ -116,4 +116,4 @@ class Global3DVAR(SOCA):
                         soca_obs_file=self.soca_observations_yaml)
 
         # Configure the SOCA application.
-        self.config_soca(obs_yaml_list=obs_yaml_list)
+        self.config_soca()
