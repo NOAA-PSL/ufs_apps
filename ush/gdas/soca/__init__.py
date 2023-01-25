@@ -140,19 +140,20 @@ class SOCA:
             path = os.path.join(dirpath, subdir)
             fileio_interface.dirpath_tree(path=path)
 
-    def config_obs(self, dirpath: str, obs_config_yaml: str,
-                   soca_obs_file: str) -> list:
+    def build_obs(self, dirpath: str, obs_config_yaml: str,
+                  soca_obs_file: str) -> None:
         """
         Description
         -----------
 
-        This method builds the YAML-formatted file observation
-        configuration files for each observation (and associated
-        attributes) define in the obs_config attribute of the SOCA
-        application experiment configuration file; the respective
-        configuration files are concatenated into a single
-        YAML-formatted file to be used for the respective SOCA
-        application YAML-formatted configuration file.
+        This method builds the YAML-formatted observation
+        configuration files for each specified observation (and
+        associated attributes) defined in the obs_config attribute of
+        the SOCA application experiment configuration file; the file
+        path names are written to a YAML-formatted file containing
+        attributes allowing the file to be parsed using the
+        transclusion applications of the YAML parser toolkit (see
+        ufs_pyutils/confs/yaml_interface.py).
 
         Parameters
         ----------
@@ -167,13 +168,12 @@ class SOCA:
             A Python string specifying the path to the YAML-formatted
             file contain the observation attributes.
 
-        Returns
-        -------
+        soca_obs_file: str
 
-        obs_yaml_list: list
-
-            A Python list containing the paths to the respective
-            YAML-formatted observation configuration files.
+            A Python string specifying the path to the YAML-formatted
+            file to contain the transclusion paths for the respective
+            SOCA observations for assimilation; this file path is
+            defined in the sub-class constructor.
 
         """
 
@@ -262,15 +262,13 @@ class SOCA:
                 # the respective YAML-formatted files.
                 obs_yaml_list.append(obs_config_yaml)
 
+        # Build a YAML-formatted file
         with open(soca_obs_file, "w", encoding="utf-8") as file:
             for obs_yaml in obs_yaml_list:
+                msg = (
+                    f"Writing transclusion attributes for observation file path {obs_yaml}.")
+                self.logger.info(msg=msg)
                 file.write(f"- !INC {obs_yaml}\n")
-
-        # CREATE YAML FILE HERE CONTAINING !INC <PATH TO OBS YAML>
-        # HERE.
-
-        return obs_yaml_list
-
 
 # ----
 
