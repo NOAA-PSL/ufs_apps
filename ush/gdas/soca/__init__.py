@@ -159,7 +159,8 @@ class SOCA:
         # Build a YAML-formatted file containing the observation file
         # paths.
         with open(soca_bkgrds_file, "w", encoding="utf-8") as file:
-            file.write(bkgrd_file_list)
+            file.write(
+                ",".join([bkgrd_file for bkgrd_file in bkgrd_file_list]))
             # for bkgrd_file in bkgrd_file_list:
             #    msg = (
             #        f"Writing background forecast file path {bkgrd_file} to "
