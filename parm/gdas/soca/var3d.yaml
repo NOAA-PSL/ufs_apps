@@ -50,6 +50,8 @@ soca:
      # application.
      bkgrd_ocean_file_string: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/forecast/MOM.res.%Y-%m-%d-%H-%M-%S.nc
 
-          
+     # Define the total number of inner-loops for the variational
+     # solver.
+     ninner: 150
 
           

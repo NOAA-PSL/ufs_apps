@@ -298,8 +298,23 @@ class SOCA:
                 self.logger.info(msg=msg)
                 file.write(f"- !INC {obs_yaml}\n")
 
-    def check_mandvars(self, mandvar_list):
-        """ """
+    def check_mandvars(self, mandvar_list: list) -> None:
+        """
+        Description
+        -----------
+
+        This method checks for missing mandatory configuration
+        variables for the respective SOCA application.
+
+        Parameters
+        ----------
+
+        mandvar_list: list
+
+            A Python list containing the respective SOCA application
+            mandatory configuration variables.
+
+        """
 
         missing_vars = list(
             sorted(set(mandvar_list) - set(vars(self.soca_config_obj))))
@@ -310,6 +325,27 @@ class SOCA:
                    f"{self.options_obj.yaml_file}: {missing_vars}. Aborting!!!")
             error(msg=msg)
 
+    def link_fixedfiles(self, dirpath: str, fixedfile_yaml: str,
+                        ignore_missing: bool = False) -> None:
+        """ """
+
+        fixedfile_dict = YAML().read_yaml(yaml_file=fixedfile_yaml)
+
+        for fixedfile in fixedfile_dict:
+            if not ignore_missing:
+                exist = fileio_interface.fileexist(path=fixedfile)
+
+                if not exist:
+                    msg = (f"The SOCA application fixed file path {fixedfile} does not "
+                           "exist. Aborting!!!")
+                    error(msg=msg)
+
+            srcfile = fixedfile
+            dstfile = parser_interface.dict_key_value(
+                dict_in=fixedfile_dict, key=fixedfile, no_split=True)
+            dstfile = os.path.join(dirpath, dstfile)
+
+            fileio_interface.symlink(srcfile=srcfile, dstfile=dstfile)
 
 # ----
 

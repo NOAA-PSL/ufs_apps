@@ -1,3 +1,3 @@
-godas_sst_bgerr.nc: godas_sst_bgerr.nc
-rossrad.dat: rossrad.dat
-seaice.giomas.clim.1deg.nc: seaice.climatology.nc
+!ENV ${HOMEufs}/fix/gdas/soca/1p0/godas_sst_bgerr.nc: godas_sst_bgerr.nc
+!ENV ${HOMEufs}/fix/gdas/soca/1p0/rossrad.dat: rossrad.dat
+!ENV ${HOMEufs}/fix/gdas/soca/1p0/seaice.giomas.clim.1deg.nc: seaice.climatology.nc

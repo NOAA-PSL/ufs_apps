@@ -103,6 +103,7 @@ class Global3DVAR(SOCA):
                                 self.dirpath, "state_variables.yaml"):
                             self.soca_config_obj.state_variables
                             }
+
         self.build_config_files(config_file_dict=config_file_dict)
 
         # Establish the environment variables and values required to
@@ -128,6 +129,11 @@ class Global3DVAR(SOCA):
 
         # Build the directory tree for the respective application.
         self.build_dirtree(dirpath=self.dirpath, is_ens=False)
+
+        # Link the SOCA application fixed files.
+        self.link_fixedfiles(
+            dirpath=self.dirpath, fixedfile_yaml=self.soca_config_obj.fixed_file_config,
+            ignore_missing=False)
 
         # Link and configure the observation attributes.
         self.build_obs(dirpath=self.dirpath,
