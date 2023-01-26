@@ -345,6 +345,8 @@ class SOCA:
                 dict_in=fixedfile_dict, key=fixedfile, no_split=True)
             dstfile = os.path.join(dirpath, dstfile)
 
+            msg = f"Linking file {srcfile} to {dstfile}."
+            self.logger.info(msg=msg)
             fileio_interface.symlink(srcfile=srcfile, dstfile=dstfile)
 
 # ----
