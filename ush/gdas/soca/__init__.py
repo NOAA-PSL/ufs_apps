@@ -79,7 +79,7 @@ class SOCA:
         self.launch.build_configs()
         self.logger = Logger()
 
-        print(self.cycle)
+        print(self.launch.cycle)
         quit()
 
         # Parse the YAML-formatted file and configure the SOCA
