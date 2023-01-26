@@ -106,7 +106,7 @@ class SOCA:
             value = parser_interface.dict_key_value(
                 dict_in=config_file_dict, key=config_file, no_split=True)
 
-            print(value)
+            print(type(value))
 
             with open(config_file, "w", encoding="utf-8") as file:
                 if isinstance(value, list):
