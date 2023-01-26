@@ -71,4 +71,7 @@ soca:
      # solver.
      ninner: 150
 
+     # Specify whether to assimilate ice observations.
+     assim_ice: False
+
           

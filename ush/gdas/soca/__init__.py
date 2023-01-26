@@ -79,6 +79,9 @@ class SOCA:
         self.launch.build_configs()
         self.logger = Logger()
 
+        print(self.cycle)
+        quit()
+
         # Parse the YAML-formatted file and configure the SOCA
         # application; proceed accordingly.
         self.yaml_dict = YAML().read_concat_yaml(yaml_file=self.options_obj.yaml_file)
@@ -330,13 +333,15 @@ class SOCA:
         """ """
 
         # Collect the attributes from the SOCA application
-        # configuration object.
+        # configuration object; proceed accordingly.
         bkgrds_config_obj = parser_interface.object_define()
         bkgrd_attr_list = ["analysis_interval_seconds",
-                           "bkgrd_ice_filename",
+                           "assim_ice",
                            "bkgrd_interval_seconds",
                            "bkgrd_ocean_filename"
                            ]
+        if soca_config_obj.assim_ice:
+            bkgrd_attr_list.append("bkgrd_ice_filename")
 
         for bkgrd_attr in bkgrd_attr_list:
 
@@ -357,21 +362,15 @@ class SOCA:
         # respective analysis time.
         ntimes = int((bkgrds_config_obj.analysis_interval_seconds /
                       bkgrds_config_obj.bkgrd_interval_seconds) + 1.0)
-
-        # print(ntimes)
-        # print(-1.0*(bkgrds_config_obj.analysis_interval_seconds/2.0))
-        # print((bkgrds_config_obj.analysis_interval_seconds/2.0))
-        # quit()
-
         offset_seconds_list = numpy.linspace(
             start=(-1.0*(bkgrds_config_obj.analysis_interval_seconds/2.0)),
             stop=(bkgrds_config_obj.analysis_interval_seconds/2.0), num=ntimes)
 
-        print(offset_seconds_list)
-        quit()
         # Define the SOCA application background forecast files and
         # link the files accordingly to the working directory; proceed
         # accordingly.
+        bkgrd_file_list = []
+        for offset_second in offset_seconds_list:
 
     def link_fixedfiles(self, dirpath: str, fixedfile_yaml: str,
                         ignore_missing: bool = False) -> None:
