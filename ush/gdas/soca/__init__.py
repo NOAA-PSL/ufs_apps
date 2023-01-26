@@ -106,10 +106,12 @@ class SOCA:
             value = parser_interface.dict_key_value(
                 dict_in=config_file_dict, key=config_file, no_split=True)
 
+            print(value)
+
             with open(config_file, "w", encoding="utf-8") as file:
                 if isinstance(value, list):
                     file.write(
-                        "[" + ",".join([item for item in value.split()]) + "]")
+                        "[" + ",".join([item for item in value]) + "]")
                 if not isinstance(value, list):
                     file.write(value)
 
