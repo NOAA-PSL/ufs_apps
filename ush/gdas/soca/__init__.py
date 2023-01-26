@@ -343,7 +343,7 @@ class SOCA:
             # Collect the value for the respective attribute; proceed
             # accordingly.
             value = parser_interface.object_getattr(
-                object_in=soca_config_obj, key=bkgrd_attr, force=True, no_split=True)
+                object_in=soca_config_obj, key=bkgrd_attr, force=True)
             if value is None:
                 msg = (f"The mandatory attribute {bkgrd_attr} could not be "
                        "determined from the SOCA application configuration file "
