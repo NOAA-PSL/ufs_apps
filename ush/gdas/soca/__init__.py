@@ -164,7 +164,7 @@ class SOCA:
                     f"Writing background forecast file path {bkgrd_file} to "
                     f"{soca_bkgrds_file}.")
                 self.logger.info(msg=msg)
-                file.write(f"- !INC {bkgrd_file}\n")
+                file.write(f"{bkgrd_file}\n")
 
     def build_config_files(self, config_file_dict):
         """
