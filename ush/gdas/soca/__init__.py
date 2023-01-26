@@ -102,6 +102,72 @@ class SOCA:
             out_frmttyp=timestamp_interface.GLOBAL,
             offset_seconds=self.soca_config_obj.analysis_interval_seconds)
 
+        # Define the background forecast times relative to the
+        # respective analysis time.
+        ntimes = int((self.soca_config_obj.analysis_interval_seconds /
+                      self.soca_config_obj.bkgrd_interval_seconds) + 1.0)
+        self.offset_seconds_list = numpy.linspace(
+            start=(-1.0*(self.soca_config_obj.analysis_interval_seconds/2.0)),
+            stop=(self.soca_config_obj.analysis_interval_seconds/2.0), num=ntimes)
+
+    def build_bkgrds(self, dirpath: str, soca_config_obj: object,
+                     soca_bkgrds_file: str) -> None:
+        """ """
+
+        # Collect the attributes from the SOCA application
+        # configuration object; proceed accordingly.
+        bkgrds_config_obj = parser_interface.object_define()
+        bkgrd_attr_list = ["analysis_interval_seconds",
+                           "assim_ice",
+                           "bkgrd_interval_seconds",
+                           "bkgrd_ocean_filename"
+                           ]
+        if soca_config_obj.assim_ice:
+            bkgrd_attr_list.append("bkgrd_ice_filename")
+
+        for bkgrd_attr in bkgrd_attr_list:
+
+            # Collect the value for the respective attribute; proceed
+            # accordingly.
+            value = parser_interface.object_getattr(
+                object_in=soca_config_obj, key=bkgrd_attr, force=True)
+            if value is None:
+                msg = (f"The mandatory attribute {bkgrd_attr} could not be "
+                       "determined from the SOCA application configuration file "
+                       f"{self.options_obj.yaml_file}. Aborting!!!")
+                error(msg=msg)
+
+            bkgrds_config_obj = parser_interface.object_setattr(
+                object_in=bkgrds_config_obj, key=bkgrd_attr, value=value)
+
+        # Define the SOCA application background forecast files and
+        # link the files accordingly to the working directory; proceed
+        # accordingly.
+        bkgrd_file_list = []
+        for offset_seconds in self.offset_seconds_list:
+            filename = datetime_interface.datestrupdate(
+                datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
+                out_frmttyp=bkgrds_config_obj.bkgrd_ocean_filename,
+                offset_seconds=offset_seconds)
+            bkgrd_file_list.append(filename)
+
+            if bkgrds_config_obj.assim_ice:
+                filename = datetime_interface.datestrupdate(
+                    datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
+                    out_frmttyp=bkgrds_config_obj.bkgrd_ice_filename,
+                    offset_seconds=offset_seconds)
+                bkgrd_file_list.append(filename)
+
+        # Build a YAML-formatted file containing the observation file
+        # paths.
+        with open(soca_bkgrds_file, "w", encoding="utf-8") as file:
+            for bkgrd_file in bkgrd_file_list:
+                msg = (
+                    f"Writing background forecast file path {bkgrd_file} to "
+                    f"{soca_bkgrd_file}.")
+                self.logger.info(msg=msg)
+                file.write(f"- !INC {bkgrd_file}\n")
+
     def build_config_files(self, config_file_dict):
         """
 
@@ -242,16 +308,16 @@ class SOCA:
             ob_types_dict = parser_interface.dict_key_value(
                 dict_in=obs_yaml_dict, key=ob_types, force=True)
             if ob_types_dict is None:
-                msg=("The observation attributes could not be determined "
+                msg = ("The observation attributes could not be determined "
                        f"for observation type {ob_types} from YAML-formatted "
                        f"file path {obs_config_yaml}. Aborting!!!")
                 error(msg=msg)
 
             for ob_type in ob_types_dict:
-                obs_dict=parser_interface.dict_key_value(
+                obs_dict = parser_interface.dict_key_value(
                     dict_in=ob_types_dict, key=ob_type, force=True)
                 if obs_dict is None:
-                    msg=("Observation attributes could not be determined for "
+                    msg = ("Observation attributes could not be determined for "
                            f"observation type {ob_type} within YAML-formatted "
                            f"file path {obs_config_yaml}. Aborting!!!")
                     error(msg=msg)
@@ -260,9 +326,9 @@ class SOCA:
 
                     # Define the environment variables using the
                     # attributes for the respective observation type.
-                    value=parser_interface.dict_key_value(
+                    value = parser_interface.dict_key_value(
                         dict_in=obs_dict, key=obs_attr, no_split=True)
-                    value=datetime_interface.datestrupdate(
+                    value = datetime_interface.datestrupdate(
                         datestr=self.launch.cycle,
                         in_frmttyp=timestamp_interface.GLOBAL,
                         out_frmttyp=value,
@@ -272,15 +338,15 @@ class SOCA:
 
                 # Generate the YAML-formatted file containing the SOCA
                 # application configuration; proceed accordingly.
-                yaml_file=parser_interface.dict_key_value(
+                yaml_file = parser_interface.dict_key_value(
                     dict_in=obs_dict, key="yaml_tmpl", force=True, no_split=True)
                 if yaml_file is None:
-                    msg=("A YAML-template file path has not been specified for observation "
+                    msg = ("A YAML-template file path has not been specified for observation "
                            f"type {ob_type} in file path {obs_config_yaml}. Aborting!!!"
                            )
                     error(msg=msg)
 
-                exist=fileio_interface.fileexist(path=yaml_file)
+                exist = fileio_interface.fileexist(path=yaml_file)
                 if not exist:
                     msg = (f"The YAML-formatted file path {yaml_file} for observation type "
                            f"{ob_type} does not exist. Aborting!!!")
@@ -331,64 +397,6 @@ class SOCA:
                    "specified in the experiment configuration file path "
                    f"{self.options_obj.yaml_file}: {missing_vars}. Aborting!!!")
             error(msg=msg)
-
-    def link_bkgrds(self, dirpath: str, soca_config_obj: object) -> None:
-        """ """
-
-        # Collect the attributes from the SOCA application
-        # configuration object; proceed accordingly.
-        bkgrds_config_obj = parser_interface.object_define()
-        bkgrd_attr_list = ["analysis_interval_seconds",
-                           "assim_ice",
-                           "bkgrd_interval_seconds",
-                           "bkgrd_ocean_filename"
-                           ]
-        if soca_config_obj.assim_ice:
-            bkgrd_attr_list.append("bkgrd_ice_filename")
-
-        for bkgrd_attr in bkgrd_attr_list:
-
-            # Collect the value for the respective attribute; proceed
-            # accordingly.
-            value = parser_interface.object_getattr(
-                object_in=soca_config_obj, key=bkgrd_attr, force=True)
-            if value is None:
-                msg = (f"The mandatory attribute {bkgrd_attr} could not be "
-                       "determined from the SOCA application configuration file "
-                       f"{self.options_obj.yaml_file}. Aborting!!!")
-                error(msg=msg)
-
-            bkgrds_config_obj = parser_interface.object_setattr(
-                object_in=bkgrds_config_obj, key=bkgrd_attr, value=value)
-
-        # Define the background forecast times relative to the
-        # respective analysis time.
-        ntimes = int((bkgrds_config_obj.analysis_interval_seconds /
-                      bkgrds_config_obj.bkgrd_interval_seconds) + 1.0)
-        offset_seconds_list = numpy.linspace(
-            start=(-1.0*(bkgrds_config_obj.analysis_interval_seconds/2.0)),
-            stop=(bkgrds_config_obj.analysis_interval_seconds/2.0), num=ntimes)
-
-        # Define the SOCA application background forecast files and
-        # link the files accordingly to the working directory; proceed
-        # accordingly.
-        bkgrd_file_list = []
-        for offset_seconds in offset_seconds_list:
-            filename = datetime_interface.datestrupdate(
-                datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
-                out_frmttyp=bkgrds_config_obj.bkgrd_ocean_filename,
-                offset_seconds=offset_seconds)
-            bkgrd_file_list.append(filename)
-
-            if bkgrds_config_obj.assim_ice:
-                filename = datetime_interface.datestrupdate(
-                    datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
-                    out_frmttyp=bkgrds_config_obj.bkgrd_ice_filename,
-                    offset_seconds=offset_seconds)                
-                bkgrd_file_list.append(filename)
-            
-        print(bkgrd_file_list)
-        quit()
 
     def link_fixedfiles(self, dirpath: str, fixedfile_yaml: str,
                         ignore_missing: bool = False) -> None:

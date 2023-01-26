@@ -68,17 +68,19 @@ class Global3DVAR(SOCA):
                          task_id="global_soca_3dvar"
                          )
         self.dirpath = os.path.join(self.expt_path, "soca", task_id)
+        os.chdir(self.dirpath)
 
         # Define the mandatory configuration variables.
         self.config_var_list = ["analysis_variables", "state_variables"]
 
         # Define the YAML-formatted file to contain the observations
         # for the SOCA application.
-        self.soca_observations_yaml = os.path.join(
-            self.dirpath, "soca_observations.yaml")
+        self.soca_bkgrds_yaml = os.path.join(
+            self.dirpath, "soca_backgrounds.yaml")
         self.soca_config_yaml = os.path.join(
             self.dirpath, "soca.global_3dvar.yaml")
-        os.chdir(self.dirpath)
+        self.soca_observations_yaml = os.path.join(
+            self.dirpath, "soca_observations.yaml")
 
     def config_soca(self) -> None:
         """
@@ -137,8 +139,9 @@ class Global3DVAR(SOCA):
             ignore_missing=False)
 
         # Link the background forecast files.
-        self.link_bkgrds(dirpath=self.dirpath,
-                         soca_config_obj=self.soca_config_obj)
+        self.build_bkgrds(dirpath=self.dirpath,
+                          soca_config_obj=self.soca_config_obj,
+                          soca_bkgrds_file=self.soca_bkgrds_yaml)
 
         # Link and configure the observation attributes.
         self.build_obs(dirpath=self.dirpath,
