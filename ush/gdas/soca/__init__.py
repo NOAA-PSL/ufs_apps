@@ -364,8 +364,8 @@ class SOCA:
         # quit()
 
         offset_seconds_list = numpy.linspace(
-            (-1.0*(bkgrds_config_obj.analysis_interval_seconds/2.0),
-             (bkgrds_config_obj.analysis_interval_seconds/2.0)), num=ntimes)
+            start=(-1.0*(bkgrds_config_obj.analysis_interval_seconds/2.0)),
+            stop=(bkgrds_config_obj.analysis_interval_seconds/2.0), num=ntimes)
 
         print(offset_seconds_list)
         quit()
