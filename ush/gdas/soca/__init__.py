@@ -357,6 +357,10 @@ class SOCA:
         # respective analysis time.
         ntimes = float(bkgrds_config_obj.analysis_interval_seconds /
                        bkgrds_config_obj.bkgrd_interval_seconds)
+
+        print(ntimes)
+        quit()
+
         offset_seconds_list = [offset for offset in numpy.linspace(
             ((bkgrds_config_obj.analysis_interval_seconds/2.0) -
              bkgrds_config_obj.analysis_interval_seconds),
