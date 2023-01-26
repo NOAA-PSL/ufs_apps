@@ -100,7 +100,7 @@ class SOCA:
         self.analysis_time = datetime_interface.datestrupdate(
             datestr=self.launch.cycle, in_frmttyp=timestamp_interface.GLOBAL,
             out_frmttyp=timestamp_interface.GLOBAL,
-            offset_seconds=self.soca_config_obj.analysis_interval)
+            offset_seconds=self.soca_config_obj.analysis_interval_seconds)
 
     def build_config_files(self, config_file_dict):
         """
@@ -239,7 +239,7 @@ class SOCA:
                    "observations.")
             self.logger.info(msg=msg)
 
-            ob_types_dict=parser_interface.dict_key_value(
+            ob_types_dict = parser_interface.dict_key_value(
                 dict_in=obs_yaml_dict, key=ob_types, force=True)
             if ob_types_dict is None:
                 msg=("The observation attributes could not be determined "
