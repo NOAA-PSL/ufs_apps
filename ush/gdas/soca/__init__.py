@@ -159,12 +159,13 @@ class SOCA:
         # Build a YAML-formatted file containing the observation file
         # paths.
         with open(soca_bkgrds_file, "w", encoding="utf-8") as file:
-            for bkgrd_file in bkgrd_file_list:
-                msg = (
-                    f"Writing background forecast file path {bkgrd_file} to "
-                    f"{soca_bkgrds_file}.")
-                self.logger.info(msg=msg)
-                file.write(f"{bkgrd_file}\n")
+            file.write(bkgrd_file_list)
+            # for bkgrd_file in bkgrd_file_list:
+            #    msg = (
+            #        f"Writing background forecast file path {bkgrd_file} to "
+            #        f"{soca_bkgrds_file}.")
+            #    self.logger.info(msg=msg)
+            #    file.write(f"{bkgrd_file}\n")
 
     def build_config_files(self, config_file_dict):
         """
