@@ -164,7 +164,7 @@ class SOCA:
             for bkgrd_file in bkgrd_file_list:
                 msg = (
                     f"Writing background forecast file path {bkgrd_file} to "
-                    f"{soca_bkgrd_file}.")
+                    f"{soca_bkgrds_file}.")
                 self.logger.info(msg=msg)
                 file.write(f"- !INC {bkgrd_file}\n")
 
