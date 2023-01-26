@@ -132,8 +132,13 @@ class Global3DVAR(SOCA):
 
         # Link the SOCA application fixed files.
         self.link_fixedfiles(
-            dirpath=self.dirpath, fixedfile_yaml=self.soca_config_obj.fixed_file_config,
+            dirpath=self.dirpath,
+            fixedfile_yaml=self.soca_config_obj.fixed_file_config,
             ignore_missing=False)
+
+        # Link the background forecast files.
+        self.link_bkgrds(dirpath=self.dirpath,
+                         soca_config_obj=self.soca_config_obj)
 
         # Link and configure the observation attributes.
         self.build_obs(dirpath=self.dirpath,

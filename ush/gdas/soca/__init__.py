@@ -33,6 +33,7 @@ PLACE HOLDER
 
 # ----
 
+import numpy
 import os
 
 from dataclasses import dataclass
@@ -325,9 +326,80 @@ class SOCA:
                    f"{self.options_obj.yaml_file}: {missing_vars}. Aborting!!!")
             error(msg=msg)
 
+    def link_bkgrds(self, dirpath: str, soca_config_obj: object) -> None:
+        """ """
+
+        # Collect the attributes from the SOCA application
+        # configuration object.
+        bkgrds_config_obj = parser_interface.object_define()
+        bkgrd_attr_list = ["analysis_interval_seconds",
+                           "bkgrd_ice_filename",
+                           "bkgrd_interval_seconds",
+                           "bkgrd_ocean_filename"
+                           ]
+
+        for bkgrd_attr in bkgrd_attr_list:
+
+            # Collect the value for the respective attribute; proceed
+            # accordingly.
+            value = parser_interface.object_getattr(
+                object_in=soca_config_obj, key=bkgrd_attr, force=True, no_split=True)
+            if value is None:
+                msg = (f"The mandatory attribute {bkgrd_attr} could not be "
+                       "determined from the SOCA application configuration file "
+                       f"{self.options_obj.yaml_file}. Aborting!!!")
+                error(msg=msg)
+
+            bkgrds_config_obj = parser_interface.object_setattr(
+                object_in=bkgrds_config_obj, key=bkgrd_attr, value=value)
+
+        # Define the background forecast times relative to the
+        # respective analysis time.
+        offset_seconds_list = [offset for offset in numpy.arange(
+            ((bkgrds_config_obj.analysis_interval_seconds/2.0) -
+             bkgrds_config_obj.analysis_interval_seconds),
+            (bkgrds_config_obj.analysis_interval_seconds +
+             (bkgrds_config_obj.analysis_interval_seconds/2.0)),
+            bkgrds_config_obj.bkgrd_interval_seconds)]
+
+        print(offset_seconds_list)
+        quit()
+        # Define the SOCA application background forecast files and
+        # link the files accordingly to the working directory; proceed
+        # accordingly.
+
     def link_fixedfiles(self, dirpath: str, fixedfile_yaml: str,
                         ignore_missing: bool = False) -> None:
-        """ """
+        """
+        Description
+        -----------
+
+        This method links the specified SOCA application fixed files.
+
+        Parameters
+        ----------
+
+        dirpath: str
+
+            A Python string specifying the top-level directory path
+            beneath which the sub-directory tree will be built.
+
+        fixedfile_yaml: str
+
+            A Python string specifying the path to the YAML-formatted
+            file containing the SOCA application fixed file
+            information.
+
+        Keywords
+        --------
+
+        ignore_missing: bool, optional
+
+            A Python boolean valued variable specifying whether to
+            ignore missing source fixed files for the respective SOCA
+            application.
+
+        """
 
         fixedfile_dict = YAML().read_yaml(yaml_file=fixedfile_yaml)
 
@@ -352,7 +424,7 @@ class SOCA:
 # ----
 
 
-@msg_except_handle(SOCAError)
+@ msg_except_handle(SOCAError)
 def error(msg: str) -> None:
     """
     Description
