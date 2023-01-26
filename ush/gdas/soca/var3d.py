@@ -87,6 +87,16 @@ class Global3DVAR(SOCA):
         # least) the mandatory attributes.
         self.check_mandvars(mandvar_list=self.config_var_list)
 
+        # Build the external files to be used for compiling the SOCA
+        # application configuration file.
+        config_file_dict = {os.path.join(self.dirpath, "analysis_variables.yaml"):
+                            self.soca_config_obj.analysis_variables,
+                            os.path.join(
+                                self.dirpath, "state_variables.yaml"),
+                            self.soca_config_obj.state_variables
+                            }
+        self.build_config_files(config_file_dict=config_file_dict)
+
         # Establish the environment variables and values required to
         # build the YAML-formatted SOCA application configuration
         # file; proceed accordingly.
@@ -97,11 +107,6 @@ class Global3DVAR(SOCA):
                 msg = (f"The SOCA configuration attribute {config_var} cannot "
                        "be NoneType. Aborting!!!")
                 error(msg=msg)
-
-            if isinstance(value, list):
-                with open(f"{config_var}.yaml", "w", encoding="utf-8") as file:
-                    file.write(
-                        "[" + ",".join([f"{item}" for item in value]) + "]")
 
         # Build the YAML-formatted SOCA application configuration
         # file.

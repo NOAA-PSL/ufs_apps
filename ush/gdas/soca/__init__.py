@@ -95,6 +95,23 @@ class SOCA:
             self.soca_config_obj = parser_interface.object_setattr(
                 object_in=self.soca_config_obj, key=soca_item, value=value)
 
+    def build_config_files(self, config_file_dict):
+        """
+
+        """
+
+        # Build each configuration file accordingly.
+        for config_file in config_file_dict:
+
+            value = parser_interface.dict_key_value(
+                in_dict=config_file_dict, key=config_file, no_split=True)
+
+            with open(config_file, "w", encoding="utf-8") as file:
+                if isinstance(value, list):
+                    file.write(",".join([item for item in value]))
+                if not isinstance(value, list):
+                    file.write(value)
+
     def build_dirtree(self, dirpath: str, is_ens: bool = False) -> None:
         """
         Description
