@@ -117,9 +117,7 @@ class SOCA:
         # Collect the attributes from the SOCA application
         # configuration object; proceed accordingly.
         bkgrds_config_obj = parser_interface.object_define()
-        bkgrd_attr_list = ["analysis_interval_seconds",
-                           "assim_ice",
-                           "bkgrd_interval_seconds",
+        bkgrd_attr_list = ["assim_ice",
                            "bkgrd_ocean_filename"
                            ]
         if soca_config_obj.assim_ice:
