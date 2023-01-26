@@ -79,9 +79,6 @@ class SOCA:
         self.launch.build_configs()
         self.logger = Logger()
 
-        print(self.launch.cycle)
-        quit()
-
         # Parse the YAML-formatted file and configure the SOCA
         # application; proceed accordingly.
         self.yaml_dict = YAML().read_concat_yaml(yaml_file=self.options_obj.yaml_file)
@@ -98,6 +95,12 @@ class SOCA:
                 dict_in=soca_app_dict, key=soca_item, no_split=True)
             self.soca_config_obj = parser_interface.object_setattr(
                 object_in=self.soca_config_obj, key=soca_item, value=value)
+
+        # Define the analysis timestamp.
+        self.analysis_time = datetime_interface.datestrupdate(
+            datestr=self.launch.cycle, in_frmttyp=timestamp_interface.GLOBAL,
+            out_frmttyp=timestamp_interface.GLOBAL,
+            offset_seconds=self.soca_config_obj.analysis_interval)
 
     def build_config_files(self, config_file_dict):
         """
@@ -236,19 +239,19 @@ class SOCA:
                    "observations.")
             self.logger.info(msg=msg)
 
-            ob_types_dict = parser_interface.dict_key_value(
+            ob_types_dict=parser_interface.dict_key_value(
                 dict_in=obs_yaml_dict, key=ob_types, force=True)
             if ob_types_dict is None:
-                msg = ("The observation attributes could not be determined "
+                msg=("The observation attributes could not be determined "
                        f"for observation type {ob_types} from YAML-formatted "
                        f"file path {obs_config_yaml}. Aborting!!!")
                 error(msg=msg)
 
             for ob_type in ob_types_dict:
-                obs_dict = parser_interface.dict_key_value(
+                obs_dict=parser_interface.dict_key_value(
                     dict_in=ob_types_dict, key=ob_type, force=True)
                 if obs_dict is None:
-                    msg = ("Observation attributes could not be determined for "
+                    msg=("Observation attributes could not be determined for "
                            f"observation type {ob_type} within YAML-formatted "
                            f"file path {obs_config_yaml}. Aborting!!!")
                     error(msg=msg)
@@ -257,9 +260,9 @@ class SOCA:
 
                     # Define the environment variables using the
                     # attributes for the respective observation type.
-                    value = parser_interface.dict_key_value(
+                    value=parser_interface.dict_key_value(
                         dict_in=obs_dict, key=obs_attr, no_split=True)
-                    value = datetime_interface.datestrupdate(
+                    value=datetime_interface.datestrupdate(
                         datestr=self.launch.cycle,
                         in_frmttyp=timestamp_interface.GLOBAL,
                         out_frmttyp=value,
@@ -269,15 +272,15 @@ class SOCA:
 
                 # Generate the YAML-formatted file containing the SOCA
                 # application configuration; proceed accordingly.
-                yaml_file = parser_interface.dict_key_value(
+                yaml_file=parser_interface.dict_key_value(
                     dict_in=obs_dict, key="yaml_tmpl", force=True, no_split=True)
                 if yaml_file is None:
-                    msg = ("A YAML-template file path has not been specified for observation "
+                    msg=("A YAML-template file path has not been specified for observation "
                            f"type {ob_type} in file path {obs_config_yaml}. Aborting!!!"
                            )
                     error(msg=msg)
 
-                exist = fileio_interface.fileexist(path=yaml_file)
+                exist=fileio_interface.fileexist(path=yaml_file)
                 if not exist:
                     msg = (f"The YAML-formatted file path {yaml_file} for observation type "
                            f"{ob_type} does not exist. Aborting!!!")
@@ -370,7 +373,22 @@ class SOCA:
         # link the files accordingly to the working directory; proceed
         # accordingly.
         bkgrd_file_list = []
-#        for offset_second in offset_seconds_list:
+        for offset_seconds in offset_seconds_list:
+            filename = datetime_interface.datestrupdate(
+                datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
+                out_frmttyp=bkgrds_config_obj.bkgrd_ocean_filename,
+                offset_seconds=offset_seconds)
+            bkgrd_file_list.append(filename)
+
+            if bkgrds_config_obj.assim_ice:
+                filename = datetime_interface.datestrupdate(
+                    datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
+                    out_frmttyp=bkgrds_config_obj.bkgrd_ice_filename,
+                    offset_seconds=offset_seconds)                
+                bkgrd_file_list.append(filename)
+            
+        print(bkgrd_file_list)
+        quit()
 
     def link_fixedfiles(self, dirpath: str, fixedfile_yaml: str,
                         ignore_missing: bool = False) -> None:
