@@ -103,17 +103,24 @@ class SOCA:
         # Build each configuration file accordingly.
         for config_file in config_file_dict:
 
+            # Define the values for the configuration file and write
+            # the values to the respective configuration file; proceed
+            # accordingly.
             value = parser_interface.dict_key_value(
                 dict_in=config_file_dict, key=config_file, no_split=True)
 
-            print(type(value))
+            try:
+                with open(config_file, "w", encoding="utf-8") as file:
+                    if isinstance(value, list):
+                        file.write(
+                            "[" + ",".join([item for item in value]) + "]")
+                    if not isinstance(value, list):
+                        file.write(value)
 
-            with open(config_file, "w", encoding="utf-8") as file:
-                if isinstance(value, list):
-                    file.write(
-                        "[" + ",".join([item for item in value]) + "]")
-                if not isinstance(value, list):
-                    file.write(value)
+            except Exception as errmsg:
+                msg = (f"Writing the configuration file {config_file} failed "
+                       f"with error {errmsg}. Aborting!!!")
+                error(msg=msg)
 
     def build_dirtree(self, dirpath: str, is_ens: bool = False) -> None:
         """

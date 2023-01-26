@@ -27,11 +27,28 @@ soca:
      # application configuration (e.g., YAML-formatted) file.
      soca_config: !ENV ${HOMEufs}/parm/gdas/soca/configs/var3dfgat.yaml
 
-     # Define the list of analysis variables; comma-delimited.
+     # Define the list of analysis variables; comma-delimited; the
+     # list should be bounded by brackets.
      analysis_variables: [cicen, hicen, socn, tocn, ssh]
 
-     # Define the forecast model state variables; comman-delimited.
+     # Define the forecast model state variables; comman-delimited;
+     # the list should be bounded by brackets.
      state_variables: [cicen, hicen, hsnon, socn, tocn, ssh, hocn, uocn, vocn, mld, layer_depth]
+
+     # Define the First Guess at Appropriate Time (FGAT) interval;
+     # units are seconds; the respective FGAT times are defined
+     # relative to the analysis time.
+     fgat_interval_seconds: 10800
+
+     # Define the ice model First Guess at Appropriate Time (FGAT)
+     # file path; these are the background forecast files for the SOCA
+     # application.
+     bkgrd_ice_file_string: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/forecast/CICE.res.%Y-%m-%d-%H-%M-%S.nc
+     
+     # Define the ocean model First Guess at Appropriate Time (FGAT)
+     # file path; these are the background forecast files for the SOCA
+     # application.
+     bkgrd_ocean_file_string: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/forecast/MOM.res.%Y-%m-%d-%H-%M-%S.nc
 
           
 

@@ -81,7 +81,15 @@ class Global3DVAR(SOCA):
         os.chdir(self.dirpath)
 
     def config_soca(self) -> None:
-        """ """
+        """
+        Description
+        -----------
+
+        This method configures the SOCA application; this includes the
+        building of the respective configuration and YAML-formatted
+        SOCA application files as well as fixed-file collection.
+
+        """
 
         # Check that the SOCA application configuration contains (at
         # least) the mandatory attributes.
