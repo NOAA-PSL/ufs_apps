@@ -356,10 +356,7 @@ class SOCA:
         # Define the background forecast times relative to the
         # respective analysis time.
         ntimes = float(bkgrds_config_obj.analysis_interval_seconds /
-                       bkgrds_config_obj.bkgrd_interval_seconds)
-
-        print(ntimes)
-        quit()
+                       bkgrds_config_obj.bkgrd_interval_seconds) + 1.0
 
         offset_seconds_list = [offset for offset in numpy.linspace(
             ((bkgrds_config_obj.analysis_interval_seconds/2.0) -
