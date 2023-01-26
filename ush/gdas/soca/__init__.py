@@ -108,7 +108,8 @@ class SOCA:
 
             with open(config_file, "w", encoding="utf-8") as file:
                 if isinstance(value, list):
-                    file.write("[" + ",".join([item for item in value]) + "]")
+                    file.write(
+                        "[" + ",".join([item for item in value.split()]) + "]")
                 if not isinstance(value, list):
                     file.write(value)
 
