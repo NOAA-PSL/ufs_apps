@@ -104,7 +104,7 @@ class SOCA:
         for config_file in config_file_dict:
 
             value = parser_interface.dict_key_value(
-                in_dict=config_file_dict, key=config_file, no_split=True)
+                dict_in=config_file_dict, key=config_file, no_split=True)
 
             with open(config_file, "w", encoding="utf-8") as file:
                 if isinstance(value, list):
