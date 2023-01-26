@@ -90,10 +90,10 @@ class Global3DVAR(SOCA):
         # Build the external files to be used for compiling the SOCA
         # application configuration file.
         config_file_dict = {os.path.join(self.dirpath, "analysis_variables.yaml"):
-                            list(self.soca_config_obj.analysis_variables),
+                            self.soca_config_obj.analysis_variables,
                             os.path.join(
                                 self.dirpath, "state_variables.yaml"):
-                            list(self.soca_config_obj.state_variables)
+                            self.soca_config_obj.state_variables
                             }
         self.build_config_files(config_file_dict=config_file_dict)
 
