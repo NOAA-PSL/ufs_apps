@@ -370,7 +370,7 @@ class SOCA:
         # link the files accordingly to the working directory; proceed
         # accordingly.
         bkgrd_file_list = []
-        for offset_second in offset_seconds_list:
+#        for offset_second in offset_seconds_list:
 
     def link_fixedfiles(self, dirpath: str, fixedfile_yaml: str,
                         ignore_missing: bool = False) -> None:
