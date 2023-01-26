@@ -72,6 +72,6 @@ soca:
      ninner: 150
 
      # Specify whether to assimilate ice observations.
-     assim_ice: False
+     assim_ice: True
 
           
