@@ -60,12 +60,12 @@ soca:
      # Define the ice model First Guess at Appropriate Time (FGAT)
      # file path; these are the background forecast files for the SOCA
      # application.
-     bkgrd_ice_file: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/forecast/CICE.res.%Y-%m-%d-%H-%M-%S.nc
+     bkgrd_ice_filename: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/forecast/CICE.res.%Y-%m-%d-%H-%M-%S.nc
      
      # Define the ocean model First Guess at Appropriate Time (FGAT)
      # file path; these are the background forecast files for the SOCA
      # application; 
-     bkgrd_ocean_file: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/forecast/MOM.res.%Y-%m-%d-%H-%M-%S.nc
+     bkgrd_ocean_filename: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/forecast/MOM.res.%Y-%m-%d-%H-%M-%S.nc
 
      # Define the total number of inner-loops for the variational
      # solver.
