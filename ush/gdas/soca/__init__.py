@@ -126,7 +126,7 @@ class SOCA:
         dstfile = berror_filepath
         fileio_interface.copyfile(srcfile=srcfile, dstfile=dstfile)
 
-    def build_bkgrds(self, dirpath: str, soca_bkgrds_file: str) -> None:
+    def build_bkgrds_fgat(self, dirpath: str, soca_fgat_file: str) -> None:
         """
         Description
         -----------
@@ -156,7 +156,7 @@ class SOCA:
         soca_bkgrds_file: str
 
             A Python string specifying the path to which the list of
-            background forecast files is to be written.
+            FGAT background forecast files is to be written.
 
         """
 
