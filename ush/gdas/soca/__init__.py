@@ -110,6 +110,22 @@ class SOCA:
             start=(-1.0*(self.soca_config_obj.analysis_interval_seconds/2.0)),
             stop=(self.soca_config_obj.analysis_interval_seconds/2.0), num=ntimes)
 
+    def berror_config(self, berror_filepath: str) -> None:
+        """ """
+
+        berror_file = parser_interface.object_getattr(
+            object_in=self.soca_config_obj, key="background_error",
+            force=True)
+        if berror_file is None:
+            msg = ("The background error file path cannot be NoneType and/or "
+                   f"was not defined in experiment configuration file {self.options_obj.yaml_file}. "
+                   "Aborting!!!")
+            error(msg=msg)
+
+        srcfile = berror_file
+        dstfile = berror_filepath
+        fileio_interface.copyfile(srcfile=srcfile, dstfile=dstfile)
+
     def build_bkgrds(self, dirpath: str, soca_bkgrds_file: str) -> None:
         """
         Description
