@@ -31,6 +31,7 @@ from gdas.soca import SOCA, error
 from tools import datetime_interface
 from tools import fileio_interface
 from tools import parser_interface
+from utils import timestamp_interface
 
 # ----
 
@@ -91,7 +92,7 @@ class Global3DVAR(SOCA):
                                    'atm_window_begin': datetime_interface.datestrupdate(
                                        datestr=self.launch.cycle,
                                        in_frmttyp=timestamp_interface.GLOBAL,
-                                       out_frmttyp=timestamp_interface.HOLD,
+                                       out_frmttyp=timestamp_interface.Y_m_dTHMSZ,
                                        offset_seconds=float(self.soca_config_obj.analysis_interval_seconds/2.0)),
                                    'atm_window_length': self.soca_config_obj.analysis_interval_seconds
                                    }
