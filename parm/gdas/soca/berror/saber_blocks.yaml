@@ -1,3 +1,5 @@
+atm_window_begin: &atm_window_begin !ENV "${ATM_WINDOW_BEGIN}"
+
 covariance model: SABER
 saber central block:
   saber block name: BUMP_NICAS
