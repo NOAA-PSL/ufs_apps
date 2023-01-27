@@ -1,7 +1,9 @@
+_: &atm_window_begin: !ENV "${ATM_WINDOW_BEGIN}"
+
 cost function:
 
   cost type: 4D-Var
-  window_begin: !ENV "${ATM_WINDOW_BEGIN}"
+  window_begin: *atm_window_begin #!ENV "${ATM_WINDOW_BEGIN}"
   window_length: !ENV ${ATM_WINDOW_LENGTH}
   observations: !INC ./soca_observations.yaml
   analysis variables: &analy_vars !INC ./analysis_variables.yaml
@@ -20,7 +22,7 @@ cost function:
     basename: ./INPUT/
     ocn_filename: MOM.res.nc
     ice_filename: cice.res.nc
-    date: !ENV "${ATM_WINDOW_BEGIN}"
+    date: *atm_window_begin #!ENV "${ATM_WINDOW_BEGIN}"
     state variables: *model_vars
   background error: !INC ./soca_berror.yaml
 
@@ -63,7 +65,7 @@ final:
   increment:
     output:
       datadir: Data
-      date: !ENV "${ATM_WINDOW_BEGIN}"
+      date: *atm_window_begin #!ENV "${ATM_WINDOW_BEGIN}"
       exp: 3dvarfgat_pseudo
       type: incr
     geometry:
