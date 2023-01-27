@@ -119,7 +119,7 @@ class Global3DVAR(SOCA):
                             self.soca_config_obj.analysis_variables,
                             os.path.join(self.dirpath, "state_variables.yaml"):
                             self.soca_config_obj.state_variables,
-                            os.path.join(self.dirpath, "soca_berror.yaml"),
+                            os.path.join(self.dirpath, "soca_berror.yaml"):
                             self.soca_config_obj.background_error
                             }
 
