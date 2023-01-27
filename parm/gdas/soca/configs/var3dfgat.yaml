@@ -2,7 +2,7 @@ cost function:
 
   cost type: 4D-Var
   window_begin: !ENV "${ATM_WINDOW_BEGIN}"
-  window_length: !ENV ${ATM_WINDOW_LENGTH}
+  window_length: !ENV ${ATM_WINDOW_LENGTH} !!str
   observations: !INC ./soca_observations.yaml
   analysis variables: &analy_vars !INC ./analysis_variables.yaml
   geometry:
@@ -36,7 +36,7 @@ variational:
       increment variables: *analy_vars
       variable change: Identity
       tstep: PT1H
-    ninner: !ENV ${NINNER} !!python.int
+    ninner: !ENV ${NINNER} !!java.lang.Int 100
     gradient norm reduction: 1e-10
     test: on
     diagnostics:
