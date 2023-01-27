@@ -66,10 +66,11 @@ class Global3DVAR(SOCA):
 
         # Define the base-class attributes.
         task_id = "global_soca_3dvar"
+        self.dirpath = os.path.join(self.expt_path, "soca", task_id)
         super().__init__(options_obj=options_obj,
                          task_id="global_soca_3dvar"
                          )
-        self.dirpath = os.path.join(self.expt_path, "soca", task_id)
+
         os.chdir(self.dirpath)
 
         # Define the mandatory configuration variables.
