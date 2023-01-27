@@ -2,7 +2,7 @@ cost function:
 
   cost type: 4D-Var
   window_begin: !ENV "${ATM_WINDOW_BEGIN}"
-  window_length: !ENV ${ATM_WINDOW_LENGTH} !!str
+  window_length: (!ENV ${ATM_WINDOW_LENGTH}) !!str
   observations: !INC ./soca_observations.yaml
   analysis variables: &analy_vars !INC ./analysis_variables.yaml
   geometry:
@@ -20,7 +20,7 @@ cost function:
     basename: ./INPUT/
     ocn_filename: MOM.res.nc
     ice_filename: cice.res.nc
-    date: !ENV "{ATM_WINDOW_BEGIN}"
+    date: !ENV "${ATM_WINDOW_BEGIN}"
     state variables: *model_vars
   background error: Null
 
