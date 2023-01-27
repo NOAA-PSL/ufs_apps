@@ -252,6 +252,7 @@ class SOCA:
             dstfile = os.path.join(dirpath, bkgrd_ice_filename)
             msg = (f"Copying file {srcfile} to {dstfile}.")
             self.logger.info(msg=msg)
+            fileio_interface.copyfile(srcfile=srcfile, dstfile=dstfile)
 
     def build_config_files(self, config_file_dict):
         """
