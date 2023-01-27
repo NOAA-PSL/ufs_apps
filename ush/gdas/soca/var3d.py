@@ -146,8 +146,9 @@ class Global3DVAR(SOCA):
                     msg = (f"The SOCA attribute {soca_attr} cannot be NoneType. "
                            "Aborting!!!")
                     error(msg=msg)
-                parser_interface.enviro_set(envvar=soca_attr.upper(),
-                                            value=str(value))
+
+            parser_interface.enviro_set(envvar=soca_attr.upper(),
+                                        value=str(value))
 
         # Build the YAML-formatted SOCA application configuration
         # file.
