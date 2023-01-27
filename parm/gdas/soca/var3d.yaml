@@ -32,6 +32,11 @@ soca:
      # fixed-files for the respective SOCA application.
      fixed_file_config: !ENV ${HOMEufs}/parm/gdas/soca/fixed-files/fixed_file.var3d.1p0.yaml
 
+     # Define the path to the YAML-formatted file containing the
+     # background error attributes for the respective SOCA
+     # application.
+     background_error: !ENV ${HOMEufs}/parm/gdas/soca/berror/saber_blocks.yaml
+
      # Define the path to the YAML-formatted file containing
      # observation attributes; this file includes the observation
      # types, observation file name possibilities, and the

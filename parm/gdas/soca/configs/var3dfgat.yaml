@@ -22,7 +22,7 @@ cost function:
     ice_filename: cice.res.nc
     date: !ENV "${ATM_WINDOW_BEGIN}"
     state variables: *model_vars
-  background error: Null
+  background error: !INC ${BACKGROUND_ERROR}
 
 variational:
   minimizer:

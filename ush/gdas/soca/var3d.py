@@ -88,14 +88,15 @@ class Global3DVAR(SOCA):
         # the respective SOCA application; these attributes will be
         # queried and defined as run-time environment variables
         # accordingly.
-        self.soca_default_attrs = {'ninner': 100,
-                                   'atm_window_begin': datetime_interface.datestrupdate(
-                                       datestr=self.launch.cycle,
-                                       in_frmttyp=timestamp_interface.GLOBAL,
-                                       out_frmttyp=timestamp_interface.Y_m_dTHMSZ,
-                                       offset_seconds=float(self.soca_config_obj.analysis_interval_seconds/2.0)),
-                                   'atm_window_length': f"PT{self.soca_config_obj.analysis_interval_seconds}S"
-                                   }
+        self.soca_default_attrs = {"atm_window_begin": datetime_interface.datestrupdate(
+            datestr=self.launch.cycle,
+            in_frmttyp=timestamp_interface.GLOBAL,
+            out_frmttyp=timestamp_interface.Y_m_dTHMSZ,
+            offset_seconds=float(self.soca_config_obj.analysis_interval_seconds/2.0)),
+            "atm_window_length": f"PT{self.soca_config_obj.analysis_interval_seconds}S",
+            "background_error": None,
+            "ninner": 100
+        }
 
     def config_soca(self) -> None:
         """
