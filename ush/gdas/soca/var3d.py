@@ -94,7 +94,7 @@ class Global3DVAR(SOCA):
                                        in_frmttyp=timestamp_interface.GLOBAL,
                                        out_frmttyp=timestamp_interface.Y_m_dTHMSZ,
                                        offset_seconds=float(self.soca_config_obj.analysis_interval_seconds/2.0)),
-                                   'atm_window_length': "PT{self.soca_config_obj.analysis_interval_seconds}S"
+                                   'atm_window_length': f"PT{self.soca_config_obj.analysis_interval_seconds}S"
                                    }
 
     def config_soca(self) -> None:
