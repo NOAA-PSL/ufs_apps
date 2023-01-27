@@ -162,52 +162,86 @@ class SOCA:
 
         # Collect the attributes from the SOCA application
         # configuration object; proceed accordingly.
-        bkgrds_config_obj = parser_interface.object_define()
-        bkgrd_attr_list = ["assim_ice",
-                           "bkgrd_ocean_filename"
-                           ]
+        fgat_config_obj = parser_interface.object_define()
+        fgat_attr_list = ["assim_ice",
+                          "fgat_ocean_filename"
+                          ]
         if self.soca_config_obj.assim_ice:
-            bkgrd_attr_list.append("bkgrd_ice_filename")
+            fgat_attr_list.append("fgat_ice_filename")
 
-        for bkgrd_attr in bkgrd_attr_list:
+        for fgat_attr in fgat_attr_list:
 
             # Collect the value for the respective attribute; proceed
             # accordingly.
             value = parser_interface.object_getattr(
-                object_in=self.soca_config_obj, key=bkgrd_attr, force=True)
+                object_in=self.soca_config_obj, key=fgat_attr, force=True)
             if value is None:
-                msg = (f"The mandatory attribute {bkgrd_attr} could not be "
+                msg = (f"The mandatory attribute {fgat_attr} could not be "
                        "determined from the SOCA application configuration file "
                        f"{self.options_obj.yaml_file}. Aborting!!!")
                 error(msg=msg)
 
-            bkgrds_config_obj = parser_interface.object_setattr(
-                object_in=bkgrds_config_obj, key=bkgrd_attr, value=value)
+            fgats_config_obj = parser_interface.object_setattr(
+                object_in=fgats_config_obj, key=fgat_attr, value=value)
 
         # Define the SOCA application background forecast files and
         # link the files accordingly to the working directory; proceed
         # accordingly.
-        bkgrd_file_list = []
+        fgat_file_list = []
         for offset_seconds in self.offset_seconds_list:
             filename = datetime_interface.datestrupdate(
                 datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
-                out_frmttyp=bkgrds_config_obj.bkgrd_ocean_filename,
+                out_frmttyp=fgats_config_obj.fgat_ocean_filename,
                 offset_seconds=offset_seconds)
-            bkgrd_file_list.append(filename)
+            fgat_file_list.append(filename)
 
-            if bkgrds_config_obj.assim_ice:
+            if fgats_config_obj.assim_ice:
                 filename = datetime_interface.datestrupdate(
                     datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
-                    out_frmttyp=bkgrds_config_obj.bkgrd_ice_filename,
+                    out_frmttyp=fgats_config_obj.fgat_ice_filename,
                     offset_seconds=offset_seconds)
-                bkgrd_file_list.append(filename)
+                fgat_file_list.append(filename)
 
         # Build a YAML-formatted file containing the observation file
         # paths.
-        with open(soca_bkgrds_file, "w", encoding="utf-8") as file:
+        with open(soca_fgats_file, "w", encoding="utf-8") as file:
             file.write(
-                "[" + ",".join([bkgrd_file for bkgrd_file in bkgrd_file_list])
+                "[" + ",".join([fgat_file for fgat_file in fgat_file_list])
                 + "]")
+
+        # Copy the background forecast files, at the center of the
+        # respective analysis window, to the respective specified file
+        # path; proceed accordingly.
+        bkgrd_ocean_filename = os.path.join(dirpath, parser_interface.object_getattr(
+            object_in=self.config_obj, key="bkgrd_ocean_filename", force=True))
+        if bkgrd_ocean_filename is None:
+            msg = ("The attribute 'bkgrd_ocean_filename' could not be determined "
+                   f"from the experiment configuration file {self.options_obj.yaml_file}. "
+                   "Aborting!!!")
+            error(msg=msg)
+
+        srcfile = datetime_interface.datestrupdate(
+            datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
+            out_frmttyp=fgats_config_obj.fgat_ocean_filename)
+        dstfile = os.path.join(dirpath, bkgrd_ocean_filename)
+        msg = (f"Copying file {srcfile} to {dstfile}.")
+        self.logger.info(msg=msg)
+
+        if fgat_config_obj.assim_ice:
+            bkgrd_ice_filename = os.path.join(dirpath, parser_interface.object_getattr(
+                object_in=self.config_obj, key="bkgrd_ice_filename", force=True))
+        if bkgrd_icefilename is None:
+            msg = ("The attribute 'bkgrd_ice_filename' could not be determined "
+                   f"from the experiment configuration file {self.options_obj.yaml_file}. "
+                   "Aborting!!!")
+            error(msg=msg)
+
+            srcfile = datetime_interface.datestrupdate(
+                datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
+                out_frmttyp=fgats_config_obj.fgat_ice_filename)
+            dstfile = os.path.join(dirpath, bkgrd_ice_filename)
+            msg = (f"Copying file {srcfile} to {dstfile}.")
+            self.logger.info(msg=msg)
 
     def build_config_files(self, config_file_dict):
         """

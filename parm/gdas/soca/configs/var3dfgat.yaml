@@ -1,4 +1,9 @@
+analysis_variables: &analysis_variables !INC ./analysis_variables.yaml
 atm_window_begin: &atm_window_begin !ENV "${ATM_WINDOW_BEGIN}"
+model_bkgrds: &model_bkgrds !INC ./soca_backgrounds.yaml
+model_state: &model_state !INC ./state_variables.yaml
+
+# ----
 
 cost function:
 
@@ -6,7 +11,7 @@ cost function:
   window_begin: *atm_window_begin
   window_length: !ENV ${ATM_WINDOW_LENGTH}
   observations: !INC ./soca_observations.yaml
-  analysis variables: &analy_vars !INC ./analysis_variables.yaml
+  analysis variables: *analysis_variables
   geometry:
     mom6_input_nml: mom_input.nml
     fields metadata: ./fields_metadata.yaml
@@ -14,8 +19,8 @@ cost function:
   model:
     name: PseudoModel
     tstep: PT1H
-    state variables: &model_vars !INC ./state_variables.yaml
-    states: !INC ./soca_backgrounds.yaml
+    state variables: *model_state #model_vars #!INC ./state_variables.yaml
+    states: *model_bkgrds #!INC ./soca_backgrounds.yaml
 
   background:
     read_from_file: 1
@@ -23,7 +28,7 @@ cost function:
     ocn_filename: MOM.res.nc
     ice_filename: cice.res.nc
     date: *atm_window_begin 
-    state variables: *model_vars
+    state variables: *model_state
   background error: !INC ./soca_berror.yaml
 
 variational:

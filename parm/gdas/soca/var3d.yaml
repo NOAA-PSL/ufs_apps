@@ -62,15 +62,21 @@ soca:
      # relative to the analysis time.
      bkgrd_interval_seconds: 10800
 
+     # Define the ice model background forecast file name;
+     bkgrd_ice_filename: CICE.res.nc
+
+     # Define the ocean model background forecast file name;
+     bkgrd_ocean_filename: MOM.res.nc
+     
      # Define the ice model First Guess at Appropriate Time (FGAT)
      # file path; these are the background forecast files for the SOCA
      # application.
-     bkgrd_ice_filename: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/forecast/CICE.res.%Y-%m-%d-%H-%M-%S.nc
+     fgat_ice_filename: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/forecast/CICE.res.%Y-%m-%d-%H-%M-%S.nc
      
      # Define the ocean model First Guess at Appropriate Time (FGAT)
      # file path; these are the background forecast files for the SOCA
      # application; 
-     bkgrd_ocean_filename: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/forecast/MOM.res.%Y-%m-%d-%H-%M-%S.nc
+     fgat_ocean_filename: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/forecast/MOM.res.%Y-%m-%d-%H-%M-%S.nc
 
      # Define the total number of inner-loops for the variational
      # solver.
