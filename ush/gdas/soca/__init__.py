@@ -223,6 +223,11 @@ class SOCA:
         srcfile = datetime_interface.datestrupdate(
             datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
             out_frmttyp=fgat_config_obj.fgat_ocean_filename)
+        exist = fileio_interface.fileexist(path=srcfile)
+        if not exist:
+            msg = (f"The filepath {srcfile} does not exist. Aborting!!!")
+            error(msg=msg)
+
         dstfile = os.path.join(dirpath, bkgrd_ocean_filename)
         msg = (f"Copying file {srcfile} to {dstfile}.")
         self.logger.info(msg=msg)
@@ -239,6 +244,11 @@ class SOCA:
             srcfile = datetime_interface.datestrupdate(
                 datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
                 out_frmttyp=fgat_config_obj.fgat_ice_filename)
+            exist = fileio_interface.fileexist(path=srcfile)
+            if not exist:
+                msg = (f"The filepath {srcfile} does not exist. Aborting!!!")
+                error(msg=msg)
+
             dstfile = os.path.join(dirpath, bkgrd_ice_filename)
             msg = (f"Copying file {srcfile} to {dstfile}.")
             self.logger.info(msg=msg)
