@@ -170,7 +170,6 @@ class Global3DVAR(SOCA):
 
         # Link the background forecast files.
         self.build_bkgrds(dirpath=self.dirpath,
-                          soca_config_obj=self.soca_config_obj,
                           soca_bkgrds_file=self.soca_bkgrds_yaml)
 
         # Link and configure the observation attributes.
