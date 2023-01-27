@@ -230,7 +230,7 @@ class SOCA:
         if fgat_config_obj.assim_ice:
             bkgrd_ice_filename = os.path.join(dirpath, parser_interface.object_getattr(
                 object_in=self.soca_config_obj, key="bkgrd_ice_filename", force=True))
-        if bkgrd_icefilename is None:
+        if bkgrd_ice_filename is None:
             msg = ("The attribute 'bkgrd_ice_filename' could not be determined "
                    f"from the experiment configuration file {self.options_obj.yaml_file}. "
                    "Aborting!!!")
