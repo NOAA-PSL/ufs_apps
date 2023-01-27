@@ -213,7 +213,7 @@ class SOCA:
         # respective analysis window, to the respective specified file
         # path; proceed accordingly.
         bkgrd_ocean_filename = os.path.join(dirpath, parser_interface.object_getattr(
-            object_in=self.config_obj, key="bkgrd_ocean_filename", force=True))
+            object_in=self.soca_config_obj, key="bkgrd_ocean_filename", force=True))
         if bkgrd_ocean_filename is None:
             msg = ("The attribute 'bkgrd_ocean_filename' could not be determined "
                    f"from the experiment configuration file {self.options_obj.yaml_file}. "
@@ -229,7 +229,7 @@ class SOCA:
 
         if fgat_config_obj.assim_ice:
             bkgrd_ice_filename = os.path.join(dirpath, parser_interface.object_getattr(
-                object_in=self.config_obj, key="bkgrd_ice_filename", force=True))
+                object_in=self.soca_config_obj, key="bkgrd_ice_filename", force=True))
         if bkgrd_icefilename is None:
             msg = ("The attribute 'bkgrd_ice_filename' could not be determined "
                    f"from the experiment configuration file {self.options_obj.yaml_file}. "
