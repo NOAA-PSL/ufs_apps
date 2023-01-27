@@ -70,7 +70,7 @@ class Global3DVAR(SOCA):
                          task_id="global_soca_3dvar"
                          )
         self.dirpath = os.path.join(self.expt_path, "soca", task_id)
-        self.build_dirtree(path=self.dirpath)
+        self.build_dirtree(dirpath=self.dirpath)
         os.chdir(self.dirpath)
 
         # Define the mandatory configuration variables.
