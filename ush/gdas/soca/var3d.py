@@ -75,8 +75,9 @@ class Global3DVAR(SOCA):
         # Define the mandatory configuration variables.
         self.config_var_list = ["analysis_variables", "state_variables"]
 
-        # Define the YAML-formatted file to contain the observations
-        # for the SOCA application.
+        # Define the YAML-formatted files for the SOCA application.
+        self.soca_berror_yaml = os.path.join(
+            self.dirpath, "soca_berror.yaml")
         self.soca_bkgrds_yaml = os.path.join(
             self.dirpath, "soca_backgrounds.yaml")
         self.soca_config_yaml = os.path.join(
@@ -94,7 +95,6 @@ class Global3DVAR(SOCA):
             out_frmttyp=timestamp_interface.Y_m_dTHMSZ,
             offset_seconds=float(self.soca_config_obj.analysis_interval_seconds/2.0)),
             "atm_window_length": f"PT{self.soca_config_obj.analysis_interval_seconds}S",
-            "background_error": None,
             "ninner": 100
         }
 
@@ -117,10 +117,11 @@ class Global3DVAR(SOCA):
         # application configuration file.
         config_file_dict = {os.path.join(self.dirpath, "analysis_variables.yaml"):
                             self.soca_config_obj.analysis_variables,
-                            os.path.join(
-            self.dirpath, "state_variables.yaml"):
-            self.soca_config_obj.state_variables
-        }
+                            os.path.join(self.dirpath, "state_variables.yaml"):
+                            self.soca_config_obj.state_variables,
+                            os.path.join(self.dirpath, "soca_berror.yaml"),
+                            self.soca_config_obj.background_error
+                            }
 
         self.build_config_files(config_file_dict=config_file_dict)
 
