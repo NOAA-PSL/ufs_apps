@@ -40,7 +40,7 @@ variational:
       fields metadata: ./fields_metadata.yaml
     linear model:
       name: Identity
-      increment variables: *analy_vars
+      increment variables: *analysis_variables
       variable change: Identity
       tstep: PT1H
     ninner: !ENV ${NINNER} !!int
