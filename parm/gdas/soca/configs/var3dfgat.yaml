@@ -19,14 +19,14 @@ cost function:
   model:
     name: PseudoModel
     tstep: PT1H
-    state variables: *model_state #model_vars #!INC ./state_variables.yaml
-    states: *model_bkgrds #!INC ./soca_backgrounds.yaml
+    state variables: *model_state
+    states: *model_bkgrds
 
   background:
     read_from_file: 1
     basename: ./INPUT/
     ocn_filename: MOM.res.nc
-    ice_filename: cice.res.nc
+    ice_filename: 
     date: *atm_window_begin 
     state variables: *model_state
   background error: !INC ./soca_berror.yaml

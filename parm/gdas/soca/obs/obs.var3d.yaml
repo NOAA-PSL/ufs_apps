@@ -93,3 +93,24 @@ ice_thickness:
           # Define the observation type YAML-formatted template file.
           yaml_tmpl: !ENV ${HOMEufs}/parm/gdas/soca/obs/configs/icefb_esa.yaml
 
+# ----
+
+# Define the sea-surface temperature observation attributes.
+sst:
+
+     sst.nesdis.noaa15.so0p25:
+
+          obs_datafile_in: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/obs/ocean/nesdis.avhrr_noaa15.sst.nc
+
+          # Define the observation space name for the observation
+          # type.
+          obs_space_name: sst.nesdis.noaa15.so0p25
+
+          # Define the observation output file basename name; this
+          # file will be written beneath /obs in the SOCA experiment
+          # path.
+          obs_datafile_out: sst.nesdis.noaa15.so0p25.%Y%m%d.T%H%M%SZ.nc
+
+          # Define the observation type YAML-formatted template file.
+          yaml_tmpl: !ENV ${HOMEufs}/parm/gdas/soca/obs/configs/sst_nesdis_noaa15.so0p25.yaml
+
