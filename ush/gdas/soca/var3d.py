@@ -87,7 +87,7 @@ class Global3DVAR(SOCA):
         # the respective SOCA application; these attributes will be
         # queried and defined as run-time environment variables
         # accordingly.
-        self.soca_default_attrs = {'ninner': 100
+        self.soca_default_attrs = {'ninner': 100,
                                    'atm_window_begin': datetime_interface.datestrupdate(
                                        datestr=self.launch.cycle,
                                        in_frmttyp=timestamp_interface.GLOBAL,
