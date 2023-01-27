@@ -76,6 +76,9 @@ class SOCA:
         self.options_obj = options_obj
         self.launch = Launch(options_obj=self.options_obj, task_id=task_id)
         self.expt_path = self.launch.build_dirpath()
+        print(self.expt_path)
+        quit()
+
         self.launch.build_configs()
         self.logger = Logger()
 
