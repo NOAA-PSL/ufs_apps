@@ -357,7 +357,7 @@ class SOCA:
                         datestr=self.launch.cycle,
                         in_frmttyp=timestamp_interface.GLOBAL,
                         out_frmttyp=value,
-                        offset_seconds=self.self.soca_config_obj.analysis_interval_seconds)
+                        offset_seconds=self.soca_config_obj.analysis_interval_seconds)
                     parser_interface.enviro_set(envvar=obs_attr.upper(),
                                                 value=value)
 
