@@ -8,8 +8,8 @@ model_state: &model_state !INC ./state_variables.yaml
 cost function:
 
   cost type: 4D-Var
-  window_begin: *atm_window_begin
-  window_length: !ENV ${ATM_WINDOW_LENGTH}
+  window begin: *atm_window_begin
+  window length: !ENV ${ATM_WINDOW_LENGTH}
   observations: !INC ./soca_observations.yaml
   analysis variables: *analysis_variables
   geometry:
