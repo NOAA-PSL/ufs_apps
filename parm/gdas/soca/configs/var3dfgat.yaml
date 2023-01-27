@@ -36,7 +36,7 @@ variational:
       increment variables: *analy_vars
       variable change: Identity
       tstep: PT1H
-    ninner: !ENV ${NINNER} !!float
+    ninner: !ENV ${NINNER} !!str
     gradient norm reduction: 1e-10
     test: on
     diagnostics:
