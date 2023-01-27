@@ -45,7 +45,7 @@ variational:
       write increment: true
       increment:
         datadir: Data
-        date: !ENV "${ATM_WINDOW_BEGIN}"
+        date: !ENV ${ATM_WINDOW_BEGIN} !!str
         exp: iter1
         type: incr
 
@@ -63,7 +63,7 @@ final:
   increment:
     output:
       datadir: Data
-      date: !ENV "${ATM_WINDOW_BEGIN}"
+      date: !ENV ${ATM_WINDOW_BEGIN} !!str
       exp: 3dvarfgat_pseudo
       type: incr
     geometry:
