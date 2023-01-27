@@ -110,9 +110,39 @@ class SOCA:
             start=(-1.0*(self.soca_config_obj.analysis_interval_seconds/2.0)),
             stop=(self.soca_config_obj.analysis_interval_seconds/2.0), num=ntimes)
 
-    def build_bkgrds(self, dirpath: str, soca_config_obj: object,
-                     soca_bkgrds_file: str) -> None:
-        """ """
+    def build_bkgrds(self, dirpath: str, soca_bkgrds_file: str) -> None:
+        """
+        Description
+        -----------
+
+        This method builds the background file list and writes the
+        resultant list to the file path specified by the parameter
+        soca_bkgrds_file upon entry; the background files are
+        determined from the SOCA application configuration as follows:
+
+        - The background forecast times are determined assuming that
+          the analysis time (AT) is the center of the SOCA application
+          window.
+
+        - The background forecast times are defined to be within the
+          range [-1.0*(AT/2), (AT/2)] at the interval defined by
+          bkgrd_interval_seconds attribute within the SOCA application
+          configuration.
+
+        Parameters
+        ----------
+
+        dirpath: str
+
+            A Python string specifying the top-level directory path
+            beneath which the sub-directory tree will be built.
+
+        soca_bkgrds_file: str
+
+            A Python string specifying the path to which the list of
+            background forecast files is to be written.
+
+        """
 
         # Collect the attributes from the SOCA application
         # configuration object; proceed accordingly.
@@ -120,7 +150,7 @@ class SOCA:
         bkgrd_attr_list = ["assim_ice",
                            "bkgrd_ocean_filename"
                            ]
-        if soca_config_obj.assim_ice:
+        if self.soca_config_obj.assim_ice:
             bkgrd_attr_list.append("bkgrd_ice_filename")
 
         for bkgrd_attr in bkgrd_attr_list:
@@ -128,7 +158,7 @@ class SOCA:
             # Collect the value for the respective attribute; proceed
             # accordingly.
             value = parser_interface.object_getattr(
-                object_in=soca_config_obj, key=bkgrd_attr, force=True)
+                object_in=self.soca_config_obj, key=bkgrd_attr, force=True)
             if value is None:
                 msg = (f"The mandatory attribute {bkgrd_attr} could not be "
                        "determined from the SOCA application configuration file "
@@ -162,12 +192,6 @@ class SOCA:
             file.write(
                 "[" + ",".join([bkgrd_file for bkgrd_file in bkgrd_file_list])
                 + "]")
-            # for bkgrd_file in bkgrd_file_list:
-            #    msg = (
-            #        f"Writing background forecast file path {bkgrd_file} to "
-            #        f"{soca_bkgrds_file}.")
-            #    self.logger.info(msg=msg)
-            #    file.write(f"{bkgrd_file}\n")
 
     def build_config_files(self, config_file_dict):
         """
@@ -333,7 +357,7 @@ class SOCA:
                         datestr=self.launch.cycle,
                         in_frmttyp=timestamp_interface.GLOBAL,
                         out_frmttyp=value,
-                        offset_seconds=self.soca_config_obj.analysis_interval_seconds)
+                        offset_seconds=self.self.soca_config_obj.analysis_interval_seconds)
                     parser_interface.enviro_set(envvar=obs_attr.upper(),
                                                 value=value)
 
@@ -432,8 +456,10 @@ class SOCA:
 
         """
 
+        # Define the fixed file attributes.
         fixedfile_dict = YAML().read_yaml(yaml_file=fixedfile_yaml)
 
+        # Collect and link the respective fixed files accordingly.
         for fixedfile in fixedfile_dict:
             if not ignore_missing:
                 exist = fileio_interface.fileexist(path=fixedfile)
@@ -443,6 +469,8 @@ class SOCA:
                            "exist. Aborting!!!")
                     error(msg=msg)
 
+            # Define the respective source and destination files and
+            # create symbolic links accordingly.
             srcfile = fixedfile
             dstfile = parser_interface.dict_key_value(
                 dict_in=fixedfile_dict, key=fixedfile, no_split=True)
@@ -455,7 +483,7 @@ class SOCA:
 # ----
 
 
-@ msg_except_handle(SOCAError)
+@msg_except_handle(SOCAError)
 def error(msg: str) -> None:
     """
     Description

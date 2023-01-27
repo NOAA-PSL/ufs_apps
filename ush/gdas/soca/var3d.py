@@ -28,6 +28,7 @@ import os
 
 from confs.yaml_interface import YAML
 from gdas.soca import SOCA, error
+from tools import datetime_interface
 from tools import fileio_interface
 from tools import parser_interface
 
@@ -82,6 +83,19 @@ class Global3DVAR(SOCA):
         self.soca_observations_yaml = os.path.join(
             self.dirpath, "soca_observations.yaml")
 
+        # Define a Python dictionary containing the default values for
+        # the respective SOCA application; these attributes will be
+        # queried and defined as run-time environment variables
+        # accordingly.
+        self.soca_default_attrs = {'ninner': 100
+                                   'atm_window_begin': datetime_interface.datestrupdate(
+                                       datestr=self.launch.cycle,
+                                       in_frmttyp=timestamp_interface.GLOBAL,
+                                       out_frmttyp=timestamp_interface.HOLD,
+                                       offset_seconds=float(self.soca_config_obj.analysis_interval_seconds/2.0)),
+                                   'atm_window_length': self.soca_config_obj.analysis_interval_seconds
+                                   }
+
     def config_soca(self) -> None:
         """
         Description
@@ -102,9 +116,9 @@ class Global3DVAR(SOCA):
         config_file_dict = {os.path.join(self.dirpath, "analysis_variables.yaml"):
                             self.soca_config_obj.analysis_variables,
                             os.path.join(
-                                self.dirpath, "state_variables.yaml"):
-                            self.soca_config_obj.state_variables
-                            }
+            self.dirpath, "state_variables.yaml"):
+            self.soca_config_obj.state_variables
+        }
 
         self.build_config_files(config_file_dict=config_file_dict)
 
@@ -118,6 +132,21 @@ class Global3DVAR(SOCA):
                 msg = (f"The SOCA configuration attribute {config_var} cannot "
                        "be NoneType. Aborting!!!")
                 error(msg=msg)
+
+        for soca_attr in self.soca_default_attrs:
+            value = parser_interface.object_getattr(
+                object_in=self.soca_config_obj, key=soca_attr, force=True)
+            if value is None:
+                value = parser_interface.dict_key_value(
+                    dict_in=self.soca_default_attrs, key=soca_attr, force=True,
+                    no_split=True)
+
+                if value is None:
+                    msg = (f"The SOCA attribute {soca_attr} cannot be NoneType. "
+                           "Aborting!!!")
+                    error(msg=msg)
+                parser_interface.enviro_set(envvar=soca_attr.upper(),
+                                            value=value)
 
         # Build the YAML-formatted SOCA application configuration
         # file.
