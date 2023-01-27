@@ -2,7 +2,7 @@ cost function:
 
   cost type: 4D-Var
   window_begin: !ENV "${ATM_WINDOW_BEGIN}"
-  window_length: !ENV ${ATM_WINDOW_LENGTH} !!str
+  window_length: !ENV ${ATM_WINDOW_LENGTH}
   observations: !INC ./soca_observations.yaml
   analysis variables: &analy_vars !INC ./analysis_variables.yaml
   geometry:
@@ -63,7 +63,7 @@ final:
   increment:
     output:
       datadir: Data
-      date: !ENV ${ATM_WINDOW_BEGIN} !!binary
+      date: !ENV "${ATM_WINDOW_BEGIN}"
       exp: 3dvarfgat_pseudo
       type: incr
     geometry:
