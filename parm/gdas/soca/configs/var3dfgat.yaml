@@ -63,7 +63,7 @@ final:
   increment:
     output:
       datadir: Data
-      date: '{{ATM_WINDOW_BEGIN}}'
+      date: !ENV "${ATM_WINDOW_BEGIN}"
       exp: 3dvarfgat_pseudo
       type: incr
     geometry:

@@ -147,7 +147,7 @@ class Global3DVAR(SOCA):
                            "Aborting!!!")
                     error(msg=msg)
                 parser_interface.enviro_set(envvar=soca_attr.upper(),
-                                            value=str(value))
+                                            value=value)
 
         # Build the YAML-formatted SOCA application configuration
         # file.
