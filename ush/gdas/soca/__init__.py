@@ -181,8 +181,8 @@ class SOCA:
                        f"{self.options_obj.yaml_file}. Aborting!!!")
                 error(msg=msg)
 
-            fgats_config_obj = parser_interface.object_setattr(
-                object_in=fgats_config_obj, key=fgat_attr, value=value)
+            fgat_config_obj = parser_interface.object_setattr(
+                object_in=fgat_config_obj, key=fgat_attr, value=value)
 
         # Define the SOCA application background forecast files and
         # link the files accordingly to the working directory; proceed
@@ -191,20 +191,20 @@ class SOCA:
         for offset_seconds in self.offset_seconds_list:
             filename = datetime_interface.datestrupdate(
                 datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
-                out_frmttyp=fgats_config_obj.fgat_ocean_filename,
+                out_frmttyp=fgat_config_obj.fgat_ocean_filename,
                 offset_seconds=offset_seconds)
             fgat_file_list.append(filename)
 
-            if fgats_config_obj.assim_ice:
+            if fgat_config_obj.assim_ice:
                 filename = datetime_interface.datestrupdate(
                     datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
-                    out_frmttyp=fgats_config_obj.fgat_ice_filename,
+                    out_frmttyp=fgat_config_obj.fgat_ice_filename,
                     offset_seconds=offset_seconds)
                 fgat_file_list.append(filename)
 
         # Build a YAML-formatted file containing the observation file
         # paths.
-        with open(soca_fgats_file, "w", encoding="utf-8") as file:
+        with open(soca_fgat_file, "w", encoding="utf-8") as file:
             file.write(
                 "[" + ",".join([fgat_file for fgat_file in fgat_file_list])
                 + "]")
@@ -222,7 +222,7 @@ class SOCA:
 
         srcfile = datetime_interface.datestrupdate(
             datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
-            out_frmttyp=fgats_config_obj.fgat_ocean_filename)
+            out_frmttyp=fgat_config_obj.fgat_ocean_filename)
         dstfile = os.path.join(dirpath, bkgrd_ocean_filename)
         msg = (f"Copying file {srcfile} to {dstfile}.")
         self.logger.info(msg=msg)
@@ -238,7 +238,7 @@ class SOCA:
 
             srcfile = datetime_interface.datestrupdate(
                 datestr=self.analysis_time, in_frmttyp=timestamp_interface.GLOBAL,
-                out_frmttyp=fgats_config_obj.fgat_ice_filename)
+                out_frmttyp=fgat_config_obj.fgat_ice_filename)
             dstfile = os.path.join(dirpath, bkgrd_ice_filename)
             msg = (f"Copying file {srcfile} to {dstfile}.")
             self.logger.info(msg=msg)
