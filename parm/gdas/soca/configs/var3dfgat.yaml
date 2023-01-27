@@ -1,4 +1,4 @@
-_: &atm_window_begin !ENV "${ATM_WINDOW_BEGIN}"
+atm_window_begin: &atm_window_begin !ENV "${ATM_WINDOW_BEGIN}"
 
 cost function:
 
