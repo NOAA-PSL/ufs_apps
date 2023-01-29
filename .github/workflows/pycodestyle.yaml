@@ -71,16 +71,16 @@ jobs:
         python -m pip install --upgrade pip
         pip install pycodestyle
 
-    # Clone the ufs_fetchapp repository branch.
-    - name: Checkout ufs_fetchapp.
+    # Clone the ufs_apps repository branch.
+    - name: Checkout ufs_apps.
       uses: actions/checkout@v2
       with:
-        path: ufs_fetchapp
+        path: ufs_apps
 
     # Execute the pycodestyle application.
     - name: Run pycodestyle application.
       run: |
-        cd $GITHUB_WORKSPACE/ufs_fetchapp
-        pycodestyle -v --config $GITHUB_WORKSPACE/ufs_fetchapp/.pycodestyle .
+        cd $GITHUB_WORKSPACE/ufs_apps
+        pycodestyle -v --config $GITHUB_WORKSPACE/ufs_apps/.pycodestyle .
      
 
