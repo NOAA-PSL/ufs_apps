@@ -1,0 +1,14 @@
+# Define the forecast cycle; this string is formatted as, assuming the
+# POSIX convention, %Y%m%d%H%M%S.
+cycle: !ENV ${CYCLE}0000
+
+# Define the cycling attributes; if cycling is True the attribute
+# cycling_interval_seconds must be defined.
+cycling: True
+cycling_interval_seconds: 21600
+
+# Define attributes collected from the run-time environment; these may
+# not be necessary but are here for the time-being.
+comrot: !ENV ${ROTDIR}
+expdir: !ENV ${EXPDIR}
+experiment_name: !ENV ${PSLOT}
