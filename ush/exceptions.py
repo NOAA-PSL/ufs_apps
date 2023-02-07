@@ -41,6 +41,10 @@ Classes
         This is the base-class for exceptions encountered within the
         ush/staging module; it is a sub-class of Error.
 
+    TaskError()
+
+        This is the base-class for exceptions encountered within the
+        ush/task module; it is a sub-class of Error.
 
 Author(s)
 ---------
@@ -64,6 +68,7 @@ from utils.error_interface import Error
 __all__ = [
     "LaunchError",
     "StagingError",
+    "TaskError"
 ]
 
 # ----
@@ -95,5 +100,18 @@ class StagingError(Error):
 
     This is the base-class for exceptions encountered within the
     ush/staging module; it is a sub-class of Error.
+
+    """
+
+# ----
+
+
+class TaskError(Error):
+    """
+    Description
+    -----------
+
+    This is the base-class for exceptions encountered within the
+    ush/task module; it is a sub-class of Error.
 
     """
