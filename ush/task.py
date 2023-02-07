@@ -340,7 +340,7 @@ class Task:
 
         """
 
-    def finalize(self):
+    def finalize(self) -> None:
         """
         Description
         -----------
