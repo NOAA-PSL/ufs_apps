@@ -65,7 +65,6 @@ History
 # ----
 
 # pylint: disable=no-member
-# pylint: disable=unused-argument
 
 # ----
 
@@ -74,7 +73,6 @@ import os
 from confs.yaml_interface import YAML
 from tools import datetime_interface, fileio_interface, parser_interface
 from utils import timestamp_interface
-from utils.error_interface import msg_except_handle
 from utils.logger_interface import Logger
 
 from exceptions import LaunchError
@@ -142,7 +140,7 @@ class Launch:
                     "The option attributes provided to the base-class does not "
                     f"contain the mandatory attribute {mand_arg}. Aborting!!!"
                 )
-                error(msg=msg)
+                raise LaunchError(msg=msg)
 
             # Update the base-class object attribute.
             self = parser_interface.object_setattr(
@@ -165,7 +163,7 @@ class Launch:
                 f"The YAML-formatted configuration file {self.yaml_file} "
                 "does not exist. Aborting!!!"
             )
-            error(msg=msg)
+            raise LaunchError(msg=msg)
 
         # Parse the configuration file.
         self.yaml_dict = YAML().read_yaml(yaml_file=self.yaml_file)
@@ -256,7 +254,7 @@ class Launch:
                         f"The mandatory attribute {attr} has not been "
                         "specified. Aborting!!!"
                     )
-                    error(msg=msg)
+                    raise LaunchError(msg=msg)
                 in_dict[attr] = value
 
             # Concatenate the respective YAML-formatted files list and
@@ -290,11 +288,13 @@ class Launch:
 
         # Define the mandatory directory tree paths for the respective
         # forecast cycle.
-        dirpaths_list = [
-            os.path.join(self.work_path, self.expt_name,
-                         self.cycle, "intercom"),
-            os.path.join(self.work_path, self.expt_name, "com", self.cycle),
-        ]
+        self.expdir = os.path.join(self.work_path, "EXPDIR", self.expt_name)
+        self.rotdir = os.path.join(self.work_path, "ROTDIR", self.expt_name,
+                                   "gfs.%Y%m%d"/"%H")
+        self.stmp = os.path.join(
+            self.work_path, "STMP", "RUNDIRS", self.expt_name)
+
+        dirpaths_list = [self.expdir, self.rotdir, self.stmp]
 
         # Build the respective directory tree paths.
         for dirpath in dirpaths_list:
@@ -326,7 +326,7 @@ class Launch:
 # ----
 
 
-@msg_except_handle(LaunchError)
+@ msg_except_handle(LaunchError)
 def error(msg: str) -> None:
     """
     Description
