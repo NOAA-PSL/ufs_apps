@@ -34,6 +34,7 @@ fetch:
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.                    
                     stream_start: 20121002060000
+                    stream_stop: 20180116180000
 
                # Define the file identifier.
                gdas_crisf4:
