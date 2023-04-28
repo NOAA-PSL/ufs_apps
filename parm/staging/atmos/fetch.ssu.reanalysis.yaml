@@ -33,6 +33,6 @@ fetch:
                     # Define the available stream dates for the
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.                    
-                    stream_start: 19900101000000
+                    stream_start: 19880928000000
                     stream_stop: 20060505000000
 
