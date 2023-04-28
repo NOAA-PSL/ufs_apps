@@ -26,12 +26,12 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/airs/airsev/%Y/%m/bufr/gdas.%Y%m%d.t%Hz.airsev.tm00.bufr_d
+                    object_path: observations/reanalysis/airs/nasa/aqua/%Y/%m/bufr/gdas.%Y%m%d.t%Hz.airsev.tm00.bufr_d
                     profile_name: noaa_bdp
                     ignore_missing: True
 
                     # Define the available stream dates for the
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.                    
-                    stream_start: 20050205120000
+                    stream_start: 20020831000000
 
