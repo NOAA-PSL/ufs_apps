@@ -13,7 +13,7 @@ fetch:
 
           # Define the fetching type; this example corresponds to
           # atmosphere SAPHIR observations.
-          msu_obs:
+          saphir_obs:
 
                # Define the file identifier.
                gdas_1bmhs:
@@ -33,6 +33,7 @@ fetch:
                     # Define the available stream dates for the
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.                    
-                    stream_start: 20170201120000
+                    stream_start: 20170101000000
+                    stream_stop: 20211201000000
                
 
