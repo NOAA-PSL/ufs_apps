@@ -14,7 +14,7 @@ fetch:
                     
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/sbuv.t%Hz.bufr
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/sbuv.%Y%m%d.t%Hz.bufr
                     offset_seconds: 21600
                     
                     # Define the AWS s3 attributes for the respective
@@ -27,15 +27,15 @@ fetch:
                     # Define the available stream dates for the
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.                    
-                    stream_start: 19991015000000
-                    stream_stop:  20041231180000
+                    stream_start: 19970103000000
+                    stream_stop:  20040930180000
 
                # Define the file identifier.
                nasa_omi:
 
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/sbuv.t%Hz.nc
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/omieff.%Y%m%d.t%Hz.nc
                     offset_seconds: 21600
 
                     # Define the AWS s3 attributes for the respective
@@ -48,14 +48,14 @@ fetch:
                     # Define the available stream dates for the
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.
-                    stream_start: 20050101000000
+                    stream_start: 20041001000000
 
                # Define the file identifier.
                nasa_mls:
 
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/mls.t%Hz.nc
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/mlsnc.%Y%m%d.t%Hz.nc
                     offset_seconds: 21600
 
                     # Define the AWS s3 attributes for the respective
@@ -68,14 +68,14 @@ fetch:
                     # Define the available stream dates for the
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.
-                    stream_start: 20050101000000
+                    stream_start: 20041001000000
 
                # Define the file identifier.
                nasa_omps:
 
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/OMPSNM.t%Hz.nc
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/ompsnmeffnc.%Y%m%d.t%Hz.nc
                     offset_seconds: 21600
 
                     # Define the AWS s3 attributes for the respective
@@ -95,7 +95,7 @@ fetch:
 
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/OMPSNP.t%Hz.nc
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/ompsnpnc.%Y%m%d.t%Hz.nc
                     offset_seconds: 21600
 
                     # Define the AWS s3 attributes for the respective
@@ -115,7 +115,7 @@ fetch:
 
                     # Define the attributes corresponding to the
                     # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/OMPS-LPoz-Vis.t%Hz.nc
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/ompslpvisnc.%Y%m%d.t%Hz.nc
                     offset_seconds: 21600
 
                     # Define the AWS s3 attributes for the respective
