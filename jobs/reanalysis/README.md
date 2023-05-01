@@ -23,6 +23,7 @@ in the following table.
 | [`JUFS_FETCH_AWSS3_INSITU`](JUFS_FETCH_AWSS3_INSITU) | <div align="left">Launch the UFS workflow Amazon Web Services (AWS) s3 ocean insitu observation collection application. </div> |
 | [`JUFS_FETCH_AWSS3_MHS`](JUFS_FETCH_AWSS3_MHS) | <div align="left">Launch the UFS workflow Amazon Web Services (AWS) s3 atmospheric Microwave Humidity Sounder (MHS) observation collection application.</div> |
 | [`JUFS_FETCH_AWSS3_MSU`](JUFS_FETCH_AWSS3_MSU) | <div align="left">Launch the UFS workflow Amazon Web Services (AWS) s3 atmospheric Microwave Sounding Unit (MSU) observation collection application. </div> |
+| [`JUFS_FETCH_AWSS3_MSU`](JUFS_FETCH_AWSS3_OZONE) | <div align="left">Launch the UFS workflow Amazon Web Services (AWS) s3 ozone observation collection application. </div> |
 | [`JUFS_FETCH_AWSS3_SAPHIR`](JUFS_FETCH_AWSS3_SAPHIR) | <div align="left">Launch the UFS workflow Amazon Web Services (AWS) s3 atmospheric Sondeur Atmospherique du Profil d'Humidite Intertropicale par Radiometrie (SAPHIR) observation collection application. </div> |
 | [`JUFS_FETCH_AWSS3_SEVIRI`](JUFS_FETCH_AWSS3_SEVIRI) | <div align="left">Launch the UFS workflow Amazon Web Services (AWS) s3 atmospheric Spinning Enhanced Visible and InfraRed Imager (SEVIRI) observation collection application. </div> |
 | [`JUFS_FETCH_AWSS3_SSMI`](JUFS_FETCH_AWSS3_SSMI) | <div align="left">Launch the UFS workflow Amazon Web Services (AWS) s3 atmospheric Special Sensor Microwave Imager (SSMI) observation collection application. </div> |
