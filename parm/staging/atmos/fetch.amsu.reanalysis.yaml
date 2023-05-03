@@ -16,6 +16,27 @@ fetch:
           amsu_obs:
 
                # Define the file identifier.
+               repro_1bamua:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.t%Hz.1bamua.tm00.bufr_d
+                    offset_seconds: 21600
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/amsua/nasa/r21c_repro/%Y/%m/bufr/gdas.%Y%m%d.t%Hz.1bamua.tm00.bufr_d
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.                    
+                    stream_start: 19981026000000
+                    stream_stop: 20090501000000
+
+               # Define the file identifier.
                gdas_1bamua:
                     
                     # Define the attributes corresponding to the
@@ -33,7 +54,7 @@ fetch:
                     # Define the available stream dates for the
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.                    
-                    stream_start: 19981026000000
+                    stream_start: 20090501000000
 
                # Define the file identifier.
                gdas_1bamub:
@@ -54,23 +75,4 @@ fetch:
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.                    
                     stream_start: 19981026000000
-
-               # Define the file identifier.
-               gdas_esamub:
-                    
-                    # Define the attributes corresponding to the
-                    # respective file identifier.
-                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/gdas.t%Hz.esamub.tm00.bufr_d
-                    offset_seconds: 21600
-                    
-                    # Define the AWS s3 attributes for the respective
-                    # file identifier.
-                    bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/amsub/esamub/%Y/%m/bufr/gdas.%Y%m%d.t%Hz.esamub.tm00.bufr_d
-                    profile_name: noaa_bdp
-                    ignore_missing: True
-
-                    # Define the available stream dates for the
-                    # respective observations; format is %Y%m%d%H%M%S
-                    # assuming the POSIX convention.                    
-                    stream_start: 19981027120000
+                    stream_stop: 20091222000000

@@ -34,7 +34,7 @@ fetch:
                     # respective observations; format is %Y%m%d%H%M%S
                     # assuming the POSIX convention.                    
                     stream_start: 20051101000000
-                    stream_stop: 20121231180000
+                    stream_stop: 20151231180000
 
                # Define the file identifier.
                gdas_ssmisu:
