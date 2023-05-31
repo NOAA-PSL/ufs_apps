@@ -1,0 +1,134 @@
+# All attributes that follow are for the UFS fetching application.
+fetch:
+
+     # Define a supported the interface platform from which to collect
+     # the respective files.
+     aws_s3:
+
+          # Define the fetching type; this example corresponds to
+          # ozone observations.
+          ozone_obs:
+
+               # Define the file identifier.
+               nasa_sbuv:
+                    
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/sbuv.%Y%m%d.t%Hz.bufr
+                    offset_seconds: 21600
+                    
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/ozone/nasa/sbuv_v87/%Y/%m/bufr/sbuv_v87.%Y%m%d.%Hz.bufr
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.                    
+                    stream_start: 19970103000000
+                    stream_stop:  20040930180000
+
+               # Define the file identifier.
+               nasa_omi:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/omieff.%Y%m%d.t%Hz.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/ozone/nasa/omi-eff/%Y/%m/netcdf/OMIeff-adj.%Y%m%d_%Hz.nc
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 20041001000000
+
+               # Define the file identifier.
+               nasa_mls:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/mlsnc.%Y%m%d.t%Hz.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/ozone/nasa/mls/%Y/%m/netcdf/MLS-v5.0-oz.%Y%m%d_%Hz.nc
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 20041001000000
+
+               # Define the file identifier.
+               nasa_omps:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/ompsnmeffnc.%Y%m%d.t%Hz.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/ozone/nasa/omps-nm-eff/%Y/%m/netcdf/OMPSNM.%Y%m%d_%Hz.nc
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 20130101000000
+
+               # Define the file identifier.
+               nasa_omps-n:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/ompsnpnc.%Y%m%d.t%Hz.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/ozone/nasa/omps-nm/%Y/%m/netcdf/OMPSNP.%Y%m%d_%Hz.nc
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 20130101000000
+
+               # Define the file identifier.
+               nasa_omps-l:
+
+                    # Define the attributes corresponding to the
+                    # respective file identifier.
+                    local_path: !ENV ${WORKufs}/${EXPTufs}/${CYCLEufs}/intercom/inputs/atmos/bufr/ompslpvisnc.%Y%m%d.t%Hz.nc
+                    offset_seconds: 21600
+
+                    # Define the AWS s3 attributes for the respective
+                    # file identifier.
+                    bucket: noaa-reanalyses-pds
+                    object_path: observations/reanalysis/ozone/nasa/omps-nm/%Y/%m/netcdf/OMPS-LPoz-Vis.%Y%m%d_%Hz.nc
+                    profile_name: noaa_bdp
+                    ignore_missing: True
+
+                    # Define the available stream dates for the
+                    # respective observations; format is %Y%m%d%H%M%S
+                    # assuming the POSIX convention.
+                    stream_start: 20130101000000
+
+
+

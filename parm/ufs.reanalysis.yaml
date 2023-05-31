@@ -25,3 +25,4 @@ fetch_atmos_seviri: !ENV ${HOMEufs}/parm/staging/atmos/fetch.seviri.reanalysis.y
 fetch_atmos_ssmi: !ENV ${HOMEufs}/parm/staging/atmos/fetch.ssmi.reanalysis.yaml
 fetch_atmos_ssmis: !ENV ${HOMEufs}/parm/staging/atmos/fetch.ssmis.reanalysis.yaml
 fetch_atmos_ssu: !ENV ${HOMEufs}/parm/staging/atmos/fetch.ssu.reanalysis.yaml
+fetch_ozone: !ENV ${HOMEufs}/parm/staging/ozone/fetch.ozone.reanalysis.yaml
