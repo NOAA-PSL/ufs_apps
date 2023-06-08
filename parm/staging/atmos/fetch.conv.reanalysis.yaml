@@ -26,7 +26,7 @@ fetch:
                     # Define the AWS s3 attributes for the respective
                     # file identifier.
                     bucket: noaa-reanalyses-pds
-                    object_path: observations/reanalysis/conv/prepbufr/%Y/%m/prepbufr/gdas.%Y%m%d.t%Hz.prepfur.nr
+                    object_path: observations/reanalysis/conv/prepbufr/%Y/%m/prepbufr/gdas.%Y%m%d.t%Hz.prepbufr.nr
                     profile_name: noaa_bdp
                     ignore_missing: True
 
